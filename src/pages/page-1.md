@@ -1,5 +1,5 @@
 ---
-layout: '@layouts/PageLayout.astro'
+layout: '@Pagelayout'
 title: Hello, World
 ---
 
