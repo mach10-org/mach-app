@@ -27,7 +27,11 @@ const courses = await getCollection('courses', ({ id }) => {
   </div> -->
   {
     courses.map((course) => (
-      <Card href={`/${course.slug}`} title={course.data.title} body={course.data.description} />
+      <Card
+        href={`/${course.collection}/${course.slug}`}
+        title={course.data.title}
+        body={course.data.description}
+      />
     ))
   }
 </Pagelayout>

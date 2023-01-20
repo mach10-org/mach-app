@@ -1,6 +1,6 @@
 ---
 layout: '@Pagelayout'
-title: 001 - what is vuejs
+title: 03 - vuejs
 description: 'Learn how VUE JS works and explore the official API docs'
 ---
 
