@@ -1,11 +1,12 @@
 ---
 layout: '@Pagelayout'
-title: VUE JS
+title: 001 - what is vuejs
+description: 'Learn how VUE JS works and explore the official API docs'
 ---
 
 # Hi there VUE JS!
 
-This Markdown file creates a page at `your-domain.com/content/courses/vuejs/`
+This Markdown file creates a page at `your-domain.com/courses/vuejs/001-what-is-vuejs`
 
 It probably isn't styled much, but Markdown does support:
 

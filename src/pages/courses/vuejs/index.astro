@@ -1,0 +1,36 @@
+---
+import Pagelayout from '@Pagelayout';
+import Card from '@components/Card.astro';
+
+const posts = await Astro.glob('./*.md'); // returns an array of posts that live at ./src/pages/post/*.md
+
+posts.map((post) => {
+  console.log('post.file', post.file);
+  console.log('post.url', post.url);
+  console.log('post.frontmatter', post.frontmatter);
+  console.log('post.rawContent', post.rawContent);
+});
+---
+
+<Pagelayout title='All vuejs courses'>
+  <div>
+    {
+      posts.map((post) => (
+        <article>
+          <h1>
+            <a href={post.url}>{post.frontmatter.title}</a>
+          </h1>
+        </article>
+      ))
+    }
+  </div>
+  {
+    posts.map((post) => (
+      <Card
+        href={post.url as string}
+        title={post.frontmatter.title}
+        body={post.frontmatter.description}
+      />
+    ))
+  }
+</Pagelayout>
