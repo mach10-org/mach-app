@@ -1,0 +1,30 @@
+---
+import Pagelayout from '@Pagelayout';
+import Card from '@components/Card.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  return [{ params: { course: 'vuejs' } }, { params: { course: 'test' } }];
+}
+const courses = await getCollection('courses', ({ id }) => {
+  // Return all entries in `src/content/docs/en/`
+  return id.startsWith('vuejs/');
+});
+console.log('Astro.params [...courses]', Astro.params);
+
+const { course } = Astro.params;
+---
+
+<Pagelayout title='All vuejs courses'>
+  <h1 class='mb-4'>hi, this page lists "{course}" collection</h1>
+
+  {
+    courses.map((course) => (
+      <Card
+        href={`/${course.collection}/${course.slug}`}
+        title={course.data.title}
+        body={course.data.description}
+      />
+    ))
+  }
+</Pagelayout>

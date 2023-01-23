@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() {
+  const folderBasePath = 'vuejs/';
+
+  const courses = await getCollection('courses', ({ id }) => {
+    // Return all entries in `src/content/courses/${folderBasePath}/`
+    return id.startsWith(folderBasePath);
+  });
+
+  return courses.map((entry) => {
+    const slug = entry.slug.replace(folderBasePath, '');
+    return {
+      // params: { slug },
+      params: { slug: entry.slug.split('/').pop() },
+      props: { entry }
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Content />
