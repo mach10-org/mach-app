@@ -15,7 +15,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mach-app.io',
+  site: 'https://flo8.github.io',
+  base: '/mach-app',
   // output: 'server',
   markdown: {
     remarkPlugins: [remarkMermaid]
