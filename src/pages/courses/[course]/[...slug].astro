@@ -1,8 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
+import { getAllCollectionLessons } from '@api/courses';
 
 export async function getStaticPaths() {
-  const courses = await getCollection('courses');
+  const courses = await getAllCollectionLessons('courses');
 
   return courses.map((entry) => {
     const directories = entry.slug.split('/');
