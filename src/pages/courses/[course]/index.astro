@@ -4,15 +4,25 @@ import Card from '@components/Card.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  return [{ params: { course: 'vuejs' } }, { params: { course: 'test' } }];
+  const paramsList: any[] = [];
+
+  try {
+    const response = await fetch(import.meta.env.COURSES_ENDPOINT);
+    const data = await response.json();
+
+    Object.keys(data).forEach((key) => {
+      paramsList.push({ params: { course: key }, props: { slugs: data[key] } });
+    });
+  } catch (error) {}
+
+  return paramsList;
 }
+const { course } = Astro.params;
+
 const courses = await getCollection('courses', ({ id }) => {
   // Return all entries in `src/content/docs/en/`
-  return id.startsWith('vuejs/');
+  return id.startsWith(`${course}/`);
 });
-console.log('Astro.params [...courses]', Astro.params);
-
-const { course } = Astro.params;
 ---
 
 <Pagelayout title='All vuejs courses'>

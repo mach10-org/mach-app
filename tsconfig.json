@@ -10,6 +10,7 @@
       "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/pages/*"],
       "@styles/*": ["src/styles/*"],
+      "@models/*": ["src/models/*"],
       "@layouts/*": ["src/layouts/*"],
       "@Pagelayout": ["src/layouts/PageLayout.astro"]
     }

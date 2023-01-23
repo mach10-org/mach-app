@@ -1,30 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
-export async function getStaticPaths() {
-  const folderBasePath = 'vuejs/';
 
-  const courses = await getCollection('courses', ({ id }) => {
-    // Return all entries in `src/content/courses/${folderBasePath}/`
-    return id.startsWith(folderBasePath);
-  });
+export async function getStaticPaths() {
+  const courses = await getCollection('courses');
 
   return courses.map((entry) => {
-    // const slug = entry.slug.replace(folderBasePath, '');
     const directories = entry.slug.split('/');
+    const course = [...directories].shift();
     const slug = [...directories].pop();
-    console.log('directories', directories);
-
-    console.log('slug', slug);
 
     return {
-      // params: { slug },
-      params: { course: 'vuejs', slug },
-      // params: { slug: '04-diagram' },
+      params: { course, slug },
       props: { entry }
     };
   });
 }
-console.log('Astro.params [...slug]', Astro.params);
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();

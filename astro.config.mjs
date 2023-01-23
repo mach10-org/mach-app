@@ -11,7 +11,11 @@ import vue from '@astrojs/vue';
 import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
+import sitemap from '@astrojs/sitemap';
+
+// https://astro.build/config
 export default defineConfig({
+  site: 'https://mach-app.io',
   // output: 'server',
   markdown: {
     remarkPlugins: [remarkMermaid]
@@ -21,6 +25,7 @@ export default defineConfig({
     mdx(),
     vue({
       jsx: true
-    })
+    }),
+    sitemap()
   ]
 });
