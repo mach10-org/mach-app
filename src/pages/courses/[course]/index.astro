@@ -1,20 +1,27 @@
 ---
 import Pagelayout from '@Pagelayout';
 import Card from '@components/Card.astro';
-import { getCourseIndex, getCourseLessons } from '@api/courses';
+import { getCourseDirectories, getCourseIndex, getCourseLessons } from '@api/courses';
 import { CollectionStaticProps, Params } from '@models/courses';
 
 export async function getStaticPaths() {
   const paramsList: CollectionStaticProps[] = [];
 
   try {
-    const response = await fetch(import.meta.env.COURSES_ENDPOINT);
-    const data = await response.json();
+    //  const response = await fetch(import.meta.env.COURSES_ENDPOINT);
+    // const response = await fetch('./courses.json');
 
-    Object.keys(data).forEach((key) => {
-      paramsList.push({ params: { course: key }, props: { slugs: data[key] } });
+    // const data = await response.json();
+    const coursesDir = await getCourseDirectories('courses');
+
+    Object.keys(coursesDir).forEach((key) => {
+      paramsList.push({ params: { course: key }, props: { slugs: coursesDir[key] } });
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log('ERROR', error);
+  }
+  console.log('paramsList', paramsList);
+  console.log('COURSES_ENDPOINT', import.meta.env.COURSES_ENDPOINT);
 
   return paramsList;
 }

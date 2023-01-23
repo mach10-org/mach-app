@@ -4,7 +4,6 @@ import Card from '@components/Card.astro';
 import { getAllCourseIndex } from '@api/courses';
 
 const courses = await getAllCourseIndex('courses');
-console.log('courses', courses);
 ---
 
 <MainLayout title='Welcome to Astro.'>

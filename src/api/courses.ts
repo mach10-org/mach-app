@@ -1,4 +1,4 @@
-import { Collection, Render } from '@models/courses';
+import { Collection, CoursesDirectory, Render } from '@models/courses';
 import { getCollection, getEntryBySlug } from 'astro:content';
 
 /**
@@ -47,4 +47,28 @@ export const getCourseIndex = async (collection: Collection, course: string) => 
     }
   } catch (error) {}
   return entryResult;
+};
+
+export const getCourseDirectories = async (collection: Collection) => {
+  const coursesDir: CoursesDirectory = {};
+
+  await getCollection(collection, ({ slug }) => {
+    const directories: string[] = slug.split('/');
+
+    if (directories.length > 1) {
+      const cat = directories[0];
+      const slug = [...directories].pop();
+
+      if (!coursesDir[cat]) {
+        coursesDir[cat] = [];
+      }
+      if (slug) {
+        coursesDir[cat].push(slug);
+      }
+
+      return true;
+    }
+    return false;
+  });
+  return coursesDir;
 };
