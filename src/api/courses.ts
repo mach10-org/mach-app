@@ -6,9 +6,17 @@ import { getCollection, getEntryBySlug } from 'astro:content';
  * @returns List of all active courses index page
  */
 export const getAllCourseIndex = async (collection: Collection) => {
-  return await getCollection(collection, ({ id, data }) => {
+  const list = await getCollection(collection, ({ id, data }) => {
     return data.draft !== true && id.includes(`/_index`);
   });
+
+  const test = list.map((c) => {
+    const slug: any = c.slug.replace('/_index', '/');
+    c.slug = slug;
+    return c;
+  });
+
+  return test;
 };
 
 /**
