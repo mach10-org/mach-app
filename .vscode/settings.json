@@ -14,5 +14,12 @@
       "other": "off"
     },
     "editor.minimap.enabled": false
-  }
+  },
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "content",
+      "path": "[[workspace]]/src/content"
+    }
+  ],
+  "frontMatter.preview.host": "http://localhost:3000/mach-app/"
 }
