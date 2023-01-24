@@ -25,7 +25,6 @@ jobs:
         run: |
           echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
           echo "environement variable env.SITE_NAME : ${{ env:SITE_NAME }}"
-          echo "environement variable env SITE_NAME : $env:SITE_NAME"
           echo "environement variable secrets.MY_SECRET_TEST : ${{ secrets.MY_SECRET_TEST }}"
           echo "variable from shell environment: $PUBLIC_SITE_NAME"
 
@@ -46,6 +45,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Use variables
+        run: |
+          echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
+          echo "environement variable env.SITE_NAME : ${{ env:SITE_NAME }}"
+          echo "environement variable secrets.MY_SECRET_TEST : ${{ secrets.MY_SECRET_TEST }}"
+          echo "variable from shell environment: $PUBLIC_SITE_NAME"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
