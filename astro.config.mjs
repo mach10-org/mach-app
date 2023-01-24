@@ -25,7 +25,9 @@ export default defineConfig({
   },
   integrations: [
     tailwind(),
-    mdx(),
+    mdx({
+      drafts: false
+    }),
     vue({
       jsx: true
     }),

@@ -68,7 +68,7 @@ export const getCourseDirectories = async (collection: Collection) => {
   const coursesDir: CoursesDirectory = {};
 
   await getCollection(collection, (entry) => {
-    const { slug } = entry;
+    const { slug, data } = entry;
     const directories: string[] = slug.split('/');
 
     if (directories.length > 1) {
@@ -83,7 +83,7 @@ export const getCourseDirectories = async (collection: Collection) => {
         };
       }
       if (alias) {
-        if (!slug.includes(`${cat}/_index`)) {
+        if (data.draft !== true && !slug.includes(`${cat}/_index`)) {
           coursesDir[cat].slugs?.push(alias);
           coursesDir[cat].courses?.push(entry);
         }
