@@ -15,7 +15,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://flo8.github.io',
+  site: 'https://mach10-org.github.io/',
   base: '/mach-app',
   // output: 'server',
   markdown: {
