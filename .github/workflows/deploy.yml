@@ -7,6 +7,9 @@ on:
     branches: [main]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+env:
+  # Setting an environment variable with the value of a configuration variable
+  PUBLIC_SITE_NAME: ${{ vars.PUBLIC_SITE_NAME }}
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
