@@ -170,13 +170,13 @@
     undici "^5.14.0"
     which-pm-runs "^1.1.0"
 
-"@astrojs/vue@2.0.0-beta.0":
-  version "2.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/vue/-/vue-2.0.0-beta.0.tgz#fcdfb8a040b40f683b0cca1e9798ce7ad0fa7470"
-  integrity sha512-ve3gm99JBMgIIz1QMgjOjVUmf7qgPPNlItZCeHdJSs+wsdEC+ZzmyfApAWhkYDCvh7+wHMVBeIQOraaeyh6ufA==
+"@astrojs/vue@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@astrojs/vue/-/vue-1.2.2.tgz#66e8cb1af79626518fadd9953f0912c7cc003969"
+  integrity sha512-RdngCS7BaXv1v0ygOVJ5P7+FUsDyBLkU8YLDxxud56zeEsKxFkk6drF/lmXM8Z/sJ/SZMqsK+I9bhTHRqIkAaA==
   dependencies:
-    "@vitejs/plugin-vue" "^4.0.0"
-    "@vitejs/plugin-vue-jsx" "^3.0.0"
+    "@vitejs/plugin-vue" "^3.0.0"
+    "@vitejs/plugin-vue-jsx" "^2.0.1"
     "@vue/babel-plugin-jsx" "^1.1.1"
     "@vue/compiler-sfc" "^3.2.39"
 
@@ -199,7 +199,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.20.10.tgz#9d92fa81b87542fff50e848ed585b4212c1d34ec"
   integrity sha512-sEnuDPpOJR/fcafHMjpcpGN5M2jbUGUHwmuWKM/YdPzeEDJg8bgmbcWQFUfE32MQjti1koACvoPVsDe8Uq+idg==
 
-"@babel/core@^7.18.2", "@babel/core@^7.20.5":
+"@babel/core@^7.18.2", "@babel/core@^7.19.6":
   version "7.20.12"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.20.12.tgz#7930db57443c6714ad216953d1356dac0eb8496d"
   integrity sha512-XsMfHovsUYHFMdrIHkZphTN/2Hzzi78R08NuHfDBehym2VsPDL6Zn/JAD/JQdnRvbSsbQc4mVaU1m6JgtTEElg==
@@ -417,7 +417,7 @@
     "@babel/plugin-syntax-jsx" "^7.18.6"
     "@babel/types" "^7.20.7"
 
-"@babel/plugin-transform-typescript@^7.20.2":
+"@babel/plugin-transform-typescript@^7.20.0":
   version "7.20.13"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.20.13.tgz#e3581b356b8694f6ff450211fe6774eaff8d25ab"
   integrity sha512-O7I/THxarGcDZxkgWKMUrk7NK1/WbHAg3Xx86gqS6x9MTrNL6AwIluuZ96ms4xeDe6AVx6rjHbWHP7x26EPQBA==
@@ -873,19 +873,19 @@
   dependencies:
     "@types/node" "*"
 
-"@vitejs/plugin-vue-jsx@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue-jsx/-/plugin-vue-jsx-3.0.0.tgz#42e89d6d9eb89604d109ff9a615d77c3c080dd25"
-  integrity sha512-vurkuzgac5SYuxd2HUZqAFAWGTF10diKBwJNbCvnWijNZfXd+7jMtqjPFbGt7idOJUn584fP1Ar9j/GN2jQ3Ew==
+"@vitejs/plugin-vue-jsx@^2.0.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue-jsx/-/plugin-vue-jsx-2.1.1.tgz#7c13aa4e54f5ee8c9f37937b3d8c706c14369478"
+  integrity sha512-JgDhxstQlwnHBvZ1BSnU5mbmyQ14/t5JhREc6YH5kWyu2QdAAOsLF6xgHoIWarj8tddaiwFrNzLbWJPudpXKYA==
   dependencies:
-    "@babel/core" "^7.20.5"
-    "@babel/plugin-transform-typescript" "^7.20.2"
+    "@babel/core" "^7.19.6"
+    "@babel/plugin-transform-typescript" "^7.20.0"
     "@vue/babel-plugin-jsx" "^1.1.1"
 
-"@vitejs/plugin-vue@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-4.0.0.tgz#93815beffd23db46288c787352a8ea31a0c03e5e"
-  integrity sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==
+"@vitejs/plugin-vue@^3.0.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-3.2.0.tgz#a1484089dd85d6528f435743f84cdd0d215bbb54"
+  integrity sha512-E0tnaL4fr+qkdCNxJ+Xd0yM31UwMkQje76fsDVBBUCoGOUPexu2VDUYHL8P4CwV+zMvWw6nlRw19OnRKmYAJpw==
 
 "@vscode/emmet-helper@^2.8.4":
   version "2.8.6"

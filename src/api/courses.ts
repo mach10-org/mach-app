@@ -40,7 +40,9 @@ export const getAllCollectionLessons = async (collection: Collection) => {
 export const getCourseIndex = async (collection: Collection, course: string) => {
   let entryResult: Render | null = null;
   try {
-    const entry = await getEntryBySlug(collection, `${course}/_index`);
+    const entry = await getEntryBySlug(collection, `${course}/`);
+    console.log('entry', entry);
+
     if (entry) {
       entryResult = await entry.render();
       return entryResult;

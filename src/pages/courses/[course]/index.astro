@@ -29,7 +29,7 @@ const courses = await getCourseLessons('courses', course);
   {
     courses.map((course) => (
       <Card
-        href={`/${course.collection}/${course.slug}`}
+        href={`${course.collection}/${course.slug}`}
         title={course.data.title}
         body={course.data.description}
       />

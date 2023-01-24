@@ -6,18 +6,19 @@ import { getAllCourseIndex } from '@api/courses';
 const courses = await getAllCourseIndex('courses');
 ---
 
-<MainLayout title='Welcome to Astro.'>
+<MainLayout title='Welcome to Mach.'>
   <main>
-    <h1>Welcome to <span class='text-gradient'>Astro.site</span></h1>
+    <h1>Welcome to <span class='text-gradient'>{import.meta.env.SITE_NAME}</span></h1>
     <p class='instructions'>
-      To get started, open the directory <code>src/pages</code> in your project.<br />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
+      To add a course, create a PR and add it the <code>src/content/courses</code> following the guide
+      lines.<br />
+      <strong>Quiz !?!:</strong> You can create a quiz on each page.
     </p>
 
     {
       courses.map((course) => (
         <Card
-          href={`/${course.collection}/${course.slug}`}
+          href={`${course.collection}/${course.slug}`}
           title={course.data.title}
           body={course.data.description}
         />

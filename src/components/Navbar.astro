@@ -4,14 +4,14 @@ import ThemeIcon from './ThemeIcon.vue';
 
 <nav class='bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-700'>
   <div class='container flex flex-wrap items-center justify-between mx-auto'>
-    <a href='/' class='flex items-center'>
+    <a href={import.meta.env.BASE_URL} class='flex items-center'>
       <img
         src='https://flowbite.com/docs/images/logo.svg'
         class='h-6 mr-3 sm:h-9'
         alt='Flowbite Logo'
       />
       <span class='self-center text-xl font-semibold whitespace-nowrap dark:text-white'>
-        Mach App
+        {import.meta.env.SITE_NAME}
       </span>
     </a>
     <div class='md:order-2 hidden md:flex'>
@@ -52,8 +52,11 @@ import ThemeIcon from './ThemeIcon.vue';
       >
         <li>
           <a
-            href='/'
-            class:list={['menu-item ', { active: Astro.url.pathname === '/' }]}
+            href={`${import.meta.env.BASE_URL}`}
+            class:list={[
+              'menu-item ',
+              { active: Astro.url.pathname === `${import.meta.env.BASE_URL}` }
+            ]}
             aria-current='page'
           >
             Home
@@ -61,16 +64,22 @@ import ThemeIcon from './ThemeIcon.vue';
         </li>
         <li>
           <a
-            href='/page-1/'
-            class:list={['menu-item', { active: Astro.url.pathname === '/page-1/' }]}
+            href={`${import.meta.env.BASE_URL}page-1/`}
+            class:list={[
+              'menu-item',
+              { active: Astro.url.pathname === `${import.meta.env.BASE_URL}page-1/` }
+            ]}
           >
             Page 1
           </a>
         </li>
         <li>
           <a
-            href='/courses/vuejs/'
-            class:list={['menu-item', { active: Astro.url.pathname === '/courses/vuejs/' }]}
+            href={`${import.meta.env.BASE_URL}courses/vuejs/`}
+            class:list={[
+              'menu-item',
+              { active: Astro.url.pathname === `${import.meta.env.BASE_URL}courses/vuejs/` }
+            ]}
           >
             Course: VUE JS
           </a>
@@ -82,9 +91,9 @@ import ThemeIcon from './ThemeIcon.vue';
 
 <script>
   const handleToggleClick = () => {
-    const element = document.getElementById('navbar');
-    element.classList.toggle('hidden');
+    const element: HTMLElement | null = document.getElementById('navbar');
+    element?.classList.toggle('hidden');
   };
 
-  document.getElementById('navbar-collapse-toggle').addEventListener('click', handleToggleClick);
+  document.getElementById('navbar-collapse-toggle')?.addEventListener('click', handleToggleClick);
 </script>
