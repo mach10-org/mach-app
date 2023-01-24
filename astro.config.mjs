@@ -14,19 +14,20 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
-
-// https://astro.build/config
 export default defineConfig({
   site: 'https://mach10-org.github.io/',
   base: '/mach-app/',
   // output: 'server',
   markdown: {
-    remarkPlugins: [remarkMermaid]
+    remarkPlugins: [remarkMermaid],
+    gfm: true,
+    drafts: false
   },
   integrations: [
     tailwind(),
     mdx({
-      drafts: false
+      drafts: false,
+      gfm: true
     }),
     vue({
       jsx: true

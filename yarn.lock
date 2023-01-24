@@ -68,12 +68,12 @@
     unist-util-visit "^4.1.0"
     vfile "^5.3.2"
 
-"@astrojs/markdown-remark@^2.0.0-beta.2":
-  version "2.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@astrojs/markdown-remark/-/markdown-remark-2.0.0-beta.2.tgz#1e3e2a12b980e96c85e31f7f1ec7041cee7ee494"
-  integrity sha512-2Rubc5VuFY4qmXWAeJ0DY+FOj9190vgHSN33AYxcHVazXqLvMMmIXZCDzaeQXiGUk8vXt0UBJJrRtfrL6C/aRg==
+"@astrojs/markdown-remark@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/markdown-remark/-/markdown-remark-2.0.0.tgz#16fd5a4042f900c9a367d9afdcd7188a70344a46"
+  integrity sha512-PqDxi3L2jsxLWjsWRyn+BkaDtHKq2+ECI7PlW9NsEwu2jKKgl7sXj57s/Wjhyctr4efFdzewFArVFm1Gnb3rtw==
   dependencies:
-    "@astrojs/prism" "^2.0.0-beta.0"
+    "@astrojs/prism" "^2.0.0"
     github-slugger "^1.4.0"
     import-meta-resolve "^2.1.0"
     rehype-raw "^6.1.1"
@@ -132,10 +132,10 @@
   dependencies:
     prismjs "^1.28.0"
 
-"@astrojs/prism@^2.0.0-beta.0":
-  version "2.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/prism/-/prism-2.0.0-beta.0.tgz#b8bf2c867cfc4b6205ff32906a7d36fd640f05d3"
-  integrity sha512-GjQIA9faCexnuBrwCw8wvl34YMYIRRDOSSC7rnNpJZVuxh88QKdVksC5h1dY/x0piitXhLl4npuhMT5TN/mVcw==
+"@astrojs/prism@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/prism/-/prism-2.0.0.tgz#e35c677b13c55b209e39db5d62424844b1b7c41b"
+  integrity sha512-YgeoeEPqsxaEpg0rwe/bUq3653LqSQnMjrLlpYwrbQQMQQqz6Y5yXN+RX3SfLJ6ppNb4+Fu2+Z49EXjk48Ihjw==
   dependencies:
     prismjs "^1.28.0"
 
@@ -147,19 +147,20 @@
     sitemap "^7.1.1"
     zod "^3.17.3"
 
-"@astrojs/tailwind@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/tailwind/-/tailwind-3.0.0-beta.0.tgz#f63aa2a08de48a62d5a9d79840e6319e226be30b"
-  integrity sha512-0YGu/OXnv9XQzHm2g/VhsfGOWoo2v+ToTgx40oMd8op/k5i0h61wrfSh0xKW10Wq2j7s8AT/faPVW/6YsbJznA==
+"@astrojs/tailwind@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/tailwind/-/tailwind-3.0.0.tgz#a1d6ad0ad2cb256dd9fb1d61b7ef923737a96f6f"
+  integrity sha512-Ul0LzTIW+QD/qXUaTDSDoe/uNOPSAX6Ce7yTMzl7v+9OlZ4vlgkj1CUq/WkhlKnJ2+SnJvLArEj6yYs/M2V8nA==
   dependencies:
     "@proload/core" "^0.3.2"
     autoprefixer "^10.4.7"
     postcss "^8.4.14"
+    postcss-load-config "^4.0.1"
 
-"@astrojs/telemetry@^2.0.0-beta.0":
-  version "2.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/telemetry/-/telemetry-2.0.0-beta.0.tgz#1e87ddd8e7e181eb090b0c43ca503a754de0a07d"
-  integrity sha512-aSwbv2Io1+jPMCXKshLYgH6oNrLjsJ6TpQa5cRECJldsSyiDLFOijv4JWLxCQ1cZWZV07wu0GGhdnjUnt9U3MQ==
+"@astrojs/telemetry@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/telemetry/-/telemetry-2.0.0.tgz#025961cccca062fe010938441db7d1e607c2253a"
+  integrity sha512-RnWojVMIsql3GGWDP5pNWmhmBQVkCpxGNZ8yPr2cbmUqsUYGSvErhqfkLfro9j2/STi5UDmSpNgjPkQmXpgnKw==
   dependencies:
     ci-info "^3.3.1"
     debug "^4.3.4"
@@ -180,10 +181,10 @@
     "@vue/babel-plugin-jsx" "^1.1.1"
     "@vue/compiler-sfc" "^3.2.39"
 
-"@astrojs/webapi@^2.0.0-beta.1":
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@astrojs/webapi/-/webapi-2.0.0-beta.1.tgz#8520f5dd5139e102df57e41282f5db59725636b2"
-  integrity sha512-WFA05d6uhtlKbIE2MCr4hP36i+YFM0qBeMFY+eYFJG3550sfJXC4cuW+1+/RYkDL89ySNKPUIQAzC0pzEZ3Vxw==
+"@astrojs/webapi@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/webapi/-/webapi-2.0.0.tgz#fb1364f62134508646a53f2bbb7b0fb1ff8dcaee"
+  integrity sha512-gziwy+XvY+/B9mq/eurgJMZ4iFnkcqg1wb0tA8BsVfiUPwl7yQKAFrBxrs2rWfKMXyWlVaTFc8rAYcB5VXQEuw==
   dependencies:
     undici "^5.14.0"
 
@@ -1124,16 +1125,16 @@ astro-diagram@^0.6.3:
     puppeteer "^18.0.2"
     unist-util-visit "^4.1.0"
 
-astro@^2.0.0-beta.3:
-  version "2.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-2.0.0-beta.4.tgz#a1205c7d01e1cde4a8709480ad23cef91d12b67d"
-  integrity sha512-CiaXd7OXhcaeSbiJp6LkOrnx7NyQd2oLFl6euWsSzu8nul9gRawXgTE2cBs3d/EoBbtqFkrEP+GZ++ud7ienlg==
+astro@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-2.0.0.tgz#ac5d55bb7ef9abf327dddd553a67cf619411b90a"
+  integrity sha512-4ihZinpZXAgHbLPIPLsrXedZ//geJ5EvnzVk4DMrcUvk9ehcgSwyo2sJtG4QtmnHC92Zkmb8IiScJfczEm7ceA==
   dependencies:
     "@astrojs/compiler" "^1.0.1"
     "@astrojs/language-server" "^0.28.3"
-    "@astrojs/markdown-remark" "^2.0.0-beta.2"
-    "@astrojs/telemetry" "^2.0.0-beta.0"
-    "@astrojs/webapi" "^2.0.0-beta.1"
+    "@astrojs/markdown-remark" "^2.0.0"
+    "@astrojs/telemetry" "^2.0.0"
+    "@astrojs/webapi" "^2.0.0"
     "@babel/core" "^7.18.2"
     "@babel/generator" "^7.18.2"
     "@babel/parser" "^7.18.4"
@@ -1361,7 +1362,7 @@ character-reference-invalid@^2.0.0:
   resolved "https://registry.yarnpkg.com/character-reference-invalid/-/character-reference-invalid-2.0.1.tgz#85c66b041e43b47210faf401278abf808ac45cb9"
   integrity sha512-iBZ4F4wRbyORVsu0jPV7gXkOsGYjGHPmAyv+HiHG8gi5PtC9KI2j1+v8/tlibRvjoWX027ypmG/n0HtO5t7unw==
 
-"chokidar@>=3.0.0 <4.0.0", chokidar@^3.5.3:
+chokidar@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
   integrity sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==
@@ -2373,11 +2374,6 @@ ieee754@^1.1.13, ieee754@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
-
-immutable@^4.0.0:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.2.2.tgz#2da9ff4384a4330c36d4d1bc88e90f9e0b0ccd16"
-  integrity sha512-fTMKDwtbvO5tldky9QZ2fMX7slR0mYpY5nbnFWYp0fOzDhHqhgIw9KoYgxLWsoNTS9ZHGauHj18DTyEw6BK3Og==
 
 import-meta-resolve@^2.1.0:
   version "2.2.1"
@@ -3578,6 +3574,14 @@ postcss-load-config@^3.1.4:
     lilconfig "^2.0.5"
     yaml "^1.10.2"
 
+postcss-load-config@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-load-config/-/postcss-load-config-4.0.1.tgz#152383f481c2758274404e4962743191d73875bd"
+  integrity sha512-vEJIc8RdiBRu3oRAI0ymerOn+7rPuMvRXslTvZUKZonDHFIczxztIyJ1urxM1x9JXEikvpWWTUUqal5j/8QgvA==
+  dependencies:
+    lilconfig "^2.0.5"
+    yaml "^2.1.1"
+
 postcss-nested@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/postcss-nested/-/postcss-nested-6.0.0.tgz#1572f1984736578f360cffc7eb7dca69e30d1735"
@@ -3942,15 +3946,6 @@ sass-formatter@^0.7.5:
   dependencies:
     suf-log "^2.5.3"
 
-sass@^1.57.1:
-  version "1.57.1"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.57.1.tgz#dfafd46eb3ab94817145e8825208ecf7281119b5"
-  integrity sha512-O2+LwLS79op7GI0xZ8fqzF7X2m/m8WFfI02dHOdsK5R2ECeS5F62zrwg/relM1rjSLy7Vd/DiMNIvPrQGsA0jw==
-  dependencies:
-    chokidar ">=3.0.0 <4.0.0"
-    immutable "^4.0.0"
-    source-map-js ">=0.6.2 <2.0.0"
-
 sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -4027,7 +4022,7 @@ slash@^4.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-4.0.0.tgz#2422372176c4c6c5addb5e2ada885af984b396a7"
   integrity sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==
 
-"source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.0.2:
+source-map-js@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
@@ -4669,6 +4664,11 @@ yaml@^1.10.2:
   version "1.10.2"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
+
+yaml@^2.1.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.2.1.tgz#3014bf0482dcd15147aa8e56109ce8632cd60ce4"
+  integrity sha512-e0WHiYql7+9wr4cWMx3TVQrNwejKaEe7/rHNmQmqRjazfOP5W8PB6Jpebb5o6fIapbz9o9+2ipcaTM2ZwDI6lw==
 
 yargs-parser@^21.0.1:
   version "21.1.1"

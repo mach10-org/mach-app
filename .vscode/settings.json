@@ -1,5 +1,25 @@
 {
   "files.associations": {
     "*.mdx": "markdown"
-  }
+  },
+  "[markdown]": {
+    "editor.fontSize": 14,
+    "editor.lineHeight": 26,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 64,
+    "editor.lineNumbers": "off",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.minimap.enabled": false
+  },
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "content",
+      "path": "[[workspace]]/src/content"
+    }
+  ],
+  "frontMatter.preview.host": "http://localhost:3000/mach-app/"
 }

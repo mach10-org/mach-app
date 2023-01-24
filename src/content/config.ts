@@ -1,3 +1,4 @@
+/*
 import { defineCollection } from 'astro:content';
 // 2. Define your collection(s)
 const courseCollection = defineCollection({
@@ -13,3 +14,5 @@ const courseCollection = defineCollection({
 export const collections = {
   courses: courseCollection
 };
+
+*/
