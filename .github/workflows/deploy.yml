@@ -24,7 +24,7 @@ jobs:
       - name: Use variables
         run: |
           echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
-          echo "repository variable SITE_NAME : ${{ SITE_NAME }}"
+          echo "repository variable env.SITE_NAME : ${{ env.SITE_NAME }}"
           echo "variable from shell environment: $DAY_OF_WEEK"
 
       - name: Checkout your repository using git
