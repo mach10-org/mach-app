@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 env:
   # Setting an environment variable with the value of a configuration variable
-  PUBLIC_SITE_NAME: ${{ vars.PUBLIC_SITE_NAME }}
+  PUBLIC_SITE_NAME: ${{ vars.SITE_NAME }}
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
@@ -23,6 +23,9 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
+        run: |
+        echo "variable from shell environment: $PUBLIC_SITE_NAME"
+
       - name: Install, build, and upload your site
         uses: withastro/action@v0
         # with:
