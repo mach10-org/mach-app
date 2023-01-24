@@ -20,16 +20,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Use variables
-        # You can use configuration variables with the `vars` context for dynamic jobs
-        if: ${{ vars.USE_VARIABLES == 'true' }}
-        runs-on: ${{ vars.RUNNER }}
-        environment: ${{ vars.ENVIRONMENT_STAGE }}
         run: |
           echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
-          echo "repository variable env.SITE_NAME : ${{ env.SITE_NAME }}"
+          echo "repository variable SITE_NAME : ${{ SITE_NAME }}"
           echo "variable from shell environment: $DAY_OF_WEEK"
 
       - name: Checkout your repository using git
