@@ -1,5 +1,5 @@
 import { Collection, CoursesDirectory, Render } from '@models/courses';
-import { getCollection, getEntryBySlug } from 'astro:content';
+import { CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
 
 /**
  *
@@ -59,6 +59,11 @@ export const getCourseIndex = async (collection: Collection, course: string) => 
   return entryResult;
 };
 
+/**
+ *
+ * @param collection
+ * @returns params to build courses index page
+ */
 export const getCourseDirectories = async (collection: Collection) => {
   const coursesDir: CoursesDirectory = {};
 
@@ -78,8 +83,8 @@ export const getCourseDirectories = async (collection: Collection) => {
         };
       }
       if (alias) {
-        coursesDir[cat].slugs?.push(alias);
         if (!slug.includes(`${cat}/_index`)) {
+          coursesDir[cat].slugs?.push(alias);
           coursesDir[cat].courses?.push(entry);
         }
       }
@@ -92,4 +97,22 @@ export const getCourseDirectories = async (collection: Collection) => {
     return false;
   });
   return coursesDir;
+};
+
+export const coursePager = async (course: string, slug: string) => {
+  const coursesResult = await getCourseDirectories('courses');
+
+  const coursesDir = coursesResult[course];
+  const courses = coursesResult[course].courses as CollectionEntry<Collection>[];
+  const slugs = coursesDir.slugs || [];
+  const activeIndex = slugs?.findIndex((s) => s === slug);
+  // const prevSlugIdx = activeIndex - 1;
+  // const nextSlugIdx = activeIndex + 1;
+  const prevEntry = courses[activeIndex - 1] || null;
+  const nextEntry = courses[activeIndex + 1] || null;
+
+  return {
+    prevEntry,
+    nextEntry
+  };
 };

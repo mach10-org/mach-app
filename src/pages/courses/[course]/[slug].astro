@@ -1,5 +1,5 @@
 ---
-import { getAllCollectionLessons } from '@api/courses';
+import { coursePager, getAllCollectionLessons } from '@api/courses';
 import '@styles/global.css';
 
 export async function getStaticPaths() {
@@ -17,8 +17,31 @@ export async function getStaticPaths() {
   });
 }
 
+const { course, slug } = Astro.params;
+
+const { nextEntry, prevEntry } = await coursePager(course as string, slug as string);
+console.log('nextEntry, prevEntry', nextEntry, prevEntry);
+
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
 <Content />
+
+<div class='p-4 md:flex md:items-center md:justify-between md:p-6'>
+  {
+    prevEntry && (
+      <a href={`${import.meta.env.BASE_URL}${prevEntry.collection}/${prevEntry.slug}`}>
+        {`< ${prevEntry.data.title}`}
+      </a>
+    )
+  }
+  <br />
+  {
+    nextEntry && (
+      <a href={`${import.meta.env.BASE_URL}${nextEntry.collection}/${nextEntry.slug}`}>
+        {`${nextEntry.data.title} >`}
+      </a>
+    )
+  }
+</div>
