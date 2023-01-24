@@ -1,9 +1,16 @@
 import { MarkdownHeading } from 'astro';
 import { AstroComponentFactory } from 'astro/dist/runtime/server';
+import { CollectionEntry } from 'astro:content';
 
-export interface CoursesDirectory {
-  [key: string]: string[];
+export interface CoursesDirectoryProp {
+  slugs?: string[];
+  courses?: CollectionEntry<Collection>[];
+  entry: CollectionEntry<Collection> | null;
 }
+export interface CoursesDirectory {
+  [key: string]: CoursesDirectoryProp;
+}
+
 export type Collection = 'courses';
 
 export type Render = {
@@ -18,5 +25,5 @@ export type RenderPromise = {
 export type Params = { [key: string]: string };
 export interface CollectionStaticProps {
   params: Params;
-  props: { slugs: string[] };
+  props: CoursesDirectoryProp;
 }

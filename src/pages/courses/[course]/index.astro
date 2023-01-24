@@ -1,31 +1,42 @@
 ---
-import Pagelayout from '@Pagelayout';
+import PageLayout from '@PageLayout';
 import Card from '@components/Card.astro';
-import { getCourseDirectories, getCourseIndex, getCourseLessons } from '@api/courses';
-import { CollectionStaticProps, Params } from '@models/courses';
-
+import { getCourseDirectories } from '@api/courses';
+import { Collection, CollectionStaticProps } from '@models/courses';
+import '@styles/global.css';
+import { CollectionEntry } from 'astro:content';
+interface Props {
+  courses: CollectionEntry<Collection>[];
+  entry: CollectionEntry<Collection>;
+}
 export async function getStaticPaths() {
   const paramsList: CollectionStaticProps[] = [];
 
   try {
     const coursesDir = await getCourseDirectories('courses');
+    // console.log('coursesDir', coursesDir);
 
     Object.keys(coursesDir).forEach((key) => {
-      paramsList.push({ params: { course: key }, props: { slugs: coursesDir[key] } });
+      paramsList.push({
+        params: { course: key },
+        props: { entry: coursesDir[key].entry, courses: coursesDir[key].courses }
+      });
     });
   } catch (error) {
     console.log('ERROR', error);
   }
 
-  return paramsList;
+  return paramsList.map(({ params, props }) => {
+    return { params, props };
+  });
 }
-const { course } = Astro.params as Params;
-const Entry = await getCourseIndex('courses', course);
-const courses = await getCourseLessons('courses', course);
+
+const { entry, courses } = Astro.props;
+const { Content } = await entry.render();
 ---
 
-<Pagelayout title='All vuejs courses'>
-  {Entry && <Entry.Content />}
+<PageLayout title='All vuejs courses'>
+  <Content />
   {
     courses.map((course) => (
       <Card
@@ -35,4 +46,4 @@ const courses = await getCourseLessons('courses', course);
       />
     ))
   }
-</Pagelayout>
+</PageLayout>

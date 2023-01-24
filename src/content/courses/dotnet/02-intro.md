@@ -1,5 +1,5 @@
 ---
-layout: '@Pagelayout'
+layout: '@Contentlayout'
 title: 02 - Intro
 description: 'Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae quies, praemiaque lepores.'
 draft: true

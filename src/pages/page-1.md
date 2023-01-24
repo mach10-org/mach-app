@@ -1,5 +1,5 @@
 ---
-layout: '@Pagelayout'
+layout: '@PageLayout'
 title: Hello, World
 ---
 

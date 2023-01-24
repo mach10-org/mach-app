@@ -13,7 +13,8 @@
       "@models/*": ["src/models/*"],
       "@api/*": ["src/api/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@Pagelayout": ["src/layouts/PageLayout.astro"]
+      "@PageLayout": ["src/layouts/PageLayout.astro"],
+      "@Contentlayout": ["src/layouts/ContentLayout.astro"]
     }
   }
 }

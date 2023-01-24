@@ -1,5 +1,5 @@
 ---
-layout: '@Pagelayout'
+layout: '@Contentlayout'
 title: '01 - Getting started with Golang'
 description: 'Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae quies, praemiaque lepores.'
 ---

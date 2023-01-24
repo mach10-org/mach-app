@@ -8,7 +8,7 @@ preview: 'https://via.placeholder.com/450x300.png'
 ---
 
 <main>
-# Hi there Hello, World!
+# VUE JS INDEX!
 
 This Markdown file creates a page at `your-domain.com/page-1/`
 

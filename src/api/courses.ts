@@ -62,18 +62,29 @@ export const getCourseIndex = async (collection: Collection, course: string) => 
 export const getCourseDirectories = async (collection: Collection) => {
   const coursesDir: CoursesDirectory = {};
 
-  await getCollection(collection, ({ slug }) => {
+  await getCollection(collection, (entry) => {
+    const { slug } = entry;
     const directories: string[] = slug.split('/');
 
     if (directories.length > 1) {
       const cat = directories[0];
-      const slug = [...directories].pop();
+      const alias = [...directories].pop();
 
       if (!coursesDir[cat]) {
-        coursesDir[cat] = [];
+        coursesDir[cat] = {
+          slugs: [],
+          courses: [],
+          entry: null
+        };
       }
-      if (slug) {
-        coursesDir[cat].push(slug);
+      if (alias) {
+        coursesDir[cat].slugs?.push(alias);
+        if (!slug.includes(`${cat}/_index`)) {
+          coursesDir[cat].courses?.push(entry);
+        }
+      }
+      if (entry && coursesDir[cat]) {
+        coursesDir[cat].entry = entry;
       }
 
       return true;

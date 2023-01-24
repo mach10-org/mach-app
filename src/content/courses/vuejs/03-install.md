@@ -1,10 +1,10 @@
 ---
-layout: '@Pagelayout'
+layout: '@Contentlayout'
 title: 03 - vuejs
 description: 'Learn how VUE JS works and explore the official API docs'
 ---
 
-# Hi there VUE JS!
+# Hi there VUE JS 03!
 
 This Markdown file creates a page at `your-domain.com/courses/vuejs/001-what-is-vuejs`
 
