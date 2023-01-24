@@ -21,10 +21,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v3
+      - name: Use variables
         run: |
         echo "variable from shell environment: $PUBLIC_SITE_NAME"
+
+      - name: Checkout your repository using git
+        uses: actions/checkout@v3
 
       - name: Install, build, and upload your site
         uses: withastro/action@v0
