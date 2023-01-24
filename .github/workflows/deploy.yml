@@ -8,6 +8,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
+env:
+  DAY_OF_WEEK: Monday
+
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
@@ -20,7 +23,9 @@ jobs:
     steps:
       - name: Use variables
         run: |
-          echo "variable from shell environment: ${{ vars.SITE_NAME }}"
+          echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
+          echo "repository variable env.SITE_NAME : ${{ env.SITE_NAME }}"
+          echo "variable from shell environment: $DAY_OF_WEEK"
 
       - name: Checkout your repository using git
         uses: actions/checkout@v3
