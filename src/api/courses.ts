@@ -100,19 +100,17 @@ export const getCourseDirectories = async (collection: Collection) => {
 };
 
 export const coursePager = async (course: string, slug: string) => {
-  const coursesResult = await getCourseDirectories('courses');
+  /*const coursesResult = await getCourseDirectories('courses');
 
   const coursesDir = coursesResult[course];
-  const courses = coursesResult[course].courses as CollectionEntry<Collection>[];
+  const courses = coursesResult[course].courses;
   const slugs = coursesDir.slugs || [];
   const activeIndex = slugs?.findIndex((s) => s === slug);
-  // const prevSlugIdx = activeIndex - 1;
-  // const nextSlugIdx = activeIndex + 1;
-  const prevEntry = courses[activeIndex - 1] || null;
-  const nextEntry = courses[activeIndex + 1] || null;
+  const prevEntry = courses ? courses[activeIndex - 1] || null : null;
+  const nextEntry = courses ? courses[activeIndex + 1] || null : null;
 
   return {
     prevEntry,
     nextEntry
-  };
+  };*/
 };

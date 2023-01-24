@@ -19,8 +19,7 @@ export async function getStaticPaths() {
 
 const { course, slug } = Astro.params;
 
-const { nextEntry, prevEntry } = await coursePager(course as string, slug as string);
-console.log('nextEntry, prevEntry', nextEntry, prevEntry);
+// const { nextEntry, prevEntry } = await coursePager(course as string, slug as string);
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
@@ -28,7 +27,7 @@ const { Content } = await entry.render();
 
 <Content />
 
-<div class='p-4 md:flex md:items-center md:justify-between md:p-6'>
+<!-- <div class='p-4 md:flex md:items-center md:justify-between md:p-6'>
   {
     prevEntry && (
       <a href={`${import.meta.env.BASE_URL}${prevEntry.collection}/${prevEntry.slug}`}>
@@ -44,4 +43,4 @@ const { Content } = await entry.render();
       </a>
     )
   }
-</div>
+</div> -->
