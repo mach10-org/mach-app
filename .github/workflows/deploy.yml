@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  DAY_OF_WEEK: Monday
+  PUBLIC_SITE_NAME: ${{ vars.SITE_NAME }}
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
@@ -24,8 +24,8 @@ jobs:
       - name: Use variables
         run: |
           echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
-          echo "repository variable env.SITE_NAME : ${{ env.SITE_NAME }}"
-          echo "variable from shell environment: $DAY_OF_WEEK"
+          echo "environement variable env.SITE_NAME : ${{ env.SITE_NAME }}"
+          echo "variable from shell environment: $PUBLIC_SITE_NAME"
 
       - name: Checkout your repository using git
         uses: actions/checkout@v3
