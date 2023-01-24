@@ -19,7 +19,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://mach10-org.github.io/',
   base: '/mach-app/',
-  output: 'server',
+  // output: 'server',
   markdown: {
     remarkPlugins: [remarkMermaid]
   },
