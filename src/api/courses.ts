@@ -100,17 +100,21 @@ export const getCourseDirectories = async (collection: Collection) => {
 };
 
 export const coursePager = async (course: string, slug: string) => {
-  /*const coursesResult = await getCourseDirectories('courses');
+  let prevEntry: CollectionEntry<Collection> | null = null;
+  let nextEntry: CollectionEntry<Collection> | null = null;
+  const coursesResult = await getCourseDirectories('courses');
 
   const coursesDir = coursesResult[course];
-  const courses = coursesResult[course].courses;
-  const slugs = coursesDir.slugs || [];
-  const activeIndex = slugs?.findIndex((s) => s === slug);
-  const prevEntry = courses ? courses[activeIndex - 1] || null : null;
-  const nextEntry = courses ? courses[activeIndex + 1] || null : null;
+  if (coursesDir) {
+    const courses = coursesResult[course].courses;
+    const slugs = coursesDir.slugs || [];
+    const activeIndex = slugs?.findIndex((s) => s === slug);
+    prevEntry = courses ? courses[activeIndex - 1] || null : null;
+    nextEntry = courses ? courses[activeIndex + 1] || null : null;
+  }
 
   return {
     prevEntry,
     nextEntry
-  };*/
+  };
 };
