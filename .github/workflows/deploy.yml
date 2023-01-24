@@ -20,11 +20,13 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ${{ vars.ENVIRONMENT_STAGE }}
     steps:
       - name: Use variables
         run: |
           echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
           echo "environement variable env.SITE_NAME : ${{ env.SITE_NAME }}"
+          echo "environement variable env.MY_SECRET_TEST : ${{ env.MY_SECRET_TEST }}"
           echo "variable from shell environment: $PUBLIC_SITE_NAME"
 
       - name: Checkout your repository using git
