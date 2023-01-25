@@ -4,24 +4,13 @@ title: Hello, World
 description: Testing quizz!
 ---
 
-<Quizz
-  options="['Garbage collected','Intrepreted','Statically Typed']"
-  answer='Statically Typed'
-  prize='19'
->
-  <h6>Which term does NOT describe JavaScript?</h6>
-</Quizz>
-
-<Quiz.Question
-  options="['Garbage collected','Intrepreted','Statically Typed']"
-  answer='Statically Typed'
-  prize='19'
->
-  <h6>Quizz Question Test</h6>
-</Quiz.Question>
-
 # Hi there Hello, World!
 
 This Markdown file creates a page at `your-domain.com/page-1/`
-
 It probably isn't styled much, but Markdown does support:
+
+<Quiz.Section question='Which term does NOT describe JavaScript?'>
+  <Quiz.Question option='Garbage collected' explain='no prize for you' />
+  <Quiz.Question option='Intrepreted' explain="Yeah, that ain't it" />
+  <Quiz.Question isAnswer xp='5' option='Statically Typed' explain='hella good job' />
+</Quiz.Section>

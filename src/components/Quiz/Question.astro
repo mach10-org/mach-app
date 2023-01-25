@@ -1,10 +1,12 @@
 ---
 export interface Props {
-  options: string[];
-  answer: string;
-  xp: string;
+  isAnswer?: boolean;
+  xp?: string;
+  explain?: string;
+  option: string;
 }
+const { option, explain, xp, isAnswer } = Astro.props;
 ---
 
-<p>THIS IS A QUIZZ .astro</p>
+<p>{option}</p>
 <slot />
