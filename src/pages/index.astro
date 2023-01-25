@@ -1,7 +1,7 @@
 ---
 import PageLayout from '@PageLayout';
 import Card from '@components/Card.astro';
-import { getAllCourseIndex } from '@api/courses';
+import { getAllCourseIndex } from '@utils/courses';
 
 const courses = await getAllCourseIndex('courses');
 ---

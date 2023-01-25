@@ -108,9 +108,15 @@ export const coursePager = async (course: string, slug: string) => {
   if (coursesDir) {
     const courses = coursesResult[course].courses;
     const slugs = coursesDir.slugs || [];
-    const activeIndex = slugs?.findIndex((s) => s === slug);
-    prevEntry = courses ? courses[activeIndex - 1] || null : null;
-    nextEntry = courses ? courses[activeIndex + 1] || null : null;
+    const activeIndex = slugs.findIndex((s) => s === slug);
+    // prevEntry = courses ? courses[activeIndex - 1] || null : null;
+    // nextEntry = courses ? courses[activeIndex + 1] || null : null;
+
+    prevEntry = activeIndex > 0 ? courses?.[activeIndex - 1] || null : null;
+    nextEntry =
+      activeIndex !== -1 && activeIndex < slugs.length - 1
+        ? courses?.[activeIndex + 1] || null
+        : null;
   }
 
   return {

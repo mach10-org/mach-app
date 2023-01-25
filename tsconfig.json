@@ -11,7 +11,7 @@
       "@pages/*": ["src/pages/*"],
       "@styles/*": ["src/styles/*"],
       "@models/*": ["src/models/*"],
-      "@api/*": ["src/api/*"],
+      "@utils/*": ["src/utils/*"],
       "@layouts/*": ["src/layouts/*"],
       "@PageLayout": ["src/layouts/PageLayout.astro"],
       "@Contentlayout": ["src/layouts/ContentLayout.astro"]
