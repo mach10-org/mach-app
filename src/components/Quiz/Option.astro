@@ -1,0 +1,12 @@
+---
+export interface Props {
+  isAnswer?: boolean;
+  xp?: string;
+  explain?: string;
+  label: string;
+}
+const { label, explain, xp, isAnswer } = Astro.props;
+---
+
+<p>{label}</p>
+<slot />

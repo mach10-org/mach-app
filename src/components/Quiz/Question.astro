@@ -1,12 +1,15 @@
 ---
 export interface Props {
-  isAnswer?: boolean;
-  xp?: string;
-  explain?: string;
-  option: string;
+  label: string;
 }
-const { option, explain, xp, isAnswer } = Astro.props;
+const { label } = Astro.props;
 ---
 
-<p>{option}</p>
-<slot />
+<div
+  class='quiz-section m-6 w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
+>
+  <div class='px-4 pt-4'>
+    <h4>{label}</h4>
+    <slot />
+  </div>
+</div>
