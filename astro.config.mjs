@@ -28,16 +28,23 @@ export default defineConfig({
   },
   integrations: [
     AutoImport({
-      // import { Tweet, YouTube } from 'astro-embed';
-      // 'astro-embed': ['Tweet', 'YouTube'],
-      // Explicitly alias a default export
-      // generates:
-      // import { default as Quizz } from './src/components/Quizz.astro';
-      // imports: [{ './src/components/Quizz.astro': [['default', 'Quizz']] }]
-      // Import a component’s default export
-      // generates:
-      // import Quizz from './src/components/Quizz.astro';
-      imports: ['./src/components/Quizz.astro']
+      //  // Import a component’s default export
+      //     // generates:
+      //     // import A from './src/components/A.astro';
+      //     './src/components/A.astro',
+
+      //     {
+      //       // Explicitly alias a default export
+      //       // generates:
+      //       // import { default as B } from './src/components/B.astro';
+      //       './src/components/B.astro': [['default', 'B']],
+
+      //       // Import a module’s named exports
+      //       // generates:
+      //       // import { Tweet, YouTube } from 'astro-embed';
+      //       'astro-embed': ['Tweet', 'YouTube'],
+      //     },
+      imports: ['./src/components/Quizz.astro', { './src/components/Quiz/index.tsx': ['Quiz'] }]
     }),
 
     tailwind(),
