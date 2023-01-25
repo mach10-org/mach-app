@@ -44,9 +44,13 @@ export default defineConfig({
       //       // import { Tweet, YouTube } from 'astro-embed';
       //       'astro-embed': ['Tweet', 'YouTube'],
       //     },
-      imports: ['./src/components/Quizz.astro', { './src/components/Quiz/index.tsx': ['Quiz'] }]
+      imports: [
+        './src/components/Quizz.astro',
+        {
+          './src/components/Quiz/Quiz.jsx': ['Quiz']
+        }
+      ]
     }),
-
     tailwind(),
     mdx({
       remarkPlugins: [remarkMermaid, remarkGFM],
