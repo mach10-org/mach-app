@@ -4,7 +4,7 @@ const { title, frontmatter } = Astro.props;
 ---
 
 <MainLayout title={title || frontmatter?.title}>
-  <main class='content-page'>
+  <main class='content-page prose lg:prose-xl'>
     <slot />
   </main>
 </MainLayout>

@@ -10,11 +10,11 @@ const { href, title, body } = Astro.props;
 
 <li class='link-card'>
   <a href={`${import.meta.env.BASE_URL}${href}`}>
-    <h2>
+    <h2 class='mt-2'>
       {title}
       <span>&rarr;</span>
     </h2>
-    <p>
+    <p class='mb-2'>
       {body}
     </p>
   </a>
