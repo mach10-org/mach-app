@@ -3,10 +3,16 @@ layout: '@PageLayout'
 title: Hello world of Quiz
 description: Testing quizz!
 quiz:
-  - id: 1
-    label: bla
-  - id: 2
-    label: bla
+  label: 'From frontmatter : Which term does NOT describe JavaScript ?'
+  options:
+    - label: Garbage collected
+      explain: no prize for you
+    - label: Intrepreted
+      explain: Yeah, that ain't it
+    - label: Statically Typed
+      explain: hella good job
+      isAnswer: true
+      xp: 5
 ---
 
 # Hi there Hello, World!

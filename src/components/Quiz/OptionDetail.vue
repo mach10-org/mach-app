@@ -1,15 +1,17 @@
 <template>
   <div class="mb-3">
-    <input
+    <!-- <input
       type="radio"
       :id="id"
-      name="answer"
+      :name="name"
       :value="id"
       class="hidden peer"
       v-model="answer"
       required
       @change="$emit('update:answer', ($event.target as HTMLInputElement).value)"
-    />
+    /> -->
+    <slot />
+
     <label
       :for="id"
       class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -32,23 +34,21 @@
       </svg>
     </label>
   </div>
-  <slot />
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 const props = defineProps({
   label: { type: String, required: true },
+  id: { type: String, required: true },
   isAnswer: Boolean,
   modelValue: String,
   xp: String,
   explain: String,
-  id: { type: String, required: true },
-  answer: String
+  answer: String,
+  name: String
 });
-const answer = ref<string | undefined>(props.answer);
+// const answer = ref<string | undefined>(props.answer);
 
-const emit = defineEmits(['update:answer']);
-
-// const emit = defineEmits(['update:answer', 'update:message']);
+// defineEmits(['update:answer']);
 </script>

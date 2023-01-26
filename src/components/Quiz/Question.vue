@@ -5,15 +5,18 @@
     <div class="p-4">
       <h4>{{ label }}</h4>
 
-      <Option
-        client:only="vue"
-        v-model:answer="answer"
-        v-for="a in options"
-        :key="a.id"
-        :label="a.label"
-        :explain="a.explain"
-        :id="a.id"
-      />
+      <Option client:only="vue" v-for="a in options" :key="a.id" :label="a.label" :id="a.id">
+        <input
+          type="radio"
+          :id="a.id"
+          :name="optionsName"
+          :value="a.id"
+          class="hidden peer"
+          v-model="answer"
+          required
+          @change="$emit('update:answer', ($event.target as HTMLInputElement).value)"
+        />
+      </Option>
       <div v-if="message">
         <div
           id="toast-simple"
@@ -60,9 +63,12 @@
 <script lang="ts" setup>
 import Option from './OptionDetail.vue';
 import { useSlots, ref, onMounted, watch } from 'vue';
-defineProps({ label: String });
+const props = defineProps({ label: String, options: Object as () => Option[] });
+defineEmits(['update:answer']);
+
 const options = ref<Option[]>([]);
 const slots = useSlots();
+const optionsName = ref<string>('');
 const answer = ref<string | undefined>();
 const message = ref<string | undefined>();
 const success = ref<boolean | null>(null);
@@ -81,7 +87,9 @@ interface Option {
 
 const onSubmit = () => {
   if (typeof answer.value !== 'undefined') {
-    const option: Option = options.value[answer.value];
+    const option: Option = options.value.find((o) => o.id === answer.value) as Option;
+
+    // const option: Option = options.value[answer.value];
     if (!option.isAnswer) {
       message.value = `Incorrect !`;
     } else {
@@ -89,27 +97,22 @@ const onSubmit = () => {
     }
     success.value = option.isAnswer || false;
     message.value = `${message.value} ${option.explain}`;
-
-    console.log('onSubmit answer', message.value, option);
   }
 };
 
-// const slotText = computed(() => {
-//   return typeof slots && slots.default ? slots.default()[0].children : null; // This is the interesting line
-// });
 onMounted(() => {
-  // console.log('el.value)', el.value);
-  if (slots?.default) {
+  if (props.options) {
+    optionsName.value = 'props-answer';
+    options.value = parseList(props.options, 'props');
+  } else if (slots?.default) {
+    optionsName.value = 'slots-answer';
     slots?.default().map((vNode) => {
       const strObj = vNode?.props?.value.trim();
       if (strObj) {
         const OptionsStr = `[${strObj}]`;
         try {
-          const list = JSON.parse(OptionsStr.replace('},]', '}]'));
-          options.value = list.map((o, idx) => {
-            o.id = idx;
-            return o;
-          });
+          const list: Option[] = JSON.parse(OptionsStr.replace('},]', '}]'));
+          options.value = parseList(list, 'slots');
         } catch (error) {}
       }
       // if (!vNode.componentOptions) return false;
@@ -121,4 +124,10 @@ onMounted(() => {
   // slots.default().map(vnode => (vnode.text || vnode.elm.innerText)).join('');
   // console.log('slotText', slotText);
 });
+
+const parseList = (list: Option[], type: 'slots' | 'props') =>
+  list.map((o, idx) => {
+    o.id = `${idx}-${type}`;
+    return o;
+  });
 </script>

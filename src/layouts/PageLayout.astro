@@ -3,13 +3,20 @@ import BaseLayout from './BaseLayout.astro';
 
 const { title, frontmatter } = Astro.props;
 import '@styles/global.css';
+import { Quiz } from '@components/Quiz/Quiz';
 const pageTitle = title || frontmatter?.title;
 const props = Astro.props?.frontmatter || Astro.props;
+console.log('frontmatter', frontmatter);
 ---
 
 <BaseLayout {...props}>
   <main class='content-page prose lg:prose-xl'>
     <h1>{pageTitle}</h1>
     <slot />
+    {
+      frontmatter?.quiz && (
+        <Quiz client:only='vue' label={frontmatter.quiz.label} options={frontmatter.quiz.options} />
+      )
+    }
   </main>
 </BaseLayout>
