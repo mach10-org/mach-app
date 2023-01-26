@@ -22,7 +22,6 @@ export async function getStaticPaths() {
 const { course, slug } = Astro.params;
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-console.log('entry', entry);
 ---
 
 <ContentLayout {...entry.data}>
