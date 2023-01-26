@@ -1,6 +1,17 @@
 ---
 title: 02 -  vuejs
 description: 'Learn how VUE JS works and explore the official API docs'
+quiz:
+  label: 'From frontmatter : Which term does NOT describe JavaScript ?'
+  options:
+    - label: Garbage collected
+      explain: no prize for you
+    - label: Intrepreted
+      explain: Yeah, that ain't it
+    - label: Statically Typed
+      explain: hella good job
+      isAnswer: true
+      xp: 5
 ---
 
 # Hi there VUE JS 02!

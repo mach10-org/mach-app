@@ -5,7 +5,7 @@
     <div class="p-4">
       <h4>{{ label }}</h4>
 
-      <Option client:only="vue" v-for="a in options" :key="a.id" :label="a.label" :id="a.id">
+      <Option v-for="a in options" :key="a.id" :label="a.label" :id="a.id">
         <input
           type="radio"
           :id="a.id"

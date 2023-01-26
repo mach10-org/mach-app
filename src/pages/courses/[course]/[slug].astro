@@ -2,6 +2,9 @@
 import { getAllCollectionLessons } from '@utils/collections';
 import PaginatedCourse from '@components/PaginatedCourse.astro';
 import ContentLayout from '@Contentlayout';
+import Quiz from '@components/Quiz/Question.vue';
+const { title, frontmatter } = Astro.props;
+
 import '@styles/global.css';
 
 export async function getStaticPaths() {
@@ -22,9 +25,15 @@ export async function getStaticPaths() {
 const { course, slug } = Astro.params;
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+console.log('entry', entry.data.quiz);
 ---
 
 <ContentLayout {...entry.data}>
   <Content />
+  {
+    entry?.data?.quiz && (
+      <Quiz client:only='vue' label={entry.data.quiz.label} options={entry.data.quiz.options} />
+    )
+  }
   <PaginatedCourse {...{course, slug}} />
 </ContentLayout>

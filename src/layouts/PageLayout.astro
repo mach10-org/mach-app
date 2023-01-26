@@ -6,7 +6,6 @@ const { title, frontmatter } = Astro.props;
 import '@styles/global.css';
 const pageTitle = title || frontmatter?.title;
 const props = Astro.props?.frontmatter || Astro.props;
-console.log('frontmatter', frontmatter);
 ---
 
 <BaseLayout {...props}>
