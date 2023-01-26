@@ -1,9 +1,9 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import Quiz from '@components/Quiz/Question.vue';
 
 const { title, frontmatter } = Astro.props;
 import '@styles/global.css';
-import { Quiz } from '@components/Quiz/Quiz';
 const pageTitle = title || frontmatter?.title;
 const props = Astro.props?.frontmatter || Astro.props;
 console.log('frontmatter', frontmatter);
