@@ -2,6 +2,10 @@
 import PageLayout from '@PageLayout';
 import Card from '@components/Card.astro';
 import { getAllCourseIndex } from '@utils/collections';
+import { supabase } from '@utils/supabase';
+// const supabaseData = await supabase.from('mach').select('*');
+
+// console.log('supabase', supabaseData);
 
 const courses = await getAllCourseIndex('courses');
 const data = {
