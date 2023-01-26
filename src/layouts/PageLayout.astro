@@ -1,11 +1,15 @@
 ---
-import MainLayout from './MainLayout.astro';
+import BaseLayout from './BaseLayout.astro';
+
 const { title, frontmatter } = Astro.props;
 import '@styles/global.css';
+const pageTitle = title || frontmatter?.title;
+const props = Astro.props?.frontmatter || Astro.props;
 ---
 
-<MainLayout title={title || frontmatter?.title}>
+<BaseLayout {...props}>
   <main class='content-page prose lg:prose-xl'>
+    <h1>{pageTitle}</h1>
     <slot />
   </main>
-</MainLayout>
+</BaseLayout>

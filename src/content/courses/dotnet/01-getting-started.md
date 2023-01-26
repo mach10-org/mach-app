@@ -1,12 +1,7 @@
 ---
-layout: "@Contentlayout"
 title: 01 - Getting started with Dotnet
 description: Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae
   quies, praemiaque lepores.
-tags:
-  - GoLang
-  - BAKEND
-preview: https://via.placeholder.com/450x300.png
 lastmod: 2023-01-25T00:14:10.369Z
 ---
 

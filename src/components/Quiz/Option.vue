@@ -7,6 +7,4 @@ const props = defineProps({
   xp: String,
   explain: String
 });
-
-console.log('props option', props);
 </script>

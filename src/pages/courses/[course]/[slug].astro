@@ -1,6 +1,7 @@
 ---
 import { getAllCollectionLessons } from '@utils/collections';
 import PaginatedCourse from '@components/PaginatedCourse.astro';
+import ContentLayout from '@Contentlayout';
 import '@styles/global.css';
 
 export async function getStaticPaths() {
@@ -21,8 +22,10 @@ export async function getStaticPaths() {
 const { course, slug } = Astro.params;
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+console.log('entry', entry);
 ---
 
-<Content />
-
-<PaginatedCourse {...{course, slug}} />
+<ContentLayout {...entry.data}>
+  <Content />
+  <PaginatedCourse {...{course, slug}} />
+</ContentLayout>

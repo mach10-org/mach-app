@@ -1,10 +1,9 @@
 ---
-import MainLayout from './MainLayout.astro';
-const { title, frontmatter } = Astro.props;
+import BaseLayout from './BaseLayout.astro';
 ---
 
-<MainLayout title={title || frontmatter?.title}>
+<BaseLayout {...Astro.props}>
   <main class='content-page prose lg:prose-xl'>
     <slot />
   </main>
-</MainLayout>
+</BaseLayout>

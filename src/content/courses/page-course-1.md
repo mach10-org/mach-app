@@ -1,5 +1,4 @@
 ---
-layout: '@Contentlayout'
 title: page-course-1
 ---
 

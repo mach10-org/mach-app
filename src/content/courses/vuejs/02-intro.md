@@ -1,5 +1,4 @@
 ---
-layout: '@Contentlayout'
 title: 02 -  vuejs
 description: 'Learn how VUE JS works and explore the official API docs'
 ---

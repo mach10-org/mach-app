@@ -4,9 +4,13 @@ import Card from '@components/Card.astro';
 import { getAllCourseIndex } from '@utils/collections';
 
 const courses = await getAllCourseIndex('courses');
+const data = {
+  title: 'Mach App',
+  description: 'Learn some code....'
+};
 ---
 
-<PageLayout title='Welcome to Mach.'>
+<PageLayout {...data}>
   <h1>
     Welcome to <span class='text-gradient'
       >{import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME}</span

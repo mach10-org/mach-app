@@ -35,7 +35,7 @@ const { entry, courses } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<PageLayout title='All vuejs courses'>
+<PageLayout {...entry.data}>
   <Content />
   {
     courses.map((course) => (
