@@ -40,13 +40,13 @@
 // import { ref } from 'vue';
 const props = defineProps({
   label: { type: String, required: true },
-  id: { type: String, required: true },
-  isAnswer: Boolean,
-  modelValue: String,
-  xp: String,
-  explain: String,
-  answer: String,
-  name: String
+  id: { type: String, required: true }
+  // isAnswer: Boolean,
+  // modelValue: String,
+  // xp: String,
+  // explain: String,
+  // answer: String,
+  // name: String
 });
 // const answer = ref<string | undefined>(props.answer);
 
