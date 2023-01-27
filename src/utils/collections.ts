@@ -49,7 +49,6 @@ export const getCourseIndex = async (collection: Collection, course: string) => 
   let entryResult: Render | null = null;
   try {
     const entry = await getEntryBySlug(collection, `${course}/`);
-    console.log('entry', entry);
 
     if (entry) {
       entryResult = await entry.render();

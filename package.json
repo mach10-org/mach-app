@@ -8,21 +8,27 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "puppeteer-fix": "node node_modules/puppeteer/install.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.14.0",
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/tailwind": "^3.0.0",
     "@astrojs/vue": "^1.2.2",
+    "@heroicons/vue": "^2.0.14",
     "@supabase/supabase-js": "^2.4.1",
     "@tailwindcss/typography": "^0.5.9",
+    "@types/cookie": "^0.5.1",
     "astro": "^2.0.0",
     "astro-auto-import": "^0.2.1",
     "astro-diagram": "^0.6.3",
     "autoprefixer": "^10.4.13",
+    "cookie": "^0.5.0",
     "flowbite": "^1.6.2",
+    "heroicons": "^2.0.14",
     "mermaid": "^9.3.0",
+    "moment": "^2.29.4",
     "remark-gfm": "^3.0.1",
     "tailwindcss": "^3.0.24",
     "vue": "^3.2.30"

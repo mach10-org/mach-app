@@ -3,7 +3,6 @@ import BaseLayout from './BaseLayout.astro';
 import Quiz from '@components/Quiz/Question.vue';
 
 const { title, frontmatter } = Astro.props;
-import '@styles/global.css';
 const pageTitle = title || frontmatter?.title;
 const props = Astro.props?.frontmatter || Astro.props;
 ---
