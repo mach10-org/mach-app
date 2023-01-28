@@ -30,7 +30,6 @@ jobs:
       - name: Use variables
         run: |
           echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
-          echo "environement variable env.SITE_NAME : ${{ env.SITE_NAME }}"
           echo "environement variable env.PUBLIC_SUPABASE_URL : $PUBLIC_SUPABASE_URL"
           echo "environement variable env.PUBLIC_SUPABASE_REDIRECT_URL : $PUBLIC_SUPABASE_REDIRECT_URL"
           echo "environement variable secrets.PUBLIC_SUPABASE_KEY : $PUBLIC_SUPABASE_KEY"

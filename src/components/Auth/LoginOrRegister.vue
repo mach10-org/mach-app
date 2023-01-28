@@ -75,6 +75,7 @@ const handleSendLink = async (e) => {
   e.preventDefault();
 
   status.value = { error: '', success: false, isLoading: true };
+  console.log('PUBLIC_SUPABASE_KEY', import.meta.env.PUBLIC_SUPABASE_KEY);
 
   try {
     const { error, data } = await supabase.auth.signInWithOtp({
