@@ -1,0 +1,13 @@
+---
+import Profile from '@components/Auth/Profile.vue';
+import ContentLayout from '@layouts/ContentLayout.astro';
+
+const pageData = {
+  title: 'Mach App',
+  description: 'Connect to Mach App'
+};
+---
+
+<ContentLayout {...pageData}>
+  <Profile client:only='vue' />
+</ContentLayout>

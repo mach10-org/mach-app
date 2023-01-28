@@ -1,29 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, User } from '@supabase/supabase-js';
 import moment from 'moment';
+export type { User } from '@supabase/supabase-js';
 
 export const supabase = createClient(
   import.meta.env.PUBLIC_SUPABASE_URL,
   import.meta.env.PUBLIC_SUPABASE_KEY
 );
 
-// export async function getUser(req: Request) {
-//   const c = cookie.parse(req.headers.get('cookie') ?? '');
-//   if (!c.sbat) {
-//     return null;
-//   }
-
-//   const {
-//     data: { user }
-//   } = await supabase.auth.getUser(c.sbat);
-//   if (!user || user.role !== 'authenticated') {
-//     return null;
-//   }
-//   return user;
-// }
-
-export const getUser = async () => {
-  console.log('getUser TS');
-
+export const getUser = async (): Promise<User | null> => {
   if (
     typeof sessionStorage !== 'undefined' &&
     typeof localStorage !== 'undefined' &&
@@ -35,8 +19,8 @@ export const getUser = async () => {
       return null;
     }
 
-    const expires_in = localStorage.getItem('expires_in');
-    if (moment().isAfter(moment(expires_in))) {
+    const expires_at = localStorage.getItem('expires_at');
+    if (moment().isAfter(moment(expires_at))) {
       return null;
     }
 
@@ -47,25 +31,47 @@ export const getUser = async () => {
 
     try {
       const {
-        data: { user }
+        data: { user },
+        error
       } = await supabase.auth.getUser(access_token);
+
+      //user_metadata
+      if (error?.status === 401) {
+        logout();
+        return null;
+      }
+      console.log('error getUser', error);
 
       if (!user || user.role !== 'authenticated') {
         return null;
       }
+
+      const {
+        data: userData,
+        error: userError,
+        status
+      } = await supabase.from('profiles').select(`*`).single();
+
+      user.user_metadata = userData;
       sessionStorage.setItem('user', JSON.stringify(user));
 
       return user;
-    } catch (error) {}
+    } catch (error) {
+      console.log('error getUser', error);
+    }
   }
   return null;
 };
 
-export const logout = () => {
+export const logout = async (dbLogout = false) => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('expires_in');
+  localStorage.removeItem('expires_at');
   localStorage.removeItem('refresh_token');
   sessionStorage.removeItem('user');
+  try {
+    dbLogout ? await supabase.auth.signOut() : null;
+  } catch (error) {}
 };
 
 // export async function isLoggedIn(req: Request) {
