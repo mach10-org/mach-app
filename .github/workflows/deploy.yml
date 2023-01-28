@@ -10,6 +10,8 @@ on:
 
 env:
   PUBLIC_SITE_NAME: ${{ vars.SITE_NAME }}
+  PUBLIC_SUPABASE_KEY: ${{ secrets.PUBLIC_SUPABASE_KEY }}
+  PUBLIC_SUPABASE_URL: ${{ vars.PUBLIC_SUPABASE_URL }}
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
@@ -28,7 +30,9 @@ jobs:
         run: |
           echo "repository variable vars.SITE_NAME : ${{ vars.SITE_NAME }}"
           echo "environement variable env.SITE_NAME : ${{ env.SITE_NAME }}"
-          echo "environement variable secrets.MY_SECRET_TEST : ${{ secrets.MY_SECRET_TEST }}"
+          echo "environement variable env.PUBLIC_SUPABASE_URL : $PUBLIC_SUPABASE_URL"
+          echo "environement variable secrets.PUBLIC_SUPABASE_KEY : $PUBLIC_SUPABASE_KEY"
+          echo "environement variable secrets.PUBLIC_SUPABASE_KEY : ${{ secrets.PUBLIC_SUPABASE_KEY }}"
           echo "variable from shell environment: $PUBLIC_SITE_NAME"
 
       - name: Checkout your repository using git
