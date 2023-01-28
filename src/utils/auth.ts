@@ -40,7 +40,6 @@ export const getUser = async (): Promise<User | null> => {
         logout();
         return null;
       }
-      console.log('error getUser', error);
 
       if (!user || user.role !== 'authenticated') {
         return null;

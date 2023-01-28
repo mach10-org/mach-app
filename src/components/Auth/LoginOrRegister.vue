@@ -25,7 +25,22 @@
                 required
               />
             </div>
-
+            <div>
+              <label
+                for="email"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Username</label
+              >
+              <input
+                type="text"
+                name="username"
+                id="username"
+                v-model="username"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="my username"
+                required
+              />
+            </div>
             <button
               class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               @click="handleSendLink"
@@ -68,8 +83,10 @@ import { supabase } from '@utils/auth';
 import { computed, ref } from 'vue';
 
 const email = ref('');
+const username = ref('');
+
 const status = ref({ error: '', success: false, isLoading: false });
-const canSubmit = computed(() => email.value.trim() !== '');
+const canSubmit = computed(() => email.value.trim() !== '' && username.value.trim() !== '');
 
 const handleSendLink = async (e) => {
   e.preventDefault();
@@ -79,12 +96,12 @@ const handleSendLink = async (e) => {
   try {
     const { error, data } = await supabase.auth.signInWithOtp({
       email: email.value,
+
       options: {
+        data: { username: username.value },
         emailRedirectTo: import.meta.env.PUBLIC_SUPABASE_REDIRECT_URL
       }
     });
-    console.log('data', data);
-    console.log('PUBLIC_SUPABASE_REDIRECT_URL', import.meta.env.PUBLIC_SUPABASE_REDIRECT_URL);
 
     if (error?.message) {
       status.value = {

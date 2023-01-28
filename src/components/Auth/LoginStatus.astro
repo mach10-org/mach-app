@@ -23,7 +23,7 @@ import { UserCircleIcon } from '@heroicons/vue/24/outline';
     <div class='px-4 py-3'>
       <span id='userName' class='block text-sm text-gray-900 dark:text-white'></span>
       <span
-        id='userMail'
+        id='xpPoints'
         class='block text-sm font-medium text-gray-500 truncate dark:text-gray-400'></span>
     </div>
     <ul class='py-2' aria-labelledby='user-menu-button'>
@@ -63,11 +63,11 @@ import { UserCircleIcon } from '@heroicons/vue/24/outline';
     const user = await getUser();
     if (user !== null) {
       element = document.getElementById('isLoggedIn');
-      const userMail = document.getElementById('userMail');
-      const mail = document.createTextNode(user.email as string);
-      userMail?.appendChild(mail);
+      const xpPoints = document.getElementById('xpPoints');
+      const mail = document.createTextNode(`${user?.user_metadata?.xp} Points`);
+      xpPoints?.appendChild(mail);
       const userName = document.getElementById('userName');
-      const name = document.createTextNode('Joh Doe');
+      const name = document.createTextNode(user?.user_metadata?.username || '');
       userName?.appendChild(name);
     } else {
       element = document.getElementById('isNotLoggedIn');

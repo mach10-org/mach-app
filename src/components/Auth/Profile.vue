@@ -24,11 +24,11 @@
               >
               <input
                 type="text"
-                name="username"
+                name="userName"
                 id="username"
                 v-model="username"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="username@company.com"
+                placeholder="my username"
                 required
               />
             </div>
@@ -100,18 +100,14 @@ const handleSendLink = async (e) => {
       .from('profiles')
       .upsert({ id: user.value?.id, username: username.value })
       .select();
+    const res = await getUser();
+    console.log('username.value', username.value);
+    if (res) {
+      res.user_metadata.username = username.value;
+      sessionStorage.setItem('user', JSON.stringify(res));
+    }
 
-    console.log('data', data);
-    console.log('error', error);
-
-    // const { error } = await supabase.from('profiles').insert({ id: 1, username: 'Denmark' });
-    // const { error, data } = await supabase.auth.signInWithOtp({
-    //   email: username.value,
-    //   options: {
-    //     emailRedirectTo: import.meta.env.PUBLIC_SUPABASE_REDIRECT_URL
-    //   }
-    // });
-    /*if (error?.message) {
+    if (error?.message) {
       status.value = {
         error: error.message,
         success: false,
@@ -119,9 +115,13 @@ const handleSendLink = async (e) => {
       };
     } else {
       status.value = { error: '', success: true, isLoading: false };
-    }*/
+    }
   } catch (error) {
-    console.log('ERROR', error);
+    status.value = {
+      error: error.message,
+      success: false,
+      isLoading: false
+    };
   }
 };
 </script>

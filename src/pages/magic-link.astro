@@ -68,7 +68,12 @@
           localStorage.setItem('refresh_token', refresh_token);
           try {
             const user = await getUser();
-            window.location.assign(`${import.meta.env.BASE_URL}`);
+            console.log('user', user);
+            if (user?.user_metadata.username) {
+              return window.location.assign(`${import.meta.env.BASE_URL}`);
+            } else {
+              return window.location.assign(`${import.meta.env.BASE_URL}profile`);
+            }
           } catch (error) {
             //TODO: handle error
           }
@@ -80,7 +85,7 @@
         // error=unauthorized_client&error_code=401&error_description=Email+link+is+invalid+or+has+expired
       }
     } else {
-      window.location.assign(`${import.meta.env.BASE_URL}`);
+      return window.location.assign(`${import.meta.env.BASE_URL}`);
     }
   }
   parseMagicLink();
