@@ -1,6 +1,18 @@
-import { createClient, User } from '@supabase/supabase-js';
+import { createClient, Session, User } from '@supabase/supabase-js';
 import moment from 'moment';
 export type { User } from '@supabase/supabase-js';
+
+export interface Profile {
+  id?: string;
+  updated_at?: Date;
+  username?: string;
+  xp?: number;
+}
+interface TokenObj {
+  access_token: string;
+  expires_in: string;
+  refresh_token: string;
+}
 
 export const supabase = createClient(
   import.meta.env.PUBLIC_SUPABASE_URL,
@@ -19,14 +31,16 @@ export const getUser = async (): Promise<User | null> => {
       return null;
     }
 
-    const expires_at = localStorage.getItem('expires_at');
+    const expires_at_str = localStorage.getItem('expires_at');
+    const expires_at = expires_at_str ? parseInt(expires_at_str, 10) : null;
+
     if (moment().isAfter(moment(expires_at))) {
       return null;
     }
 
-    if (sessionStorage.getItem('user')) {
-      const userStr = sessionStorage.getItem('user') as string;
-      return JSON.parse(userStr);
+    const userProfile = getUserProfile();
+    if (userProfile) {
+      return userProfile;
     }
 
     try {
@@ -34,8 +48,6 @@ export const getUser = async (): Promise<User | null> => {
         data: { user },
         error
       } = await supabase.auth.getUser(access_token);
-
-      //user_metadata
       if (error?.status === 401) {
         logout();
         return null;
@@ -52,7 +64,7 @@ export const getUser = async (): Promise<User | null> => {
       } = await supabase.from('profiles').select(`*`).single();
 
       user.user_metadata = userData;
-      sessionStorage.setItem('user', JSON.stringify(user));
+      saveUserProfile(user);
 
       return user;
     } catch (error) {
@@ -60,6 +72,16 @@ export const getUser = async (): Promise<User | null> => {
     }
   }
   return null;
+};
+
+export const upsertProfile = async (profile: Profile) => {
+  try {
+    const { data, error } = await supabase.from('profiles').upsert(profile).select().single();
+
+    return { data, error };
+  } catch (error) {
+    return { data: null, error };
+  }
 };
 
 export const logout = async (dbLogout = false) => {
@@ -73,6 +95,40 @@ export const logout = async (dbLogout = false) => {
   } catch (error) {}
 };
 
-// export async function isLoggedIn(req: Request) {
-//   return (await getUser(req)) != null;
-// }
+export const saveToken = ({ access_token, expires_in, refresh_token }: TokenObj) => {
+  let d = new Date();
+  d = new Date(d.getTime() + parseInt(expires_in) * 1000);
+  localStorage.setItem('access_token', access_token);
+  localStorage.setItem('expires_in', expires_in);
+  localStorage.setItem('expires_at', `${d.getTime()}`);
+  localStorage.setItem('refresh_token', refresh_token);
+};
+
+export const saveUserProfile = (user: User | undefined) => {
+  if (user) {
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }
+};
+
+export const getUserProfile = () => {
+  if (sessionStorage.getItem('user')) {
+    const userStr = sessionStorage.getItem('user') as string;
+    return JSON.parse(userStr);
+  }
+  return null;
+};
+
+export const refreshSession = async () => {
+  const access_token = localStorage.getItem('access_token');
+  const refresh_token = localStorage.getItem('refresh_token');
+
+  if (access_token && refresh_token) {
+    try {
+      const { data, error } = await supabase.auth.refreshSession({ refresh_token });
+      const { session, user } = data;
+
+      console.log('data', data);
+      console.log('error', error);
+    } catch (error) {}
+  }
+};

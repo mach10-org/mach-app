@@ -25,11 +25,15 @@
                 required
               />
             </div>
+
             <div>
+              <p class="text-lg mb-1 font-medium text-gray-900 dark:text-white">
+                First time login ?
+              </p>
               <label
-                for="email"
+                for="username"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Username</label
+                >Create a username</label
               >
               <input
                 type="text"
@@ -37,7 +41,7 @@
                 id="username"
                 v-model="username"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="my username"
+                placeholder="username"
                 required
               />
             </div>
@@ -86,7 +90,7 @@ const email = ref('');
 const username = ref('');
 
 const status = ref({ error: '', success: false, isLoading: false });
-const canSubmit = computed(() => email.value.trim() !== '' && username.value.trim() !== '');
+const canSubmit = computed(() => email.value.trim() !== '');
 
 const handleSendLink = async (e) => {
   e.preventDefault();

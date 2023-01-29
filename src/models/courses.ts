@@ -27,3 +27,11 @@ export interface CollectionStaticProps {
   params: Params;
   props: CoursesDirectoryProp;
 }
+
+export interface QuizOption {
+  label: string;
+  isAnswer?: boolean;
+  xp?: string;
+  explain?: string;
+  id: string;
+}

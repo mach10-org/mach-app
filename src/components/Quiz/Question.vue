@@ -63,31 +63,22 @@
 <script lang="ts" setup>
 import Option from './OptionDetail.vue';
 import { useSlots, ref, onMounted, watch } from 'vue';
-const props = defineProps({ label: String, options: Object as () => Option[] });
+import { QuizOption } from '@models/courses';
+import { saveAnswer } from '@utils/quiz';
+
+const props = defineProps({ label: String, options: Object as () => QuizOption[] });
 defineEmits(['update:answer']);
 
-const options = ref<Option[]>([]);
+const options = ref<QuizOption[]>([]);
 const slots = useSlots();
 const optionsName = ref<string>('');
 const answer = ref<string | undefined>();
 const message = ref<string | undefined>();
 const success = ref<boolean | null>(null);
 
-// watch(answer, (val) => {
-//   console.log('answer PARENT', val, answer.value);
-// });
-
-interface Option {
-  label: string;
-  isAnswer?: boolean;
-  xp?: string;
-  explain?: string;
-  id: string;
-}
-
-const onSubmit = () => {
+const onSubmit = async () => {
   if (typeof answer.value !== 'undefined') {
-    const option: Option = options.value.find((o) => o.id === answer.value) as Option;
+    const option: QuizOption = options.value.find((o) => o.id === answer.value) as QuizOption;
 
     // const option: Option = options.value[answer.value];
     if (!option.isAnswer) {
@@ -97,6 +88,7 @@ const onSubmit = () => {
     }
     success.value = option.isAnswer || false;
     message.value = `${message.value} ${option.explain}`;
+    await saveAnswer(option, 'vuejs/02-intro/');
   }
 };
 
@@ -111,7 +103,7 @@ onMounted(() => {
       if (strObj) {
         const OptionsStr = `[${strObj}]`;
         try {
-          const list: Option[] = JSON.parse(OptionsStr.replace('},]', '}]'));
+          const list: QuizOption[] = JSON.parse(OptionsStr.replace('},]', '}]'));
           options.value = parseList(list, 'slots');
         } catch (error) {}
       }
@@ -125,7 +117,7 @@ onMounted(() => {
   // console.log('slotText', slotText);
 });
 
-const parseList = (list: Option[], type: 'slots' | 'props') =>
+const parseList = (list: QuizOption[], type: 'slots' | 'props') =>
   list.map((o, idx) => {
     o.id = `${idx}-${type}`;
     return o;

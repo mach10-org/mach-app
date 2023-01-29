@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts" setup>
-import { supabase, getUser, User } from '@utils/auth';
+import { getUser, upsertProfile, User } from '@utils/auth';
 import { computed, onMounted, ref } from 'vue';
 
 const user = ref<User | null>(null);
@@ -83,8 +83,6 @@ const canSubmit = computed(() => username.value.trim() !== '');
 
 onMounted(async () => {
   const res = await getUser();
-  console.log('res', res);
-
   user.value = res;
   username.value = res?.user_metadata.username;
   xp.value = res?.user_metadata.xp;
@@ -96,12 +94,9 @@ const handleSendLink = async (e) => {
   status.value = { error: '', success: false, isLoading: true };
 
   try {
-    const { data, error } = await supabase
-      .from('profiles')
-      .upsert({ id: user.value?.id, username: username.value })
-      .select();
+    const { error } = await upsertProfile({ id: user.value?.id, username: username.value });
+
     const res = await getUser();
-    console.log('username.value', username.value);
     if (res) {
       res.user_metadata.username = username.value;
       sessionStorage.setItem('user', JSON.stringify(res));
