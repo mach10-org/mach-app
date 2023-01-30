@@ -62,12 +62,26 @@
 
 <script lang="ts" setup>
 import Option from './OptionDetail.vue';
-import { useSlots, ref, onMounted, watch } from 'vue';
+import { useSlots, ref, onMounted } from 'vue';
 import { QuizOption } from '@models/courses';
 import { saveAnswer } from '@utils/quiz';
+import { isConnected, profile, increasePoints } from '@stores/profile';
+import { useStore } from '@nanostores/vue';
+import { User } from '@supabase/gotrue-js';
+const $isConnected = useStore(isConnected);
+const $profile = useStore(profile);
 
-const props = defineProps({ label: String, options: Object as () => QuizOption[] });
+// import { AstroLoginStatus } from '@components/Auth/LoginStaus.astro';
+const props = defineProps({
+  slug: { type: String, required: true },
+  label: { type: String, required: true },
+  options: {
+    type: Object as () => QuizOption[],
+    required: true
+  }
+});
 defineEmits(['update:answer']);
+// console.log('AstroLoginStatus', AstroLoginStatus);
 
 const options = ref<QuizOption[]>([]);
 const slots = useSlots();
@@ -80,7 +94,6 @@ const onSubmit = async () => {
   if (typeof answer.value !== 'undefined') {
     const option: QuizOption = options.value.find((o) => o.id === answer.value) as QuizOption;
 
-    // const option: Option = options.value[answer.value];
     if (!option.isAnswer) {
       message.value = `Incorrect !`;
     } else {
@@ -88,7 +101,8 @@ const onSubmit = async () => {
     }
     success.value = option.isAnswer || false;
     message.value = `${message.value} ${option.explain}`;
-    await saveAnswer(option, 'vuejs/02-intro/');
+    const points = await saveAnswer(option, props.slug);
+    increasePoints(points);
   }
 };
 
@@ -107,14 +121,8 @@ onMounted(() => {
           options.value = parseList(list, 'slots');
         } catch (error) {}
       }
-      // if (!vNode.componentOptions) return false;
-      // return Boolean(vNode.componentOptions.propsData.active);
     });
   }
-
-  // console.log('slots.default()', slots.default()[0].props.value);
-  // slots.default().map(vnode => (vnode.text || vnode.elm.innerText)).join('');
-  // console.log('slotText', slotText);
 });
 
 const parseList = (list: QuizOption[], type: 'slots' | 'props') =>

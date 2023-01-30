@@ -39,6 +39,7 @@ export const getUser = async (): Promise<User | null> => {
     }
 
     const userProfile = getUserProfile();
+
     if (userProfile) {
       return userProfile;
     }

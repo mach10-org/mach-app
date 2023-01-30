@@ -28,7 +28,12 @@ const { Content } = await entry.render();
   <Content />
   {
     entry?.data?.quiz && (
-      <Quiz client:only='vue' label={entry.data.quiz.label} options={entry.data.quiz.options} />
+      <Quiz
+        client:only='vue'
+        slug={`${course}/${slug}/`}
+        label={entry.data.quiz.label}
+        options={entry.data.quiz.options}
+      />
     )
   }
   <PaginatedCourse {...{course, slug}} />

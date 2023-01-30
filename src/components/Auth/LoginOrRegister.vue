@@ -6,8 +6,11 @@
       >
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-            To log in, or register. Use the form below to get a magic link to your email.
+            Signup to create an account, it’s free and you can track your progress over time
           </h2>
+          <h3 class="text-lg text-gray-900 dark:text-white">
+            To log in, or register. Use the form below to get a magic link to your email.
+          </h3>
           <form class="space-y-4 md:space-y-6">
             <div>
               <label
@@ -26,25 +29,6 @@
               />
             </div>
 
-            <div>
-              <p class="text-lg mb-1 font-medium text-gray-900 dark:text-white">
-                First time login ?
-              </p>
-              <label
-                for="username"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Create a username</label
-              >
-              <input
-                type="text"
-                name="username"
-                id="username"
-                v-model="username"
-                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="username"
-                required
-              />
-            </div>
             <button
               class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               @click="handleSendLink"
@@ -73,7 +57,7 @@
             </button>
             <div v-if="status.error" class="text-sm text-red-400">{{ status.error }}</div>
             <div v-if="status.success" className="text-sm text-green-600">
-              An email should arrive in your inbox shortly
+              An email should arrive in your inbox shortly ! (@ {{ email }})
             </div>
           </form>
         </div>
@@ -87,7 +71,6 @@ import { supabase } from '@utils/auth';
 import { computed, ref } from 'vue';
 
 const email = ref('');
-const username = ref('');
 
 const status = ref({ error: '', success: false, isLoading: false });
 const canSubmit = computed(() => email.value.trim() !== '');
@@ -102,7 +85,7 @@ const handleSendLink = async (e) => {
       email: email.value,
 
       options: {
-        data: { username: username.value },
+        data: { username: '' },
         emailRedirectTo: import.meta.env.PUBLIC_SUPABASE_REDIRECT_URL
       }
     });

@@ -678,6 +678,11 @@
     source-map "^0.7.0"
     vfile "^5.0.0"
 
+"@nanostores/vue@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@nanostores/vue/-/vue-0.6.1.tgz#42dd5bcbbcae9e8129602c70e6599ce7d248f130"
+  integrity sha512-YYFcgpqrne+0xNlhAfxBX1pgtD8NsLQDsAD/SrKaZulR2qnaQ6YwWR7YKXNzWPiuvSyKD71Hv6p6FYnHyivFzA==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -3498,6 +3503,11 @@ nanoid@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
+
+nanostores@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/nanostores/-/nanostores-0.7.1.tgz#ed27fa3f9b1c2ab9b28f14373811e28b9d3fc5eb"
+  integrity sha512-7HenoVpZOjRudHCmAVWKloBTk3+Ozw49KuRWq/pNlEIIVS3x9dID+I5z3Rhjxl1muhHwv4dFhpT+0FebT9jvaA==
 
 next-tick@^1.1.0:
   version "1.1.0"

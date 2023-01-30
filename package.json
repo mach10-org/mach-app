@@ -17,6 +17,7 @@
     "@astrojs/tailwind": "^3.0.0",
     "@astrojs/vue": "^1.2.2",
     "@heroicons/vue": "^2.0.14",
+    "@nanostores/vue": "^0.6.1",
     "@supabase/supabase-js": "^2.4.1",
     "@tailwindcss/typography": "^0.5.9",
     "@types/cookie": "^0.5.1",
@@ -29,6 +30,7 @@
     "heroicons": "^2.0.14",
     "mermaid": "^9.3.0",
     "moment": "^2.29.4",
+    "nanostores": "^0.7.1",
     "remark-gfm": "^3.0.1",
     "tailwindcss": "^3.0.24",
     "vue": "^3.2.30"

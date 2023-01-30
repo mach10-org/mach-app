@@ -1,35 +1,50 @@
 import { QuizOption } from '@models/courses';
-import { supabase, upsertProfile, getUser } from './auth';
+import { supabase, upsertProfile, getUser, saveUserProfile, User } from './auth';
 
-export const savePoint = async (points: number) => {
-  console.log('savePoint');
-
-  try {
-    const user = await getUser();
-    const xp = parseInt(user?.user_metadata.xp, 10) + points;
-    if (user?.id) {
-      const { data, error } = await upsertProfile({ id: user.id, xp });
-
-      console.log('savePoint data', data);
-      console.log('savePoint error', error);
-      //saveUserProfile
-    }
-  } catch (error) {}
-};
-
-export const saveAnswer = async (option: QuizOption, course_slug: string) => {
-  console.log('saveAnswer', option);
-
+/**
+ * If answer is added && is the first time && is true = Add points
+ * @param user
+ * @param points
+ */
+export const savePoint = async (user: User, slug: string, points: number) => {
   try {
     const { data, error } = await supabase
       .from('answers')
-      .insert([{ course_slug, title: option.label, success: option?.isAnswer || false }]);
-    console.log('saveAnswer data', data);
-    console.log('saveAnswer error', error);
+      .select('*')
+      .eq('user', user.id)
+      .eq('course_slug', slug)
+      .is('success', true);
 
-    if (option.isAnswer && option.xp) {
-      const xp = parseInt(option.xp, 10);
-      await savePoint(xp);
+    if (data?.length === 1) {
+      const xp = parseInt(user?.user_metadata.xp, 10) + points;
+      points = xp;
+      const { data, error } = await upsertProfile({ id: user.id, xp });
+      if (!error) {
+        user.user_metadata = data;
+        saveUserProfile(user);
+      }
     }
   } catch (error) {}
+  console.log('savePoint', points);
+
+  return points;
+};
+
+export const saveAnswer = async (option: QuizOption, course_slug: string) => {
+  let user = await getUser();
+  let xp = option?.xp ? parseInt(option.xp, 10) : 0;
+  try {
+    const { error } = await supabase
+      .from('answers')
+      .insert([
+        { course_slug, title: option.label, user: user?.id, success: option?.isAnswer || false }
+      ]);
+
+    if (user && option.isAnswer && xp) {
+      xp = await savePoint(user, course_slug, xp);
+    }
+  } catch (error) {}
+  console.log('user updated', user);
+
+  return xp;
 };
