@@ -57,7 +57,8 @@
             </button>
             <div v-if="status.error" class="text-sm text-red-400">{{ status.error }}</div>
             <div v-if="status.success" className="text-sm text-green-600">
-              An email should arrive in your inbox shortly ! (@ {{ email }})
+              An email should arrive in your inbox shortly ! <br />
+              {{ email }}
             </div>
           </form>
         </div>

@@ -76,17 +76,6 @@ import LoginStatus from './Auth/LoginStatus.vue';
             Quizz
           </a>
         </li>
-        <li>
-          <a
-            href={`${import.meta.env.BASE_URL}courses/vuejs/`}
-            class:list={[
-              'menu-item',
-              { active: Astro.url.pathname === `${import.meta.env.BASE_URL}courses/vuejs/` }
-            ]}
-          >
-            Course: VUE JS
-          </a>
-        </li>
       </ul>
     </div>
   </div>

@@ -23,6 +23,8 @@ export const savePoint = async (user: User, slug: string, points: number) => {
         user.user_metadata = data;
         saveUserProfile(user);
       }
+    } else {
+      points = 0;
     }
   } catch (error) {}
   console.log('savePoint', points);

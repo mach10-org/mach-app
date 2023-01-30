@@ -67,11 +67,9 @@ import { QuizOption } from '@models/courses';
 import { saveAnswer } from '@utils/quiz';
 import { isConnected, profile, increasePoints } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
-import { User } from '@supabase/gotrue-js';
 const $isConnected = useStore(isConnected);
 const $profile = useStore(profile);
 
-// import { AstroLoginStatus } from '@components/Auth/LoginStaus.astro';
 const props = defineProps({
   slug: { type: String, required: true },
   label: { type: String, required: true },
@@ -81,7 +79,7 @@ const props = defineProps({
   }
 });
 defineEmits(['update:answer']);
-// console.log('AstroLoginStatus', AstroLoginStatus);
+console.log('props quiz', props);
 
 const options = ref<QuizOption[]>([]);
 const slots = useSlots();

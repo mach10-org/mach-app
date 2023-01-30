@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { UserCircleIcon } from '@heroicons/vue/24/outline';
 import { getUser, logout } from '@utils/auth';
-import { isConnected, profile } from '@stores/profile';
+import { isConnected, profile, removeUser } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
 import { onMounted, ref } from 'vue';
 const $isConnected = useStore(isConnected);
@@ -83,6 +83,7 @@ onMounted(async () => {
 
 const handleLogoutClick = () => {
   logout();
+  removeUser();
   window.location.assign(`${import.meta.env.BASE_URL}`);
 };
 </script>

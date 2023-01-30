@@ -5,6 +5,7 @@ import Quiz from '@components/Quiz/Question.vue';
 const { title, frontmatter } = Astro.props;
 const pageTitle = title || frontmatter?.title;
 const props = Astro.props?.frontmatter || Astro.props;
+const slug = Astro.url.pathname;
 ---
 
 <BaseLayout {...props}>
@@ -13,7 +14,12 @@ const props = Astro.props?.frontmatter || Astro.props;
     <slot />
     {
       frontmatter?.quiz && (
-        <Quiz client:only='vue' label={frontmatter.quiz.label} options={frontmatter.quiz.options} />
+        <Quiz
+          slug={slug}
+          client:only='vue'
+          label={frontmatter.quiz.label}
+          options={frontmatter.quiz.options}
+        />
       )
     }
   </main>
