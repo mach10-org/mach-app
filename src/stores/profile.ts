@@ -1,4 +1,4 @@
-import { atom, action } from 'nanostores';
+import { action } from 'nanostores';
 import { persistentAtom } from '@nanostores/persistent';
 import { supabase, User } from '@utils/auth';
 import { UserAppMetadata } from '@supabase/supabase-js';

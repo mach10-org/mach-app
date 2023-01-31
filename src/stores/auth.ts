@@ -3,6 +3,7 @@ import { persistentAtom, persistentMap } from '@nanostores/persistent';
 import moment from 'moment';
 import { supabase, User } from '@utils/auth';
 import { profile, setUser, removeUser } from './profile';
+import { AuthResponse } from '@supabase/supabase-js';
 
 export type JwToken = {
   expires_in: string | undefined;
@@ -97,4 +98,19 @@ export const getUser = async (): Promise<User | null> => {
   }
 
   return null;
+};
+
+export const signinOrUp = async (email: string, emailRedirectTo: string): Promise<AuthResponse> => {
+  try {
+    const response = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        data: { username: '' },
+        emailRedirectTo
+      }
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };

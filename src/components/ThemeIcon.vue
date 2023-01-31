@@ -28,29 +28,19 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue';
-const theme = (() => {
-  if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-    return localStorage.getItem('theme');
-  }
+import { onMounted } from 'vue';
+import { settings, toggleTheme } from '@stores/utils';
+
+onMounted(() => {
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
+    settings.setKey('theme', 'dark');
   }
-  return 'light';
-})();
-
-const darkMode = ref(theme);
-
-const applyDarkMode = () =>
-  document.documentElement.classList[darkMode.value === 'light' ? 'add' : 'remove']('dark');
-
-watchEffect(applyDarkMode);
+  const isDark = settings.get().theme === 'dark';
+  document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+});
 
 const toggleDarkMode = function () {
   document.documentElement.classList.toggle('dark');
-  const element = document.documentElement;
-  const isDark = element.classList.contains('dark');
-  localStorage.setItem('theme', !isDark ? 'dark' : 'light');
-  darkMode.value = !isDark ? 'dark' : 'light';
+  toggleTheme();
 };
 </script>

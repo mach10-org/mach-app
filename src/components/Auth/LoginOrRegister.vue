@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-import { supabase } from '@utils/auth';
+import { signinOrUp } from '@stores/auth';
 import { computed, ref } from 'vue';
 
 const email = ref('');
@@ -82,14 +82,10 @@ const handleSendLink = async (e) => {
   status.value = { error: '', success: false, isLoading: true };
 
   try {
-    const { error, data } = await supabase.auth.signInWithOtp({
-      email: email.value,
-
-      options: {
-        data: { username: '' },
-        emailRedirectTo: import.meta.env.PUBLIC_SUPABASE_REDIRECT_URL
-      }
-    });
+    const { error, data } = await signinOrUp(
+      email.value,
+      import.meta.env.PUBLIC_SUPABASE_REDIRECT_URL
+    );
 
     if (error?.message) {
       status.value = {
