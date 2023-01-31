@@ -62,8 +62,8 @@
 </template>
 <script lang="ts" setup>
 import { UserCircleIcon } from '@heroicons/vue/24/outline';
-import { getUser, logout } from '@utils/auth';
-import { isConnected, profile, removeUser } from '@stores/profile';
+import { getUser, logout } from '@stores/auth';
+import { isConnected, profile, removeUser, setUser } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
 import { onMounted, ref } from 'vue';
 const $isConnected = useStore(isConnected);
@@ -74,10 +74,6 @@ const showMenu = ref(false);
 onMounted(async () => {
   try {
     const user = await getUser();
-    if (user !== null) {
-      profile.set(user);
-      isConnected.set(true);
-    }
   } catch (error) {}
 });
 

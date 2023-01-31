@@ -1,8 +1,10 @@
 ---
+import ErrorMessage from '@components/ErrorMessage.vue';
 import BaseLayout from './BaseLayout.astro';
 ---
 
 <BaseLayout {...Astro.props}>
+  <ErrorMessage client:only='vue' />
   <main class='content-page prose lg:prose-xl'>
     <slot />
   </main>

@@ -1,5 +1,7 @@
 import { QuizOption } from '@models/courses';
-import { supabase, upsertProfile, getUser, saveUserProfile, User } from './auth';
+import { getUser } from '@stores/auth';
+import { updateUser, upsertProfile } from '@stores/profile';
+import { supabase, User } from './auth';
 
 /**
  * If answer is added && is the first time && is true = Add points
@@ -21,7 +23,7 @@ export const savePoint = async (user: User, slug: string, points: number) => {
       const { data, error } = await upsertProfile({ id: user.id, xp });
       if (!error) {
         user.user_metadata = data;
-        saveUserProfile(user);
+        updateUser(user);
       }
     } else {
       points = 0;

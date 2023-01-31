@@ -35,7 +35,7 @@
 
             <button
               class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              @click="handleSendLink"
+              @click="submit"
               :disabled="!canSubmit || status.isLoading"
               :class="{ 'cursor-not-allowed opacity-70': !canSubmit || status.isLoading }"
             >
@@ -71,8 +71,12 @@
 </template>
 
 <script lang="ts" setup>
-import { getUser, upsertProfile, User } from '@utils/auth';
+import { User } from '@utils/auth';
+import { getUser } from '@stores/auth';
+import { upsertProfile, profile } from '@stores/profile';
 import { computed, onMounted, ref } from 'vue';
+import { useStore, useVModel } from '@nanostores/vue';
+// const $profile = useStore(profile);
 
 const user = ref<User | null>(null);
 
@@ -82,25 +86,20 @@ const status = ref({ error: '', success: false, isLoading: false });
 const canSubmit = computed(() => username.value.trim() !== '');
 
 onMounted(async () => {
-  const res = await getUser();
-  user.value = res;
-  username.value = res?.user_metadata.username;
-  xp.value = res?.user_metadata.xp;
+  const userProfile = profile.get();
+
+  user.value = userProfile;
+  username.value = userProfile?.user_metadata.username;
+  xp.value = userProfile?.user_metadata.xp;
 });
 
-const handleSendLink = async (e) => {
+const submit = async (e: Event) => {
   e.preventDefault();
 
   status.value = { error: '', success: false, isLoading: true };
 
   try {
     const { error } = await upsertProfile({ id: user.value?.id, username: username.value });
-
-    const res = await getUser();
-    if (res) {
-      res.user_metadata.username = username.value;
-      sessionStorage.setItem('user', JSON.stringify(res));
-    }
 
     if (error?.message) {
       status.value = {
