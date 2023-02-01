@@ -55,9 +55,10 @@ export default defineConfig({
     }),
     tailwind(),
     mdx({
-      remarkPlugins: [remarkMermaid, remarkGFM],
+      remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime],
       drafts: false,
-      gfm: true
+      gfm: true,
+      extendMarkdownConfig: false
     }),
     vue({
       jsx: true

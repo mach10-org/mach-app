@@ -3,7 +3,14 @@ import { getAllCollectionLessons } from '@utils/collections';
 import PaginatedCourse from '@components/PaginatedCourse.astro';
 import ContentLayout from '@Contentlayout';
 import Quiz from '@components/Quiz/Question.vue';
+console.log('Asto props', Astro.slots);
 
+/*
+const posts = await Astro.glob('../../*.mdx');
+posts.map((entry) => {
+  console.log('posts', entry.frontmatter);
+});
+*/
 export async function getStaticPaths() {
   const courses = await getAllCollectionLessons('courses');
   // console.log('courses ===', courses);
@@ -12,6 +19,7 @@ export async function getStaticPaths() {
     const directories = entry.slug.split('/');
     const course = [...directories].shift();
     const slug = [...directories].pop();
+    // console.log('entry', entry);
 
     return {
       params: { course, slug },
@@ -23,20 +31,20 @@ export async function getStaticPaths() {
 
 const { course, slug } = Astro.params;
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, ...rest } = await entry.render();
 ---
 
-<ContentLayout {...entry.data}>
-  <Content />
-  {
-    entry?.data?.quiz && (
-      <Quiz
-        client:only='vue'
-        slug={`${course}/${slug}/`}
-        label={entry.data.quiz.label}
-        options={entry.data.quiz.options}
-      />
-    )
-  }
-  <PaginatedCourse {...{course, slug}} />
-</ContentLayout>
+<!-- <ContentLayout {...entry.data}> -->
+<Content />
+{
+  entry?.data?.quiz && (
+    <Quiz
+      client:only='vue'
+      slug={`${course}/${slug}/`}
+      label={entry.data.quiz.label}
+      options={entry.data.quiz.options}
+    />
+  )
+}
+<PaginatedCourse {...{course, slug}} />
+<!-- </ContentLayout> -->

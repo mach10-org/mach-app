@@ -1,0 +1,14 @@
+---
+import ContentLayout from './ContentLayout.astro';
+import Quiz from '@components/Quiz/Question.vue';
+
+const { title, frontmatter } = Astro.props;
+const pageTitle = title || frontmatter?.title;
+const props = Astro.props?.frontmatter || Astro.props;
+const slug = Astro.url.pathname;
+// console.log('Course Layout', Astro.props);
+---
+
+<ContentLayout {...Astro.props.frontmatter}>
+  <slot />
+</ContentLayout>

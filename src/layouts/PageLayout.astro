@@ -6,6 +6,7 @@ const { title, frontmatter } = Astro.props;
 const pageTitle = title || frontmatter?.title;
 const props = Astro.props?.frontmatter || Astro.props;
 const slug = Astro.url.pathname;
+// console.log('Page Layout', Astro.props);
 ---
 
 <BaseLayout {...props}>

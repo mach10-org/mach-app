@@ -1,8 +1,9 @@
 ---
+layout: "@CourseLayout"
 title: 02 -  vuejs
-description: 'Learn how VUE JS works and explore the official API docs'
+description: Learn how VUE JS works and explore the official API docs
 quiz:
-  label: 'From frontmatter : Which term does NOT describe JavaScript ?'
+  label: "From frontmatter : Which term does NOT describe JavaScript ?"
   options:
     - label: Garbage collected
       explain: no prize for you
@@ -12,9 +13,12 @@ quiz:
       explain: hella good job
       isAnswer: true
       xp: 5
+lastmod: 2023-02-01T21:10:41.768Z
 ---
 
 # Hi there VUE JS 02!
+
+## 🍱 What will I build?
 
 This Markdown file creates a page at `your-domain.com/courses/vuejs/001-what-is-vuejs`
 

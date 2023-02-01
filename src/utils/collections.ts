@@ -1,5 +1,7 @@
 import { Collection, CoursesDirectory, Render } from '@models/courses';
 import { CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
+import getReadingTime from 'reading-time';
+import { toString } from 'mdast-util-to-string';
 
 /**
  *
@@ -123,5 +125,16 @@ export const coursePager = async (course: string, slug: string) => {
   return {
     prevEntry,
     nextEntry
+  };
+};
+
+export const remarkReadingTime = (data) => {
+  return function (tree, { data }) {
+    const textOnPage = toString(tree);
+    const readingTime = getReadingTime(textOnPage);
+    // readingTime.text will give us minutes read as a friendly string,
+    // i.e. "3 min read"
+    data.minutesRead = readingTime.text;
+    console.log('data.astro', data);
   };
 };
