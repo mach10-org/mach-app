@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import remarkMermaid from 'astro-diagram/remark-mermaid';
 import AutoImport from 'astro-auto-import';
 import remarkGFM from 'remark-gfm';
+import { remarkReadingTime } from './src/plugin/remark-reading-time.mjs';
 
 // https://astro.build/config
 import tailwind from '@astrojs/tailwind';
@@ -22,9 +23,10 @@ export default defineConfig({
   // output: 'server',
 
   markdown: {
-    remarkPlugins: [remarkMermaid, remarkGFM],
+    remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime],
     gfm: true,
-    drafts: false
+    drafts: false,
+    extendDefaultPlugins: true
   },
   integrations: [
     AutoImport({

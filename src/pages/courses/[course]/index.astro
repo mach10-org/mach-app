@@ -4,6 +4,7 @@ import Card from '@components/Card.astro';
 import { getCourseDirectories } from '@utils/collections';
 import { Collection, CollectionStaticProps } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
+
 interface Props {
   courses: CollectionEntry<Collection>[];
   entry: CollectionEntry<Collection>;
@@ -13,7 +14,6 @@ export async function getStaticPaths() {
 
   try {
     const coursesDir = await getCourseDirectories('courses');
-    // console.log('coursesDir', coursesDir);
 
     Object.keys(coursesDir).forEach((key) => {
       paramsList.push({

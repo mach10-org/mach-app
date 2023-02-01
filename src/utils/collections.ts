@@ -67,6 +67,8 @@ export const getCourseDirectories = async (collection: Collection) => {
   const coursesDir: CoursesDirectory = {};
 
   await getCollection(collection, (entry) => {
+    // console.log('getCourseDirectories', entry);
+
     const { slug, data } = entry;
     const directories: string[] = slug.split('/');
 
