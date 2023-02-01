@@ -6,3 +6,14 @@
     @apply text-white bg-blue-700 md:bg-transparent md:text-blue-700  dark:text-white;
   }
 }
+
+.dark [type='checkbox']:checked,
+.dark [type='radio']:checked,
+[type='checkbox']:checked,
+[type='radio']:checked {
+  background-color: currentColor;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-color: transparent;
+}
