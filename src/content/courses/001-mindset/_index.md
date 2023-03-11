@@ -1,10 +1,12 @@
 ---
-title: Course intro
-description: Course intro
-layout: "@layouts/MainLayout.astro"
+title: Prepare your mindset
+description: 'This short introduction will give you a few tips to make the most of this course'
+tags:
+  - mindset
+preview: 'https://via.placeholder.com/450x300.png'
 ---
 
-### Course description
+## Introduction
 
 “If I only had an hour to chop down a tree, I would spend the first 45 minutes sharpening my axe.” said Abraham Lincoln.
 
