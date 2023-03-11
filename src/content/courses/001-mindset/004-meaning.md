@@ -1,7 +1,6 @@
 ---
 title: Meaning
 description: Meaning
-layout: "@layouts/MainLayout.astro"
 ---
 
 People want to create thing and have fun. We learn best by playing and having fun.

@@ -1,7 +1,6 @@
 ---
 title: Organize
 description: Organize
-layout: "@layouts/MainLayout.astro"
 ---
 
 Being able to organize thoughts is a powerful tool. To make my point here, I would like to give you a quick example that will illustrate my point.

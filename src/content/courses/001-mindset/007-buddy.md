@@ -1,6 +1,5 @@
 title: Buddy
 description: Buddy
-layout: "@layouts/MainLayout.astro"
 
 ---
 

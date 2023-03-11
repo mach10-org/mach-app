@@ -1,7 +1,6 @@
 ---
 title: About your beliefs
 description: About your beliefs
-layout: "@layouts/MainLayout.astro"
 ---
 
 ### Limitating beliefs

@@ -1,7 +1,6 @@
 ---
 title: Ownership
 description: Ownership
-layout: "@layouts/MainLayout.astro"
 ---
 
 As we saw in the previous section, removing limiting beliefs is a key part of your own success.

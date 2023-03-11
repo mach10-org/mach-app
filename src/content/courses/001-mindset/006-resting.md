@@ -1,6 +1,5 @@
 title: Resting
 description: Resting
-layout: "@layouts/MainLayout.astro"
 
 ---
 

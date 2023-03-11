@@ -1,7 +1,6 @@
 ---
 title: Flow
 description: Flow
-layout: "@layouts/MainLayout.astro"
 ---
 
 ### Mastering focus and attention
