@@ -1,0 +1,27 @@
+---
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Header.astro";
+---
+
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="stylesheet" type="text/css" href={Astro.resolve("../styles/global.css")}>
+        <title>Astro</title>
+    </head>
+    <body>
+        <Navigation></Navigation>
+
+        <slot>
+
+        </slot>
+
+<Footer></Footer>
+<script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+</body>
+</html>
+
