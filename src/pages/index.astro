@@ -1,317 +1,75 @@
 ---
-import Layout from "@layouts/layout.astro";
+import ContentLayout from '@Contentlayout';
+import Card from '@components/Card.astro';
+import { getAllCourseIndex } from '@utils/collections';
+import '@styles/global.css';
+
+const courses = await getAllCourseIndex('courses');
+const data = {
+  title: 'Mach App',
+  description: 'Learn some code....'
+};
 ---
-<Layout>
-<section class="bg-white dark:bg-gray-900">
-    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-12 xl:gap-0 lg:py-16 lg:grid-cols-12">
-        <div class="mr-auto place-self-center lg:col-span-7 xl:col-span-8">
-            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Ready to take off for a new life?</h1>
-            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">We are on a mission to transform lives of 10,000 people. Why not you? It starts <b>today 👩🏻‍🚀👇</b></p>
-            <form action="#" class="">
-                <div class="flex items-center mb-3">
-                    <div class="relative w-auto mr-3">
-                        <label for="member_email" class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-                        </div>
-                        <input class="block md:w-96 w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter your email" type="email" name="member[email]" id="member_email" required="">
-                    </div>
-                    <div>
-                        <input type="submit" value="Apply now" class="px-5 py-3 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="member_submit" id="member_submit">
-                    </div>
-                </div>
-                <div class="text-sm text-left text-gray-500 dark:text-gray-300">Apply today, free forever. First course starting in 2023.</div>
-            </form>
-        </div>
-        <div class="hidden lg:mt-0 lg:col-span-5 xl:col-span-4 lg:flex">
-            <img src="https://positiveroutines.com/wp-content/uploads/2018/06/Asian-woman-smiling-at-laptop.jpg" alt="succeed">
-        </div>                
-    </div>
-</section>
 
+<ContentLayout {...data}>
+  <h1>
+    Welcome to <span class='text-gradient'
+      >{import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME}</span
+    >
+  </h1>
+  <p class='instructions'>
+    To add a course, create a PR and add it to <code>src/content/courses</code> following the guide lines.<br
+    />
+    <strong>Quiz !?!:</strong> You can create a quiz on each page.
+  </p>
 
-<section class="bg-white dark:bg-gray-900">
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-      <div class="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
-          <h2 class="mb-4 text-4xl tracking-tight font-bold text-gray-900 dark:text-white">Our mission? Train <span class="font-extrabold">10,000</span> software engineers in Japan 🗾</h2>
-          <p class="mb-4 font-light">The world is changing rapidly and software is reshaping the economy and companies all over the world, including Japan.
+  {
+    courses.map((course) => (
+      <Card
+        href={`${course.collection}/${course.slug}`}
+        title={course.data.title}
+        body={course.data.description}
+      />
+    ))
+  }
+</ContentLayout>
 
-While most companies understand the importance of digital technologies, tech talent is *really* hard to find.
-For this reason, many companies are ready to pay high salaries, hire foreigners or offer remote work positions.</p>
-
-<p class="mb-4 font-light">Most tech startups do not care about your diploma, school name, your age or gender.
-Skills and your ability to get the job done effectively are all that matters.</p>
-
-<p class="mb-4 font-light">I started this project because I hired a lot of people over the past few years. Believe me, the school name never mattered much to me. Actually, many of the people who impressed me the most by their skills, were self taught who never attended university.</p>
-
-<p class="mb-4 font-light">I believe it is urgent to train more people in Japan. Of course, there are many great universities, however not everyone had the chance to enter or afford them. Or they simply didn't choose this way when it as time to choose.</p>
-
-<p class="mb-4 font-light">When it comes education, constraints such as money or location shouldn't be issues. We believe a different approach is possible.</p>
-
-          <p class="mb-4 font-medium">We are on a mission to train the software engineers of tomorrow and we are just getting started.</p>
-          <a href="mission" class="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700">
-              Why are we doing this?
-              <svg class="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-          </a>
-      </div>
-  </div>
-</section>
-
-<section class="bg-white dark:bg-gray-900">
-  <div class="py-8 px-4 mx-auto max-w-screen-xl text-center sm:py-16 lg:px-6">
-      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Software engineering for complete beginners</h2>
-      <p class="text-gray-500 sm:text-xl dark:text-gray-400">Since covid19, many of us realized it's more important than ever to build new skills. In the digital economy, being able to code opens new opportunities and change your life forever.</p>
-      <div class="mt-8 lg:mt-12 space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-          <div>
-              <svg class="mx-auto mb-4 w-12 h-12 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.625 2.655A9 9 0 0119 11a1 1 0 11-2 0 7 7 0 00-9.625-6.492 1 1 0 11-.75-1.853zM4.662 4.959A1 1 0 014.75 6.37 6.97 6.97 0 003 11a1 1 0 11-2 0 8.97 8.97 0 012.25-5.953 1 1 0 011.412-.088z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M5 11a5 5 0 1110 0 1 1 0 11-2 0 3 3 0 10-6 0c0 1.677-.345 3.276-.968 4.729a1 1 0 11-1.838-.789A9.964 9.964 0 005 11zm8.921 2.012a1 1 0 01.831 1.145 19.86 19.86 0 01-.545 2.436 1 1 0 11-1.92-.558c.207-.713.371-1.445.49-2.192a1 1 0 011.144-.83z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M10 10a1 1 0 011 1c0 2.236-.46 4.368-1.29 6.304a1 1 0 01-1.838-.789A13.952 13.952 0 009 11a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-              <h3 class="mb-2 text-xl font-bold dark:text-white">Free. Forever.</h3>
-              <p class="mb-4 text-gray-500 dark:text-gray-400">We believe education should be free and accessible for all. Learning new skills and deciding to change career is hard enough. Money should never be an issue. No hidden costs.</p>
-              <a href="#" class="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-500 dark:hover:text-primary-400">
-                  How can this be free? <svg class="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></a>
-              
-          </div>
-          <div>
-              <svg class="mx-auto mb-4 w-12 h-12 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
-              <h3 class="mb-2 text-xl font-bold dark:text-white">From 7-99 years old</h3>
-              <p class="mb-4 text-gray-500 dark:text-gray-400">It's never too early nor too late to learn anything, that also applies to software engineering. Women, men, in junior highschool or late in your career, you are welcome!</p>
-              <a href="#" class="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-500 dark:hover:text-primary-400">
-                  Is this really for me? <svg class="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></a>
-              
-          </div>
-          <div>
-              <svg class="mx-auto mb-4 w-12 h-12 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <h3 class="mb-2 text-xl font-bold dark:text-white">Learn with fun</h3>
-              <p class="mb-4 text-gray-500 dark:text-gray-400">Learning should be fun. Boring is the enemy of effective learning. We believe a great learning experience should be fun, self-paced and enjoyable.</p>
-              <a href="#" class="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-500 dark:hover:text-primary-400">
-                  How is this different? <svg class="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></a>
-              
-          </div>
-      </div>
-  </div>
-</section>
-
-<section class="bg-white dark:bg-gray-900">
-  <div class="py-8 px-4 mx-auto space-y-12 max-w-screen-xl lg:space-y-20 sm:py-16 lg:px-6">
-      <!-- Row -->
-      <div class="gap-8 items-center lg:grid lg:grid-cols-2 xl:gap-16">
-          <div class="text-gray-500 sm:text-lg dark:text-gray-400">
-              <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">No experience needed</h2>
-              <p class="mb-8 font-light lg:text-xl">Many online courses assume you have already some programming background or even math. We are focused on bringing people from level 0.</p>
-              <!-- List -->
-              <ul role="list" class="pt-8 my-7 space-y-5 border-t border-gray-200 dark:border-gray-700">
-                  <li class="flex space-x-3">
-                      <!-- Icon -->
-                      <svg class="flex-shrink-0 w-5 h-5 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                      <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Learn at your own pace</span>
-                  </li>
-                  <li class="flex space-x-3">
-                      <!-- Icon -->
-                      <svg class="flex-shrink-0 w-5 h-5 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                      <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Gain practical knowledge companies are looking for</span>
-                  </li>
-                  <li class="flex space-x-3">
-                      <!-- Icon -->
-                      <svg class="flex-shrink-0 w-5 h-5 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                      <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Broaden your skills</span>
-                  </li>
-              </ul>
-              <p class="mb-8 font-light lg:text-xl">Never used a computer before? No problem.</p>
-          </div>
-          <img class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" src="https://images.assetsdelivery.com/compings_v2/tokyovisionaryroom/tokyovisionaryroom2208/tokyovisionaryroom220800384.jpg" alt="office feature image">
-      </div>
-      <!-- Row -->
-      <div class="gap-8 items-center lg:grid lg:grid-cols-2 xl:gap-16">
-          <img class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" src="https://as2.ftcdn.net/v2/jpg/01/95/11/43/1000_F_195114322_p9YdJPKZUE5QQVbkP93BKxC4CGJ1nbNT.jpg" alt="office feature image 2">
-          <div class="text-gray-500 sm:text-lg dark:text-gray-400">
-              <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Invest in yourself</h2>
-              <p class="mb-8 font-light lg:text-xl">Creating software is an art and even a way of thinking. Wether you consider changing career in the future or just by curiosity, learning to code will transform your life for the better.</p>
-              <!-- List -->
-              <ul role="list" class="pt-8 my-7 space-y-5 border-t border-gray-200 dark:border-gray-700">
-                  <li class="flex space-x-3">
-                      <!-- Icon -->
-                      <svg class="flex-shrink-0 w-5 h-5 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                      <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Unlock new opportunities</span>
-                  </li>
-                  <li class="flex space-x-3">
-                      <!-- Icon -->
-                      <svg class="flex-shrink-0 w-5 h-5 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                      <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Ability to choose your own future</span>
-                  </li>
-                  <li class="flex space-x-3">
-                      <!-- Icon -->
-                      <svg class="flex-shrink-0 w-5 h-5 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                      <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Turn your ideas into a startup</span>
-                  </li>
-                  <li class="flex space-x-3">
-                      <!-- Icon -->
-                      <svg class="flex-shrink-0 w-5 h-5 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                      <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Get help and support from the community</span>
-                  </li>
-              </ul>
-              <p class="font-light lg:text-xl"></p>
-          </div>
-      </div>
-  </div>
-</section>
-
-
-<section class="bg-white dark:bg-gray-900">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 ">
-        <h2 class="mb-6 lg:mb-8 text-3xl lg:text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Frequently asked questions</h2>
-        <div class="mx-auto max-w-screen-md">
-            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
-                <h2 id="accordion-flush-heading-1">
-                    <button type="button" class="flex justify-between items-center py-5 w-full font-medium text-left text-gray-900 bg-white border-b border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
-                        <span>始めるには何が必要ですか？</span>
-                        <svg data-accordion-icon="" class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-flush-body-1" class="" aria-labelledby="accordion-flush-heading-1">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">パソコンがあればベストですが、なければキーボード付きの iPad でも始められるはずです。</p>
-                        <p class="text-gray-500 dark:text-gray-400">スマートフォンで学習すれば、通勤時などにも時間を有効に使えます。途中、おすすめの本を数冊購入するのも、時間を有効に使えるかもしれません。</p>
-                    </div>
-                </div>
-                <h2 id="accordion-flush-heading-2">
-                    <button type="button" class="flex justify-between items-center py-5 w-full font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
-                        <span>始めたけど辞めたくなったらどうすればいいの？</span>
-                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">何もありません。ただ、辞める理由をお聞かせいただきたいです。改善につなげたり、励まして差し上げたりすることはできますよ 🍵🙂。</p>
-                        <p class="text-gray-500 dark:text-gray-400">どちらにしても、後でいつでも学習を再開することができます。</p>
-                    </div>
-                </div>
-                <h2 id="accordion-flush-heading-3">
-                    <button type="button" class="flex justify-between items-center py-5 w-full font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
-                        <span>もし私があなたに提案したいことがあれば教えてください。</span>
-                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">使っていただいてのご意見やご感想は大歓迎です。成長することや、モチベーション維持に苦労していますか？あなたの考えをここで共有してください。このサービスは永久に動き続けるので、改善するためのフィードバックをお待ちしています。</p>
-                    </div>
-                </div>
-                <h2 id="accordion-flush-heading-4">
-                    <button type="button" class="flex justify-between items-center py-5 w-full font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-4" aria-expanded="false" aria-controls="accordion-flush-body-4">
-                        <span>他のオンラインコースと比較すると、時間的な制約が大きいように思います。</span>
-                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">ソフトウェアエンジニアには 2 つのタイプがあります。コンピュータサイエンスを十分に理解し、挑戦的で革新的な仕事をする人（タイプ 1）と、いくつかのツールに精通しているだけで何とかやっている人（タイプ 2）です。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">
-どちらもソフトウェア・エンジニアと呼ばれ、初期のキャリアでは同じような給与を得る傾向があります。しかし、全社のエンジニアは、価値のある商業的な仕事であれ、画期的なオープンソースプロジェクトであれ、技術的なリーダーシップであれ、質の高い個人の貢献であれ、時間とともにより充実した、より報酬の高い仕事に向かって進歩します。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">タイプ 1 のエンジニアは、従来の方法であれ、キャリアを通じて絶え間なく学習することであれ、コンピュータサイエンスを深く学ぶ方法を見つけます。タイプ 2 のエンジニアは、通常、表面的な部分にとどまり、その基礎ではなく特定のツールや技術を学び、技術的な流行の風が変わったときにだけ新しいスキルを身に付けます。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">現在、業界への参入者は急速に増加していますが、CS の新卒者数は比較的横ばいです。このように、第 2 種エンジニアの供給過剰は、彼らの雇用機会を減らし、より充実した仕事から彼らを遠ざけ始めています。タイプ 1 エンジニアを目指す人も、単に雇用の安定を求める人も、ソフトウェアエンジニアの基礎を学ぶことが唯一の確実な道となります。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">音楽理論を持たずに耳で少しギターを覚えた人と、実際に楽譜を読み、書き、好きな楽器で美しく解釈できる人の違いと考えてみてください。ほとんどのオンラインコースは前者のタイプに焦点を当てていますが、私たちは後者のタイプに焦点を当てたいと考えています。</p>
-                    </div>
-                </div>
-                <!--<h2 id="accordion-flush-heading-5">
-                    <button type="button" class="flex justify-between items-center py-5 w-full font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-5" aria-expanded="false" aria-controls="accordion-flush-body-5">
-                        <span>QUESTION。</span>
-                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-5">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">TODO</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">TEXT1</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">TEXT2</p>
-                    </div>
-                </div>-->
-                <h2 id="accordion-flush-heading-6">
-                    <button type="button" class="flex justify-between items-center py-5 w-full font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-6" aria-expanded="false" aria-controls="accordion-flush-body-6">
-                        <span>卒業証書がもらえますか？</span>
-                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-flush-body-6" class="hidden" aria-labelledby="accordion-flush-heading-6">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">しかし、20 年以上ソフトウェアエンジニアを採用してきた者として、1 つだけ言わせてください。ほとんどの（良い）企業が気にするのはただ 1 つ、「仕事を成し遂げられるかどうか」です。私は、卒業証書の時代は終わったと強く思っている。卒業証書は、単に成果を表す紙切れに過ぎません。私がこれまで出会った優秀なソフトウェアエンジニアのほとんどは、高校卒業後すぐに学習をあきらめた。高校にすら行けなかった人もいる。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">ほとんどのスタートアップ企業や大企業でさえ、卒業証書はあまり気にせず、あなたの評判が卒業証書となります。あなたがどこから来て、何を達成したかが、あなたの卒業証書なのです。このプログラムでは、単にいくつかのことを教えるだけでなく、評判の良いブランドを作ることを意図しています。このブランドは、このプログラムを修了した人たちが総称しています。つまり、このプログラムのブランドは、受講者の評判によって築かれるのです。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">つまり、このプログラムを修了して最初の仕事に就くとき、何らかの形でこのコースを背負い、代表することになるのです。つまり、このプログラムを修了して最初の仕事に就くとき、このコースを背負って代表することになるのです。私たちが高い水準を保つことは非常に重要で、私を信じてください、卒業証書は決して重要ではないのです。</p>
-                    </div>
-                </div>
-                <h2 id="accordion-flush-heading-7">
-                    <button type="button" class="flex justify-between items-center py-5 w-full font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-7" aria-expanded="false" aria-controls="accordion-flush-body-7">
-                        <span>このコースを卒業すると、どのような待遇を目指せるのでしょうか？</span>
-                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-flush-body-7" class="hidden" aria-labelledby="accordion-flush-heading-7">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">場合にもよりますが、最近の技術系職種は明らかに給料が高い（しかも急上昇中！）です。コロナ禍は実際にこの傾向を加速させました。しかし、良い人生を送るためにお金は重要ですが、それが私たちを最も幸せに感じさせるものではないとも思っています。多くの研究で、ある閾値を超えると、お金があっても幸せにはなれないことが確認されています。この閾値は、おそらく皆さんが思っているほど高くはないでしょう。陳腐に聞こえるかもしれませんが、お金というのは、実はモチベーションを上げる力としては弱いものだと思います。技術や世界で最も偉大なものは、お金を稼ぐために作られ、設計されたわけではありません。それらは、実現させたいアイデアがある人たちによって作られたものです。何もないところから自分のアイデアを作り上げたという感覚は、お金よりも 100 倍も強力な達成感と自己満足を与えてくれます。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">確かに人は、選択や達成に自由があると幸せだと思います。自分がやりたいプロジェクト、会社を選べる、作れるというのは、すごいことだと思います。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">個人的には、上記のすべてを感じることができましたし、アイデアを基に構築し、最初の顧客を持ち、チームを作り、雇用を創出する自由は、私にとって、そこから集めたお金よりもはるかに有意義なものです。このような状況にある私の知人の多くも、この感覚を共有しています。あなたにも、いつかそう思ってもらえるようにと願うばかりです。それはただ、あなたとあなたの選択次第なのです。</p>
-                    </div>
-                </div>
-                <h2 id="accordion-flush-heading-8">
-                    <button type="button" class="flex justify-between items-center py-5 w-full font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-8" aria-expanded="false" aria-controls="accordion-flush-body-8">
-                        <span>どのくらいの時間が必要ですか？</span>
-                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-flush-body-8" class="hidden" aria-labelledby="accordion-flush-heading-8">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">一日 1 時間から 2 時間あれば完璧です。学習はマラソンであり、短距離走ではありません。時間をかけて一貫性を持たせることが常に良いのです。急ぐよりも、一貫性を保つ方が常に勝ります。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">また、現実的な目標を設定することも大切です。私たちは、新しいことに一週間にどれだけの時間をかけられるか、過大評価しがちです。面白いことに、私たちは毎週少しずつでも 1 年でどこまで進歩できるかを過小評価しがちです。ですから、ここでは辛抱することが大切です。人生において最も偉大なことは、常に時間がかかるものです。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">また、重要なのは集中力です。どれだけ時間をかけるかだけでなく、集中力のレベルも重要です。プログラミングの勉強をするときは、自分を邪魔しないモードに設定するようにしましょう。例えば、スマートフォンの通知を一時停止したり、いっそのことスマートフォンを無音モードにしてしまってください。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">集中中に邪魔が入ると、脳はタスクに戻るのに平均 23 分かかると言われています（これは実際にカリフォルニア大学アーバイン校の研究で測定されたものです）。</p>
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">そのため、LINE のメッセージに返信したり、Twitter のフィードをスクロールして休憩したりすることは、2 分どころか、実際には 20 分以上もの集中力を失っていることになります。気が散ると生産性が落ちる。集中力というのは本当に大事です。</p>
-                    </div>
-                </div>
-            </div> 
-        </div>               
-    </div>
-</section>
-
-<section class="bg-white dark:bg-gray-900">
-  <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
-      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 lg:text-5xl dark:text-white">Together we are stronger</h2>
-      <p class="font-light text-gray-500 sm:text-lg sm:px-8 lg:px-32 xl:px-64 dark:text-gray-400">The world and economy are changing, then it's also time to rethink education. We believe it should be free and accessible from anywhere.</p>
-      <dl class="grid grid-cols-2 gap-8 mx-auto mt-8 max-w-screen-md text-gray-900 lg:mt-14 sm:grid-cols-3 dark:text-white">
-          <div class="flex flex-col justify-center items-center">
-              <dt class="mb-2 text-4xl font-extrabold">10K</dt>
-              <dd class="text-xl font-normal text-gray-500 dark:text-gray-400">goal of trained software engineers</dd>
-          </div>
-          <div class="flex flex-col justify-center items-center">
-              <dt class="mb-2 text-4xl font-extrabold">2023</dt>
-              <dd class="text-xl font-normal text-gray-500 dark:text-gray-400">opening of our first online program</dd>
-          </div>
-          <div class="flex flex-col justify-center items-center">
-              <dt class="mb-2 text-4xl font-extrabold">$0</dt>
-              <dd class="text-xl font-normal text-gray-500 dark:text-gray-400">tuition fees. no hidden costs.</dd>
-          </div>
-      </dl>
-  </div>
-</section>
-
-<section class="bg-white dark:bg-gray-900">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 ">
-        <div class="mx-auto max-w-screen-md text-center">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">How about a new start from today?</h2>
-            <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">The best time to start was yesterday. The next best time is <b>now</b>. Your choice today might be one the best decision of your life. Why not give it a try? It's 100% free.</p>
-            <form action="#" class="mx-auto max-w-screen-sm">
-                <div class="flex items-center mb-3">
-                    <div class="relative mr-3 w-full">
-                        <label for="member_email" class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
-                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-                        </div>
-                        <input class="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter your email" type="email" name="member[email]" id="member_email" required="">
-                    </div>
-                    <div>
-                        <input type="submit" value="Apply now" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="member_submit" id="member_submit">
-                    </div>
-                </div>
-                <div class="text-sm text-left text-gray-500 dark:text-gray-300">Apply today, free forever. First course starting in 2023.</div>
-            </form>
-        </div>
-    </div>
-</section>
-</Layout>
+<style>
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .instructions {
+    line-height: 1.6;
+    margin: 1rem 0;
+    border: 1px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+  }
+  .instructions code {
+    font-size: 0.875em;
+    font-weight: bold;
+    background: rgba(var(--accent), 12%);
+    color: rgb(var(--accent));
+    border-radius: 4px;
+    padding: 0.3em 0.45em;
+  }
+  .instructions strong {
+    color: rgb(var(--accent));
+  }
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 1rem;
+    padding: 0;
+  }
+</style>
