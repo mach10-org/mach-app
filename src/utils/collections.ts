@@ -1,7 +1,7 @@
 import { Collection, CoursesDirectory, Render } from '@models/courses';
 import { CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
 
-const idxKey = '/0-index';
+const idxKey = '/0_index';
 
 /**
  *

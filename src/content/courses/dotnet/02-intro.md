@@ -1,14 +1,15 @@
 ---
 title: 02 - Intro
-description: 'Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae quies, praemiaque lepores.'
+description: Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae quies, praemiaque lepores.
 draft: true
 tags:
   - GoLang
   - BAKEND
-preview: 'https://via.placeholder.com/450x300.png'
+preview: https://via.placeholder.com/450x300.png
+lastmod: 2023-05-24T23:19:03.468Z
 ---
 
-# Hi there Hello, World!
+# 02-intro!
 
 This Markdown file creates a page at `your-domain.com/page-1/`
 
