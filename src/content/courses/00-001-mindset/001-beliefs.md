@@ -1,6 +1,7 @@
 ---
 title: About your beliefs
 description: About your beliefs
+lastmod: 2023-05-24T04:28:50.459Z
 ---
 
 ### Limitating beliefs

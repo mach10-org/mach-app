@@ -1,9 +1,10 @@
 ---
 title: Prepare your mindset
-description: 'This short introduction will give you a few tips to make the most of this course'
+description: This short introduction will give you a few tips to make the most of this course
 tags:
   - mindset
-preview: 'https://via.placeholder.com/450x300.png'
+preview: https://via.placeholder.com/450x300.png
+lastmod: 2023-05-24T04:28:53.384Z
 ---
 
 ## Introduction

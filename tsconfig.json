@@ -2,11 +2,10 @@
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     "strictNullChecks": true,
-    "jsx": "react-jsx",
+    "allowJs": true,
+    "jsx": "preserve",
     "baseUrl": ".",
-    "types": [
-      "vite/client" // if using vite
-    ],
+    "types": ["vite/client"],
     "paths": {
       "@components/*": ["src/components/*"],
       "@content/*": ["src/content/*"],

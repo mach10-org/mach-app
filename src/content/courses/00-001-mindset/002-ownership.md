@@ -1,6 +1,7 @@
 ---
 title: Ownership
 description: Ownership
+lastmod: 2023-05-24T04:28:48.538Z
 ---
 
 As we saw in the previous section, removing limiting beliefs is a key part of your own success.

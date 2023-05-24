@@ -1,6 +1,7 @@
 ---
 title: Organize
 description: Organize
+lastmod: 2023-05-24T04:28:42.796Z
 ---
 
 Being able to organize thoughts is a powerful tool. To make my point here, I would like to give you a quick example that will illustrate my point.
