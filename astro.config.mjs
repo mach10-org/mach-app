@@ -33,16 +33,13 @@ export default defineConfig({
     AutoImport({
       imports: [
         {
+          './src/components/Test.astro': [['default', 'Test']],
           './src/components/Quiz': ['Quiz']
         }
       ]
     }),
     tailwind(),
-    mdx({
-      remarkPlugins: [remarkMermaid, remarkGFM],
-      drafts: false,
-      gfm: true
-    }),
+    mdx(),
     vue({
       jsx: true
     }),

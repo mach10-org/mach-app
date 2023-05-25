@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
   try {
     const coursesDir = await getCourseDirectories('courses');
-    console.log('coursesDir', coursesDir);
+    // console.log('coursesDir', coursesDir);
 
     Object.keys(coursesDir).forEach((key) => {
       paramsList.push({
