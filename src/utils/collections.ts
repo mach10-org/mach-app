@@ -2,7 +2,8 @@ import { Collection, CoursesDirectory, Render } from '@models/courses';
 import { CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
 import getReadingTime from 'reading-time';
 
-const idxKey = '/0_index';
+const idxKey = '/README';
+// const idxKey = '/0_index';
 
 /**
  *
@@ -14,7 +15,7 @@ export const getAllCourseIndex = async (collection: Collection) => {
   });
 
   const test = list.map((c) => {
-    const slug: any = c.slug.replace(idxKey, '/');
+    const slug: any = c.slug.toLowerCase().replace(idxKey.toLowerCase(), '/');
     c.slug = slug;
     return c;
   });
@@ -29,6 +30,8 @@ export const getAllCourseIndex = async (collection: Collection) => {
  */
 export const getCourseLessons = async (collection: Collection, course: string) => {
   return await getCollection(collection, ({ id, data }) => {
+    console.log(`${course}${idxKey}`);
+
     return id.startsWith(`${course}/`) && data.draft !== true && !id.includes(`${course}${idxKey}`);
   });
 };
@@ -49,6 +52,8 @@ export const getAllCollectionLessons = async (collection: Collection) => {
  * @returns Index page of a course folder
  */
 export const getCourseIndex = async (collection: Collection, course: string) => {
+  console.log('getCourseIndex');
+
   let entryResult: Render | null = null;
   try {
     const entry = await getEntryBySlug(collection, `${course}/`);
