@@ -1,5 +1,6 @@
 import { Collection, CoursesDirectory, Render } from '@models/courses';
 import { CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
+import getReadingTime from 'reading-time';
 
 const idxKey = '/0_index';
 
@@ -69,10 +70,9 @@ export const getCourseDirectories = async (collection: Collection) => {
   const coursesDir: CoursesDirectory = {};
 
   await getCollection(collection, (entry) => {
-    // console.log('getCourseDirectories', entry);
-
     const { slug, data } = entry;
     const directories: string[] = slug.split('/');
+    data.minutesRead = getReadingTime(entry?.body || '');
 
     if (directories.length > 1) {
       const cat = directories[0];

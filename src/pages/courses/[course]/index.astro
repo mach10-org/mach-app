@@ -37,5 +37,5 @@ const { Content } = await entry.render();
 
 <PageLayout {...entry.data}>
   <Content />
-  {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} title={course.data.title} body={course.data.description} />)}
+  {courses.map((course) => <Card minutesRead={course.data.minutesRead} href={`${course.collection}/${course.slug}`} title={course.data.title} body={course.data.description} />)}
 </PageLayout>

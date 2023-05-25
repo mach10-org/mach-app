@@ -6,7 +6,6 @@ import Quiz from '@components/Quiz/Question.vue';
 
 export async function getStaticPaths() {
   const courses = await getAllCollectionLessons('courses');
-  // console.log('courses ===', courses);
 
   return courses.map((entry) => {
     const directories = entry.slug.split('/');
@@ -28,15 +27,6 @@ const { Content } = await entry.render();
 
 <ContentLayout {...entry.data}>
   <Content />
-  {
-    entry?.data?.quiz && (
-      <Quiz
-        client:only='vue'
-        slug={`${course}/${slug}/`}
-        label={entry.data.quiz.label}
-        options={entry.data.quiz.options}
-      />
-    )
-  }
+  {entry?.data?.quiz && <Quiz client:only='vue' slug={`${course}/${slug}/`} label={entry.data.quiz.label} options={entry.data.quiz.options} />}
   <PaginatedCourse {...{course, slug}} />
 </ContentLayout>
