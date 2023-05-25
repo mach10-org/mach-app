@@ -1,10 +1,11 @@
 ---
 title: Dotnet
-description: 'Test Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae quies, praemiaque lepores.'
+description: Test Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae quies, praemiaque lepores.
 tags:
   - GoLang
   - BAKEND
-preview: 'https://via.placeholder.com/450x300.png'
+preview: https://via.placeholder.com/450x300.png
+lastmod: 2023-05-25T01:07:11.476Z
 ---
 
 ## 🍱 What will I build?
