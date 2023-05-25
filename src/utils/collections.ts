@@ -1,17 +1,19 @@
 import { Collection, CoursesDirectory, Render } from '@models/courses';
 import { CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
 
+const idxKey = '/0_index';
+
 /**
  *
  * @returns List of all active courses index page
  */
 export const getAllCourseIndex = async (collection: Collection) => {
   const list = await getCollection(collection, ({ id, data }) => {
-    return data.draft !== true && id.includes(`/_index`);
+    return data.draft !== true && id.includes(idxKey);
   });
 
   const test = list.map((c) => {
-    const slug: any = c.slug.replace('/_index', '/');
+    const slug: any = c.slug.replace(idxKey, '/');
     c.slug = slug;
     return c;
   });
@@ -26,7 +28,7 @@ export const getAllCourseIndex = async (collection: Collection) => {
  */
 export const getCourseLessons = async (collection: Collection, course: string) => {
   return await getCollection(collection, ({ id, data }) => {
-    return id.startsWith(`${course}/`) && data.draft !== true && !id.includes(`${course}/_index`);
+    return id.startsWith(`${course}/`) && data.draft !== true && !id.includes(`${course}${idxKey}`);
   });
 };
 
@@ -36,7 +38,7 @@ export const getCourseLessons = async (collection: Collection, course: string) =
  */
 export const getAllCollectionLessons = async (collection: Collection) => {
   return await getCollection(collection, ({ data, id }) => {
-    return data.draft !== true && !id.includes(`/_index`);
+    return data.draft !== true && !id.includes(idxKey);
   });
 };
 
@@ -84,7 +86,7 @@ export const getCourseDirectories = async (collection: Collection) => {
         };
       }
       if (alias) {
-        if (data.draft !== true && !slug.includes(`${cat}/_index`)) {
+        if (data.draft !== true && !slug.includes(`${cat}${idxKey}`)) {
           coursesDir[cat].slugs?.push(alias);
           coursesDir[cat].courses?.push(entry);
         }
@@ -114,10 +116,7 @@ export const coursePager = async (course: string, slug: string) => {
     // nextEntry = courses ? courses[activeIndex + 1] || null : null;
 
     prevEntry = activeIndex > 0 ? courses?.[activeIndex - 1] || null : null;
-    nextEntry =
-      activeIndex !== -1 && activeIndex < slugs.length - 1
-        ? courses?.[activeIndex + 1] || null
-        : null;
+    nextEntry = activeIndex !== -1 && activeIndex < slugs.length - 1 ? courses?.[activeIndex + 1] || null : null;
   }
 
   return {

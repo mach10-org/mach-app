@@ -1,6 +1,7 @@
+---
 title: Buddy
 description: Buddy
-
+lastmod: 2023-05-24T04:28:30.937Z
 ---
 
 ### Find a buddy

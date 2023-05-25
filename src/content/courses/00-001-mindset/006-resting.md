@@ -1,6 +1,7 @@
+---
 title: Resting
 description: Resting
-
+lastmod: 2023-05-24T04:28:39.104Z
 ---
 
 ### Resting you CNS alias the central nervous system
