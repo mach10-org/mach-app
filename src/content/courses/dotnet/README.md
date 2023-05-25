@@ -5,7 +5,7 @@ tags:
   - GoLang
   - BAKEND
 preview: https://via.placeholder.com/450x300.png
-lastmod: 2023-05-25T01:07:11.476Z
+lastmod: 2023-05-25T22:14:35.923Z
 ---
 
 ## 🍱 What will I build?
