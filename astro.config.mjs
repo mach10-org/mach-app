@@ -33,7 +33,6 @@ export default defineConfig({
     AutoImport({
       imports: [
         {
-          './src/components/Test.astro': [['default', 'Test']],
           './src/components/Quiz': ['Quiz']
         }
       ]
