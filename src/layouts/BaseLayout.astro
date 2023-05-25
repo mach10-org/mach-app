@@ -11,7 +11,7 @@ import '@styles/global.css';
 
 <html lang='en'>
   <head>
-    <BaseHead {...Astro.props} />
+    <BaseHead title={Astro.props.title} description={Astro.props.description} preview={Astro.props.preview} />
   </head>
   <body>
     <Navbar />

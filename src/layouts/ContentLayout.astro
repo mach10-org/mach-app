@@ -1,11 +1,20 @@
 ---
 import ErrorMessage from '@components/ErrorMessage.vue';
 import BaseLayout from './BaseLayout.astro';
+console.log('Astro.props', Astro.props);
+const data = Astro.props;
 ---
 
 <BaseLayout {...Astro.props}>
   <ErrorMessage client:only='vue' />
   <main class='content-page prose lg:prose-xl'>
+    <h1>{data.title}</h1>
+
+    {data?.description && <h2>{data.description}</h2>}
+    {data?.minutesRead?.text && <strong>{data?.minutesRead?.text}</strong>}
+
+    {data?.preview && <img src={data.preview} />}
+
     <slot />
   </main>
 </BaseLayout>
