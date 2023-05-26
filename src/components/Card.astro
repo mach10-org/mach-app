@@ -1,12 +1,20 @@
 ---
 export interface Props {
-  title: string;
-  body: string;
   href: string;
-  minutesRead?: { text: string; minutes: number; time: number; words: number };
+  data: {
+    title: string;
+    body: string;
+    href: string;
+    minutesRead?: { text: string; minutes: number; time: number; words: number };
+    section?: string;
+  };
 }
 
-const { href, title, body, minutesRead } = Astro.props;
+const {
+  href,
+  data: { title, body, minutesRead, section }
+} = Astro.props;
+// console.log('Astro.props', Astro.props);
 ---
 
 <li class='link-card'>
@@ -16,6 +24,14 @@ const { href, title, body, minutesRead } = Astro.props;
       <span>&rarr;</span>
     </h2>
     {minutesRead?.text && <strong>{minutesRead?.text}</strong>}
+
+    {
+      section && (
+        <span>
+          <span> - </span> <strong>Section : {section}</strong>
+        </span>
+      )
+    }
 
     <p class='mb-2'>
       {body}

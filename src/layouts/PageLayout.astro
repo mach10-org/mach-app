@@ -12,15 +12,6 @@ const slug = Astro.url.pathname;
   <main class='content-page prose lg:prose-xl'>
     <h1>{pageTitle}</h1>
     <slot />
-    {
-      frontmatter?.quiz && (
-        <Quiz
-          slug={slug}
-          client:only='vue'
-          label={frontmatter.quiz.label}
-          options={frontmatter.quiz.options}
-        />
-      )
-    }
+    {frontmatter?.quiz && <Quiz slug={slug} client:only='vue' label={frontmatter.quiz.label} options={frontmatter.quiz.options} />}
   </main>
 </BaseLayout>

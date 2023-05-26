@@ -14,7 +14,6 @@ export async function getStaticPaths() {
 
   try {
     const coursesDir = await getCourseDirectories('courses');
-    // console.log('coursesDir', coursesDir);
 
     Object.keys(coursesDir).forEach((key) => {
       paramsList.push({
@@ -37,5 +36,5 @@ const { Content } = await entry.render();
 
 <PageLayout {...entry.data}>
   <Content />
-  {courses.map((course) => <Card minutesRead={course.data.minutesRead} href={`${course.collection}/${course.slug}`} title={course.data.title} body={course.data.description} />)}
+  {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} data={course.data} />)}
 </PageLayout>

@@ -3,7 +3,6 @@ import { CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
 import getReadingTime from 'reading-time';
 
 const idxKey = '/README';
-// const idxKey = '/0_index';
 
 /**
  *
@@ -11,7 +10,7 @@ const idxKey = '/README';
  */
 export const getAllCourseIndex = async (collection: Collection) => {
   const list = await getCollection(collection, ({ id, data }) => {
-    return data.draft !== true && id.includes(idxKey);
+    return data.draft !== true && id.toLowerCase().includes(idxKey.toLowerCase());
   });
 
   const test = list.map((c) => {
@@ -30,9 +29,7 @@ export const getAllCourseIndex = async (collection: Collection) => {
  */
 export const getCourseLessons = async (collection: Collection, course: string) => {
   return await getCollection(collection, ({ id, data }) => {
-    console.log(`${course}${idxKey}`);
-
-    return id.startsWith(`${course}/`) && data.draft !== true && !id.includes(`${course}${idxKey}`);
+    return id.startsWith(`${course}/`) && data.draft !== true && !id.toLowerCase().includes(`${course}${idxKey.toLowerCase()}`);
   });
 };
 
@@ -42,7 +39,7 @@ export const getCourseLessons = async (collection: Collection, course: string) =
  */
 export const getAllCollectionLessons = async (collection: Collection) => {
   return await getCollection(collection, ({ data, id }) => {
-    return data.draft !== true && !id.includes(idxKey);
+    return data.draft !== true && !id.toLowerCase().includes(idxKey.toLowerCase());
   });
 };
 
@@ -52,8 +49,6 @@ export const getAllCollectionLessons = async (collection: Collection) => {
  * @returns Index page of a course folder
  */
 export const getCourseIndex = async (collection: Collection, course: string) => {
-  console.log('getCourseIndex');
-
   let entryResult: Render | null = null;
   try {
     const entry = await getEntryBySlug(collection, `${course}/`);
@@ -91,7 +86,7 @@ export const getCourseDirectories = async (collection: Collection) => {
         };
       }
       if (alias) {
-        if (data.draft !== true && !slug.includes(`${cat}${idxKey}`)) {
+        if (data.draft !== true && !slug.toLowerCase().includes(`${cat}${idxKey.toLowerCase()}`)) {
           coursesDir[cat].slugs?.push(alias);
           coursesDir[cat].courses?.push(entry);
         }
