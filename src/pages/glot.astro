@@ -1,11 +1,14 @@
 ---
 import ContentLayout from '@Contentlayout';
 import '@styles/global.css';
+import GlotAPI from 'glot-api';
+import { CodeCompiler } from '@components/CodeCompiler';
 ---
 
 <ContentLayout>
   <h1>tutorialspoint CODE COMPILER</h1>
-  <iframe src='https://glot.io/new/go' height='1000' width='750'></iframe>
+
+  <CodeCompiler client:load />
 </ContentLayout>
 
 <style>

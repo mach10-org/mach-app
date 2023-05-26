@@ -6,16 +6,17 @@ import { remarkReadingTime } from './src/plugin/remark-reading-time.mjs';
 import tailwind from '@astrojs/tailwind';
 import vue from '@astrojs/vue';
 import mdx from '@astrojs/mdx';
-
 import sitemap from '@astrojs/sitemap';
 
-// https://astro.build/config
 
 // https://astro.build/config
 
 // https://astro.build/config
 
 // https://astro.build/config
+
+// https://astro.build/config
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -29,19 +30,11 @@ export default defineConfig({
     drafts: false,
     extendDefaultPlugins: true
   },
-  integrations: [
-    AutoImport({
-      imports: [
-        {
-          './src/components/Quiz': ['Quiz']
-        }
-      ]
-    }),
-    tailwind(),
-    mdx(),
-    vue({
-      jsx: true
-    }),
-    sitemap()
-  ]
+  integrations: [AutoImport({
+    imports: [{
+      './src/components/Quiz': ['Quiz']
+    }]
+  }), tailwind(), mdx(), vue({
+    jsx: true
+  }), sitemap(), react()]
 });
