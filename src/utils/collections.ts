@@ -10,7 +10,7 @@ const idxKey = '/README';
  */
 export const getAllCourseIndex = async (collection: Collection) => {
   const list = await getCollection(collection, ({ id, data }) => {
-    return data.draft !== true && id.includes(idxKey);
+    return data.draft !== true && id.toLowerCase().includes(idxKey.toLowerCase());
   });
 
   const test = list.map((c) => {
@@ -29,7 +29,7 @@ export const getAllCourseIndex = async (collection: Collection) => {
  */
 export const getCourseLessons = async (collection: Collection, course: string) => {
   return await getCollection(collection, ({ id, data }) => {
-    return id.startsWith(`${course}/`) && data.draft !== true && !id.includes(`${course}${idxKey}`);
+    return id.startsWith(`${course}/`) && data.draft !== true && !id.toLowerCase().includes(`${course}${idxKey.toLowerCase()}`);
   });
 };
 
@@ -39,7 +39,7 @@ export const getCourseLessons = async (collection: Collection, course: string) =
  */
 export const getAllCollectionLessons = async (collection: Collection) => {
   return await getCollection(collection, ({ data, id }) => {
-    return data.draft !== true && !id.includes(idxKey);
+    return data.draft !== true && !id.toLowerCase().includes(idxKey.toLowerCase());
   });
 };
 
@@ -86,7 +86,7 @@ export const getCourseDirectories = async (collection: Collection) => {
         };
       }
       if (alias) {
-        if (data.draft !== true && !slug.includes(`${cat}${idxKey}`)) {
+        if (data.draft !== true && !slug.toLowerCase().includes(`${cat}${idxKey.toLowerCase()}`)) {
           coursesDir[cat].slugs?.push(alias);
           coursesDir[cat].courses?.push(entry);
         }

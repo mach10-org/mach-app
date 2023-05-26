@@ -5,7 +5,6 @@ import { getAllCourseIndex } from '@utils/collections';
 import '@styles/global.css';
 
 const courses = await getAllCourseIndex('courses');
-// console.log('courses', courses);
 
 const data = {
   title: 'Mach App',
@@ -22,7 +21,7 @@ const data = {
     <strong>Quiz !?!:</strong> You can create a quiz on each page.
   </p>
 
-  {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} title={course.data.title} body={course.data.description} />)}
+  {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} data={course.data} />)}
 </ContentLayout>
 
 <style>
