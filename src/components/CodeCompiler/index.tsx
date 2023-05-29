@@ -12,8 +12,6 @@ export interface Langages {
 }
 let langages: Langages[] | null = null;
 
-const gloTdata = { files: [{ name: 'main.js', content: 'console.log(`Hello World!`);' }], stdin: '', command: '' };
-
 /*
 try {
   // const response = await glot.run('javascript', gloTdata);
@@ -59,8 +57,17 @@ const CodeCompiler = () => {
     // markers.forEach(marker => console.log('onValidate:', marker.message));
   };
 
-  const showValue = () => {
-    console.log(editorRef?.current?.getValue());
+  const showValue = async () => {
+    const content = editorRef?.current?.getValue();
+    console.log('content', content);
+    const gloTdata = { files: [{ name: 'main.js', content }], stdin: '', command: '' };
+
+    try {
+      const response = await glot.run('javascript', gloTdata);
+      console.log('response', response);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
   // return <Editor height='90vh' defaultLanguage='javascript' defaultValue='' />;
   return (
