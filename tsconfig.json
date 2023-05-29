@@ -5,46 +5,25 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "types": [
-      "vite/client"
+    "types": ["vite/client"],
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
     ],
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@content/*": [
-        "src/content/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@models/*": [
-        "src/models/*"
-      ],
-      "@stores/*": [
-        "src/stores/*"
-      ],
-      "@plugins/*": [
-        "src/plugins/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@layouts/*": [
-        "src/layouts/*"
-      ],
-      "@PageLayout": [
-        "src/layouts/PageLayout.astro"
-      ],
-      "@Contentlayout": [
-        "src/layouts/ContentLayout.astro"
-      ]
+      "@components/*": ["src/components/*"],
+      "@content/*": ["src/content/*"],
+      "@assets/*": ["src/assets/*"],
+      "@pages/*": ["src/pages/*"],
+      "@styles/*": ["src/styles/*"],
+      "@models/*": ["src/models/*"],
+      "@stores/*": ["src/stores/*"],
+      "@plugins/*": ["src/plugins/*"],
+      "@utils/*": ["src/utils/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@PageLayout": ["src/layouts/PageLayout.astro"],
+      "@Contentlayout": ["src/layouts/ContentLayout.astro"]
     },
     "jsxImportSource": "react"
   }

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Editor, { DiffEditor, useMonaco, loader, OnMount } from '@monaco-editor/react';
 import GlotAPI from 'glot-api';
 import { editor } from 'monaco-editor';
+// import { Editor } from '@monaco-editor/react';
+import { Editor, DiffEditor, useMonaco, loader, OnMount } from '@monaco-editor/react';
 //https://github.com/enkidevs/glot-api
 const token = 'f2c16827-22c0-4cdf-8bec-5b3ee5c4eb37'; // If you are logged in you will find your token here:  https://glot.io/account/token
 const glot = new GlotAPI(token);
@@ -10,16 +11,18 @@ export interface Langages {
   name: string;
 }
 let langages: Langages[] | null = null;
+
 const gloTdata = { files: [{ name: 'main.js', content: 'console.log(`Hello World!`);' }], stdin: '', command: '' };
 
+/*
 try {
   // const response = await glot.run('javascript', gloTdata);
   // console.log('response', response);
 } catch (error) {
   console.log('error', error);
 }
-
-export const CodeCompiler = () => {
+*/
+const CodeCompiler = () => {
   const editorRef = useRef<editor.ICodeEditor>();
   const [langages, setLangages] = useState<Langages[]>();
 
@@ -55,10 +58,11 @@ export const CodeCompiler = () => {
     // model markers
     // markers.forEach(marker => console.log('onValidate:', marker.message));
   };
+
   const showValue = () => {
     console.log(editorRef?.current?.getValue());
   };
-
+  // return <Editor height='90vh' defaultLanguage='javascript' defaultValue='' />;
   return (
     <>
       <div>
@@ -166,3 +170,5 @@ Hello
 
 </body>
 </html>`;
+
+export default CodeCompiler;
