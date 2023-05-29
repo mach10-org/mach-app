@@ -3,6 +3,9 @@ import ContentLayout from '@Contentlayout';
 import Card from '@components/Card.astro';
 import { getAllCourseIndex } from '@utils/collections';
 import '@styles/global.css';
+// const languagesRes = await fetch('https://run.glot.io/languages');
+// const languages = await languagesRes.json();
+// console.log('languages', languages);
 
 const courses = await getAllCourseIndex('courses');
 

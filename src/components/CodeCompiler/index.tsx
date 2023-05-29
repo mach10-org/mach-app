@@ -6,6 +6,8 @@ import { Editor, DiffEditor, useMonaco, loader, OnMount } from '@monaco-editor/r
 //https://github.com/enkidevs/glot-api
 const token = 'f2c16827-22c0-4cdf-8bec-5b3ee5c4eb37'; // If you are logged in you will find your token here:  https://glot.io/account/token
 const glot = new GlotAPI(token);
+// const gloTdata = { files: [{ name: 'main.js', content: 'console.log(`Hello World!`);' }], stdin: '', command: '' };
+
 export interface Langages {
   url: string;
   name: string;
@@ -27,9 +29,14 @@ const CodeCompiler = () => {
   useEffect(() => {
     // declare the data fetching function
     const getLangages = async () => {
-      const res = await glot.languages({ limit: 200 }); // handle pagination automatically
-      setLangages[res];
+      // const res = await glot.languages({ limit: 200 }); // handle pagination automatically
+      // setLangages[res];
+      const res = await fetch('/api/glot-languages.json');
+      const response = await res.json();
+      console.log('response', response);
     };
+    console.log('getLangages', getLangages);
+
     // call the function
     getLangages().catch((error) => {
       console.log('error', error);
@@ -61,9 +68,13 @@ const CodeCompiler = () => {
     const content = editorRef?.current?.getValue();
     console.log('content', content);
     const gloTdata = { files: [{ name: 'main.js', content }], stdin: '', command: '' };
-
+    const formdata = new FormData();
+    formdata.append('files', JSON.stringify(gloTdata));
     try {
-      const response = await glot.run('javascript', gloTdata);
+      // const response = await glot.run('javascript', gloTdata);
+      // console.log('response', response);
+      const res = await fetch('/api/glot-run.json', { method: 'POST', body: formdata });
+      const response = await res.json();
       console.log('response', response);
     } catch (error) {
       console.log('error', error);
