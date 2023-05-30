@@ -9,5 +9,6 @@ const props = Astro.props?.frontmatter || Astro.props;
 <BaseLayout {...props}>
   <main class='content-page prose lg:prose-xl'>
     <h1>{pageTitle}</h1>
+    <slot></slot>
   </main>
 </BaseLayout>
