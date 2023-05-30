@@ -1,0 +1,14 @@
+---
+layout: "@IntroLayout"
+title: Homepage
+---
+
+import NoTag from '@components/NoTag.astro'
+import Hero from '@components/Page/Home/Hero.astro'
+import Newsletter from '@components/Block/Newsletter.astro'
+
+<Hero>
+  <NoTag slot="title">Ready to take off for a new life?</NoTag>
+  <NoTag slot="description">We are on a mission to transform lives of 10,000 people. Why not you? It starts **today 👩🏻‍🚀👇**</NoTag>
+  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Apply now" description="Apply today, free forever. First course starting in 2023" inputId="email-newsletter-hero" />
+</Hero>

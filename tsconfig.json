@@ -23,7 +23,8 @@
       "@utils/*": ["src/utils/*"],
       "@layouts/*": ["src/layouts/*"],
       "@PageLayout": ["src/layouts/PageLayout.astro"],
-      "@Contentlayout": ["src/layouts/ContentLayout.astro"]
+      "@ContentLayout": ["src/layouts/ContentLayout.astro"],
+      "@IntroLayout": ["src/layouts/IntroLayout.astro"]
     },
     "jsxImportSource": "react"
   }
