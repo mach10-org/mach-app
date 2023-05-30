@@ -3,9 +3,14 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "allowJs": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "types": ["vite/client"],
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ],
     "paths": {
       "@components/*": ["src/components/*"],
       "@content/*": ["src/content/*"],

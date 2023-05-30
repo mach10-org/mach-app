@@ -6,7 +6,6 @@ import { remarkReadingTime } from './src/plugin/remark-reading-time.mjs';
 import tailwind from '@astrojs/tailwind';
 import vue from '@astrojs/vue';
 import mdx from '@astrojs/mdx';
-
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
@@ -16,12 +15,17 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 
 // https://astro.build/config
+import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mach10-org.github.io/',
   base: '/mach-app/',
   // output: 'server',
+  output: 'hybrid',
+  experimental: {
+    hybridOutput: true
+  },
 
   markdown: {
     remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime],
@@ -42,6 +46,7 @@ export default defineConfig({
     vue({
       jsx: true
     }),
-    sitemap()
+    sitemap(),
+    react()
   ]
 });
