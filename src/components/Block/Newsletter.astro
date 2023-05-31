@@ -1,4 +1,5 @@
 ---
+import { OButton } from '@oruga-ui/oruga-next'
 export interface Props {
   label: string;
   placeholder: string;
@@ -19,7 +20,7 @@ const { label, placeholder, buttonText, description, inputId } = Astro.props;
           <input class="block md:w-96 w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder={placeholder} type="email" name="member[email]" id={inputId} required="">
       </div>
       <div>
-          <input type="submit" value={buttonText} class="px-5 py-3 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-primary hover:bg-primary-hover focus:ring-4 focus:ring-primary-300" name="member_submit">
+          <OButton type="submit" name="member_submit" client:only="vue">{buttonText}</OButton>
       </div>
   </div>
   <div class="text-sm text-left text-gray-500 dark:text-gray-300">{description}</div>
