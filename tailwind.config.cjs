@@ -113,6 +113,22 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        body: [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "system-ui",
+        ],
+        sans: [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "system-ui",
+        ],
+      },
       borderRadius: {
         DEFAULT: "5px",
       },

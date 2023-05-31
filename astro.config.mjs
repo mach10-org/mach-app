@@ -9,12 +9,6 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
-
-// https://astro.build/config
-
-// https://astro.build/config
-
-// https://astro.build/config
 import react from '@astrojs/react';
 
 // https://astro.build/config
@@ -23,6 +17,7 @@ export default defineConfig({
   base: '/mach-app/',
   // output: 'server',
   output: 'hybrid',
+  trailingSlash: 'always',
   experimental: {
     hybridOutput: true
   },
