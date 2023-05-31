@@ -2,6 +2,8 @@
 const { Theme } = require("tailwind-easy-theme");
 
 const theme = new Theme({
+  'text-base': '#111827',
+  'text-muted': '#89939F',
   primary: {
     DEFAULT: "#2563eb",
     300: "#3b82f6",
@@ -9,6 +11,7 @@ const theme = new Theme({
     700: "#1d4ed8",
   },
   "primary-hover": "#1d4ed8",
+  "border-input": "#CED3D8",
   secondary: {
     100: "#f4f5fa",
     200: "#dbe1f8",
@@ -102,7 +105,9 @@ const theme = new Theme({
 });
 
 const darkMode = theme.variant({
+  'text-base': '#EDF1F5',
   "background-page": "#090909",
+  "border-input": "#232E4A",
 });
 
 module.exports = {

@@ -51,3 +51,22 @@
   --oruga-variant-primary: theme('colors.primary');
   @apply hover:bg-primary-hover focus:ring focus:ring-opacity-50 focus:ring-primary-600;
 }
+
+/* Input */
+.o-input {
+  --oruga-input-padding: calc(0.375em - 1px) .7em;
+  --oruga-input-border-color: theme('colors.border-input');
+  --oruga-input-box-shadow: none;
+  --oruga-input-background-color: TODO;
+  --oruga-input-color: theme('colors.text-base');
+
+  @apply transition-colors transition-shadow focus:border-primary focus:ring-1 focus:ring-opacity-50 focus:ring-primary;
+
+  &::placeholder {
+    @apply text-text-muted opacity-100 italic;
+  }
+
+  &--large {
+    --oruga-input-font-size-large: theme('fontSize.lg')
+  }
+}
