@@ -794,6 +794,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@oruga-ui/oruga-next@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@oruga-ui/oruga-next/-/oruga-next-0.6.0.tgz#096f4bef223bdf79e2223965894542a13352a9df"
+  integrity sha512-M1Y5PgCWBUDmQGH74cgzrp3vKaRFdHVtGNr0DwejeJGScB7Q6jodW4xgCz6K4hajLgHW6zxz/3ukpC4ZczlfaQ==
+
 "@pkgr/utils@^2.3.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@pkgr/utils/-/utils-2.4.1.tgz#adf291d0357834c410ce80af16e711b56c7b1cd3"
