@@ -9,7 +9,7 @@ const slug = Astro.url.pathname;
 ---
 
 <BaseLayout {...props}>
-  <main class='content-page prose lg:prose-xl'>
+  <main class='content-page prose prose-slate dark:prose-dark'>
     <h1>{pageTitle}</h1>
     <slot />
     {frontmatter?.quiz && <Quiz slug={slug} client:only='vue' label={frontmatter.quiz.label} options={frontmatter.quiz.options} />}

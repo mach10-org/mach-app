@@ -5,7 +5,7 @@ tags:
   - GoLang
   - BAKEND
 preview: https://via.placeholder.com/450x300.png
-lastmod: 2023-05-26T03:20:01.298Z
+lastmod: 2023-05-31T04:32:01.353Z
 ---
 
 # Go from the beginning
@@ -13,6 +13,8 @@ lastmod: 2023-05-26T03:20:01.298Z
 Welcome to Go from the beginning, a free book containing 25+ lessons that will take you from "zero to hero" in the amazing language Go.
 
 ## Read online
+
+### test Read online
 
 > <https://softchris.github.io/golang-book/>
 

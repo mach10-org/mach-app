@@ -36,6 +36,11 @@ export interface QuizOption {
   id: string;
 }
 
+export interface CourseProps {
+  href?: string;
+  course: CollectionEntry<Collection>;
+}
+
 export interface CourseDataProps {
   title: string;
   description: string;

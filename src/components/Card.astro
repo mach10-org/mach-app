@@ -1,11 +1,8 @@
 ---
-import { Collection, CourseDataProps, CourseRender } from '@models/courses';
+import { Collection, CourseDataProps, CourseProps, CourseRender } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
 
-export interface Props {
-  href: string;
-  course: CollectionEntry<Collection>;
-}
+interface Props extends CourseProps {}
 const { href, course } = Astro.props;
 const { title, description } = course?.data as CourseDataProps;
 const { remarkPluginFrontmatter } = (await course.render()) as CourseRender;

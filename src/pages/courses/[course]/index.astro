@@ -5,6 +5,7 @@ import { getCourseDirectories } from '@utils/collections';
 import { Collection, CollectionStaticProps } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
 import TOC from '@components/TOC.astro';
+import CoursesTable from '@components/CoursesTable/index.astro';
 
 interface Props {
   courses: CollectionEntry<Collection>[];
@@ -34,12 +35,15 @@ export async function getStaticPaths() {
 const { entry, courses } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
 
-// console.log('courses page: Astro.props', Astro.props);
+// console.log('courses', courses);
 ---
 
 <PageLayout {...entry.data}>
   <TOC pageHeadings={headings} />
 
   <Content />
+
+  <CoursesTable courses={courses} />
+
   {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)}
 </PageLayout>

@@ -1,0 +1,27 @@
+---
+import { Collection, CourseDataProps, CourseProps } from '@models/courses';
+import { CollectionEntry } from 'astro:content';
+
+interface Props extends CourseProps {
+  index: number;
+}
+const { course, index } = Astro.props;
+const { title, description } = course?.data as CourseDataProps;
+const href = `${import.meta.env.BASE_URL}${course.collection}/${course.slug}`;
+---
+
+<li class='flex items-center space-x-3'>
+  <svg class='flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'
+    ><path fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'></path></svg
+  >
+
+  <div class='self-center rounded-full border w-6 h-6 text-center'>{index + 1}</div>
+  <h4 class='my-0'>
+    <a href={href} class='line-clamp-1'>
+      {title}
+    </a>
+  </h4>
+</li>
+
+<style></style>
+<script></script>

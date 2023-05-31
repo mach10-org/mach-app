@@ -7,8 +7,8 @@ const props = Astro.props?.frontmatter || Astro.props;
 ---
 
 <BaseLayout {...props}>
-  <main class='content-page prose lg:prose-xl'>
+  <main class='content-page prose prose-slate dark:prose-dark'>
     <h1>{pageTitle}</h1>
-    <slot></slot>
+    <slot />
   </main>
 </BaseLayout>
