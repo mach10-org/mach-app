@@ -3,7 +3,12 @@ import { getAllCollectionLessons } from '@utils/collections';
 import PaginatedCourse from '@components/PaginatedCourse.astro';
 import ContentLayout from '@ContentLayout';
 import Quiz from '@components/Quiz/Question.vue';
-
+import TOC from '@components/TOC.astro';
+import { CollectionEntry } from 'astro:content';
+import { Collection } from '@models/courses';
+interface Props {
+  entry: CollectionEntry<Collection>;
+}
 export async function getStaticPaths() {
   const courses = await getAllCollectionLessons('courses');
 
@@ -22,11 +27,16 @@ export async function getStaticPaths() {
 
 const { course, slug } = Astro.params;
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings, remarkPluginFrontmatter } = await entry.render();
+// const headings = await Content?.getHeadings();
+
+// console.log('remarkPluginFrontmatter', remarkPluginFrontmatter);
+// console.log('course page: Astro.props', Astro.props);
 ---
 
 <ContentLayout {...entry.data}>
+  <TOC pageHeadings={headings} />
   <Content />
   {entry?.data?.quiz && <Quiz client:only='vue' slug={`${course}/${slug}/`} label={entry.data.quiz.label} options={entry.data.quiz.options} />}
-  <PaginatedCourse {...{course, slug}} />
+  <PaginatedCourse {...{ course, slug }} />
 </ContentLayout>

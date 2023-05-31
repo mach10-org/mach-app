@@ -1,20 +1,16 @@
 ---
+import { Collection, CourseDataProps, CourseRender } from '@models/courses';
+import { CollectionEntry } from 'astro:content';
+
 export interface Props {
   href: string;
-  data: {
-    title: string;
-    body: string;
-    href: string;
-    minutesRead?: { text: string; minutes: number; time: number; words: number };
-    section?: string;
-  };
+  course: CollectionEntry<Collection>;
 }
+const { href, course } = Astro.props;
+const { title, description } = course?.data as CourseDataProps;
+const { remarkPluginFrontmatter } = (await course.render()) as CourseRender;
 
-const {
-  href,
-  data: { title, body, minutesRead, section }
-} = Astro.props;
-// console.log('Astro.props', Astro.props);
+// console.log('remarkPluginFrontmatter', remarkPluginFrontmatter);
 ---
 
 <li class='link-card'>
@@ -23,18 +19,18 @@ const {
       {title}
       <span>&rarr;</span>
     </h2>
-    {minutesRead?.text && <strong>{minutesRead?.text}</strong>}
+    {remarkPluginFrontmatter?.minutesRead?.text && <strong>{remarkPluginFrontmatter?.minutesRead?.text}</strong>}
 
     {
-      section && (
+      remarkPluginFrontmatter?.section && (
         <span>
-          <span> - </span> <strong>Section : {section}</strong>
+          <span> - </span> <strong>Section : {remarkPluginFrontmatter?.section}</strong>
         </span>
       )
     }
 
     <p class='mb-2'>
-      {body}
+      {description}
     </p>
   </a>
 </li>

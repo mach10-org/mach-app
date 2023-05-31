@@ -7,6 +7,7 @@ import tailwind from '@astrojs/tailwind';
 import vue from '@astrojs/vue';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import remarkToc from 'remark-toc';
 
 // https://astro.build/config
 
@@ -22,13 +23,9 @@ export default defineConfig({
   site: 'https://mach10-org.github.io/',
   base: '/mach-app/',
   // output: 'server',
-  output: 'hybrid',
-  experimental: {
-    hybridOutput: true
-  },
 
   markdown: {
-    remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime],
+    remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime, remarkToc],
     gfm: true,
     drafts: false,
     extendDefaultPlugins: true
