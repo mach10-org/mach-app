@@ -1,0 +1,57 @@
+---
+import { Collection, CourseDataProps } from '@models/courses';
+import { CollectionEntry } from 'astro:content';
+import CoursesTableItem from './Item.astro';
+
+export type Props = {
+  courses: CollectionEntry<Collection>[];
+};
+
+type GroupCourse = {
+  [key: string]: CollectionEntry<Collection>[];
+};
+const { courses } = Astro.props;
+
+const grouped: GroupCourse = courses.reduce((acc, curr) => {
+  const { section = '' } = curr.data as CourseDataProps;
+  if (!acc[section]) acc[section] = []; //If this type wasn't previously stored
+  acc[section].push(curr);
+  return acc;
+}, {});
+---
+
+<div id='toc' class=''>
+  <nav class=''>
+    <h2 class='mb-4 font-medium uppercase tracking-widest'>Table of content</h2>
+    <ul class='list-none space-y-8 p-0 text-sm'>
+      {
+        Object.keys(grouped).map((key, idx) => {
+          const coursesByroup = grouped[key];
+          return (
+            <li class='space-y-4'>
+              <div>
+                <div>Part {idx + 1}</div>
+                <h3 class='m-0'>{key}</h3>
+              </div>
+              <ul class='list-none p-0'>
+                {coursesByroup.map((c, idx) => {
+                  return <CoursesTableItem index={idx} course={c} />;
+                })}
+              </ul>
+            </li>
+          );
+        })
+
+        /*courses.map((c) => {
+          return (
+            <CoursesTableItem course={c} />
+           
+          );
+        })*/
+      }
+    </ul>
+  </nav>
+</div>
+
+<style></style>
+<script></script>

@@ -9,6 +9,6 @@ const props = Astro.props?.frontmatter || Astro.props;
 <BaseLayout {...props}>
   <main>
     <h1 class="text-text-base">{pageTitle}</h1>
-    <slot></slot>
+    <slot />
   </main>
 </BaseLayout>
