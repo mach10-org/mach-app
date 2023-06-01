@@ -1,0 +1,25 @@
+---
+export interface Props {
+  imageSrc: string;
+  imageAlt: string;
+  imagePosition: 'left' | 'right';
+  addSeparator?: boolean;
+}
+const { imageSrc, imagePosition, imageAlt, addSeparator } = Astro.props;
+---
+<section class="">
+  <div class="container mx-auto py-8 gap-8 items-center lg:grid lg:grid-cols-2 xl:gap-16">
+    { imagePosition === 'left' && <img src={imageSrc} alt={imageAlt} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
+    <div>
+      <h2 class="mb-4 text-4xl tracking-tight font-bold text-text-title">
+        <slot name="title" />
+      </h2>
+      <div class="prose-lg max-w-none">
+        <slot name="description" />
+      </div>
+      { addSeparator && <div class="mt-7 border-t border-border-input"/> }
+      <slot />
+    </div>
+    { imagePosition === 'right' && <img src={imageSrc} alt={imageAlt} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
+  </div>
+</section>
