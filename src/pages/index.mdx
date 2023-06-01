@@ -7,6 +7,8 @@ import NoTag from '@components/NoTag.astro'
 import Hero from '@components/Page/Home/Hero.astro'
 import Newsletter from '@components/Block/Newsletter.vue'
 import TitleDescription from '@components/Block/TitleDescription.astro'
+import TitleDescriptionWithCards from '@components/Block/TitleDescriptionWithCards.astro'
+import CardSmall from '@components/Block/CardSmall.astro'
 
 <Hero>
   <NoTag slot="title">Ready to take off for a new life?</NoTag>
@@ -29,3 +31,28 @@ import TitleDescription from '@components/Block/TitleDescription.astro'
 
   **We are on a mission to train the software engineers of tomorrow and we are just getting started.**
 </TitleDescription>
+
+<TitleDescriptionWithCards>
+  <NoTag slot="title">Software engineering for complete beginners</NoTag>
+  <NoTag slot="description">
+    Since covid19, many of us realized it's more important than ever to build new skills. In the digital economy, being able to code opens new opportunities and change your life forever.
+  </NoTag>
+
+  <CardSmall link="todo/" linkText="How can this be free?" icon="FingerPrintIcon">
+    <NoTag slot="title">Free. Forever.</NoTag>
+
+    We believe education should be free and accessible for all. Learning new skills and deciding to change career is hard enough. Money should never be an issue. No hidden costs.
+  </CardSmall>
+
+  <CardSmall link="todo/" linkText="Is this really for me?" icon="ClipboardDocumentListIcon">
+    <NoTag slot="title">From 7-99 years old.</NoTag>
+
+    It's never too early nor too late to learn anything, that also applies to software engineering. Women, men, in junior highschool or late in your career, you are welcome!
+  </CardSmall>
+
+  <CardSmall link="todo/" linkText="How is this different?" icon="CheckBadgeIcon">
+    <NoTag slot="title">Learn with fun</NoTag>
+
+    Learning should be fun. Boring is the enemy of effective learning. We believe a great learning experience should be fun, self-paced and enjoyable.
+  </CardSmall>
+</TitleDescriptionWithCards>

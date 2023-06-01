@@ -1,0 +1,27 @@
+---
+import LinkArrow from '@components/LinkArrow.astro'
+import Icon from '@components/DynamicHeroIcon.vue'
+
+export interface Props {
+  link?: string;
+  linkText?: string;
+  icon: string;
+}
+const { link, linkText, icon } = Astro.props;
+---
+<div class="text-center">
+  <Icon name={icon} outline={false} client:only="vue" classes="mx-auto mb-4 w-12 h-12 text-primary" />
+  <h3 class="mb-2 text-xl font-bold text-text-title">
+    <slot name="title" />
+  </h3>
+  <div class="prose max-w-none mb-4">
+    <slot />
+  </div>
+  {
+    link && linkText && (
+      <LinkArrow href={link} classes="font-medium text-sm">
+        {linkText}
+      </LinkArrow>
+    )
+  }
+</div>
