@@ -46,19 +46,19 @@ export const increasePoints = action(profile, 'increasePoints', (store, add) => 
   return store.get();
 });
 
-export const removeUser = action(profile, 'remove', (store) => {
+export const removeUser = action(profile, 'removeUser', (store) => {
   isConnected.set(false);
   store.set(null);
   return store.get();
 });
 
-export const setUser = action(profile, 'set', (store, user: User) => {
+export const setUser = action(profile, 'setUser', (store, user: User) => {
   store.set(user);
   isConnected.set(true);
   return store.get();
 });
 
-export const updateUser = action(profile, 'set', (store, data: UserAppMetadata) => {
+export const updateUser = action(profile, 'updateUser', (store, data: UserAppMetadata) => {
   const user = profile.get();
   if (user) {
     user.user_metadata = data;

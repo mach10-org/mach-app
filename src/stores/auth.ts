@@ -83,13 +83,11 @@ export const getUser = async (): Promise<User | null> => {
       return null;
     }
 
-    const {
-      data: userData,
-      error: userError,
-      status
-    } = await supabase.from('profiles').select(`*`).single();
+    const { data: userData, error: userError, status } = await supabase.from('profiles').select(`*`).single();
 
-    user.user_metadata = userData;
+    if (userData) {
+      user.user_metadata = userData;
+    }
     setUser(user);
 
     return user;

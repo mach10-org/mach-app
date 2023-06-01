@@ -27,15 +27,20 @@ export async function getStaticPaths() {
     };
   });
 }
-// console.log('Astro.props', Astro.props);
 
 const { course, slug } = Astro.params;
 const { entry, courses } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
-// const headings = await Content?.getHeadings();
 
-// console.log('remarkPluginFrontmatter', remarkPluginFrontmatter);
-// console.log('course page: Astro.props', Astro.props);
+let params:
+  | {
+      course: string;
+      slug: string;
+    }
+  | undefined = undefined;
+if (course && slug) {
+  params = { course, slug };
+}
 ---
 
 <ContentLayout {...entry.data}>
@@ -46,7 +51,7 @@ const { Content, headings, remarkPluginFrontmatter } = await entry.render();
   {
     Astro.params?.course && (
       <CoursesTableDrawer>
-        <CoursesTable courseId={Astro.params.course} courses={courses} />
+        <CoursesTable courseId={Astro.params.course} courses={courses} params={params} />
       </CoursesTableDrawer>
     )
   }

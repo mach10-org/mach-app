@@ -21,6 +21,7 @@
       "@stores/*": ["src/stores/*"],
       "@plugins/*": ["src/plugins/*"],
       "@utils/*": ["src/utils/*"],
+      "@strores/*": ["src/strores/*"],
       "@layouts/*": ["src/layouts/*"],
       "@PageLayout": ["src/layouts/PageLayout.astro"],
       "@ContentLayout": ["src/layouts/ContentLayout.astro"],
