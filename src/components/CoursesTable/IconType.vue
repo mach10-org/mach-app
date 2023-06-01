@@ -1,15 +1,13 @@
 <template>
-  <CheckCircleIcon v-if="isDone" class="w-6 h-6 text-green-500" />
-
-  <BeakerIcon v-if="isInProgress && !isDone" class="w-6 h-6 text-gray-500" />
+  <Icon v-if="isDone" name="CheckCircleIcon" :outline="true" client:only="vue" classes="w-6 h-6 text-green-500" />
+  <Icon v-if="isInProgress && !isDone" name="BeakerIcon" :outline="false" client:only="vue" classes="w-6 h-6 text-gray-500" />
 
   <div v-if="!isInProgress && !isDone" class="self-center rounded-full border w-6 h-6 text-center">{{ index }}</div>
 </template>
 
 <script setup lang="ts">
 import { courseTaken } from '@stores/courses';
-import { BeakerIcon } from '@heroicons/vue/24/solid';
-import { CheckCircleIcon } from '@heroicons/vue/24/outline';
+import Icon from '@components/DynamicHeroIcon.vue';
 import { onMounted, ref } from 'vue';
 const props = defineProps({
   isInProgress: Boolean,
@@ -22,8 +20,5 @@ const courseTakenList = courseTaken.get();
 onMounted(async () => {
   const found = courseTakenList.find((c) => `${c?.courseId}/${c?.lessonId}` === props.slug);
   isDone.value = !!found;
-  if (found) {
-    console.log('isDone', `${props.slug}`, isDone.value); // 0
-  }
 });
 </script>
