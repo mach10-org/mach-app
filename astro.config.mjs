@@ -13,18 +13,13 @@ import sitemap from '@astrojs/sitemap';
 import remarkToc from 'remark-toc';
 
 // https://astro.build/config
-
-// https://astro.build/config
-
-// https://astro.build/config
-
-// https://astro.build/config
 import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mach10-org.github.io/',
   base: '/mach-app/',
+  trailingSlash: 'always',
 
   markdown: {
     remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime, [remarkToc, { prefix: 'test-' }]],
