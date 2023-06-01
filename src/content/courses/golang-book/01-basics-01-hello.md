@@ -1,7 +1,7 @@
 ---
 title: Hello world
 description: Why use Go and how to write your first program
-lastmod: 2023-05-26T02:32:19.377Z
+lastmod: 2023-06-01T03:48:29.561Z
 section: Basics
 ---
 

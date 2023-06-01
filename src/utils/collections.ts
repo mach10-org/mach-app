@@ -10,10 +10,6 @@ const idxKey = '/README';
  */
 export const getAllCourseIndex = async (collection: Collection) => {
   const list = await getCollection(collection, ({ id, data }) => {
-    if (id === 'golang-book/01-basics-01-hello.md') {
-      // console.log('data ', id, data);
-    }
-
     return data.draft !== true && id.toLowerCase().includes(idxKey.toLowerCase());
   });
 
@@ -75,10 +71,6 @@ export const getCourseDirectories = async (collection: Collection) => {
 
   await getCollection(collection, (entry) => {
     const { slug, data } = entry;
-    if (slug === 'golang-book/01-basics-01-hello') {
-      // console.log('getCollection render', entry.render());
-      // console.log('getCollection entry ', entry);
-    }
 
     const directories: string[] = slug.split('/');
     // data.minutesRead = getReadingTime(entry?.body || '');

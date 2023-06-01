@@ -40,9 +40,7 @@ import LoginStatus from './Auth/LoginStatus.vue';
       </button>
     </div>
     <div class='hidden w-full md:block md:w-auto' id='navbar'>
-      <ul
-        class='flex flex-col p-4 mt-4  md:flex-row md:space-x-3 md:mt-0 md:text-sm md:font-medium'
-      >
+      <ul class='flex flex-col p-4 mt-4 md:flex-row md:space-x-3 md:mt-0 md:text-sm md:font-medium'>
         <li>
           <a href={`${import.meta.env.BASE_URL}`} class:list={['menu-item ', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}` }]} aria-current='page'> Home</a>
         </li>
@@ -63,7 +61,7 @@ import LoginStatus from './Auth/LoginStatus.vue';
     </div>
   </div>
 </nav>
-
+<!-- 
 <script>
   const handleToggleClick = () => {
     const element: HTMLElement | null = document.getElementById('navbar');
@@ -71,4 +69,4 @@ import LoginStatus from './Auth/LoginStatus.vue';
   };
 
   document.getElementById('navbar-collapse-toggle')?.addEventListener('click', handleToggleClick);
-</script>
+</script> -->
