@@ -6,9 +6,26 @@ title: Homepage
 import NoTag from '@components/NoTag.astro'
 import Hero from '@components/Page/Home/Hero.astro'
 import Newsletter from '@components/Block/Newsletter.vue'
+import TitleDescription from '@components/Block/TitleDescription.astro'
 
 <Hero>
   <NoTag slot="title">Ready to take off for a new life?</NoTag>
   <NoTag slot="description">We are on a mission to transform lives of 10,000 people. Why not you? It starts **today 👩🏻‍🚀👇**</NoTag>
-  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Apply now" description="Apply today, free forever. First course starting in 2023" inputId="email-newsletter-hero" client:only="vue" />
+  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Apply now" description="Apply today, free forever. First course starting in 2023." inputId="email-newsletter-hero" client:only="vue" />
 </Hero>
+
+<TitleDescription link="mission/" linkText="Why are we doing this?">
+  <NoTag slot="title">Our mission? Train **10,000** software engineers in Japan 🗾</NoTag>
+
+  The world is changing rapidly and software is reshaping the economy and companies all over the world, including Japan. While most companies understand the importance of digital technologies, tech talent is *really* hard to find. For this reason, many companies are ready to pay high salaries, hire foreigners or offer remote work positions.
+
+  Most tech startups do not care about your diploma, school name, your age or gender. Skills and your ability to get the job done effectively are all that matters.
+
+  I started this project because I hired a lot of people over the past few years. Believe me, the school name never mattered much to me. Actually, many of the people who impressed me the most by their skills, were self taught who never attended university.
+
+  I believe it is urgent to train more people in Japan. Of course, there are many great universities, however not everyone had the chance to enter or afford them. Or they simply didn't choose this way when it as time to choose.
+
+  When it comes education, constraints such as money or location shouldn't be issues. We believe a different approach is possible.
+
+  **We are on a mission to train the software engineers of tomorrow and we are just getting started.**
+</TitleDescription>
