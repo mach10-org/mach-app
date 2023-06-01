@@ -160,6 +160,28 @@ module.exports = {
         "inner-sm": "inset 0px -3px 0px rgba(0, 0, 0, 0.2);",
         checkbox: "0px 2px 4px rgba(0, 0, 0, 0.2)",
       },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': theme('colors.text-base'),
+            '--tw-prose-headings': theme('colors.text-title'),
+            '--tw-prose-lead': theme('colors.text-title'),
+            '--tw-prose-links': theme('colors.primary'),
+            '--tw-prose-bold': theme('colors.text-base'),
+            '--tw-prose-counters': theme('colors.text-muted'),
+            '--tw-prose-bullets': theme('colors.text-muted'),
+            '--tw-prose-hr': theme('colors.text-muted'),
+            '--tw-prose-quotes': theme('colors.text-muted'),
+            '--tw-prose-quote-borders': theme('colors.text-muted'),
+            '--tw-prose-captions': theme('colors.text-muted'),
+            '--tw-prose-code': theme('colors.text-base'),
+            '--tw-prose-pre-code': theme('colors.text-base'),
+            '--tw-prose-pre-bg': theme('colors.text-base'),
+            '--tw-prose-th-borders': theme('colors.border-input'),
+            '--tw-prose-td-borders': theme('colors.border-input'),
+          },
+        },
+      }),
     },
   },
   plugins: [
