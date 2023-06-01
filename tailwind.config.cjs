@@ -2,15 +2,23 @@
 const { Theme } = require("tailwind-easy-theme");
 
 const theme = new Theme({
-  'text-base': '#111827',
+  'text-base': '#232E4A',
+  'text-title': '#111827',
   'text-muted': '#89939F',
   primary: {
-    DEFAULT: "#2563eb",
-    300: "#3b82f6",
-    600: "#2563eb",
-    700: "#1d4ed8",
+    DEFAULT: "#be185d",
+    50: '#fdf2f8',
+    100: '#fce7f3',
+    200: '#fbcfe8',
+    300: '#f9a8d4',
+    400: '#f472b6',
+    500: '#ec4899',
+    600: '#db2777',
+    700: '#be185d',
+    800: '#9d174d',
+    900: '#831843',
   },
-  "primary-hover": "#1d4ed8",
+  "primary-hover": "#9d174d",
   "border-input": "#CED3D8",
   secondary: {
     100: "#f4f5fa",
@@ -23,6 +31,7 @@ const theme = new Theme({
     700: "#2470d6",
   },
   "background-page": "#f6f6f6",
+  "background-base": "#fff",
   gray: {
     25: "#FCFDFE", // rgba(227, 235, 246, 0.12)
     50: "#F9FBFD",
@@ -105,8 +114,10 @@ const theme = new Theme({
 });
 
 const darkMode = theme.variant({
-  'text-base': '#EDF1F5',
+  'text-base': '#e2e5e8',
+  'text-title': '#EDF1F5',
   "background-page": "#090909",
+  "background-base": "#000",
   "border-input": "#232E4A",
 });
 

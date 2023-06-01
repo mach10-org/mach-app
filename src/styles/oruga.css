@@ -1,7 +1,7 @@
 @import '@oruga-ui/oruga-next/dist/oruga-full-vars.css';
 
 .o-btn {
-  --oruga-button-padding: calc(0.375em - 1px) .9em;
+  --oruga-button-padding: calc(1.275em - 1px) .9em;
   @apply transition rounded-[3px] font-semibold;
 
   /* &--icon-only {
@@ -49,15 +49,16 @@
 
 .o-btn--primary {
   --oruga-variant-primary: theme('colors.primary');
+  --oruga-button-border: 1px solid theme('colors.primary');
   @apply hover:bg-primary-hover focus:ring focus:ring-opacity-50 focus:ring-primary-600;
 }
 
 /* Input */
 .o-input {
-  --oruga-input-padding: calc(0.375em - 1px) .7em;
+  --oruga-input-padding: 1.275em .7em;
   --oruga-input-border-color: theme('colors.border-input');
   --oruga-input-box-shadow: none;
-  --oruga-input-background-color: TODO;
+  --oruga-input-background-color: theme('colors.background-base');;
   --oruga-input-color: theme('colors.text-base');
 
   @apply transition-colors transition-shadow focus:border-primary focus:ring-1 focus:ring-opacity-50 focus:ring-primary;

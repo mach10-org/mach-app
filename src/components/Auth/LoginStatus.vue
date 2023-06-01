@@ -51,14 +51,16 @@
     </div>
   </div>
 
-  <a
+  <OButton
     v-else
     id="isNotLoggedIn"
+    tag="a"
     :href="`${BASE_URL}login/`"
-    class="mr-5 menu-item text-center py-2.5 px-6 text-purple-700 rounded-md border hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+    class="mr-5"
+    variant="primary"
   >
     Login
-  </a>
+  </OButton>
 </template>
 <script lang="ts" setup>
 import { UserCircleIcon } from '@heroicons/vue/24/outline';
@@ -66,6 +68,7 @@ import { getUser, logout } from '@stores/auth';
 import { isConnected, profile, removeUser, setUser } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
 import { onMounted, ref } from 'vue';
+import { OButton } from "@oruga-ui/oruga-next";
 const $isConnected = useStore(isConnected);
 const $profile = useStore(profile);
 const BASE_URL = import.meta.env.BASE_URL;
