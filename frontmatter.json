@@ -2,7 +2,7 @@
   "$schema": "https://frontmatter.codes/frontmatter.schema.json",
   "frontMatter.content.autoUpdateDate": true,
   "frontMatter.content.fmHighlight": true,
-  "frontMatter.preview.host": "http://localhost:3000/mach-app/",
+  "frontMatter.preview.host": "http://localhost:3000/",
   "frontMatter.taxonomy.contentTypes": [
     {
       "name": "default",

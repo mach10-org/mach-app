@@ -10,7 +10,7 @@ import vue from '@astrojs/vue';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import remarkToc from 'remark-toc';
-console.log('process.env', process.env);
+console.log('import.meta.env', import.meta.env);
 // https://astro.build/config
 import react from '@astrojs/react';
 
@@ -19,6 +19,7 @@ export default defineConfig({
   site: 'https://mach10-org.github.io/',
   base: process.env.NODE_ENV === 'development' ? '' : '/mach-app/',
   trailingSlash: 'always',
+  // base: '/mach-app/',
 
   markdown: {
     remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime, [remarkToc, { prefix: 'test-' }]],
