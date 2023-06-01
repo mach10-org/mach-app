@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 const { Theme } = require("tailwind-easy-theme");
 
+const parseThemeColor = (color) => {
+  return color.replace('<alpha-value>', 1)
+}
+
 const theme = new Theme({
   'text-base': '#232E4A',
   'text-title': '#111827',
@@ -163,22 +167,22 @@ module.exports = {
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
-            '--tw-prose-body': theme('colors.text-base'),
-            '--tw-prose-headings': theme('colors.text-title'),
-            '--tw-prose-lead': theme('colors.text-title'),
-            '--tw-prose-links': theme('colors.primary'),
-            '--tw-prose-bold': theme('colors.text-base'),
-            '--tw-prose-counters': theme('colors.text-muted'),
-            '--tw-prose-bullets': theme('colors.text-muted'),
-            '--tw-prose-hr': theme('colors.text-muted'),
-            '--tw-prose-quotes': theme('colors.text-muted'),
-            '--tw-prose-quote-borders': theme('colors.text-muted'),
-            '--tw-prose-captions': theme('colors.text-muted'),
-            '--tw-prose-code': theme('colors.text-base'),
-            '--tw-prose-pre-code': theme('colors.text-base'),
-            '--tw-prose-pre-bg': theme('colors.text-base'),
-            '--tw-prose-th-borders': theme('colors.border-input'),
-            '--tw-prose-td-borders': theme('colors.border-input'),
+            '--tw-prose-body': parseThemeColor(theme('colors.text-base')),
+            '--tw-prose-headings': parseThemeColor(theme('colors.text-title')),
+            '--tw-prose-lead': parseThemeColor(theme('colors.text-title')),
+            '--tw-prose-links': parseThemeColor(theme('colors.primary')),
+            '--tw-prose-bold': parseThemeColor(theme('colors.text-base')),
+            '--tw-prose-counters': parseThemeColor(theme('colors.text-muted')),
+            '--tw-prose-bullets': parseThemeColor(theme('colors.text-muted')),
+            '--tw-prose-hr': parseThemeColor(theme('colors.text-muted')),
+            '--tw-prose-quotes': parseThemeColor(theme('colors.text-muted')),
+            '--tw-prose-quote-borders': parseThemeColor(theme('colors.text-muted')),
+            '--tw-prose-captions': parseThemeColor(theme('colors.text-muted')),
+            '--tw-prose-code': parseThemeColor(theme('colors.text-base')),
+            '--tw-prose-pre-code': parseThemeColor(theme('colors.text-base')),
+            '--tw-prose-pre-bg': parseThemeColor(theme('colors.text-base')),
+            '--tw-prose-th-borders': parseThemeColor(theme('colors.border-input')),
+            '--tw-prose-td-borders': parseThemeColor(theme('colors.border-input')),
           },
         },
       }),
