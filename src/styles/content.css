@@ -16,3 +16,7 @@ code {
   margin: auto;
   padding: 1.5rem;
 }
+
+.link {
+  @apply text-primary hover:text-primary-hover hover:underline;
+}
