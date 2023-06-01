@@ -12,12 +12,12 @@ const { link, linkText } = Astro.props;
     <h2 class="mb-4 text-4xl tracking-tight font-bold text-text-title">
       <slot name="title" />
     </h2>
-    <div class="prose max-w-none">
+    <div class="prose-lg max-w-none">
       <slot />
     </div>
     {
       link && linkText && (
-        <LinkArrow href={link} classes="font-medium mt-5">
+        <LinkArrow href={link} classes="font-medium mt-6 text-lg">
           {linkText}
         </LinkArrow>
       )
