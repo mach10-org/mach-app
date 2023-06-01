@@ -34,16 +34,14 @@ export async function getStaticPaths() {
 
 const { entry, courses } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
-
-// console.log('courses', courses);
 ---
 
 <PageLayout {...entry.data}>
-  <TOC pageHeadings={headings} />
+  <!-- <TOC pageHeadings={headings} /> -->
 
   <Content />
 
-  <CoursesTable courses={courses} />
+  {Astro.params?.course && <CoursesTable courseId={Astro.params.course} courses={courses} />}
 
-  {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)}
+  <!-- {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)} -->
 </PageLayout>

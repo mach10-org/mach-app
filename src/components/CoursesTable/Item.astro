@@ -7,7 +7,7 @@ interface Props extends CourseProps {
 }
 const { course, index } = Astro.props;
 const { title, description } = course?.data as CourseDataProps;
-const href = `${import.meta.env.BASE_URL}${course.collection}/${course.slug}`;
+const href = `${import.meta.env.BASE_URL}${course.collection}/${course.slug}/`;
 ---
 
 <li class='flex items-center space-x-3'>
