@@ -2,13 +2,24 @@
 const { Theme } = require("tailwind-easy-theme");
 
 const theme = new Theme({
+  'text-base': '#232E4A',
+  'text-title': '#111827',
+  'text-muted': '#89939F',
   primary: {
-    DEFAULT: "#2563eb",
-    300: "#3b82f6",
-    600: "#2563eb",
-    700: "#1d4ed8",
+    DEFAULT: "#be185d",
+    50: '#fdf2f8',
+    100: '#fce7f3',
+    200: '#fbcfe8',
+    300: '#f9a8d4',
+    400: '#f472b6',
+    500: '#ec4899',
+    600: '#db2777',
+    700: '#be185d',
+    800: '#9d174d',
+    900: '#831843',
   },
-  "primary-hover": "#1d4ed8",
+  "primary-hover": "#9d174d",
+  "border-input": "#CED3D8",
   secondary: {
     100: "#f4f5fa",
     200: "#dbe1f8",
@@ -20,6 +31,7 @@ const theme = new Theme({
     700: "#2470d6",
   },
   "background-page": "#f6f6f6",
+  "background-base": "#fff",
   gray: {
     25: "#FCFDFE", // rgba(227, 235, 246, 0.12)
     50: "#F9FBFD",
@@ -102,7 +114,11 @@ const theme = new Theme({
 });
 
 const darkMode = theme.variant({
+  'text-base': '#e2e5e8',
+  'text-title': '#EDF1F5',
   "background-page": "#090909",
+  "background-base": "#000",
+  "border-input": "#232E4A",
 });
 
 module.exports = {
@@ -113,6 +129,22 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        body: [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "system-ui",
+        ],
+        sans: [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "system-ui",
+        ],
+      },
       borderRadius: {
         DEFAULT: "5px",
       },
@@ -128,6 +160,28 @@ module.exports = {
         "inner-sm": "inset 0px -3px 0px rgba(0, 0, 0, 0.2);",
         checkbox: "0px 2px 4px rgba(0, 0, 0, 0.2)",
       },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': theme('colors.text-base'),
+            '--tw-prose-headings': theme('colors.text-title'),
+            '--tw-prose-lead': theme('colors.text-title'),
+            '--tw-prose-links': theme('colors.primary'),
+            '--tw-prose-bold': theme('colors.text-base'),
+            '--tw-prose-counters': theme('colors.text-muted'),
+            '--tw-prose-bullets': theme('colors.text-muted'),
+            '--tw-prose-hr': theme('colors.text-muted'),
+            '--tw-prose-quotes': theme('colors.text-muted'),
+            '--tw-prose-quote-borders': theme('colors.text-muted'),
+            '--tw-prose-captions': theme('colors.text-muted'),
+            '--tw-prose-code': theme('colors.text-base'),
+            '--tw-prose-pre-code': theme('colors.text-base'),
+            '--tw-prose-pre-bg': theme('colors.text-base'),
+            '--tw-prose-th-borders': theme('colors.border-input'),
+            '--tw-prose-td-borders': theme('colors.border-input'),
+          },
+        },
+      }),
     },
   },
   plugins: [
