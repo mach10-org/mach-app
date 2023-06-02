@@ -6,9 +6,10 @@ type Props = {
   collection: string;
   title: string;
   params: CourseParams;
+  courseSize: number;
 };
 
-const { collection, title, params } = Astro.props;
+const { collection, title, params, courseSize } = Astro.props;
 const href = `/${collection}/${params.course}/`;
 ---
 
@@ -21,6 +22,6 @@ const href = `/${collection}/${params.course}/`;
       </a>
     </h3>
 
-    <Progress client:load slug={params.slug} course={params.course} />
+    <Progress client:only='vue' slug={params.slug} course={params.course} courseSize={courseSize} />
   </div>
 </div>

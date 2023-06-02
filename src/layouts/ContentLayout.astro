@@ -20,7 +20,7 @@ type Props = {
 ---
 
 <BaseLayout {...courseDir?.entry?.data}>
-  {courseIndex && params?.course && <CourseProgress title={courseIndex.remarkPluginFrontmatter.title} collection={collection} params={params} />}
+  {courseIndex && params?.course && <CourseProgress title={courseIndex.remarkPluginFrontmatter.title} collection={collection} params={params} courseSize={courseDir?.courses?.length || 0} />}
 
   <ErrorMessage client:only='vue' />
   <main class='content-page prose'>
