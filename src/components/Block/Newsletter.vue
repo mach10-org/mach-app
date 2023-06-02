@@ -1,7 +1,7 @@
 <template>
-  <form action="#" class="">
+  <form action="#" :class="classes">
     <div class="flex items-center mb-3">
-      <div class="relative w-auto mr-3">
+      <div class="relative flex-1 mr-3">
         <label :for="inputId" class="sr-only">{{ label }}</label>
         <OInput
           :placeholder="placeholder"
@@ -35,5 +35,6 @@ defineProps({
   buttonText: String,
   description: String,
   inputId: String,
+  classes: String,
 });
 </script>
