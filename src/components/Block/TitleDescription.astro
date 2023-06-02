@@ -4,16 +4,18 @@ import LinkArrow from '@components/LinkArrow.astro'
 export interface Props {
   link?: string;
   linkText?: string;
+  isCentered?: boolean;
+  classes?: string;
 }
-const { link, linkText } = Astro.props;
+const { link, linkText, isCentered, classes } = Astro.props;
 ---
 <section class="">
-  <div class="container mx-auto py-8">
-    <h2 class="mb-4 text-4xl tracking-tight font-bold text-text-title">
+  <div class="container mx-auto py-8" class:list={[ classes ]}>
+    <h2 class="mb-4 text-4xl tracking-tight font-bold text-text-title" class:list={[ { 'text-center': isCentered } ]}>
       <slot name="title" />
     </h2>
-    <div class="prose-lg max-w-none">
-      <slot />
+    <div class="prose-lg max-w-none" class:list={[ { 'text-center': isCentered } ]}>
+      <slot name="description" />
     </div>
     {
       link && linkText && (
@@ -22,5 +24,6 @@ const { link, linkText } = Astro.props;
         </LinkArrow>
       )
     }
+    <slot />
   </div>
 </section>
