@@ -7,7 +7,7 @@ const props = frontmatter || Astro.props;
 const description = frontmatter?.description;
 const image = frontmatter?.image;
 
-const hasHeader = pageTitle && description && image;
+const hasHeader = pageTitle && image;
 ---
 <BaseLayout {...props}>
   <main>
