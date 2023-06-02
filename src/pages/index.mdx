@@ -106,3 +106,12 @@ import CheckList from '@components/Block/CheckList.astro'
     tuition fees. no hidden costs.
   </CardSmall>
 </TitleDescriptionWithCards>
+
+<TitleDescription classes="sm:px-8 lg:px-32 xl:px-64" isCentered={true}>
+  <NoTag slot="title">How about a new start from today?</NoTag>
+  <NoTag slot="description">
+    The best time to start was yesterday. The next best time is now. Your choice today might be one the best decision of your life. Why not give it a try? It's 100% free.
+  </NoTag>
+
+  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Apply now" description="Apply today, free forever. First course starting in 2023." inputId="email-newsletter-footer" client:only="vue" classes="mx-auto max-w-screen-sm mt-6" />
+</TitleDescription>
