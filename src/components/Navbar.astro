@@ -54,6 +54,9 @@ import LoginStatus from './Auth/LoginStatus.vue';
           <a href={`${import.meta.env.BASE_URL}courses/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}courses/` }]}> Courses</a>
         </li>
         <li>
+          <a href={`${import.meta.env.BASE_URL}who-for/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}who-for/` }]}> Is it for me?</a>
+        </li>
+        <li>
           <a href={`${import.meta.env.BASE_URL}page-quizz/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}page-quizz/` }]}> Quiz</a>
         </li>
 
