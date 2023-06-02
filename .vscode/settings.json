@@ -21,5 +21,5 @@
       "path": "[[workspace]]/src/content"
     }
   ],
-  "frontMatter.preview.host": "http://localhost:3000/mach-app/"
+  "frontMatter.preview.host": "http://localhost:3000/"
 }

@@ -5,9 +5,7 @@ import ContentLayout from '@ContentLayout';
 import Quiz from '@components/Quiz/Question.vue';
 import TOC from '@components/TOC.astro';
 import { CollectionEntry } from 'astro:content';
-import { Collection } from '@models/courses';
-import CoursesTable from '@components/CoursesTable/index.astro';
-import CoursesTableDrawer from '@components/CoursesTable/drawer.astro';
+import { Collection, CourseParams } from '@models/courses';
 
 interface Props {
   entry: CollectionEntry<Collection>;
@@ -27,29 +25,21 @@ export async function getStaticPaths() {
     };
   });
 }
-// console.log('Astro.props', Astro.props);
 
 const { course, slug } = Astro.params;
 const { entry, courses } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
-// const headings = await Content?.getHeadings();
 
-// console.log('remarkPluginFrontmatter', remarkPluginFrontmatter);
-// console.log('course page: Astro.props', Astro.props);
+let params: CourseParams | undefined = undefined;
+if (course && slug) {
+  params = { course, slug };
+}
 ---
 
-<ContentLayout {...entry.data}>
+<ContentLayout frontmatter={remarkPluginFrontmatter} courseDir={Astro.props} params={params}>
   <!-- <TOC pageHeadings={headings} /> -->
   <Content />
   {entry?.data?.quiz && <Quiz client:only='vue' slug={`${course}/${slug}/`} label={entry.data.quiz.label} options={entry.data.quiz.options} />}
-
-  {
-    Astro.params?.course && (
-      <CoursesTableDrawer>
-        <CoursesTable courseId={Astro.params.course} courses={courses} />
-      </CoursesTableDrawer>
-    )
-  }
 
   <PaginatedCourse {...{ course, slug }} />
 </ContentLayout>

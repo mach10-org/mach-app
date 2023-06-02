@@ -2,16 +2,19 @@
 import { Collection, CollectionStaticProps, CourseDataProps } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
 import CoursesTableItem from './Item.astro';
-import { getCourseDirectories } from '@utils/collections';
 
 export type Props = {
   courseId: string;
   courses: CollectionEntry<Collection>[];
+  params?: {
+    course: string;
+    slug: string;
+  };
 };
 type GroupCourse = {
   [key: string]: CollectionEntry<Collection>[];
 };
-const { courseId, courses } = Astro.props;
+const { courseId, courses, params } = Astro.props;
 
 const grouped: GroupCourse = courses?.reduce((acc, curr) => {
   const { section = '' } = curr.data as CourseDataProps;
@@ -37,7 +40,7 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
                 </div>
                 <ul class='list-none p-0'>
                   {coursesByroup.map((c, idx) => {
-                    return <CoursesTableItem index={idx} course={c} />;
+                    return <CoursesTableItem index={idx} course={c} params={params} />;
                   })}
                 </ul>
               </li>

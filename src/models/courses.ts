@@ -18,6 +18,10 @@ export type Render = {
   headings: MarkdownHeading[];
   remarkPluginFrontmatter: Record<string, any>;
 };
+export type CourseParams = {
+  course: string;
+  slug: string;
+};
 
 // export type RenderPromise = {
 //   render(): Promise<Render>;
