@@ -10,7 +10,7 @@ type Props = {
 };
 
 const { collection, title, params, courseSize } = Astro.props;
-const href = `${import.meta.env.BASE_URL}/${collection}/${params.course}/`;
+const href = `${import.meta.env.BASE_URL}${collection}/${params.course}/`;
 ---
 
 <div class='bg-gray-100 w-full border-b-2 border-indigo-400'>
