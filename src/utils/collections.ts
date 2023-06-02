@@ -1,7 +1,5 @@
 import { Collection, CoursesDirectory, Render } from '@models/courses';
-import { CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
-import getReadingTime from 'reading-time';
-
+import { CollectionEntry, getCollection, getEntry } from 'astro:content';
 const idxKey = '/README';
 
 /**
@@ -51,7 +49,7 @@ export const getAllCollectionLessons = async (collection: Collection) => {
 export const getCourseIndex = async (collection: Collection, course: string) => {
   let entryResult: Render | null = null;
   try {
-    const entry = await getEntryBySlug(collection, `${course}/`);
+    const entry = await getEntry(collection, `${course}`);
 
     if (entry) {
       entryResult = await entry.render();
