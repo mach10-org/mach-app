@@ -31,3 +31,14 @@ export const setCourseTaken = action(courseTaken, 'setCourseTaken', (store, payl
 
   return store.get();
 });
+
+export const resetCourse = action(courseTaken, 'resetCourse', (store, payload: PayloadCourseTaken) => {
+  const prevData = store.get();
+  const { course, slug } = payload;
+  if (course && slug) {
+    const filtered = prevData.filter((c) => !(c.courseId === course && c.lessonId === slug));
+    store.set([...filtered]);
+  }
+
+  return store.get();
+});

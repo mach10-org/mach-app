@@ -21,16 +21,42 @@
       </div>
       <p class="ml-10 font-medium text-gray-600 md:text-xl">Completion</p>
 
-      <div class="flex gap-x-3 whitespace-nowrap ml-auto" v-if="isDone">
-        <Icon name="CheckCircleIcon" :outline="true" client:only="vue" classes="w-6 h-6 text-green-500" />
+      <div class="flex gap-x-3 whitespace-nowrap ml-auto items-center relative" v-if="isDone">
+        <Icon name="CheckCircleIcon" :outline="true" classes="w-6 h-6 text-green-500" />
         <span class="font-medium text-gray-600 hidden sm:block md:text-xl">Chapter finished</span>
+        <!-- <OButton size="small" inverted><Icon name="EllipsisVerticalIcon" :outline="true" classes="w-6 h-6 text-grey-300" /></OButton> -->
+
+        <div data-dial-init class="relative group">
+          <button
+            type="button"
+            data-dial-toggle="speed-dial-menu-dropdown"
+            aria-controls="speed-dial-menu-dropdown"
+            aria-expanded="false"
+            class="flex items-center justify-center ml-auto text-grey-300 rounded-full w-10 h-10 hover:bg-blue-400 hover:text-white"
+          >
+            <Icon name="EllipsisVerticalIcon" :outline="true" classes="w-6 h-6 " />
+            <span class="sr-only">Open actions menu</span>
+          </button>
+          <div
+            id="speed-dial-menu-dropdown"
+            class="absolute top-full right-0 flex flex-col justify-end hidden mb-4 space-y-2 bg-white border border-gray-100 rounded-lg shadow-sm dark:border-gray-600 dark:bg-gray-700"
+          >
+            <ul class="text-sm text-gray-500 dark:text-gray-300">
+              <li>
+                <a @click="onResetCourse" class="cursor-pointer flex items-center px-5 py-2 hover:text-blue-400">
+                  <span class="text-sm font-medium">Mark as not finished</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { courseTaken } from '@stores/courses';
+import { courseTaken, resetCourse } from '@stores/courses';
 import Icon from '@components/DynamicHeroIcon.vue';
 import { computed, onMounted, ref } from 'vue';
 const props = defineProps({
@@ -48,17 +74,28 @@ const props = defineProps({
   }
 });
 const isDone = ref(false);
+const coursesDoneLength = ref(0);
+const percentage = ref<number | null>(null);
 const courseTakenList = courseTaken.get();
 const circumference = 50 * 2 * Math.PI;
 const circle = 60;
 const radius = 50;
 
-const percentage = computed(() => {
-  const coursesDoneLength = courseTakenList.filter((c) => c.courseId === props.course).length;
-  return Math.ceil((coursesDoneLength / props.courseSize) * 100);
-});
-onMounted(async () => {
+const setPercentage = (coursesDoneLength: number) => {
+  percentage.value = Math.ceil((coursesDoneLength / props.courseSize) * 100);
+};
+
+onMounted(() => {
+  coursesDoneLength.value = courseTakenList.filter((c) => c.courseId === props.course).length;
   const found = courseTakenList.find((c) => c.lessonId === props.slug && c.courseId === props.course);
   isDone.value = !!found;
+  setPercentage(coursesDoneLength.value);
 });
+
+const onResetCourse = () => {
+  const res = resetCourse({ slug: props.slug, course: props.course });
+  isDone.value = false;
+  coursesDoneLength.value = res.length;
+  setPercentage(coursesDoneLength.value);
+};
 </script>
