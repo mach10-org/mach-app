@@ -1,10 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
-<BaseLayout title={title}>
-  <main class='content-page prose'>
+<BaseLayout title={title} description={description}>
+  <main class='content-page prose prose-lg prose-xl'>
     <slot />
   </main>
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import ThemeIcon from './ThemeIcon.vue';
 import LoginStatus from './Auth/LoginStatus.vue';
+import LoginStatusMenu from './Auth/LoginStatusMenu.vue';
 ---
 
 <nav class='border-border-input border-b px-2 sm:px-4 py-2.5'>
@@ -11,16 +12,16 @@ import LoginStatus from './Auth/LoginStatus.vue';
         {import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME}
       </span>
     </a>
-    <div class='md:order-2 hidden md:flex items-center'>
+    <div class='ml-auto md:order-2 flex items-center'>
       <LoginStatus client:only='vue' />
-
       <ThemeIcon client:only='vue' />
     </div>
 
     <div class='flex items-center md:hidden'>
-      <div class='flex'>
+      <!-- <div class='flex'>
+        <LoginStatus client:only='vue' />
         <ThemeIcon client:only='vue' />
-      </div>
+      </div> -->
 
       <button
         data-collapse-toggle='navbar'
@@ -60,6 +61,7 @@ import LoginStatus from './Auth/LoginStatus.vue';
     </div>
   </div>
 </nav>
+
 <!-- 
 <script>
   const handleToggleClick = () => {
