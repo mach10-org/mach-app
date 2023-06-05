@@ -23,7 +23,7 @@ const theme = new Theme({
     900: '#831843',
   },
   "primary-hover": "#9d174d",
-  "border-input": "#CED3D8",
+  "border-input": "#dee5ed",
   secondary: {
     100: "#f4f5fa",
     200: "#dbe1f8",
@@ -34,7 +34,7 @@ const theme = new Theme({
     600: "#2C7BE5",
     700: "#2470d6",
   },
-  "background-page": "#f6f6f6",
+  "background-page": "#F9FBFD",
   "background-base": "#fff",
   gray: {
     25: "#FCFDFE", // rgba(227, 235, 246, 0.12)
@@ -120,9 +120,9 @@ const theme = new Theme({
 const darkMode = theme.variant({
   'text-base': '#e2e5e8',
   'text-title': '#EDF1F5',
-  "background-page": "#090909",
-  "background-base": "#000",
-  "border-input": "#232E4A",
+  "background-page": "#232E4A",
+  "background-base": "#12263f",
+  "border-input": "#3a4959",
 });
 
 module.exports = {
@@ -132,6 +132,21 @@ module.exports = {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        md: '1.5rem',
+        lg: '2rem',
+        xl: '2rem',
+      },
+
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+      },
+    },
     extend: {
       fontFamily: {
         body: [

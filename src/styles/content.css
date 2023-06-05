@@ -18,5 +18,5 @@ code {
 }
 
 .link {
-  @apply text-primary hover:text-primary-hover hover:underline;
+  @apply text-primary hover:text-primary-hover hover:underline dark:text-primary-300 dark:hover:text-primary-400;
 }
