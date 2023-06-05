@@ -3,13 +3,11 @@ import remarkMermaid from 'astro-diagram/remark-mermaid';
 import AutoImport from 'astro-auto-import';
 import remarkGFM from 'remark-gfm';
 import { remarkReadingTime } from './src/plugin/remark-reading-time.mjs';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 import tailwind from '@astrojs/tailwind';
 import vue from '@astrojs/vue';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import remarkToc from 'remark-toc';
 // https://astro.build/config
 import react from '@astrojs/react';
 
@@ -20,8 +18,7 @@ export default defineConfig({
   trailingSlash: 'ignore',
 
   markdown: {
-    remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime, [remarkToc, { prefix: 'test-' }]],
-    rehypePlugins: [[rehypeAutolinkHeadings, { behavior: 'before' }]],
+    remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime],
     gfm: true,
     drafts: false,
     extendDefaultPlugins: true
