@@ -14,14 +14,17 @@ const href = `${import.meta.env.BASE_URL}${collection}/${params.course}/`;
 ---
 
 <div class='bg-gray-100 w-full border-b-2 border-indigo-400'>
-  <div class='container mx-auto py-6 px-8'>
-    <h3>
-      <a href={href} class='flex gap-x-3 hover:text-indigo-400'>
-        <Icon name={'ArrowLeftIcon'} outline={false} client:only='vue' classes='w-6 h-6 ' />
-        <span>{title}</span>
-      </a>
-    </h3>
-
-    <Progress client:only='vue' slug={params.slug} course={params.course} courseSize={courseSize} />
+  <div class='container mx-auto px-8'>
+    <div class='flex flex-col md:flex-row self-center gap-x-12'>
+      <h3 class='flex py-8 md:self-center'>
+        <a href={href} class='flex gap-x-3 hover:text-indigo-400'>
+          <Icon name={'ArrowLeftIcon'} outline={false} client:only='vue' classes='w-6 h-6 ' />
+          <span>{title}</span>
+        </a>
+      </h3>
+      <div class='progress-widget grow'>
+        <Progress client:only='vue' slug={params.slug} course={params.course} courseSize={courseSize} />
+      </div>
+    </div>
   </div>
 </div>

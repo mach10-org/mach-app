@@ -1,8 +1,8 @@
 <template>
-  <div class="py-10 bg-gray-100" v-if="percentage">
-    <div class="flex items-center flex-wrap px-10 bg-white shadow-xl rounded-2xl h-20">
+  <div class="py-10 bg-gray-100 -mt-6 md:mt-0" v-if="percentage">
+    <div class="flex items-center flex-wrap px-10 bg-white shadow-xl rounded-2xl" :class="widthHeight">
       <div class="flex items-center justify-center -m-6 overflow-hidden bg-white rounded-full">
-        <svg class="w-32 h-32 w-20 h-20 transform translate-x-1 translate-y-1" x-cloak aria-hidden="true">
+        <svg class="" :class="svgSizeClass" x-cloak aria-hidden="true">
           <circle class="text-gray-300" stroke-width="10" stroke="currentColor" fill="transparent" :r="radius" :cx="circle" :cy="circle" />
           <circle
             class="text-blue-600"
@@ -19,12 +19,11 @@
         </svg>
         <span class="absolute text-md text-blue-700">{{ percentage }}% </span>
       </div>
-      <p class="ml-10 font-medium text-gray-600 md:text-xl">Completion</p>
+      <p class="ml-10 font-medium text-gray-600 md:text-lg">Completion</p>
 
       <div class="flex gap-x-3 whitespace-nowrap ml-auto items-center relative" v-if="isDone">
         <Icon name="CheckCircleIcon" :outline="true" classes="w-6 h-6 text-green-500" />
-        <span class="font-medium text-gray-600 hidden sm:block md:text-xl">Chapter finished</span>
-        <!-- <OButton size="small" inverted><Icon name="EllipsisVerticalIcon" :outline="true" classes="w-6 h-6 text-grey-300" /></OButton> -->
+        <span class="font-medium text-gray-600 hidden text-lg lg:block">Chapter finished</span>
 
         <div data-dial-init class="relative group">
           <button
@@ -58,7 +57,7 @@
 <script setup lang="ts">
 import { courseTaken, resetCourse } from '@stores/courses';
 import Icon from '@components/DynamicHeroIcon.vue';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 const props = defineProps({
   course: {
     type: String,
@@ -77,9 +76,17 @@ const isDone = ref(false);
 const coursesDoneLength = ref(0);
 const percentage = ref<number | null>(null);
 const courseTakenList = courseTaken.get();
-const circumference = 50 * 2 * Math.PI;
-const circle = 60;
-const radius = 50;
+// const circle = 60;
+// const radius = 50;
+// const circumference = 50 * 2 * Math.PI;
+// const svgSizeClass = 'w-32 h-32 transform translate-x-1 translate-y-1';
+// const widthHeight = 'h-20';
+
+const circle = 42;
+const radius = 36;
+const circumference = radius * 2 * Math.PI;
+const svgSizeClass = 'w-24 h-24 transform translate-x-1.5 translate-y-1.5'; /**/
+const widthHeight = 'h-16';
 
 const setPercentage = (coursesDoneLength: number) => {
   percentage.value = Math.ceil((coursesDoneLength / props.courseSize) * 100);
