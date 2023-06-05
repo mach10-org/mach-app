@@ -4,20 +4,20 @@ import LoginStatus from './Auth/LoginStatus.vue';
 import LoginStatusMenu from './Auth/LoginStatusMenu.vue';
 ---
 
-<nav class='border-border-input border-b px-2 sm:px-4 py-2.5'>
+<nav class='border-border-input border-b py-2.5'>
   <div class='container flex flex-wrap items-center justify-between mx-auto'>
     <a href={import.meta.env.BASE_URL} class='flex items-center'>
-      <span class='text-3xl h-6 mr-3 sm:h-9'>👩🏻‍🚀</span>
-      <span class='self-center text-xl font-semibold whitespace-nowrap dark:text-white'>
+      <span class='text-2xl mr-3 sm:text-3xl'>👩🏻‍🚀</span>
+      <span class='self-center text-xl font-semibold whitespace-nowrap text-text-base'>
         {import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME}
       </span>
     </a>
-    <div class='ml-auto md:order-2 flex items-center'>
+    <div class='ml-auto lg:order-2 flex items-center'>
       <LoginStatus client:only='vue' />
       <ThemeIcon client:only='vue' />
     </div>
 
-    <div class='flex items-center md:hidden'>
+    <div class='flex items-center lg:hidden'>
       <!-- <div class='flex'>
         <LoginStatus client:only='vue' />
         <ThemeIcon client:only='vue' />
@@ -40,8 +40,8 @@ import LoginStatusMenu from './Auth/LoginStatusMenu.vue';
         </svg>
       </button>
     </div>
-    <div class='hidden w-full md:block md:w-auto' id='navbar'>
-      <ul class='flex flex-col p-4 mt-4 md:flex-row md:space-x-3 md:mt-0 md:text-sm md:font-medium'>
+    <div class='hidden w-full lg:block lg:w-auto' id='navbar'>
+      <ul class='flex flex-col p-4 mt-4 lg:flex-row lg:space-x-3 lg:mt-0 lg:text-sm lg:font-medium'>
         <li>
           <a href={`${import.meta.env.BASE_URL}`} class:list={['menu-item ', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}` }]} aria-current='page'> Home</a>
         </li>

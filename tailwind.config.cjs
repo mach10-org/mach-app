@@ -132,6 +132,21 @@ module.exports = {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        md: '1.5rem',
+        lg: '2rem',
+        xl: '2rem',
+      },
+
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+      },
+    },
     extend: {
       fontFamily: {
         body: [
