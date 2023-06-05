@@ -23,12 +23,12 @@ const hasHeader = pageTitle && image;
               <p class='text-lg font-normal text-gray-300'>{description}</p>
             </div>
           </header>
-          <div class='flex relative z-20 justify-between p-6 -mt-36 mx-4 max-w-screen-xl bg-background-page rounded xl:-mt-32 xl:p-9 xl:mx-auto'>
+          <div class='flex relative z-20 justify-between p-6 -mt-36 mx-4 max-w-screen-xl bg-background-base rounded xl:-mt-32 xl:p-9 xl:mx-auto'>
             <div class='article flex-1 max-w-none prose prose-lg'>
               <slot />
             </div>
             <div class='hidden lg:block w-[340px] pl-10'>
-              <TOC pageHeadings={headings} maxDepth={3} classes='sticky top-[20px] bg-background-page w-full' />
+              <TOC pageHeadings={headings} maxDepth={3} classes='sticky top-[20px] bg-background-base w-full' />
             </div>
           </div>
         </>
