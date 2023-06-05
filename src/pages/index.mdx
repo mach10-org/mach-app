@@ -11,6 +11,7 @@ import TitleDescriptionImage from '@components/Block/TitleDescriptionImage.astro
 import TitleDescriptionWithCards from '@components/Block/TitleDescriptionWithCards.astro'
 import CardSmall from '@components/Block/CardSmall.astro'
 import CheckList from '@components/Block/CheckList.astro'
+import CheckListItem from '@components/Block/CheckListItem.astro'
 
 <Hero>
   <NoTag slot="title">Ready to take off for a new life?</NoTag>
@@ -66,7 +67,17 @@ import CheckList from '@components/Block/CheckList.astro'
     Many online courses assume you have already some programming background or even math. We are focused on bringing people from level 0.
   </NoTag>
 
-  <CheckList items={['Learn at your own pace', 'Gain practical knowledge companies are looking for', 'Broaden your skills']} />
+  <CheckList>
+    <CheckListItem>
+      <NoTag slot="title">Learn at your own pace</NoTag>
+    </CheckListItem>
+    <CheckListItem>
+      <NoTag slot="title">Gain practical knowledge companies are looking for</NoTag>
+    </CheckListItem>
+    <CheckListItem>
+      <NoTag slot="title">Broaden your skills</NoTag>
+    </CheckListItem>
+  </CheckList>
 
   <div class="prose-lg">
     Never used a computer before? No problem.
@@ -79,7 +90,20 @@ import CheckList from '@components/Block/CheckList.astro'
     Creating software is an art and even a way of thinking. Wether you consider changing career in the future or just by curiosity, learning to code will transform your life for the better.
   </NoTag>
 
-  <CheckList items={['Unlock new opportunities', 'Ability to choose your own future', 'Turn your ideas into a startup', 'Get help and support from the community']} />
+  <CheckList>
+    <CheckListItem>
+      <NoTag slot="title">Unlock new opportunities</NoTag>
+    </CheckListItem>
+    <CheckListItem>
+      <NoTag slot="title">Ability to choose your own future</NoTag>
+    </CheckListItem>
+    <CheckListItem>
+      <NoTag slot="title">Turn your ideas into a startup</NoTag>
+    </CheckListItem>
+    <CheckListItem>
+      <NoTag slot="title">Get help and support from the community</NoTag>
+    </CheckListItem>
+  </CheckList>
 </TitleDescriptionImage>
 
 <TitleDescriptionWithCards classes="sm:px-8 lg:px-32 xl:px-64">

@@ -12,7 +12,7 @@ const hasHeader = pageTitle && image;
 ---
 
 <BaseLayout {...props}>
-  <main>
+  <main class:list={[ {'lg:space-y-10': !hasHeader} ]}>
     {
       hasHeader && (
         <>

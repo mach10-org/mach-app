@@ -1,0 +1,67 @@
+---
+layout: "@IntroLayout"
+title: Why free?
+---
+
+import NoTag from '@components/NoTag.astro'
+import Hero from '@components/Page/Free/Hero.astro'
+import TitleDescription from '@components/Block/TitleDescription.astro'
+import TitleDescriptionImage from '@components/Block/TitleDescriptionImage.astro'
+import CheckList from '@components/Block/CheckList.astro'
+import CheckListItem from '@components/Block/CheckListItem.astro'
+
+<Hero>
+  <NoTag slot="title1">Free.</NoTag>
+  <NoTag slot="title2">Forever.</NoTag>
+  <NoTag slot="description">No tuition fees, no hidden cost. All you have to invest is your time.</NoTag>
+</Hero>
+
+<TitleDescriptionImage imagePosition="right" imageSrc="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png" imageAlt="office content" imageSrc2="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png" imageAlt2="office content">
+  <NoTag slot="title">How can this be free? 🎁</NoTag>
+  <NoTag slot="description">
+    This website was started as a website made with love and passion for software engineering and sharing knowledge. As a result, we do not expect any income for now and want to keep things simple.
+
+    We might welcome donations from companies in the future. Companies are paying absurd sums of money to hire people. Many tech recruiters are charging companies between 30% to 40% of yearly income of the hired person. For tech talent, this means very large sums of money. We believe these should be used to feed into an ecosystem and benefit the candidates.
+  </NoTag>
+</TitleDescriptionImage>
+
+<TitleDescription>
+  <NoTag slot="title">A completely different model that benefits you first</NoTag>
+  <NoTag slot="description">
+    Companies are ready to pay a lot of money on hiring agencies to hire talented people and even to relocate them sometimes. This money would be better spent training people.
+
+    **We believe this money should go to create better education. In any case, we will never charge people for taking the opportunity to learn.**
+  </NoTag>
+</TitleDescription>
+
+<TitleDescriptionImage imageSrc="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/features/feature-office-long.png" imagePosition="left" imageAlt="feature image" addSeparator={true}>
+  <NoTag slot="title">Our secret sauce 👨‍🍳</NoTag>
+  <NoTag slot="description">
+    Yes, creating content and training people usually costs money. Here are our secret sauce recipe.
+  </NoTag>
+
+  <CheckList>
+    <CheckListItem>
+      <NoTag slot="title">Community created content</NoTag>
+      <NoTag slot="description">
+        Our content will be created and maintained by passionate people who work in IT. In fact, we want to make this content to be publicly and freely available to anyone.
+      </NoTag>
+    </CheckListItem>
+    <CheckListItem>
+      <NoTag slot="title">Make mutual help the standard</NoTag>
+      <NoTag slot="description">
+        Explaining a concept you recently learnt to someone else is magic as it benefits both the teacher and the learner. We aim to create an ecosystem where everyone can be taught from more experienced students while teaching students with less experience. A virtuous cycle.
+      </NoTag>
+    </CheckListItem>
+    <CheckListItem>
+      <NoTag slot="title">Automatic feedbacks</NoTag>
+      <NoTag slot="description">
+        Software and data can make learning more scalable and effective. Our platform will give you automatic feedback on where to improve. Alternatively, it will also tell us how we should improve our content by analyzing the data.
+      </NoTag>
+    </CheckListItem>
+  </CheckList>
+
+  <div class="prose">
+    And more to come, we're just getting started 🚀
+  </div>
+</TitleDescriptionImage>
