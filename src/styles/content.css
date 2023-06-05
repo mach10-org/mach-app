@@ -13,10 +13,9 @@ code {
 }
 
 .content-page {
-  margin: auto;
-  padding: 1.5rem;
+  @apply mx-auto p-4 lg:p-8;
 }
 
 .link {
-  @apply text-primary hover:text-primary-hover hover:underline dark:text-primary-300 dark:hover:text-primary-400;
+  @apply text-link hover:text-link-hover hover:underline;
 }

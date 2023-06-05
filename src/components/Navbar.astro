@@ -4,7 +4,7 @@ import LoginStatus from './Auth/LoginStatus.vue';
 import LoginStatusMenu from './Auth/LoginStatusMenu.vue';
 ---
 
-<nav class='border-border-input border-b py-2.5'>
+<nav class='py-2'>
   <div class='container flex flex-wrap items-center justify-between mx-auto'>
     <a href={import.meta.env.BASE_URL} class='flex items-center'>
       <span class='text-2xl mr-3 sm:text-3xl'>👩🏻‍🚀</span>
@@ -41,7 +41,7 @@ import LoginStatusMenu from './Auth/LoginStatusMenu.vue';
       </button>
     </div>
     <div class='hidden w-full lg:block lg:w-auto' id='navbar'>
-      <ul class='flex flex-col p-4 mt-4 lg:flex-row lg:space-x-3 lg:mt-0 lg:text-sm lg:font-medium'>
+      <ul class='flex flex-col p-3 mt-4 lg:flex-row lg:space-x-3 lg:mt-0 lg:text-base lg:font-medium'>
         <li>
           <a href={`${import.meta.env.BASE_URL}`} class:list={['menu-item ', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}` }]} aria-current='page'> Home</a>
         </li>

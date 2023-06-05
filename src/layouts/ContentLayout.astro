@@ -23,15 +23,17 @@ type Props = {
   {courseIndex && params?.course && <CourseProgress title={courseIndex.remarkPluginFrontmatter.title} collection={collection} params={params} courseSize={courseDir?.courses?.length || 0} />}
 
   <ErrorMessage client:only='vue' />
-  <main class='content-page prose prose-lg prose-xl'>
-    {frontmatter?.minutesRead?.text && <strong>{frontmatter.minutesRead.text}</strong>}
-    {
-      frontmatter?.lastmod && (
-        <>
-          | <strong>{moment(frontmatter.lastmod).format('LLLL')}</strong>
-        </>
-      )
-    }
+  <main class='content-page prose prose-lg lg:prose-xl bg-background-base rounded-b'>
+    <span class="text-text-muted">
+      {frontmatter?.minutesRead?.text && <strong>{frontmatter.minutesRead.text}</strong>}
+      {
+        frontmatter?.lastmod && (
+          <>
+            | <strong>{moment(frontmatter.lastmod).format('LLLL')}</strong>
+          </>
+        )
+      }
+    </span>
     {courseDir?.entry?.data?.title && <h1>{courseDir.entry.data.title}</h1>}
     {courseDir?.entry?.data?.description && <h2>{courseDir?.entry?.data.description}</h2>}
     {courseDir?.entry?.data?.preview && <img src={courseDir?.entry?.data.preview} />}

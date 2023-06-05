@@ -23,6 +23,8 @@ const theme = new Theme({
     900: '#831843',
   },
   "primary-hover": "#9d174d",
+  "link": "#be185d",
+  "link-hover": "#9d174d",
   "border-input": "#dee5ed",
   secondary: {
     100: "#f4f5fa",
@@ -123,6 +125,8 @@ const darkMode = theme.variant({
   "background-page": "#232E4A",
   "background-base": "#12263f",
   "border-input": "#3a4959",
+  "link": "#f9a8d4",
+  "link-hover": "#f472b6",
 });
 
 module.exports = {
@@ -185,8 +189,8 @@ module.exports = {
             '--tw-prose-body': parseThemeColor(theme('colors.text-base')),
             '--tw-prose-headings': parseThemeColor(theme('colors.text-title')),
             '--tw-prose-lead': parseThemeColor(theme('colors.text-title')),
-            '--tw-prose-links': parseThemeColor(theme('colors.primary')),
-            '--tw-prose-bold': parseThemeColor(theme('colors.text-base')),
+            '--tw-prose-links': parseThemeColor(theme('colors.link')),
+            '--tw-prose-bold': 'inherit',
             '--tw-prose-counters': parseThemeColor(theme('colors.text-muted')),
             '--tw-prose-bullets': parseThemeColor(theme('colors.text-muted')),
             '--tw-prose-hr': parseThemeColor(theme('colors.text-muted')),

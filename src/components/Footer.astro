@@ -1,16 +1,16 @@
-<footer class='py-4 sm:pt-14 sm:pb-6 border-gray-200 border-t'>
+<footer class='py-4 sm:pt-14 sm:pb-6'>
   <div class='mx-auto container'>
     <div class='md:flex md:justify-between'>
       <div class='mb-6 md:mb-0'>
         <a href=`${import.meta.env.BASE_URL}` class='flex items-center'>
-          <!--<img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-8" alt="FlowBite Logo" />-->
-          <span class='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>👩🏻‍🚀 {import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME}</span>
+          <span class='text-2xl mr-3 sm:text-3xl'>👩🏻‍🚀</span>
+          <span class='self-center text-2xl font-semibold whitespace-nowrap '>{import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME}</span>
         </a>
       </div>
       <div class='grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3'>
         <div>
-          <h2 class='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>Resources</h2>
-          <ul class='text-gray-600 dark:text-gray-400'>
+          <h2 class='mb-6 text-sm font-semibold uppercase '>Resources</h2>
+          <ul class='text-text-muted'>
             <li class='mb-4'>
               <a href=`${import.meta.env.BASE_URL}manifesto/` class='hover:underline'>Manifesto</a>
             </li>
@@ -23,8 +23,8 @@
           </ul>
         </div>
         <div>
-          <h2 class='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>Follow us</h2>
-          <ul class='text-gray-600 dark:text-gray-400'>
+          <h2 class='mb-6 text-sm font-semibold uppercase '>Follow us</h2>
+          <ul class='text-text-muted'>
             <li class='mb-4'>
               <a href='https://github.com/themesberg/flowbite' target='_blank' class='hover:underline'>Instagram</a>
             </li>
@@ -34,8 +34,8 @@
           </ul>
         </div>
         <div>
-          <h2 class='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>Legal</h2>
-          <ul class='text-gray-600 dark:text-gray-400'>
+          <h2 class='mb-6 text-sm font-semibold uppercase '>Legal</h2>
+          <ul class='text-text-muted'>
             <li class='mb-4'>
               <a href=`${import.meta.env.BASE_URL}privacy-policy/` class='hover:underline'>Privacy Policy</a>
             </li>
@@ -46,9 +46,9 @@
         </div>
       </div>
     </div>
-    <hr class='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
+    <hr class='my-6 border-border-input sm:mx-auto lg:my-8' />
     <div class='sm:flex sm:items-center sm:center content-center justify-center'>
-      <span class='text-sm text-gray-500 sm:text-center dark:text-gray-400'>© {import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME} - made with ❤️ and plenty of 🍵 in 🗾🇯🇵</span>
+      <span class='text-sm text-text-muted sm:text-center'>© {import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME} - made with ❤️ and plenty of 🍵 in 🗾🇯🇵</span>
     </div>
   </div>
 </footer>
