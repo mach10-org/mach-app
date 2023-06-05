@@ -6,7 +6,7 @@ import LoginStatus from './Auth/LoginStatus.vue';
 <nav class='border-border-input border-b px-2 sm:px-4 py-2.5'>
   <div class='container flex flex-wrap items-center justify-between mx-auto'>
     <a href={import.meta.env.BASE_URL} class='flex items-center'>
-      <img src={`${import.meta.env.BASE_URL}img/logo.svg`} class='h-6 mr-3 sm:h-9' alt='Flowbite Logo' />
+      <span class='text-3xl h-6 mr-3 sm:h-9'>👩🏻‍🚀</span>
       <span class='self-center text-xl font-semibold whitespace-nowrap dark:text-white'>
         {import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME}
       </span>
@@ -55,16 +55,6 @@ import LoginStatus from './Auth/LoginStatus.vue';
         </li>
         <li>
           <a href={`${import.meta.env.BASE_URL}who-for/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}who-for/` }]}> Is it for me?</a>
-        </li>
-        <li>
-          <a href={`${import.meta.env.BASE_URL}page-quizz/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}page-quizz/` }]}> Quiz</a>
-        </li>
-
-        <li>
-          <a href={`${import.meta.env.BASE_URL}jdoodle/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}jdoodle/` }]}> JDOODLE</a>
-        </li>
-        <li>
-          <a href={`${import.meta.env.BASE_URL}glot/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}glot/` }]}> GLOT</a>
         </li>
       </ul>
     </div>

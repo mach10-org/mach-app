@@ -1,7 +1,7 @@
 ---
 title: Hello world
 description: Why use Go and how to write your first program
-lastmod: 2023-06-01T23:38:07.876Z
+lastmod: 2023-06-04T23:43:48.626Z
 section: Basics
 preview: https://via.placeholder.com/450x300.png
 ---
@@ -11,7 +11,10 @@ preview: https://via.placeholder.com/450x300.png
 This lesson covers some history of Go and also teaches you how to build your first Go app.
 
 > Watch the video
-> [![your first Go program](https://img.youtube.com/vi/1825FjiewWs/0.jpg)](https://www.youtube.com/watch?v=1825FjiewWs)
+>
+> <div class="youtube-player">
+> <iframe width="560" height="315" src="https://www.youtube.com/embed/1825FjiewWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+> </div>
 
 ## Introduction
 
