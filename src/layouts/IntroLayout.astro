@@ -1,7 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import TOC from '@components/TOC/index.astro';
 
-const { title, frontmatter } = Astro.props;
+const { title, frontmatter, headings } = Astro.props;
 const pageTitle = title || frontmatter?.title;
 const props = frontmatter || Astro.props;
 const description = frontmatter?.description;
@@ -22,11 +23,13 @@ const hasHeader = pageTitle && image;
               <p class='text-lg font-normal text-gray-300'>{description}</p>
             </div>
           </header>
-          <div class='flex relative z-20 justify-between p-6 -m-36 mb-2 mx-4 max-w-screen-xl bg-background-page rounded xl:-m-32 xl:p-9 xl:mx-auto'>
-            <div class='xl:w-[828px] w-full max-w-none prose prose-lg'>
+          <div class='flex relative z-20 justify-between p-6 -mt-36 mx-4 max-w-screen-xl bg-background-page rounded xl:-mt-32 xl:p-9 xl:mx-auto'>
+            <div class='article flex-1 max-w-none prose prose-lg'>
               <slot />
             </div>
-            <div>TODO TOC</div>
+            <div class='hidden lg:block w-[340px] pl-10'>
+              <TOC pageHeadings={headings} maxDepth={3} classes='sticky top-[20px] bg-background-page w-full' />
+            </div>
           </div>
         </>
       )
