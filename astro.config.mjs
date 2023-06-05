@@ -17,7 +17,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://mach10-org.github.io/',
   base: process.env.NODE_ENV === 'development' ? '' : '/mach-app/',
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
 
   markdown: {
     remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime, [remarkToc, { prefix: 'test-' }]],
