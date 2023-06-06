@@ -208,6 +208,9 @@ module.exports = {
                 'text-decoration': 'underline',
                 color: parseThemeColor(theme('colors.link-hover')),
               },
+            },
+            h1: {
+              'font-weight': 700,
             }
           },
         },

@@ -27,7 +27,7 @@ if (course && slug) {
         {prev && (
           <a
             href={`${import.meta.env.BASE_URL}${prev?.collection}/${prev?.slug}/`}
-            class='inline-flex items-center px-4 py-2 text-sm font-medium group bg-background-page rounded-lg transition-colors border border-border-input text-primary hover:text-white hover:bg-primary hover:border-primary hover:no-underline mr-auto'
+            class='inline-flex items-center px-4 py-2 text-sm font-medium group bg-background-page rounded-lg transition-colors border border-border-input text-link hover:text-white hover:bg-primary hover:border-primary hover:no-underline mr-auto'
           >
             <svg aria-hidden='true' class='w-5 h-5 mr-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
               <path
@@ -46,7 +46,7 @@ if (course && slug) {
           <a
             id='goto-next-chapter'
             href={`${import.meta.env.BASE_URL}${next?.collection}/${next?.slug}/`}
-            class='ml-auto inline-flex items-center px-4 py-2 text-sm font-medium group bg-background-page rounded-lg transition-colors border border-border-input text-primary hover:text-white hover:bg-primary hover:border-primary hover:no-underline mt-2 md:mt-0'
+            class='ml-auto inline-flex items-center px-4 py-2 text-sm font-medium group bg-background-page rounded-lg transition-colors border border-border-input text-link hover:text-white hover:bg-primary hover:border-primary hover:no-underline mt-2 md:mt-0'
           >
             <div class="mr-2">
               <span class="transition-colors text-text-muted group-hover:text-white">Next chapter:</span> <br />
