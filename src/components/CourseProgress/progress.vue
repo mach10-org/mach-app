@@ -1,11 +1,14 @@
 <template>
-  <div class="py-10 bg-gray-100 -mt-6 md:mt-0" v-if="percentage">
-    <div class="flex items-center flex-wrap px-10 bg-white shadow-xl rounded-2xl" :class="widthHeight">
-      <div class="flex items-center justify-center -m-6 overflow-hidden bg-white rounded-full">
+  <div class="" v-if="percentage">
+    <div class="flex items-center flex-wrap px-4 lg:px-6 bg-background-base rounded-2xl" :class="widthHeight">
+      <a :href="href" class='inline-flex items-center text-sm font-medium link mr-6 lg:mr-8'>
+        &larr; {{title}}
+      </a>
+      <div class="flex items-center justify-center -my-6 overflow-hidden bg-background-base rounded-full">
         <svg class="" :class="svgSizeClass" x-cloak aria-hidden="true">
-          <circle class="text-gray-300" stroke-width="10" stroke="currentColor" fill="transparent" :r="radius" :cx="circle" :cy="circle" />
+          <circle class="text-border-input" stroke-width="10" stroke="currentColor" fill="transparent" :r="radius" :cx="circle" :cy="circle" />
           <circle
-            class="text-blue-600"
+            class="text-primary"
             stroke-width="10"
             :stroke-dasharray="circumference"
             :stroke-dashoffset="circumference - (percentage / 100) * circumference"
@@ -17,21 +20,21 @@
             :cy="circle"
           />
         </svg>
-        <span class="absolute text-md text-blue-700">{{ percentage }}% </span>
+        <span class="absolute text-md text-text-base">{{ percentage }}% </span>
       </div>
-      <p class="ml-10 font-medium text-gray-600 md:text-lg">Completion</p>
+      <p class="hidden ml-3 font-medium text-text-base md:text-lg lg:block">Completion</p>
 
-      <div class="flex gap-x-3 whitespace-nowrap ml-auto items-center relative" v-if="isDone">
-        <Icon name="CheckCircleIcon" :outline="true" classes="w-6 h-6 text-green-500" />
-        <span class="font-medium text-gray-600 hidden text-lg lg:block">Chapter finished</span>
+      <div class="flex whitespace-nowrap ml-auto items-center relative" v-if="isDone">
+        <Icon name="CheckCircleIcon" :outline="true" classes="w-6 h-6 text-green-500 mr-1" />
+        <span class="font-medium text-text-base hidden lg:block">Chapter finished</span>
 
-        <div data-dial-init class="relative group">
+        <div data-dial-init class="relative group ml-3">
           <button
             type="button"
             data-dial-toggle="speed-dial-menu-dropdown"
             aria-controls="speed-dial-menu-dropdown"
             aria-expanded="false"
-            class="flex items-center justify-center ml-auto text-grey-300 rounded-full w-10 h-10 hover:bg-blue-400 hover:text-white"
+            class="flex items-center justify-center ml-auto text-text-muted w-10 h-10 hover:bg-primary hover:text-white rounded"
           >
             <Icon name="EllipsisVerticalIcon" :outline="true" classes="w-6 h-6 " />
             <span class="sr-only">Open actions menu</span>
@@ -69,6 +72,14 @@ const props = defineProps({
   },
   courseSize: {
     type: Number,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  href: {
+    type: String,
     required: true
   }
 });

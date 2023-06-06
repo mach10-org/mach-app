@@ -13,7 +13,13 @@ export const settings = persistentMap<SettingsValue>('settings:', {
 
 export const toggleTheme = action(settings, 'toggle', (store) => {
   const isDark = store.get().theme === 'dark';
-  store.setKey('theme', !isDark ? 'dark' : 'light');
+  if (isDark) {
+    store.setKey('theme', 'light');
+    document.documentElement.classList.remove('dark');
+  } else {
+    store.setKey('theme', 'dark');
+    document.documentElement.classList.add('dark');
+  }
 
   return store.get();
 });

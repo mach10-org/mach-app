@@ -7,6 +7,7 @@ const pageTitle = title || frontmatter?.title;
 const props = frontmatter || Astro.props;
 const description = frontmatter?.description;
 const image = frontmatter?.image;
+const showTOC = frontmatter?.showTOC !== undefined ? frontmatter.showTOC : true;
 
 const hasHeader = pageTitle && image;
 ---
@@ -27,9 +28,11 @@ const hasHeader = pageTitle && image;
             <div class='article flex-1 max-w-none prose prose-lg'>
               <slot />
             </div>
-            <div class='hidden lg:block w-[340px] pl-10'>
-              <TOC pageHeadings={headings} maxDepth={3} classes='sticky top-[20px] bg-background-base w-full' />
-            </div>
+            {showTOC && (
+              <div class='hidden lg:block w-[340px] pl-10'>
+                <TOC pageHeadings={headings} maxDepth={2} classes='sticky top-[20px] bg-background-base w-full' />
+              </div>
+            )}
           </div>
         </>
       )

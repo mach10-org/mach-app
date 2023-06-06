@@ -2,42 +2,50 @@
 const { Theme } = require("tailwind-easy-theme");
 
 const parseThemeColor = (color) => {
-  return color.replace('<alpha-value>', 1)
-}
+  return color.replace("<alpha-value>", 1);
+};
 
 const theme = new Theme({
-  'text-base': '#232E4A',
-  'text-title': '#111827',
-  'text-muted': '#89939F',
+  "text-base": "#232E4A",
+  "text-title": "#111827",
+  "text-muted": "#89939F",
   primary: {
     DEFAULT: "#be185d",
-    50: '#fdf2f8',
-    100: '#fce7f3',
-    200: '#fbcfe8',
-    300: '#f9a8d4',
-    400: '#f472b6',
-    500: '#ec4899',
-    600: '#db2777',
-    700: '#be185d',
-    800: '#9d174d',
-    900: '#831843',
+    50: "#fdf2f7",
+    100: "#fce7f0",
+    200: "#fbcfe1",
+    300: "#f9a8ca",
+    400: "#f472a8",
+    500: "#ec488c",
+    600: "#db2772",
+    700: "#be185d",
+    800: "#9d174f",
+    900: "#831844",
+    950: "#500725",
   },
-  "primary-hover": "#9d174d",
-  "link": "#be185d",
-  "link-hover": "#9d174d",
+  "primary-hover": "#9d174f",
+  link: "#be185d",
+  "link-hover": "#9d174f",
   "border-input": "#dee5ed",
   secondary: {
-    100: "#f4f5fa",
-    200: "#dbe1f8",
-    600: "#9a9cbf",
-    700: "#7068bf",
+    50: "#f1fafa",
+    100: "#daf2f3",
+    200: "#bae3e7",
+    300: "#8acfd6",
+    400: "#53b2bd",
+    500: "#3896a2",
+    600: "#348291",
+    700: "#2d6471",
+    800: "#2c545e",
+    900: "#294750",
+    950: "#172e35",
   },
   tertiary: {
     600: "#2C7BE5",
     700: "#2470d6",
   },
-  "background-page": "#F9FBFD",
-  "background-base": "#fff",
+  "background-page": "#F9F9F9",
+  "background-base": "#fcfcfc",
   gray: {
     25: "#FCFDFE", // rgba(227, 235, 246, 0.12)
     50: "#F9FBFD",
@@ -120,13 +128,13 @@ const theme = new Theme({
 });
 
 const darkMode = theme.variant({
-  'text-base': '#e2e5e8',
-  'text-title': '#EDF1F5',
+  "text-base": "#e2e5e8",
+  "text-title": "#EDF1F5",
   "background-page": "#232E4A",
-  "background-base": "#12263f",
+  "background-base": "#242F4D",
   "border-input": "#3a4959",
-  "link": "#f9a8d4",
-  "link-hover": "#f472b6",
+  link: "#f9a8ca",
+  "link-hover": "#f472a8",
 });
 
 module.exports = {
@@ -138,17 +146,17 @@ module.exports = {
   theme: {
     container: {
       padding: {
-        DEFAULT: '1rem',
-        md: '1.5rem',
-        lg: '2rem',
-        xl: '2rem',
+        DEFAULT: "1rem",
+        md: "1.5rem",
+        lg: "2rem",
+        xl: "2rem",
       },
 
       screens: {
-        sm: '640px',
-        md: '768px',
-        lg: '1024px',
-        xl: '1280px',
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
       },
     },
     extend: {
@@ -186,29 +194,38 @@ module.exports = {
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
-            '--tw-prose-body': parseThemeColor(theme('colors.text-base')),
-            '--tw-prose-headings': parseThemeColor(theme('colors.text-title')),
-            '--tw-prose-lead': parseThemeColor(theme('colors.text-title')),
-            '--tw-prose-links': parseThemeColor(theme('colors.link')),
-            '--tw-prose-bold': 'inherit',
-            '--tw-prose-counters': parseThemeColor(theme('colors.text-muted')),
-            '--tw-prose-bullets': parseThemeColor(theme('colors.text-muted')),
-            '--tw-prose-hr': parseThemeColor(theme('colors.text-muted')),
-            '--tw-prose-quotes': parseThemeColor(theme('colors.text-muted')),
-            '--tw-prose-quote-borders': parseThemeColor(theme('colors.text-muted')),
-            '--tw-prose-captions': parseThemeColor(theme('colors.text-muted')),
-            '--tw-prose-code': parseThemeColor(theme('colors.text-base')),
-            '--tw-prose-pre-code': parseThemeColor(theme('colors.text-base')),
-            '--tw-prose-pre-bg': parseThemeColor(theme('colors.text-base')),
-            '--tw-prose-th-borders': parseThemeColor(theme('colors.border-input')),
-            '--tw-prose-td-borders': parseThemeColor(theme('colors.border-input')),
+            "--tw-prose-body": parseThemeColor(theme("colors.text-base")),
+            "--tw-prose-headings": parseThemeColor(theme("colors.text-title")),
+            "--tw-prose-lead": parseThemeColor(theme("colors.text-title")),
+            "--tw-prose-links": parseThemeColor(theme("colors.link")),
+            "--tw-prose-bold": "inherit",
+            "--tw-prose-counters": parseThemeColor(theme("colors.text-muted")),
+            "--tw-prose-bullets": parseThemeColor(theme("colors.text-muted")),
+            "--tw-prose-hr": parseThemeColor(theme("colors.text-muted")),
+            "--tw-prose-quotes": parseThemeColor(theme("colors.text-muted")),
+            "--tw-prose-quote-borders": parseThemeColor(
+              theme("colors.text-muted")
+            ),
+            "--tw-prose-captions": parseThemeColor(theme("colors.text-muted")),
+            "--tw-prose-code": parseThemeColor(theme("colors.text-base")),
+            "--tw-prose-pre-code": parseThemeColor(theme("colors.text-base")),
+            "--tw-prose-pre-bg": parseThemeColor(theme("colors.text-base")),
+            "--tw-prose-th-borders": parseThemeColor(
+              theme("colors.border-input")
+            ),
+            "--tw-prose-td-borders": parseThemeColor(
+              theme("colors.border-input")
+            ),
             a: {
-              'text-decoration': 'none',
-              '&:hover': {
-                'text-decoration': 'underline',
-                color: parseThemeColor(theme('colors.link-hover')),
+              "text-decoration": "none",
+              "&:hover": {
+                "text-decoration": "underline",
+                color: parseThemeColor(theme("colors.link-hover")),
               },
-            }
+            },
+            h1: {
+              "font-weight": 700,
+            },
           },
         },
       }),

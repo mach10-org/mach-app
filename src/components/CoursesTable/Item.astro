@@ -16,8 +16,8 @@ const isInProgress = params ? course.slug === `${params?.course}/${params?.slug}
 
 <li class='flex items-center space-x-3'>
   <IconTypes client:only='vue' index={index + 1} isInProgress={isInProgress} slug={course.slug} />
-  <h4 class='my-0'>
-    <a href={href} class='line-clamp-1'>
+  <h4 class='my-0 flex-1'>
+    <a href={href} class='line-clamp-1 block'>
       {title}
     </a>
   </h4>

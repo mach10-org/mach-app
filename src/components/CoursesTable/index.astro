@@ -34,9 +34,9 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
             const coursesByroup = grouped[key];
             return (
               <li class='space-y-4'>
-                <div class='p-3 border-l-[4px] border-border-input rounded-md bg-background-page'>
+                <div class='px-4 py-3 border-l-[4px] border-border-input rounded-md bg-background-page'>
                   <div>SECTION {idx + 1}</div>
-                  <h3 class='m-0'>{key}</h3>
+                  <h3 class='m-0 text-text-title'>{key}</h3>
                 </div>
                 <ul class='list-none p-0'>
                   {coursesByroup.map((c, idx) => {
