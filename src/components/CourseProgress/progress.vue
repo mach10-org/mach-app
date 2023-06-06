@@ -1,6 +1,6 @@
 <template>
   <div class="" v-if="percentage">
-    <div class="flex items-center flex-wrap px-4 lg:px-6 bg-background-base rounded-2xl" :class="widthHeight">
+    <div class="flex items-center flex-wrap px-4 lg:px-8 bg-background-base rounded-2xl" :class="widthHeight">
       <a :href="href" class='inline-flex items-center text-sm font-medium link mr-6 lg:mr-8'>
         &larr; {{title}}
       </a>
