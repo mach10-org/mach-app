@@ -202,6 +202,13 @@ module.exports = {
             '--tw-prose-pre-bg': parseThemeColor(theme('colors.text-base')),
             '--tw-prose-th-borders': parseThemeColor(theme('colors.border-input')),
             '--tw-prose-td-borders': parseThemeColor(theme('colors.border-input')),
+            a: {
+              'text-decoration': 'none',
+              '&:hover': {
+                'text-decoration': 'underline',
+                color: parseThemeColor(theme('colors.link-hover')),
+              },
+            }
           },
         },
       }),
