@@ -1,31 +1,22 @@
 <template>
   <section>
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
-      <div
-        class="w-full bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700"
-      >
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h2 class="text-center text-xl font-bold text-gray-900 dark:text-white">
             {{ user?.email }}
           </h2>
           <h3 class="text-center text-lg font-bold text-gray-900 dark:text-white">{{ xp }} XP</h3>
           <h4>
-            We’d love to learn more about you. Could you share with us what is your main goal
-            applying here? Even if it’s just curiosity, we’re interested to hear ☺. <br />This is
-            also helping us to know our audience and adapt our content accordingly.
+            We’d love to learn more about you. Could you share with us what is your main goal applying here? Even if it’s just curiosity, we’re interested to hear ☺. <br />This is also helping us to
+            know our audience and adapt our content accordingly.
           </h4>
 
-          <p class="text-center mb-2 font-light text-gray-500 dark:text-gray-400">
-            Update your profile !
-          </p>
+          <p class="text-center mb-2 font-light text-gray-500 dark:text-gray-400">Update your profile !</p>
 
           <form class="space-y-4 md:space-y-6">
             <div>
-              <label
-                for="full_name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Your firstname (how should we call you?)</label
-              >
+              <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your firstname (how should we call you?)</label>
               <input
                 type="text"
                 v-model="full_nameModel"
@@ -37,11 +28,7 @@
             </div>
 
             <div>
-              <label
-                for="gender"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Gender</label
-              >
+              <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
 
               <select
                 id="gender"
@@ -57,19 +44,11 @@
             </div>
 
             <div>
-              <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Birthdate</label
-              >
+              <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birthdate</label>
 
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg
-                    aria-hidden="true"
-                    class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fill-rule="evenodd"
                       d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
@@ -90,11 +69,7 @@
             </div>
 
             <div>
-              <label
-                for="education"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Education level</label
-              >
+              <label for="education" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Education level</label>
 
               <select
                 id="education"
@@ -111,11 +86,7 @@
             </div>
 
             <div>
-              <label
-                for="computer_xp"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Experience with computers</label
-              >
+              <label for="computer_xp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Experience with computers</label>
 
               <select
                 id="computer_xp"
@@ -125,24 +96,15 @@
               >
                 <option value="">Choose</option>
                 <option value="Never used it">Never used it</option>
-                <option value="I know how to use a computer but never did technical work">
-                  I know how to use a computer but never did technical work
-                </option>
-                <option value="I have already programming experience">
-                  I have already programming experience
-                </option>
+                <option value="I know how to use a computer but never did technical work">I know how to use a computer but never did technical work</option>
+                <option value="I have already programming experience">I have already programming experience</option>
               </select>
             </div>
 
             <div>
-              <label for="goal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >What is your goal with this program?</label
-              >
+              <label for="goal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">What is your goal with this program?</label>
               <div class="grid grid-cols-2 gap-2">
-                <div
-                  v-for="(value, index) in goalsList"
-                  class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700"
-                >
+                <div v-for="(value, index) in goalsList" class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
                   <input
                     :key="index"
                     :id="`goal-${index}`"
@@ -152,21 +114,13 @@
                     :value="value"
                     class="w-4 h-4 text-blue-500 bg-gray-100 border-gray-300 rounded checked:bg-blue-500 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
-                  <label
-                    :for="`goal-${index}`"
-                    class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >{{ value }}</label
-                  >
+                  <label :for="`goal-${index}`" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ value }}</label>
                 </div>
               </div>
             </div>
 
             <div>
-              <label
-                for="about"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Could you tell us more about you and your objectives ?</label
-              >
+              <label for="about" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Could you tell us more about you and your objectives ?</label>
 
               <textarea
                 id="about"
@@ -204,9 +158,7 @@
               Save
             </button>
             <div v-if="status.error" class="text-sm text-red-400">{{ status.error }}</div>
-            <div v-if="status.success" className="text-sm text-green-600">
-              Your profile has been saved
-            </div>
+            <div v-if="status.success" className="text-sm text-green-600">Your profile has been saved</div>
           </form>
         </div>
       </div>
@@ -221,15 +173,7 @@ import { onMounted, ref } from 'vue';
 import { useVModel } from '@nanostores/vue';
 
 // const firstname = useVModel(profileData, 'firstname');
-const {
-  full_nameModel,
-  genderModel,
-  dobModel,
-  educationModel,
-  computer_xpModel,
-  goalModel,
-  aboutModel
-} = useVModel(profileData, [
+const { full_nameModel, genderModel, dobModel, educationModel, computer_xpModel, goalModel, aboutModel } = useVModel(profileData, [
   'full_name',
   'gender',
   'dob',
