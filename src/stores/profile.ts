@@ -1,7 +1,8 @@
 import { action, map } from 'nanostores';
 import { persistentAtom } from '@nanostores/persistent';
-import { supabase, User } from '@utils/auth';
+import { User } from '@utils/auth';
 import { UserAppMetadata } from '@supabase/supabase-js';
+import { supabase } from '@utils/supabase';
 
 export interface Profile {
   id?: string;
@@ -70,7 +71,6 @@ export const updateUser = action(profile, 'updateUser', (store, data: UserAppMet
 export const upsertProfile = async (profile: Profile) => {
   try {
     const { data, error } = await supabase.from('profiles').upsert(profile).select().single();
-    console.log('upsertProfile', data);
 
     if (!error) {
       updateUser(data);

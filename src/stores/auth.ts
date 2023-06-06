@@ -1,9 +1,10 @@
 import { atom, action } from 'nanostores';
 import { persistentAtom, persistentMap } from '@nanostores/persistent';
 import moment from 'moment';
-import { supabase, User } from '@utils/auth';
+import { User } from '@utils/auth';
 import { profile, setUser, removeUser } from './profile';
-import { AuthResponse } from '@supabase/supabase-js';
+import { AuthResponse, UserMetadata } from '@supabase/supabase-js';
+import { supabase } from '@utils/supabase';
 
 export type JwToken = {
   expires_in: string | undefined;
@@ -53,6 +54,7 @@ export const logout = async (dbLogout = false) => {
 export const getUser = async (): Promise<User | null> => {
   const tokenData = token.get();
   const { access_token, expires_at: expires_at_str } = tokenData;
+  console.log('expires_at_str', expires_at_str);
 
   if (!access_token) {
     return null;
@@ -60,15 +62,24 @@ export const getUser = async (): Promise<User | null> => {
 
   const expires_at = expires_at_str ? parseInt(expires_at_str, 10) : null;
 
-  if (moment().isAfter(moment(expires_at))) {
-    return null;
+  if (expires_at && moment().isAfter(moment(expires_at))) {
+    const userProfile = await refreshToken();
+    console.log('userProfile refreshToken', userProfile);
+    return userProfile;
   }
 
   const userProfile = profile.get();
+  console.log('userProfile "session in the 3600 secondes"', userProfile);
 
   if (userProfile) {
     return userProfile;
   }
+
+  const userWidtProfileData = await fetchUser(access_token);
+  return userWidtProfileData;
+};
+
+export const fetchUser = async (access_token: string) => {
   try {
     const {
       data: { user },
@@ -78,27 +89,52 @@ export const getUser = async (): Promise<User | null> => {
       // logout();
       return null;
     }
-
     if (!user || user.role !== 'authenticated') {
       return null;
     }
-
-    const { data: userData, error: userError, status } = await supabase.from('profiles').select(`*`).single();
-
-    if (userData) {
-      user.user_metadata = userData;
-    }
-    setUser(user);
-
-    return user;
+    const userWidtProfileData = await getProfile(user);
+    return userWidtProfileData;
   } catch (error) {
-    console.log('error getUser', error);
+    return null;
   }
-
-  return null;
 };
 
-export const signinOrUp = async (email: string, emailRedirectTo: string): Promise<AuthResponse> => {
+export const getProfile = async (user: User) => {
+  try {
+    const { data, error, status } = await supabase.from('profiles').select(`*`).single();
+    // const { data, error } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+
+    if (data) {
+      user.user_metadata = data;
+    }
+    setUser(user);
+  } catch (error) {}
+
+  return user;
+};
+
+export const refreshToken = async () => {
+  let userWidtProfileData: User | null = null;
+  try {
+    const { data, error } = await supabase.auth.refreshSession();
+    const { session, user } = data;
+    if (error) {
+      throw error;
+    }
+    if (session) {
+      const { access_token, expires_in, refresh_token } = session;
+      saveToken({ access_token, expires_in: `${expires_in}`, refresh_token });
+      if (user) {
+        userWidtProfileData = await getProfile(user);
+      }
+    }
+    return userWidtProfileData;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const signinOrUp = async (email: string, emailRedirectTo: string) => {
   try {
     const response = await supabase.auth.signInWithOtp({
       email,

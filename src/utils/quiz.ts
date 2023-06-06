@@ -1,8 +1,9 @@
 import { QuizOption } from '@models/courses';
 import { getUser } from '@stores/auth';
 import { updateUser, upsertProfile } from '@stores/profile';
-import { supabase, User } from './auth';
+import { User } from './auth';
 import { UserMetadata } from '@supabase/supabase-js';
+import { supabase } from './supabase';
 
 /**
  * If answer is added && is the first time && is true = Add points

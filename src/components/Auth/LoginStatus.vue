@@ -15,7 +15,7 @@
     <!-- Dropdown menu -->
 
     <div
-      class="absolute min-w-[12rem] -translate-y-2 -translate-x-20 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+      class="absolute min-w-[12rem] inset-auto -translate-y-2 -translate-x-20 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
       id="user-dropdown"
       :class="{ hidden: !showMenu }"
     >
