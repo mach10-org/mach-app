@@ -24,6 +24,6 @@ const BASE_URL = import.meta.env.BASE_URL;
 const handleLogoutClick = () => {
   logout();
   removeUser();
-  window.location.assign(`${import.meta.env.BASE_URL}`);
+  window.location.assign(`${BASE_URL}`);
 };
 </script>

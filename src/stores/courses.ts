@@ -7,7 +7,7 @@ import { getUser } from '@stores/auth';
 export interface PayloadCourseTaken {
   course: string;
   slug: string;
-  href: Location;
+  href: string;
 }
 export interface CourseTaken {
   courseId: string;

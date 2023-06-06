@@ -1,9 +1,8 @@
-import { atom, action } from 'nanostores';
-import { persistentAtom, persistentMap } from '@nanostores/persistent';
+import { action } from 'nanostores';
+import { persistentMap } from '@nanostores/persistent';
 import moment from 'moment';
 import { User } from '@utils/auth';
 import { profile, setUser, removeUser } from './profile';
-import { AuthResponse, UserMetadata } from '@supabase/supabase-js';
 import { supabase } from '@utils/supabase';
 
 export type JwToken = {
@@ -12,17 +11,20 @@ export type JwToken = {
   refresh_token: string | undefined;
   access_token: string | undefined;
 };
-interface NewToken {
+
+export interface NewToken {
   access_token: string;
   expires_in: string;
   refresh_token: string;
 }
+
 const defaultTokenValues = {
   expires_in: undefined,
   expires_at: undefined,
   refresh_token: undefined,
   access_token: undefined
 };
+
 export const token = persistentMap<JwToken>('jwtoken:', defaultTokenValues);
 
 export const saveToken = action(token, 'token', (store, data: NewToken) => {
@@ -54,7 +56,6 @@ export const logout = async (dbLogout = false) => {
 export const getUser = async (): Promise<User | null> => {
   const tokenData = token.get();
   const { access_token, expires_at: expires_at_str } = tokenData;
-  console.log('expires_at_str', expires_at_str);
 
   if (!access_token) {
     return null;
@@ -64,12 +65,10 @@ export const getUser = async (): Promise<User | null> => {
 
   if (expires_at && moment().isAfter(moment(expires_at))) {
     const userProfile = await refreshToken();
-    console.log('userProfile refreshToken', userProfile);
     return userProfile;
   }
 
   const userProfile = profile.get();
-  console.log('userProfile "session in the 3600 secondes"', userProfile);
 
   if (userProfile) {
     return userProfile;

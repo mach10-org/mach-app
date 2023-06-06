@@ -20,24 +20,6 @@
       :class="{ hidden: !showMenu }"
     >
       <LoginStatusMenu />
-      <!-- <div class="px-4 py-3">
-        <span id="userName" class="block text-sm text-gray-900 dark:text-white">{{ $profile?.email }}</span>
-        <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ $profile?.user_metadata?.xp }} Points</span>
-      </div>
-      <ul class="py-2" aria-labelledby="user-menu-button">
-        <li>
-          <a :href="`${BASE_URL}profile/`" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profil</a>
-        </li>
-        <li>
-          <button
-            class="block text-left w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-            type="button"
-            @click="handleLogoutClick"
-          >
-            Sign out
-          </button>
-        </li>
-      </ul> -->
     </div>
   </div>
 
@@ -45,26 +27,19 @@
 </template>
 <script lang="ts" setup>
 import { UserCircleIcon } from '@heroicons/vue/24/outline';
-import { getUser, logout } from '@stores/auth';
+import { getUser } from '@stores/auth';
 import { isConnected, profile, removeUser, setUser } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
 import { onMounted, ref } from 'vue';
 import { OButton } from '@oruga-ui/oruga-next';
 import LoginStatusMenu from './LoginStatusMenu.vue';
 const $isConnected = useStore(isConnected);
-const $profile = useStore(profile);
 const BASE_URL = import.meta.env.BASE_URL;
 const showMenu = ref(false);
 
 onMounted(async () => {
   try {
-    const user = await getUser();
+    await getUser();
   } catch (error) {}
 });
-
-const handleLogoutClick = () => {
-  logout();
-  removeUser();
-  window.location.assign(`${import.meta.env.BASE_URL}`);
-};
 </script>
