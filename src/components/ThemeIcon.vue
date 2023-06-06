@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="toggleDarkMode"
+    @click="toggleTheme"
     type="button"
     class="theme-toggle rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
   >
@@ -10,7 +10,9 @@
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+      <path
+        d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+      ></path>
     </svg>
     <svg
       class="theme-toggle-light-icon w-6 h-5 hidden dark:block"
@@ -28,19 +30,18 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
-import { settings, toggleTheme } from '@stores/utils';
+import { onMounted } from "vue";
+import { settings, toggleTheme } from "@stores/utils";
 
 onMounted(() => {
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  const theme = settings.get().theme;
+  if (
+    theme === "dark" ||
+    (theme === "auto" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
     settings.setKey('theme', 'dark');
+    document.documentElement.classList.add("dark");
   }
-  const isDark = settings.get().theme === 'dark';
-  document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
 });
-
-const toggleDarkMode = function () {
-  document.documentElement.classList.toggle('dark');
-  toggleTheme();
-};
 </script>
