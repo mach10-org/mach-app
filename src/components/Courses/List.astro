@@ -1,6 +1,8 @@
 ---
-import Card from '@components/Card.astro';
+import Card from './Card.astro';
 import { getAllCourseIndex } from '@utils/collections';
 const courses = await getAllCourseIndex('courses');
 ---
-{courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)}
+<ul class="p-0">
+  {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)}
+</ul>

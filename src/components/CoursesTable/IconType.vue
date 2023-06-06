@@ -1,7 +1,9 @@
 <template>
-  <Icon v-if="courseStore?.length && isDone" name="CheckCircleIcon" :outline="true" client:only="vue" classes="w-6 h-6 text-green-500" />
-  <Icon v-if="isInProgress && !isDone" name="BeakerIcon" :outline="false" client:only="vue" classes="w-6 h-6 text-gray-500" />
-  <div v-if="!isInProgress && !isDone" class="self-center rounded-full border w-6 h-6 text-center">{{ index }}</div>
+  <div v-if="courseStore?.length && isDone" class="flex items-center justify-center rounded-full border border-border-input w-6 h-6">
+    <Icon name="CheckIcon" :outline="false" classes="w-4 h-4 text-green-500" />
+  </div>
+  <Icon v-if="isInProgress && !isDone" name="BeakerIcon" :outline="false" classes="w-6 h-6 text-text-muted" />
+  <div v-if="!isInProgress && !isDone" class="flex items-center justify-center rounded-full border border-border-input w-6 h-6">{{ index }}</div>
 </template>
 
 <script setup lang="ts">
