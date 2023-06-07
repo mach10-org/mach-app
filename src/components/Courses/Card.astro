@@ -10,10 +10,10 @@ const { remarkPluginFrontmatter } = (await course.render()) as CourseRender;
 // console.log('remarkPluginFrontmatter', remarkPluginFrontmatter);
 ---
 
-<li class='list-none p-0'>
-  <a href={`${import.meta.env.BASE_URL}${href}`} class="group bg-background-page flex items-center px-6 py-4 rounded no-underline transition-colors border border-border-input hover:bg-primary hover:border-primary">
+<li>
+  <a href={`${import.meta.env.BASE_URL}${href}`} class="link h-full group bg-background-base flex px-6 py-4 rounded no-underline transition-colors border border-border-input hover:bg-primary hover:border-primary">
     <div class="flex-1">
-      <h2 class='transition-colors m-0 text-xl text-link group-hover:text-white leading-6 mt-1'>{title}</h2>
+      <h2 class='transition-colors m-0 text-2xl lg:text-3xl text-link group-hover:text-white leading-6 lg:leading-7 mt-1 font-extrabold'>{title}</h2>
       <span class="transition-colors text-text-muted text-sm group-hover:text-white block mb-2"> 
         {remarkPluginFrontmatter?.minutesRead?.text && remarkPluginFrontmatter?.minutesRead?.text} 
         {

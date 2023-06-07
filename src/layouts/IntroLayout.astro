@@ -6,10 +6,9 @@ const { title, frontmatter, headings } = Astro.props;
 const pageTitle = title || frontmatter?.title;
 const props = frontmatter || Astro.props;
 const description = frontmatter?.description;
-const image = frontmatter?.image;
+const preview = frontmatter?.preview;
 const showTOC = frontmatter?.showTOC !== undefined ? frontmatter.showTOC : true;
-
-const hasHeader = pageTitle && image;
+const hasHeader = frontmatter?.hasHeader !== undefined ? frontmatter.hasHeader : false;
 ---
 
 <BaseLayout {...props}>
@@ -17,7 +16,8 @@ const hasHeader = pageTitle && image;
     {
       hasHeader && (
         <>
-          <header class="bg-[url('https://www.nippon.com/en/ncommon/contents/japan-data/1971940/1971940.jpg')] w-full h-[460px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative">
+          <header class="w-full h-[460px] xl:h-[537px] relative">
+            <img src={preview} class="absolute top-0 left-0 w-full h-full w-full object-cover -z-1" />
             <div class='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50' />
             <div class='absolute top-20 left-1/2 px-4 mx-auto w-full max-w-screen-xl -translate-x-1/2 xl:top-1/2 xl:-translate-y-1/2 xl:px-0'>
               <h1 class='mb-4 max-w-4xl text-2xl font-extrabold leading-none text-white sm:text-3xl lg:text-4xl'>{pageTitle}</h1>

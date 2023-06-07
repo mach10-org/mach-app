@@ -1,6 +1,6 @@
 <template>
   <div class="" v-if="percentage">
-    <div class="flex items-center flex-wrap px-4 lg:px-6 bg-background-base rounded-2xl" :class="widthHeight">
+    <div class="flex items-center flex-wrap px-4 lg:px-8 bg-background-base rounded-2xl" :class="widthHeight">
       <a :href="href" class="inline-flex items-center text-sm font-medium link mr-6 lg:mr-8"> &larr; {{ title }} </a>
       <div class="flex items-center justify-center -my-6 overflow-hidden bg-background-base rounded-full">
         <svg class="" :class="svgSizeClass" x-cloak aria-hidden="true">

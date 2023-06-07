@@ -1,8 +1,10 @@
 ---
+import { Picture } from '@astrojs/image/components';
+
 export interface Props {
-  imageSrc: string;
+  imageSrc: any;
   imageAlt: string;
-  imageSrc2?: string;
+  imageSrc2?: any;
   imageAlt2?: string;
   imagePosition: 'left' | 'right';
   addSeparator?: boolean;
@@ -10,10 +12,14 @@ export interface Props {
 const { imageSrc, imagePosition, imageAlt, addSeparator, imageSrc2, imageAlt2 } = Astro.props;
 
 const has2Images = imageSrc2 !== undefined
+const widths = [464, 928, 576, 1152]
+const sizes = "(min-width: 1024px) 464px, (min-width: 1280px) 576px"
+const widths2Images = [280, 560, 224, 448]
+const sizes2Images = "(min-width: 1024px) 224px, (min-width: 1280px) 280px"
 ---
 <section class="">
   <div class="container mx-auto py-8 gap-8 items-center lg:grid lg:grid-cols-2 xl:gap-16">
-    { imagePosition === 'left' && <img src={imageSrc} alt={imageAlt} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
+    { imagePosition === 'left' && <Picture src={imageSrc} alt={imageAlt} widths={widths} sizes={sizes} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
     <div>
       <h2 class="mb-4 text-4xl tracking-tight font-bold text-text-title">
         <slot name="title" />
@@ -24,11 +30,11 @@ const has2Images = imageSrc2 !== undefined
       { addSeparator && <div class="mt-7 border-t border-border-input"/> }
       <slot />
     </div>
-    { imagePosition === 'right' && !has2Images && <img src={imageSrc} alt={imageAlt} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
+    { imagePosition === 'right' && !has2Images && <Picture src={imageSrc} alt={imageAlt} widths={widths} sizes={sizes} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
     { imagePosition === 'right' && has2Images && (
       <div class="grid grid-cols-2 gap-4 mt-8">
-        <img class="w-full rounded-lg" src={imageSrc} alt={imageAlt}>
-        <img class="mt-4 w-full lg:mt-10 rounded-lg" src={imageSrc2} alt={imageAlt}>
+        <Picture class="w-full rounded-lg" src={imageSrc} alt={imageAlt} widths={widths2Images} sizes={sizes2Images} />
+        <Picture class="mt-4 w-full lg:mt-10 rounded-lg" src={imageSrc2} alt={imageAlt} widths={widths2Images} sizes={sizes2Images} />
       </div>
     )}
   </div>
