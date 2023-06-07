@@ -2,7 +2,7 @@
 import { Picture } from '@astrojs/image/components';
 
 export interface Props {
-  imageSrc: string;
+  imageSrc: any;
   imageAlt: string;
   imageSrc2?: string;
   imageAlt2?: string;
@@ -17,7 +17,7 @@ const sizes = "(min-width: 1024px) 464px, (min-width: 1280px) 576px"
 ---
 <section class="">
   <div class="container mx-auto py-8 gap-8 items-center lg:grid lg:grid-cols-2 xl:gap-16">
-    { imagePosition === 'left' && <Picture src={import(`../../assets${imageSrc}` /* @vite-ignore */)} alt={imageAlt} widths={widths} sizes={sizes} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
+    { imagePosition === 'left' && <Picture src={imageSrc} alt={imageAlt} widths={widths} sizes={sizes} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
     <div>
       <h2 class="mb-4 text-4xl tracking-tight font-bold text-text-title">
         <slot name="title" />
@@ -28,7 +28,7 @@ const sizes = "(min-width: 1024px) 464px, (min-width: 1280px) 576px"
       { addSeparator && <div class="mt-7 border-t border-border-input"/> }
       <slot />
     </div>
-    { imagePosition === 'right' && !has2Images && <Picture src={import(`../../assets${imageSrc}` /* @vite-ignore */)} alt={imageAlt} widths={widths} sizes={sizes} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
+    { imagePosition === 'right' && !has2Images && <Picture src={imageSrc} alt={imageAlt} widths={widths} sizes={sizes} class="hidden mb-4 w-full lg:mb-0 lg:flex rounded-lg" /> }
     { imagePosition === 'right' && has2Images && (
       <div class="grid grid-cols-2 gap-4 mt-8">
         <img class="w-full rounded-lg" src={imageSrc} alt={imageAlt}>

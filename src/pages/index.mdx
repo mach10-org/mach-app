@@ -63,7 +63,7 @@ import CheckListItem from '@components/Block/CheckListItem.astro'
   </CardSmall>
 </TitleDescriptionWithCards>
 
-<TitleDescriptionImage imageSrc="/img/home-no-experience-needed.jpg" imagePosition="right" imageAlt="office feature image" addSeparator={true}>
+<TitleDescriptionImage imageSrc={import("../assets/img/home-no-experience-needed.jpg")} imagePosition="right" imageAlt="office feature image" addSeparator={true}>
   <NoTag slot="title">No experience needed</NoTag>
   <NoTag slot="description">
     Many online courses assume you have already some programming background or even math. We are focused on bringing people from level 0.
@@ -86,7 +86,7 @@ import CheckListItem from '@components/Block/CheckListItem.astro'
   </div>
 </TitleDescriptionImage>
 
-<TitleDescriptionImage imageSrc="/img/home-invest-in-yourself.jpg" imagePosition="left" imageAlt="office feature image" addSeparator={true}>
+<TitleDescriptionImage imageSrc={import("../assets/img/home-invest-in-yourself.jpg")} imagePosition="left" imageAlt="office feature image" addSeparator={true}>
   <NoTag slot="title">Invest in yourself</NoTag>
   <NoTag slot="description">
     Creating software is an art and even a way of thinking. Wether you consider changing career in the future or just by curiosity, learning to code will transform your life for the better.

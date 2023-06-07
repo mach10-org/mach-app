@@ -34,7 +34,7 @@ import CheckListItem from '@components/Block/CheckListItem.astro'
   </NoTag>
 </TitleDescription>
 
-<TitleDescriptionImage imageSrc="/img/free-our-secret-sauce.jpg" imagePosition="left" imageAlt="feature image" addSeparator={true}>
+<TitleDescriptionImage imageSrc={import("../assets/img/free-our-secret-sauce.jpg")} imagePosition="left" imageAlt="feature image" addSeparator={true}>
   <NoTag slot="title">Our secret sauce 👨‍🍳</NoTag>
   <NoTag slot="description">
     Yes, creating content and training people usually costs money. Here are our secret sauce recipe.
