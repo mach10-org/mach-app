@@ -8,8 +8,7 @@ const props = frontmatter || Astro.props;
 const description = frontmatter?.description;
 const preview = frontmatter?.preview;
 const showTOC = frontmatter?.showTOC !== undefined ? frontmatter.showTOC : true;
-
-const hasHeader = pageTitle && preview;
+const hasHeader = frontmatter?.hasHeader !== undefined ? frontmatter.hasHeader : false;
 ---
 
 <BaseLayout {...props}>

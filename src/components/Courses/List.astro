@@ -3,6 +3,11 @@ import Card from './Card.astro';
 import { getAllCourseIndex } from '@utils/collections';
 const courses = await getAllCourseIndex('courses');
 ---
-<ul class="p-0">
-  {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)}
-</ul>
+<div>
+  <div class="container mx-auto py-8">
+    <h1 class="text-text-title max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl"><slot name="title" /></h1>
+    <ul class="p-0 grid mt-10 lg:mt-13 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-12">
+      {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)}
+    </ul>
+  </div>
+</div>
