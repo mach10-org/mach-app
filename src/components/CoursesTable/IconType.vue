@@ -12,7 +12,7 @@ import Icon from '@components/DynamicHeroIcon.vue';
 import { useStore } from '@nanostores/vue';
 const courseStore = useStore(courseTaken);
 
-defineProps({
+const props = defineProps({
   isInProgress: Boolean,
   index: Number,
   slug: String,

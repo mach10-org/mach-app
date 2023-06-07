@@ -12,6 +12,7 @@ export type Props = {
 };
 const { courseId, courses, params } = Astro.props;
 
+
 const grouped: GroupCourse = courses?.reduce((acc, curr) => {
   const { section = '' } = curr.data as CourseDataProps;
   if (!acc[section]) acc[section] = []; //If this type wasn't previously stored
@@ -23,6 +24,6 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
 <div id='course-toc'>
   <nav>
     <h2 class='mt-0'>Table of content</h2>
-    <Menu client:only='vue' grouped={grouped} params={params} baseUrl={import.meta.env.BASE_URL} />
+    <Menu client:only='vue' grouped={grouped} params={params || {course:courseId}} baseUrl={import.meta.env.BASE_URL} />
   </nav>
 </div>
