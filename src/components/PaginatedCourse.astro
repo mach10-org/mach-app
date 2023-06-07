@@ -3,27 +3,33 @@ import { coursePager } from '@utils/collections';
 import { Collection } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
 import Spinner from './svg/Spinner.astro';
+import Icon from '@components/DynamicHeroIcon.vue';
+import { getCourseInfo } from '@utils/collections';
 
 export interface Props {
   course?: string;
   slug?: string;
+  title: string;
 }
 
-const { course, slug } = Astro.props;
+const { course, slug, title } = Astro.props;
+const courseInfo = await getCourseInfo('courses', `${course}`);
+
 let prev: CollectionEntry<Collection> | null = null;
 let next: CollectionEntry<Collection> | null = null;
 let showPager = false;
-let href: string = `${import.meta.env.BASE_URL}`;
+let nextLink: string = `${import.meta.env.BASE_URL}`;
 if (course && slug) {
   const result = await coursePager(course as string, slug as string);
+
   prev = result.prevEntry;
   next = result.nextEntry;
   showPager = prev !== null || next !== null;
-  href = `${next?.collection}/${next?.slug}/`;
+  nextLink = `${next?.collection}/${next?.slug}/`;
 }
 ---
 
-<astro-message-wrapper data-message={JSON.stringify({ course, slug, href })}>
+<astro-message-wrapper data-message={JSON.stringify({ course, slug, next: nextLink, courseInfo, title })}>
   {
     showPager && (
       <div class='flex flex-col justify-start md:flex-row md:items-center md:justify-between pt-6 md:pt-8'>
@@ -32,9 +38,8 @@ if (course && slug) {
             href={`${import.meta.env.BASE_URL}${prev?.collection}/${prev?.slug}/`}
             class='inline-flex items-center px-4 py-2 text-sm font-medium group bg-background-page rounded-lg transition-colors border border-border-input text-link hover:text-white hover:bg-primary hover:border-primary hover:no-underline mr-auto'
           >
-            <svg aria-hidden='true' class='w-5 h-5 mr-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
-              <path fill-rule='evenodd' d='M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z' clip-rule='evenodd' />
-            </svg>
+            <Icon name='ArrowLeftIcon' outline={true} classes='w-5 h-5 mr-2' />
+
             <div class='ml-2'>
               <span class='transition-colors text-text-muted group-hover:text-white'>Previous chapter:</span> <br />
               {prev?.data.title}
@@ -47,18 +52,15 @@ if (course && slug) {
             href={`${import.meta.env.BASE_URL}${next?.collection}/${next?.slug}/`}
             class='ml-auto inline-flex items-center px-4 py-2 text-sm font-medium group bg-background-page rounded-lg transition-colors border border-border-input text-link hover:text-white hover:bg-primary hover:border-primary hover:no-underline mt-2 md:mt-0'
           >
-            <Spinner />
+            <span class='hidden loading-spinner'>
+              <Spinner />
+            </span>
             <div class='mr-2'>
               <span class='transition-colors text-text-muted group-hover:text-white'>Next chapter:</span> <br />
               {next?.data.title}
             </div>
-            <svg aria-hidden='true' class='w-5 h-5 ml-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
-              <path
-                fill-rule='evenodd'
-                d='M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z'
-                clip-rule='evenodd'
-              />
-            </svg>
+
+            <Icon name='ArrowRightIcon' outline={true} classes='w-5 h-5 ml-2' />
           </a>
         )}
       </div>
@@ -72,23 +74,30 @@ if (course && slug) {
   class AstroMessageWrapper extends HTMLElement {
     constructor() {
       super();
+      if (!this?.dataset?.message) {
+        return;
+      }
+      const data: PayloadCourseTaken = JSON.parse(this.dataset.message);
+      // console.log('data', data);
+
       const button = this.querySelector('#goto-next-chapter');
-      button?.addEventListener('click', async (e) => {
-        console.log('button', button);
+      if (button) {
+        button?.addEventListener('click', onClickNext);
+      }
+      async function onClickNext(this: HTMLElement, ev: Event) {
+        ev.preventDefault();
+        this.removeEventListener('click', onClickNext);
 
-        e.preventDefault();
-        if (this?.dataset?.message) {
-          const data: PayloadCourseTaken = JSON.parse(this.dataset.message);
-          let url = data.href;
-          window.location.assign(`${import.meta.env.BASE_URL}${url}`);
+        const loader = button?.querySelector('.loading-spinner');
+        loader?.classList.toggle('hidden');
+        try {
+          await setCourseTaken(data);
+        } catch (error) {}
+        let url = data.next;
+        window.location.assign(`${import.meta.env.BASE_URL}${url}`);
+      }
 
-          try {
-            await setCourseTaken(data);
-          } catch (error) {}
-        }
-
-        console.log('Click event done');
-      });
+      console.log('Click event done');
     }
   }
 

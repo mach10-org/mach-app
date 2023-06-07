@@ -1,6 +1,6 @@
-import { Collection, CoursesDirectory, Render } from '@models/courses';
+import { Collection, CourseRender, CoursesDirectory, CoursesInfos, Render } from '@models/courses';
 import { CollectionEntry, getCollection, getEntry } from 'astro:content';
-const idxKey = '/README';
+export const idxKey = '/README';
 
 /**
  *
@@ -57,6 +57,40 @@ export const getCourseIndex = async (collection: Collection, course: string) => 
     }
   } catch (error) {}
   return entryResult;
+};
+
+/**
+ *
+ * @param course
+ * @returns get course title, number of lessons and total duration
+ */
+export const getCourseInfo = async (collection: Collection, course: string) => {
+  let result: CoursesInfos | null = null;
+  try {
+    const entry = await getEntry(collection, `${course}${idxKey.toLowerCase()}`);
+
+    if (entry) {
+      const lessons = await getCourseLessons(collection, `${course}`);
+      const lessonsData = await Promise.all(
+        lessons.map(async (l) => {
+          const { remarkPluginFrontmatter } = (await l.render()) as CourseRender;
+          return remarkPluginFrontmatter?.minutesRead;
+        })
+      );
+
+      const duration = lessonsData.reduce((acc, minutesRead) => {
+        return acc + minutesRead.minutes;
+      }, 0);
+
+      result = {
+        title: entry.data.title,
+        quantity: lessons.length,
+        duration
+      };
+    }
+  } catch (error) {}
+
+  return result;
 };
 
 /**

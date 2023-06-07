@@ -2,6 +2,12 @@ import { MarkdownHeading } from 'astro';
 import { AstroComponentFactory } from 'astro/dist/runtime/server';
 import { CollectionEntry } from 'astro:content';
 
+export interface CoursesInfos {
+  title: string;
+  quantity: number;
+  duration: number;
+}
+
 export interface CoursesDirectoryProp {
   slugs?: string[];
   courses?: CollectionEntry<Collection>[];
@@ -63,3 +69,6 @@ export interface CourseRender extends Render {
     minutesRead: MinutesRead;
   };
 }
+export type GroupCourse = {
+  [key: string]: CollectionEntry<Collection>[];
+};

@@ -26,13 +26,13 @@ export async function getStaticPaths() {
   });
 }
 
-const { course, slug } = Astro.params;
+const { course, slug: lessonSlug } = Astro.params;
 const { entry, courses } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
 
 let params: CourseParams | undefined = undefined;
-if (course && slug) {
-  params = { course, slug };
+if (course && lessonSlug) {
+  params = { course, slug: lessonSlug };
 }
 ---
 
@@ -41,5 +41,5 @@ if (course && slug) {
   <Content />
   {entry?.data?.quiz && <Quiz client:only='vue' slug={`${course}/${slug}/`} label={entry.data.quiz.label} options={entry.data.quiz.options} />}
 
-  <PaginatedCourse {...{ course, slug }} />
+  <PaginatedCourse {...{ course, slug: lessonSlug, title: entry.data.title }} />
 </ContentLayout>

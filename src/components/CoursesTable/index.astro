@@ -1,8 +1,7 @@
 ---
-import { Collection, CollectionStaticProps, CourseDataProps } from '@models/courses';
+import { Collection, CourseDataProps, GroupCourse } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
-import CoursesTableItem from './Item.astro';
-
+import Menu from './Menu.vue';
 export type Props = {
   courseId: string;
   courses: CollectionEntry<Collection>[];
@@ -10,9 +9,6 @@ export type Props = {
     course: string;
     slug: string;
   };
-};
-type GroupCourse = {
-  [key: string]: CollectionEntry<Collection>[];
 };
 const { courseId, courses, params } = Astro.props;
 
@@ -27,29 +23,6 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
 <div id='course-toc'>
   <nav>
     <h2 class='mt-0'>Table of content</h2>
-    <ul class='list-none space-y-8 p-0 text-sm'>
-      {
-        grouped &&
-          Object.keys(grouped).map((key, idx) => {
-            const coursesByroup = grouped[key];
-            return (
-              <li class='space-y-4'>
-                <div class='px-4 py-3 border-l-[4px] border-border-input rounded-md bg-background-page'>
-                  <div>SECTION {idx + 1}</div>
-                  <h3 class='m-0 text-text-title'>{key}</h3>
-                </div>
-                <ul class='list-none p-0'>
-                  {coursesByroup.map((c, idx) => {
-                    return <CoursesTableItem index={idx} course={c} params={params} />;
-                  })}
-                </ul>
-              </li>
-            );
-          })
-      }
-    </ul>
+    <Menu client:only='vue' grouped={grouped} params={params} baseUrl={import.meta.env.BASE_URL} />
   </nav>
 </div>
-
-<style></style>
-<script></script>

@@ -33,13 +33,17 @@ import { useStore } from '@nanostores/vue';
 import { onMounted, ref } from 'vue';
 import { OButton } from '@oruga-ui/oruga-next';
 import LoginStatusMenu from './LoginStatusMenu.vue';
+import { getCourseTaken } from '@stores/courses';
 const $isConnected = useStore(isConnected);
 const BASE_URL = import.meta.env.BASE_URL;
 const showMenu = ref(false);
 
 onMounted(async () => {
   try {
-    await getUser();
+    const user = await getUser();
+    if (user) {
+      getCourseTaken(user.id);
+    }
   } catch (error) {}
 });
 </script>
