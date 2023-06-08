@@ -10,7 +10,6 @@ export const getAllCourseIndex = async (collection: Collection) => {
   const list = await getCollection(collection, ({ id, data }) => {
     return data.draft !== true && id.toLowerCase().includes(idxKey.toLowerCase());
   });
-
   const test = list.map((c) => {
     const slug: any = c.slug.toLowerCase().replace(idxKey.toLowerCase(), '/');
     c.slug = slug;
@@ -38,6 +37,18 @@ export const getCourseLessons = async (collection: Collection, course: string) =
 export const getAllCollectionLessons = async (collection: Collection) => {
   return await getCollection(collection, ({ data, id }) => {
     return data.draft !== true && !id.toLowerCase().includes(idxKey.toLowerCase());
+  });
+};
+
+/**
+ *
+ * @returns All active lessons for a list of courses
+ */
+export const getAllLessonsPerCourse = async (collection: Collection, courses: string[]) => {
+  return await getCollection(collection, ({ data, id }) => {
+    const lessonId = id.toLowerCase();
+    const courseIndexId = idxKey.toLowerCase();
+    return data.draft !== true && !lessonId.includes(courseIndexId) && !!courses.find((course) => lessonId.includes(course));
   });
 };
 

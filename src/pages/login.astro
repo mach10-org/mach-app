@@ -1,6 +1,6 @@
 ---
 import LoginOrRegister from '@components/Auth/LoginOrRegister.vue';
-import ContentLayout from '@layouts/ContentLayout.astro';
+import MainLayout from '@layouts/MainLayout.astro';
 
 const pageData = {
   title: 'Mach10',
@@ -8,6 +8,15 @@ const pageData = {
 };
 ---
 
-<ContentLayout {...pageData}>
+<MainLayout {...pageData}>
   <LoginOrRegister client:only='vue' />
-</ContentLayout>
+</MainLayout>
+
+<script>
+  import { getUser } from '@stores/auth';
+  const BASE_URL = import.meta.env.BASE_URL;
+  const user = await getUser();
+  if (user) {
+    window.location.assign(`${BASE_URL}`);
+  }
+</script>
