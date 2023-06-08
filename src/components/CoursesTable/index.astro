@@ -2,6 +2,7 @@
 import { Collection, CourseDataProps, GroupCourse } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
 import Icon from '@components/DynamicHeroIcon.vue';
+import Group from './Group.astro';
 
 export type CompProps = {
   courseId: string;
@@ -38,34 +39,7 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
           grouped &&
             Object.keys(grouped).map((key, idx) => {
               const coursesByroup = grouped[key];
-              return (
-                <li class='space-y-4'>
-                  <div class='p-3 bg-gray-200 border border-gray-200 rounded-md '>
-                    <div>SECTION {idx + 1}</div>
-                    <h3 class='m-0'>{key}</h3>
-                  </div>
-                  <ul class='list-none p-0' data-section={key}>
-                    {coursesByroup.map((c, idx) => {
-                      const href = `${import.meta.env.BASE_URL}${c.collection}/${c.slug}/`;
-                      // const isInProgress = params ? c.slug === `${params?.course}/${params?.slug}` : false;
-                      const { title } = c?.data as CourseDataProps;
-                      const index = idx + 1;
-                      return (
-                        <li class='flex items-center space-x-3' data-slug={c.slug}>
-                          <div class='lesson-idx flex items-center justify-center rounded-full border border-border-input w-6 h-6'>{index}</div>
-                          <Icon client:load name='ShieldCheckIcon' outline={true} classes='is-done hidden w-6 h-6  text-green-500' />
-                          <Icon client:load name='BeakerIcon' outline={false} classes='in-progress hidden w-6 h-6 text-text-muted' />
-                          <h4 class='my-0 flex-1'>
-                            <a href={href} class='line-clamp-1 block'>
-                              {title}
-                            </a>
-                          </h4>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
-              );
+              return <Group courses={coursesByroup} key={key} sectionIdx={idx} />;
             })
         }
       </ul>
@@ -93,7 +67,6 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
         }
         onSet(courseTaken, ({ newValue, abort }) => {
           const listVisible = newValue.find((l) => l.slug === courseId);
-          console.log('listVisible', listVisible);
           listVisible?.learning_lesson.forEach((lesson) => {
             const id = `${courseId}/${lesson.slug}`;
             const lessonDone = toc.find(`[data-slug="${id}"]`);
@@ -116,5 +89,3 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
 
   customElements.define('astro-toc-wrapper', AstroTOCWrapper);
 </script>
-<!-- <IconTypes client:only='vue' done={false} index={idx + 1} isInProgress={isInProgress} slug={c.slug} /> -->
-<!-- define:vars={{ courseId }} -->

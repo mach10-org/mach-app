@@ -1,0 +1,26 @@
+---
+import { Collection, CourseDataProps, GroupCourse } from '@models/courses';
+import { CollectionEntry } from 'astro:content';
+import Icon from '@components/DynamicHeroIcon.vue';
+
+type Props = {
+  lessonIdx: number;
+  course: CollectionEntry<Collection>;
+};
+const { course, lessonIdx } = Astro.props;
+
+const href = `${import.meta.env.BASE_URL}${course.collection}/${course.slug}/`;
+const { title } = course?.data as CourseDataProps;
+const index = lessonIdx + 1;
+---
+
+<li class='flex items-center space-x-3' data-slug={course.slug}>
+  <div class='lesson-idx flex items-center justify-center rounded-full border border-border-input w-6 h-6'>{index}</div>
+  <Icon client:load name='ShieldCheckIcon' outline={true} classes='is-done hidden w-6 h-6  text-green-500' />
+  <Icon client:load name='BeakerIcon' outline={false} classes='in-progress hidden w-6 h-6 text-text-muted' />
+  <h4 class='my-0 flex-1'>
+    <a href={href} class='line-clamp-1 block'>
+      {title}
+    </a>
+  </h4>
+</li>
