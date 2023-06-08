@@ -56,6 +56,9 @@ export interface CourseDataProps {
   description: string;
   lastmod: Date;
   section?: string;
+  preview: string;
+  previewRatio: `${number}:${number}`;
+  tags: string[];
 }
 export interface MinutesRead {
   text: string;
