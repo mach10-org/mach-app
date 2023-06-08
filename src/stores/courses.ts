@@ -48,6 +48,7 @@ export const setCourseTaken = action(courseTaken, 'setCourseTaken', async (store
     let res: boolean = false;
     if (user) {
       res = await saveCourse(user.id, payload);
+      getCourseTaken(user.id);
     }
     return res;
   } catch (error) {}
