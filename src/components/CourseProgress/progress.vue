@@ -1,8 +1,8 @@
 <template>
-  <div class="" v-if="percentage">
+  <div class="">
     <div class="flex items-center flex-wrap px-4 lg:px-8 bg-background-base rounded-2xl" :class="widthHeight">
       <a :href="href" class="inline-flex items-center text-sm font-medium link mr-6 lg:mr-8"> &larr; {{ title }} </a>
-      <div class="flex items-center justify-center -my-6 overflow-hidden bg-background-base rounded-full">
+      <div v-if="percentage" class="flex items-center justify-center -my-6 overflow-hidden bg-background-base rounded-full">
         <svg class="" :class="svgSizeClass" x-cloak aria-hidden="true">
           <circle class="text-border-input" stroke-width="10" stroke="currentColor" fill="transparent" :r="radius" :cx="circle" :cy="circle" />
           <circle
@@ -20,7 +20,7 @@
         </svg>
         <span class="absolute text-md text-text-base">{{ percentage }}% </span>
       </div>
-      <p class="hidden ml-3 font-medium text-text-base md:text-lg lg:block">Completion</p>
+      <p v-if="percentage" class="hidden ml-3 font-medium text-text-base md:text-lg lg:block">Completion</p>
 
       <div class="flex whitespace-nowrap ml-auto items-center relative" v-if="isDone">
         <Icon name="CheckCircleIcon" :outline="true" classes="w-6 h-6 text-green-500 mr-1" />

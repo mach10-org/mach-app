@@ -10,7 +10,6 @@ import { getCourseIndex } from '@utils/collections';
 const { courseDir, frontmatter, params } = Astro.props;
 const collection = 'courses';
 const courseIndex = await getCourseIndex(collection, `${params?.course}/readme`);
-// console.log('courseDir', courseDir);
 
 type Props = {
   frontmatter: Record<string, any>;
@@ -24,12 +23,12 @@ type Props = {
 
   <ErrorMessage client:only='vue' />
   <main class='content-page prose prose-lg lg:prose-xl bg-background-base rounded'>
-    <div class="text-text-muted text-base mb-2">
-      { frontmatter?.minutesRead?.text }
+    <div class='text-text-muted text-base mb-2'>
+      {frontmatter?.minutesRead?.text}
       {
         frontmatter?.lastmod && (
           <time>
-            <span class="text-border-input mx-2">|</span> {moment(frontmatter.lastmod).format('LLLL')}
+            <span class='text-border-input mx-2'>|</span> {moment(frontmatter.lastmod).format('LLLL')}
           </time>
         )
       }
