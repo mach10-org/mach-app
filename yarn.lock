@@ -799,6 +799,7 @@ __metadata:
     astro-auto-import: ^0.3.0
     astro-diagram: ^0.7.0
     autoprefixer: ^10.4.14
+    cash-dom: ^8.1.5
     colord: ^2.9.3
     cookie: ^0.5.0
     flowbite: ^1.6.2
@@ -2100,6 +2101,13 @@ __metadata:
   version: 1.0.30001495
   resolution: "caniuse-lite@npm:1.0.30001495"
   checksum: c0a139a2e679ca60ae1ce2aaf0e9f5850cc1016b3735200cc1a1347bd7737f0a2a5993bc3f88f43a13ec687befffdae212a849f782702a6fe488de123e92351e
+  languageName: node
+  linkType: hard
+
+"cash-dom@npm:^8.1.5":
+  version: 8.1.5
+  resolution: "cash-dom@npm:8.1.5"
+  checksum: b5d914604d21aae575662a39f149fd4984fe99f4663f567fdfe5104c88797949bf6a022a40be0ecb880fb306d84b853d6080abdb5aa178b38901e231f8fb4f2c
   languageName: node
   linkType: hard
 

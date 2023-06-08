@@ -40,7 +40,7 @@ const { Content, headings, remarkPluginFrontmatter } = await entry.render();
 
   <Content />
 
-  {Astro.params?.course && <CoursesTable courseId={Astro.params.course} courses={courses} />}
+  {Astro.params?.course && <CoursesTable courseId={Astro.params.course} courses={courses} coursePage={true} />}
 
   <!-- {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)} -->
 </PageLayout>

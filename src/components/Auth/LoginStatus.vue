@@ -27,8 +27,8 @@
 </template>
 <script lang="ts" setup>
 import { UserCircleIcon } from '@heroicons/vue/24/outline';
-import { getUser } from '@stores/auth';
-import { isConnected, profile, removeUser, setUser } from '@stores/profile';
+import { getUser, logout } from '@stores/auth';
+import { isConnected, removeUser } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
 import { onMounted, ref } from 'vue';
 import { OButton } from '@oruga-ui/oruga-next';
@@ -41,8 +41,12 @@ const showMenu = ref(false);
 onMounted(async () => {
   try {
     const user = await getUser();
+
     if (user) {
       getCourseTaken(user.id);
+    } else {
+      logout();
+      removeUser();
     }
   } catch (error) {}
 });

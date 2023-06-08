@@ -1,17 +1,24 @@
 ---
 import { Collection, CourseDataProps, GroupCourse } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
-import Menu from './Menu.vue';
-export type Props = {
+import Icon from '@components/DynamicHeroIcon.vue';
+
+export type CompProps = {
   courseId: string;
-  courses: CollectionEntry<Collection>[];
+  coursePage?: boolean;
+  pathname?: string;
   params?: {
     course: string;
     slug: string;
   };
 };
-const { courseId, courses, params } = Astro.props;
 
+export type Props = CompProps & {
+  courses: CollectionEntry<Collection>[];
+};
+const { courseId, courses, params, coursePage } = Astro.props;
+
+const { pathname } = Astro.url;
 
 const grouped: GroupCourse = courses?.reduce((acc, curr) => {
   const { section = '' } = curr.data as CourseDataProps;
@@ -21,9 +28,93 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
 }, {});
 ---
 
-<div id='course-toc'>
-  <nav>
-    <h2 class='mt-0'>Table of content</h2>
-    <Menu client:only='vue' grouped={grouped} params={params || {course:courseId}} baseUrl={import.meta.env.BASE_URL} />
-  </nav>
-</div>
+<astro-toc-wrapper data-message={JSON.stringify({ courseId, params, pathname, coursePage })}>
+  <div id='course-toc'>
+    <nav>
+      <h2 class='mt-0'>Table of content</h2>
+
+      <ul class='list-none space-y-8 p-0 text-sm' data-course={courseId}>
+        {
+          grouped &&
+            Object.keys(grouped).map((key, idx) => {
+              const coursesByroup = grouped[key];
+              return (
+                <li class='space-y-4'>
+                  <div class='p-3 bg-gray-200 border border-gray-200 rounded-md '>
+                    <div>SECTION {idx + 1}</div>
+                    <h3 class='m-0'>{key}</h3>
+                  </div>
+                  <ul class='list-none p-0' data-section={key}>
+                    {coursesByroup.map((c, idx) => {
+                      const href = `${import.meta.env.BASE_URL}${c.collection}/${c.slug}/`;
+                      // const isInProgress = params ? c.slug === `${params?.course}/${params?.slug}` : false;
+                      const { title } = c?.data as CourseDataProps;
+                      const index = idx + 1;
+                      return (
+                        <li class='flex items-center space-x-3' data-slug={c.slug}>
+                          <div class='lesson-idx flex items-center justify-center rounded-full border border-border-input w-6 h-6'>{index}</div>
+                          <Icon client:load name='ShieldCheckIcon' outline={true} classes='is-done hidden w-6 h-6  text-green-500' />
+                          <Icon client:load name='BeakerIcon' outline={false} classes='in-progress hidden w-6 h-6 text-text-muted' />
+                          <h4 class='my-0 flex-1'>
+                            <a href={href} class='line-clamp-1 block'>
+                              {title}
+                            </a>
+                          </h4>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+              );
+            })
+        }
+      </ul>
+    </nav>
+  </div>
+</astro-toc-wrapper>
+
+<script>
+  import $ from 'cash-dom';
+  import { CompProps } from './index.astro';
+  import { courseTaken } from '@stores/courses';
+  import { onSet } from 'nanostores';
+
+  class AstroTOCWrapper extends HTMLElement {
+    constructor() {
+      super();
+      if (!this?.dataset?.message) {
+        return;
+      }
+      const { courseId, params, pathname, coursePage }: CompProps = JSON.parse(this.dataset.message);
+      $(function () {
+        const toc = $('#course-toc');
+        if (!toc) {
+          return;
+        }
+        onSet(courseTaken, ({ newValue, abort }) => {
+          const listVisible = newValue.find((l) => l.slug === courseId);
+          console.log('listVisible', listVisible);
+          listVisible?.learning_lesson.forEach((lesson) => {
+            const id = `${courseId}/${lesson.slug}`;
+            const lessonDone = toc.find(`[data-slug="${id}"]`);
+            if (lessonDone) {
+              lessonDone.find('.is-done').toggleClass('hidden');
+              lessonDone.find('.lesson-idx').toggleClass('hidden');
+            }
+          });
+          if (!coursePage && params) {
+            const id = `${courseId}/${params.slug}`;
+            const lessonViewed = toc.find(`[data-slug="${id}"]`);
+            lessonViewed.find('.is-done').addClass('hidden');
+            lessonViewed.find('.lesson-idx').addClass('hidden');
+            lessonViewed.find('.in-progress').toggleClass('hidden');
+          }
+        });
+      });
+    }
+  }
+
+  customElements.define('astro-toc-wrapper', AstroTOCWrapper);
+</script>
+<!-- <IconTypes client:only='vue' done={false} index={idx + 1} isInProgress={isInProgress} slug={c.slug} /> -->
+<!-- define:vars={{ courseId }} -->

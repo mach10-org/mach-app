@@ -35,6 +35,8 @@ export interface Learning {
 export const courseTaken = atom<Learning[]>([]);
 
 export const getCourseTaken = action(courseTaken, 'setCourseTaken', async (store, userId: string) => {
+  console.log('getCourseTaken');
+
   const data = await getLearningRecords(userId);
   store.set([...data]);
   return store.get();

@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "puppeteer-fix": "node node_modules/puppeteer/install.js"
+    "puppeteer-fix": "node node_modules/puppeteer/install.js",
+    "update-types": "npx supabase gen types typescript --project-id \"teenfvdmlapuzevrxwtl\" --schema public > src/models/supabase.ts"
   },
   "dependencies": {
     "@astrojs/image": "^0.17.0",
@@ -33,6 +34,7 @@
     "astro-auto-import": "^0.3.0",
     "astro-diagram": "^0.7.0",
     "autoprefixer": "^10.4.14",
+    "cash-dom": "^8.1.5",
     "cookie": "^0.5.0",
     "flowbite": "^1.6.2",
     "glot-api": "guizmo/glot-api",
