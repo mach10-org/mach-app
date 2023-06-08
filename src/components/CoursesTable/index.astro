@@ -66,21 +66,24 @@ const grouped: GroupCourse = courses?.reduce((acc, curr) => {
           return;
         }
         onSet(courseTaken, ({ newValue, abort }) => {
+          console.log('onSet', newValue);
           const listVisible = newValue.find((l) => l.slug === courseId);
           listVisible?.learning_lesson.forEach((lesson) => {
             const id = `${courseId}/${lesson.slug}`;
+            console.log('id', id);
             const lessonDone = toc.find(`[data-slug="${id}"]`);
             if (lessonDone) {
-              lessonDone.find('.is-done').toggleClass('hidden');
-              lessonDone.find('.lesson-idx').toggleClass('hidden');
+              lessonDone.find('.is-done').removeClass('hidden');
+              lessonDone.find('.lesson-idx').addClass('hidden');
             }
           });
           if (!coursePage && params) {
+            console.log('les autre');
             const id = `${courseId}/${params.slug}`;
             const lessonViewed = toc.find(`[data-slug="${id}"]`);
             lessonViewed.find('.is-done').addClass('hidden');
             lessonViewed.find('.lesson-idx').addClass('hidden');
-            lessonViewed.find('.in-progress').toggleClass('hidden');
+            lessonViewed.find('.in-progress').removeClass('hidden');
           }
         });
       });

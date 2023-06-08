@@ -9,7 +9,9 @@ export interface PayloadCourseTaken {
   next?: string;
   courseInfo?: CoursesInfos;
   title?: string;
+  courseId?: string;
 }
+
 export interface CourseTaken {
   courseId: string;
   lessonId: string;
@@ -35,27 +37,12 @@ export interface Learning {
 export const courseTaken = atom<Learning[]>([]);
 
 export const getCourseTaken = action(courseTaken, 'setCourseTaken', async (store, userId: string) => {
-  console.log('getCourseTaken');
-
   const data = await getLearningRecords(userId);
   store.set([...data]);
   return store.get();
 });
 
 export const setCourseTaken = action(courseTaken, 'setCourseTaken', async (store, payload: PayloadCourseTaken) => {
-  /*
-  const prevData = store.get();
-  const { course: courseId, slug: lessonId } = payload;
-  if (courseId && lessonId) {
-    const isFound = prevData.find((c) => c.courseId === courseId && c.lessonId === lessonId);
-    if (!isFound) {
-      const data = { courseId, lessonId };
-      prevData.push(data);
-      store.set([...prevData]);
-    }
-  }
-*/
-
   try {
     let user = await getUser();
     let res: boolean = false;
@@ -66,18 +53,13 @@ export const setCourseTaken = action(courseTaken, 'setCourseTaken', async (store
   } catch (error) {}
 
   return false;
-
-  return store.get();
 });
 
-export const resetCourse = action(courseTaken, 'resetCourse', (store, payload: PayloadCourseTaken) => {
-  /*const prevData = store.get();
-  const { course, slug } = payload;
-  if (course && slug) {
-    const filtered = prevData.filter((c) => !(c.courseId === course && c.lessonId === slug));
-    store.set([...filtered]);
-  }*/
-
+export const resetCourse = action(courseTaken, 'resetCourse', async (store, userId: string, payload: PayloadCourseTaken) => {
+  const res = await deleteCourse(payload);
+  if (res) {
+    getCourseTaken(userId);
+  }
   return store.get();
 });
 
@@ -132,16 +114,27 @@ export const saveCourse = async (userId: string, payload: PayloadCourseTaken) =>
   }
 };
 
+export const deleteCourse = async (payload: PayloadCourseTaken) => {
+  try {
+    const { data, error } = await supabase.from('learning_lesson').delete().eq('id', payload.courseId);
+
+    if (!error) {
+      return true;
+    }
+  } catch (error) {
+    console.log('saveCourse error', error);
+    return false;
+  }
+};
+
 export const saveLesson = async (courseId: string, payload: PayloadCourseTaken) => {
   const dataToSave = {
-    // updated_at: new Date().toISOString(),
     slug: payload.slug,
     title: payload.title,
     course_id: courseId
   };
   try {
     const { data: lessonCreated, error } = await supabase.from('learning_lesson').upsert(dataToSave, { onConflict: 'course_id, slug' }).select().single();
-    console.log('lessonCreated', lessonCreated);
 
     if (error) {
       throw error;
