@@ -4,8 +4,8 @@ description: Test Lorem markdownum fumante aura etiam potuit praebetis differt s
 tags:
   - GoLang
   - BAKEND
-preview: /img/course-dotnet.jpg
-previewRatio: 9:4
+preview: course-dotnet.jpg
+previewRatio: "9:4"
 lastmod: 2023-05-25T22:14:35.923Z
 ---
 

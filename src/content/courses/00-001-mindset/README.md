@@ -3,8 +3,8 @@ title: Prepare your mindset
 description: This short introduction will give you a few tips to make the most of this course
 tags:
   - mindset
-preview: /img/course-prepare-your-mindset.png
-previewRatio: 224:109
+preview: course-prepare-your-mindset.png
+previewRatio: "224:109"
 lastmod: 2023-05-24T04:28:53.384Z
 ---
 

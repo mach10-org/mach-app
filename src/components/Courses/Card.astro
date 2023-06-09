@@ -13,15 +13,15 @@ const { remarkPluginFrontmatter } = (await course.render()) as CourseRender;
 <li>
   <a
     href={`${import.meta.env.BASE_URL}${href}`}
-    class='link h-full group bg-background-base flex flex-col rounded overflow-hidden no-underline transition-colors border border-border-input hover:bg-primary hover:border-primary'
+    class='link h-full group bg-background-base flex flex-col rounded overflow-hidden no-underline transition border border-border-input transition duration-500 drop-shadow-lg hover:drop-shadow-2xl'
   >
-    <Picture class='w-full h-[223px] object-cover' src={preview} alt='' widths={[360, 720, 1000]} sizes='(min-width:768px) 360px, 100vw' aspectRatio='29:18' />
+    <Picture class='w-full h-[223px] object-cover' src={`/img/${preview}`} alt='' widths={[360, 720, 1000]} sizes='(min-width:768px) 360px, 100vw' aspectRatio='29:18' />
     <div class='flex flex-col flex-1 px-4 py-3'>
-      <h2 class='transition-colors mb-1 text-xl lg:text-2xl text-link group-hover:text-white font-extrabold'>{title}</h2>
-      <p class='transition-colors text-text-base m-0 group-hover:text-white leading-6 flex-1'>
+      <h2 class='transition-colors mb-1 text-xl lg:text-2xl text-link font-extrabold group-hover:text-link-hover'>{title}</h2>
+      <p class='transition-colors text-text-base m-0 leading-6 flex-1'>
         {description}
       </p>
-      <span class='transition-colors text-text-muted text-sm group-hover:text-white block mt-2'>
+      <span class='transition-colors text-text-muted text-sm  block mt-2'>
         {remarkPluginFrontmatter?.minutesRead?.text && remarkPluginFrontmatter?.minutesRead?.text}
         {
           remarkPluginFrontmatter?.section && (
