@@ -3,21 +3,11 @@ import { persistentAtom } from '@nanostores/persistent';
 import { User } from '@utils/auth';
 import { UserAppMetadata } from '@supabase/supabase-js';
 import { supabase } from '@utils/supabase';
+import { Database } from '@models/supabase';
 
-export interface Profile {
-  id?: string;
-  email?: string;
-  updated_at?: Date;
-  username?: string;
-  xp?: number;
-  full_name?: string;
-  gender?: string;
-  education?: string;
-  dob?: Date;
-  computer_xp?: string;
-  goal?: string[];
-  about?: string;
-}
+export type DatabaseRowProfile = Database['public']['Tables']['profiles']['Row'];
+
+export interface Profile extends DatabaseRowProfile {}
 
 const primitive = {
   encode: JSON.stringify,
@@ -30,10 +20,18 @@ const defaultProfile = {
   full_name: '',
   gender: '',
   education: '',
-  dob: undefined,
+  dob: null,
   computer_xp: '',
   goal: [],
   about: '',
+  website: '',
+  avatar_url: '',
+  id: '',
+  email: '',
+  updated_at: '',
+  username: '',
+  xp: 0,
+
   ...profile.get()?.user_metadata
 };
 

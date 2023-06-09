@@ -13,7 +13,6 @@
       <UserCircleIcon class="h-6 h-6 text-gray-100" />
     </button>
     <!-- Dropdown menu -->
-
     <div
       class="absolute min-w-[12rem] inset-auto -translate-y-2 -translate-x-20 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
       id="user-dropdown"
@@ -30,6 +29,7 @@ import { UserCircleIcon } from '@heroicons/vue/24/outline';
 import { getUser, logout } from '@stores/auth';
 import { isConnected, removeUser } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
+import { onSet } from 'nanostores';
 import { onMounted, ref } from 'vue';
 import { OButton } from '@oruga-ui/oruga-next';
 import LoginStatusMenu from './LoginStatusMenu.vue';
@@ -46,7 +46,6 @@ onMounted(async () => {
       getCourseTaken(user.id);
     } else {
       logout();
-      removeUser();
     }
   } catch (error) {}
 });

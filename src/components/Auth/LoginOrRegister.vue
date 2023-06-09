@@ -1,23 +1,13 @@
 <template>
   <section>
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
-      <div
-        class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
-      >
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-            Signup to create an account, it’s free and you can track your progress over time
-          </h2>
-          <h3 class="text-lg text-gray-900 dark:text-white">
-            To log in, or register. Use the form below to get a magic link to your email.
-          </h3>
+          <h2 class="text-xl font-bold text-gray-900 dark:text-white">Signup to create an account, it’s free and you can track your progress over time</h2>
+          <h3 class="text-lg text-gray-900 dark:text-white">To log in, or register. Use the form below to get a magic link to your email.</h3>
           <form class="space-y-4 md:space-y-6">
             <div>
-              <label
-                for="email"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Email</label
-              >
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
               <input
                 type="email"
                 name="email"
@@ -70,11 +60,19 @@
 <script lang="ts" setup>
 import { signinOrUp } from '@stores/auth';
 import { computed, ref } from 'vue';
+import { supabase } from '@utils/supabase';
 
 const email = ref('');
 
 const status = ref({ error: '', success: false, isLoading: false });
 const canSubmit = computed(() => email.value.trim() !== '');
+const { BASE_URL, PUBLIC_SUPABASE_REDIRECT_URL } = import.meta.env;
+
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event == 'SIGNED_IN') {
+    window.location.assign(`${BASE_URL}`);
+  }
+});
 
 const handleSendLink = async (e) => {
   e.preventDefault();
@@ -82,10 +80,7 @@ const handleSendLink = async (e) => {
   status.value = { error: '', success: false, isLoading: true };
 
   try {
-    const { error, data } = await signinOrUp(
-      email.value,
-      import.meta.env.PUBLIC_SUPABASE_REDIRECT_URL
-    );
+    const { error, data } = await signinOrUp(email.value, PUBLIC_SUPABASE_REDIRECT_URL);
 
     if (error?.message) {
       status.value = {

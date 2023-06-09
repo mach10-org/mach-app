@@ -1,3 +1,18 @@
-import { createClient } from '@supabase/supabase-js';
+import { Database } from '@models/supabase';
+import { SupabaseClientOptions, createClient } from '@supabase/supabase-js';
 
-export const supabase = createClient(import.meta.env.PUBLIC_SUPABASE_URL, import.meta.env.PUBLIC_SUPABASE_KEY);
+const options: SupabaseClientOptions<'public'> = {
+  db: {
+    schema: 'public'
+  },
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true
+  },
+  global: {
+    headers: { 'x-mach-header': 'mach10' }
+  }
+};
+
+export const supabase = createClient<Database>(import.meta.env.PUBLIC_SUPABASE_URL, import.meta.env.PUBLIC_SUPABASE_KEY, options);

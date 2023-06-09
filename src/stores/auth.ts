@@ -1,5 +1,3 @@
-import { action } from 'nanostores';
-import { persistentMap } from '@nanostores/persistent';
 import moment from 'moment';
 import { User } from '@utils/auth';
 import { profile, setUser, removeUser } from './profile';
@@ -18,53 +16,24 @@ export interface NewToken {
   refresh_token: string;
 }
 
-const defaultTokenValues = {
-  expires_in: undefined,
-  expires_at: undefined,
-  refresh_token: undefined,
-  access_token: undefined
-};
-
-export const token = persistentMap<JwToken>('jwtoken:', defaultTokenValues);
-
-export const saveToken = action(token, 'token', (store, data: NewToken) => {
-  const newToken = getNewToken(data);
-  store.set(newToken);
-  return store.get();
-});
-
-export const deleteToken = action(token, 'deleteToken', (store) => {
-  store.set(defaultTokenValues);
-  return store.get();
-});
-
-export const getNewToken = ({ access_token, expires_in, refresh_token }: NewToken) => {
-  let d = new Date();
-  d = new Date(d.getTime() + parseInt(expires_in) * 1000);
-  const expires_at = `${d.getTime()}`;
-  return { access_token, expires_in, refresh_token, expires_at };
-};
-
-export const logout = async (dbLogout = false) => {
-  deleteToken();
+export const logout = async () => {
   removeUser();
   try {
-    dbLogout ? await supabase.auth.signOut() : null;
+    await supabase.auth.signOut();
   } catch (error) {}
 };
 
 export const getUser = async (): Promise<User | null> => {
-  const tokenData = token.get();
-  const { access_token, expires_at: expires_at_str } = tokenData;
-
-  if (!access_token) {
+  const { data } = await supabase.auth.getSession();
+  if (!data?.session) {
     return null;
   }
 
-  const expires_at = expires_at_str ? parseInt(expires_at_str, 10) : null;
+  const { access_token, expires_at } = data.session;
 
-  if (expires_at && moment().isAfter(moment(expires_at))) {
+  if (expires_at && moment().isAfter(moment(expires_at * 1000))) {
     const userProfile = await refreshToken();
+
     return userProfile;
   }
 
@@ -74,11 +43,11 @@ export const getUser = async (): Promise<User | null> => {
     return userProfile;
   }
 
-  const userWidtProfileData = await fetchUser(access_token);
+  const userWidtProfileData = await fetchUserProfile(access_token);
   return userWidtProfileData;
 };
 
-export const fetchUser = async (access_token: string) => {
+export const fetchUserProfile = async (access_token: string) => {
   try {
     const {
       data: { user },
@@ -122,7 +91,7 @@ export const refreshToken = async () => {
     }
     if (session) {
       const { access_token, expires_in, refresh_token } = session;
-      saveToken({ access_token, expires_in: `${expires_in}`, refresh_token });
+      // saveToken({ access_token, expires_in: `${expires_in}`, refresh_token });
       if (user) {
         userWidtProfileData = await getProfile(user);
       }

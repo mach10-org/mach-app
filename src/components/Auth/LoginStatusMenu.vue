@@ -16,14 +16,13 @@
 </template>
 <script lang="ts" setup>
 import { logout } from '@stores/auth';
-import { profile, removeUser } from '@stores/profile';
+import { profile } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
 const $profile = useStore(profile);
 const BASE_URL = import.meta.env.BASE_URL;
 
-const handleLogoutClick = () => {
-  logout();
-  removeUser();
+const handleLogoutClick = async () => {
+  await logout();
   window.location.assign(`${BASE_URL}`);
 };
 </script>
