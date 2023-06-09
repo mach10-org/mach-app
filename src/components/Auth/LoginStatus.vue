@@ -27,9 +27,8 @@
 <script lang="ts" setup>
 import { UserCircleIcon } from '@heroicons/vue/24/outline';
 import { getUser, logout } from '@stores/auth';
-import { isConnected, removeUser } from '@stores/profile';
+import { isConnected } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
-import { onSet } from 'nanostores';
 import { onMounted, ref } from 'vue';
 import { OButton } from '@oruga-ui/oruga-next';
 import LoginStatusMenu from './LoginStatusMenu.vue';
