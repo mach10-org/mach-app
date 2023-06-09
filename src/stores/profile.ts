@@ -27,7 +27,6 @@ const defaultProfile = {
   website: '',
   avatar_url: '',
   id: '',
-  email: '',
   updated_at: '',
   username: '',
   xp: 0,
