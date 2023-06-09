@@ -1,12 +1,12 @@
 ---
-import { getPreviewURL } from '@utils/page'
+import { getPreviewURL } from '@utils/page';
 export interface Props {
   title: string;
   description: string;
   preview?: string;
 }
 const { title, description, preview } = Astro.props;
-const computedPreview = getPreviewURL(preview)
+const computedPreview = getPreviewURL(preview);
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -14,7 +14,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <!-- Global Metadata -->
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width,initial-scale=1' />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩🏻‍🚀</text></svg>">
+<link rel='icon' href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩🏻‍🚀</text></svg>' />
 <meta name='generator' content={Astro.generator} />
 
 <!-- Canonical URL -->

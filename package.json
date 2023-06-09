@@ -45,6 +45,7 @@
     "moment": "^2.29.4",
     "monaco-editor": "^0.38.0",
     "nanostores": "^0.8.1",
+    "programming-languages-logos": "^0.0.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "reading-time": "^1.5.0",

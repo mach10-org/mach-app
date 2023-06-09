@@ -7,10 +7,10 @@
             {{ user?.email }}
           </h2>
           <h3 class="text-center text-lg font-bold text-gray-900 dark:text-white">{{ xp }} XP</h3>
-          <h4>
+          <p class="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl">
             We’d love to learn more about you. Could you share with us what is your main goal applying here? Even if it’s just curiosity, we’re interested to hear ☺. <br />This is also helping us to
             know our audience and adapt our content accordingly.
-          </h4>
+          </p>
 
           <p class="text-center mb-2 font-light text-gray-500 dark:text-gray-400">Update your profile !</p>
 
@@ -22,7 +22,7 @@
                 v-model="full_nameModel"
                 id="full_name"
                 name="full_name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-600 dark:focus:border-primary-600"
                 placeholder="firstname"
               />
             </div>
@@ -34,7 +34,7 @@
                 id="gender"
                 name="gender"
                 v-model="genderModel"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-600 dark:focus:border-primary-600"
               >
                 <option value="">Choose</option>
                 <option value="male">Male</option>
@@ -62,7 +62,7 @@
                   name="dob"
                   v-model="dobModel"
                   type="date"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-600 dark:focus:border-primary-600"
                   placeholder="Select date"
                 />
               </div>
@@ -75,7 +75,7 @@
                 id="education"
                 name="education"
                 v-model="educationModel"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-600 dark:focus:border-primary-600"
               >
                 <option value="">Choose</option>
                 <option value="Primary education">Primary education</option>
@@ -92,7 +92,7 @@
                 id="computer_xp"
                 name="computer_xp"
                 v-model="computer_xpModel"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-600 dark:focus:border-primary-600"
               >
                 <option value="">Choose</option>
                 <option value="Never used it">Never used it</option>
@@ -112,7 +112,7 @@
                     name="goal"
                     v-model="goalModel"
                     :value="value"
-                    class="w-4 h-4 text-blue-500 bg-gray-100 border-gray-300 rounded checked:bg-blue-500 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    class="w-4 h-4 text-blue-500 bg-gray-100 border-gray-300 rounded checked:bg-primary-600 focus:ring-primary-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label :for="`goal-${index}`" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ value }}</label>
                 </div>
@@ -127,7 +127,7 @@
                 v-model="aboutModel"
                 name="about"
                 rows="4"
-                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-600 dark:focus:border-primary-600"
                 placeholder="Write your thoughts here..."
               ></textarea>
             </div>
@@ -183,7 +183,6 @@ const { full_nameModel, genderModel, dobModel, educationModel, computer_xpModel,
   'goal',
   'about'
 ]);
-
 const user = ref<User | null>(null);
 const xp = ref(0);
 const status = ref({ error: '', success: false, isLoading: false });
