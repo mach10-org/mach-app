@@ -46,6 +46,8 @@ const theme = new Theme({
   },
   "background-page": "#F9F9F9",
   "background-base": "#fcfcfc",
+  "lighter-gray": "#EDF1F5",
+  "light-gray": "#E3EBF6",
   gray: {
     25: "#FCFDFE", // rgba(227, 235, 246, 0.12)
     50: "#F9FBFD",
@@ -132,6 +134,8 @@ const darkMode = theme.variant({
   "text-title": "#EDF1F5",
   "background-page": "#232E4A",
   "background-base": "#242F4D",
+  "lighter-gray": "#2C3B5E",
+  "light-gray": "#34456E",
   "border-input": "#3a4959",
   link: "#f9a8ca",
   "link-hover": "#f472a8",
