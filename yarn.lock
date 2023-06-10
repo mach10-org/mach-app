@@ -790,6 +790,7 @@ __metadata:
     "@nanostores/persistent": ^0.8.0
     "@nanostores/vue": ^0.8.2
     "@oruga-ui/oruga-next": ^0.6.0
+    "@programming-languages-logos/go": ^0.0.0
     "@supabase/supabase-js": ^2.24.0
     "@tailwindcss/typography": ^0.5.9
     "@types/cookie": ^0.5.1
@@ -802,6 +803,7 @@ __metadata:
     cash-dom: ^8.1.5
     colord: ^2.9.3
     cookie: ^0.5.0
+    devicon: ^2.15.1
     flowbite: ^1.6.2
     glot-api: guizmo/glot-api
     heroicons: ^2.0.14
@@ -1043,6 +1045,13 @@ __metadata:
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
   checksum: e5c69fdebf52a4012f6a1f14817ca8e9599cb1be73dd1387e1785e2ed5e5f0862ff817f420a87c7fc532add1f88a12e25aeb010ffcbdc98eace3d55ce2139cf0
+  languageName: node
+  linkType: hard
+
+"@programming-languages-logos/go@npm:^0.0.0":
+  version: 0.0.0
+  resolution: "@programming-languages-logos/go@npm:0.0.0"
+  checksum: 2d036e76b624eee66669cb1cfb1aa0ad509495d65b937299a69dfa45cdd5dfaae5f6104d2b7640753d50920a242c191fa08f8cf1c28dc76c9f51a81ea7cce0be
   languageName: node
   linkType: hard
 
@@ -2955,6 +2964,13 @@ __metadata:
   version: 4.3.2
   resolution: "devalue@npm:4.3.2"
   checksum: 034530e3910a096e528ca6481cd80ab2a21f4a5b813fb896d421eadf52dc969dfbbd5677aa06d28a6448a0f2f7e7d91d9ed88cd9aaa497f4b34e427d80c2a8a5
+  languageName: node
+  linkType: hard
+
+"devicon@npm:^2.15.1":
+  version: 2.15.1
+  resolution: "devicon@npm:2.15.1"
+  checksum: dfdc93270f97acd4954ab6c9d67a3f1105851b81ed73a5ec340046af8a2414b834f30b233294654d4afbbb95c30dd594bf2590182658c5529bee3073110e5448
   languageName: node
   linkType: hard
 

@@ -18,9 +18,6 @@ import { allTasks } from 'nanostores';
 import { computed, onMounted } from 'vue';
 await allTasks();
 const coursesDone = courseTaken.get();
-// const coursesId = coursesDone.map((c) => c.slug);
-// const allCoursesEnrolled = await getAllLessonsPerCourse('courses', coursesId);
-console.log('coursesDone', coursesDone);
 
 const totalLessons = computed(() =>
   coursesDone.reduce((acc, course) => {
