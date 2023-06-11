@@ -234,6 +234,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astropub/flow@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@astropub/flow@npm:0.4.0"
+  checksum: ff4f285ba70b4c6a62cf4f9bca7a03c9319c97bf81193785bac02d339b46adf2a208884e1286393fc9bf55366c113bafecb09ffbac7818f7c4c9e8086aedba50
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.21.4":
   version: 7.21.4
   resolution: "@babel/code-frame@npm:7.21.4"
@@ -785,6 +792,7 @@ __metadata:
     "@astrojs/tailwind": ^3.1.3
     "@astrojs/ts-plugin": ^1.0.6
     "@astrojs/vue": ^2.2.0
+    "@astropub/flow": ^0.4.0
     "@heroicons/vue": ^2.0.14
     "@monaco-editor/react": ^4.5.1
     "@nanostores/persistent": ^0.8.0
