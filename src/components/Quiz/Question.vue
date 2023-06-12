@@ -1,21 +1,10 @@
 <template>
-  <div
-    class="quiz-section my-6 w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-  >
+  <div class="quiz-section my-6 w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="p-4">
       <h4>{{ label }}</h4>
 
       <Option v-for="a in options" :key="a.id" :label="a.label" :id="a.id">
-        <input
-          type="radio"
-          :id="a.id"
-          :name="optionsName"
-          :value="a.id"
-          class="hidden peer"
-          v-model="answer"
-          required
-          @change="$emit('update:answer', ($event.target as HTMLInputElement).value)"
-        />
+        <input type="radio" :id="a.id" :name="optionsName" :value="a.id" class="hidden peer" v-model="answer" required @change="$emit('update:answer', ($event.target as HTMLInputElement).value)" />
       </Option>
       <div v-if="message">
         <div
@@ -30,18 +19,8 @@
               'text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200': !success
             }"
           >
-            <svg
-              aria-hidden="true"
-              class="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clip-rule="evenodd"
-              ></path>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
             <span class="sr-only">Check icon</span>
           </div>
@@ -79,7 +58,7 @@ const props = defineProps({
   }
 });
 defineEmits(['update:answer']);
-console.log('props quiz', props);
+// console.log('props quiz', props);
 
 const options = ref<QuizOption[]>([]);
 const slots = useSlots();

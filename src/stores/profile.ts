@@ -24,12 +24,12 @@ const defaultProfile = {
   computer_xp: '',
   goal: [],
   about: '',
-  website: '',
   avatar_url: '',
   id: '',
-  updated_at: '',
-  username: '',
   xp: 0,
+  updated_at: null,
+  username: null,
+  website: null,
 
   ...profile.get()?.user_metadata
 };
@@ -38,8 +38,10 @@ export const profileData = map<Profile>(defaultProfile);
 
 export const increasePoints = action(profile, 'increasePoints', (store, add) => {
   const user = store.get();
+
   if (user?.user_metadata) {
-    user.user_metadata.xp = user.user_metadata.xp + add;
+    // user.user_metadata.xp = user.user_metadata.xp + add;
+    user.user_metadata.xp = add;
   }
   return store.get();
 });
@@ -60,8 +62,9 @@ export const updateUser = action(profile, 'updateUser', (store, data: UserAppMet
   const user = profile.get();
   if (user) {
     user.user_metadata = data;
-    store.set(user);
+    store.set({ ...user });
   }
+
   return store.get();
 });
 

@@ -197,12 +197,11 @@ onMounted(async () => {
 
 const submit = async (e: Event) => {
   e.preventDefault();
-
   const data = profileData.get();
   status.value = { error: '', success: false, isLoading: true };
-
+  const id = user?.value?.id as string;
   try {
-    const { error } = await upsertProfile(data);
+    const { error } = await upsertProfile({ ...data, id });
 
     if (error?.message) {
       status.value = {
