@@ -195,7 +195,6 @@ onMounted(async () => {
   user.value = userProfile;
   xp.value = userProfile?.user_metadata.xp || 0;
 });
-console.log('xp.value', xp.value);
 
 const submit = async (e: Event) => {
   e.preventDefault();
