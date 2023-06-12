@@ -74,10 +74,7 @@ const answer = ref<string | undefined>();
 const message = ref<string | undefined>();
 const success = ref<boolean | null>(null);
 const canSubmit = computed(() => answer.value);
-console.log('props', props);
-
 const points = computed(() => options?.value?.find((o) => o.xp)?.xp);
-console.log('points', points);
 
 const onSubmit = async () => {
   if (typeof answer.value !== 'undefined') {
