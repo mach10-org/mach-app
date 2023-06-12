@@ -10,26 +10,36 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 
 // https://astro.build/config
-import image from "@astrojs/image";
+import image from '@astrojs/image';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mach10-org.github.io/',
   base: process.env.NODE_ENV === 'development' ? '' : '/mach-app/',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   markdown: {
     remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime],
     gfm: true,
     drafts: false,
     extendDefaultPlugins: true
   },
-  integrations: [AutoImport({
-    imports: [{
-      './src/components/Quiz': ['Quiz']
-    }]
-  }), tailwind(), mdx(), vue({
-    jsx: true
-  }), sitemap(), react(), image({
-    serviceEntryPoint: '@astrojs/image/sharp'
-  })]
+  integrations: [
+    AutoImport({
+      imports: [
+        {
+          './src/components/Quiz': ['Quiz']
+        }
+      ]
+    }),
+    tailwind(),
+    mdx(),
+    vue({
+      jsx: true
+    }),
+    sitemap(),
+    react(),
+    image({
+      serviceEntryPoint: '@astrojs/image/sharp'
+    })
+  ]
 });
