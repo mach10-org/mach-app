@@ -1,37 +1,15 @@
 <template>
   <section class="flex items-start min-h-[60vh] pt-16 lg:pt-20 px-2">
-    <div
-      class="flex flex-col items-center justify-center p-6 mx-auto bg-background-base border border-border-input rounded-lg max-w-[450px] space-y-4 md:space-y-6"
-    >
-      <h2 class="text-xl font-bold text-text-title">
-        Signup to create an account, it’s free and you can track your progress
-        over time
-      </h2>
-      <h3 class="text-base">
-        To log in, or register. Use the form below to get a magic link to your
-        email.
-      </h3>
-      <form class="w-full">
+    <div class="flex flex-col items-center justify-center p-6 mx-auto bg-background-base border border-border-input rounded-lg max-w-[450px] space-y-4 md:space-y-6">
+      <h2 class="text-xl font-bold text-text-title">Signup to create an account, it’s free and you can track your progress over time</h2>
+      <h3 class="text-base">To log in, or register. Use the form below to get a magic link to your email.</h3>
+      <form class="w-full" @submit.prevent="handleSendLink">
         <OField label="Email">
           <OInput type="email" name="email" v-model="email" size="large" required />
         </OField>
 
-        <OButton
-          variant="primary"
-          @click="handleSendLink"
-          :disabled="!canSubmit || status.isLoading"
-          expanded
-          size="large"
-        >
-          <svg
-            v-if="status.isLoading"
-            aria-hidden="true"
-            role="status"
-            class="inline w-4 h-4 mr-2 animate-spin"
-            viewBox="0 0 100 101"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+        <OButton variant="primary" @click="handleSendLink" :disabled="!canSubmit || status.isLoading" expanded size="large">
+          <svg v-if="status.isLoading" aria-hidden="true" role="status" class="inline w-4 h-4 mr-2 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
               fill="currentColor"
@@ -56,19 +34,19 @@
 </template>
 
 <script lang="ts" setup>
-import { OButton, OInput, OField } from "@oruga-ui/oruga-next";
-import { signinOrUp } from "@stores/auth";
-import { computed, ref } from "vue";
-import { supabase } from "@utils/supabase";
+import { OButton, OInput, OField } from '@oruga-ui/oruga-next';
+import { signinOrUp } from '@stores/auth';
+import { computed, ref } from 'vue';
+import { supabase } from '@utils/supabase';
 
-const email = ref("");
+const email = ref('');
 
-const status = ref({ error: "", success: false, isLoading: false });
-const canSubmit = computed(() => email.value.trim() !== "");
+const status = ref({ error: '', success: false, isLoading: false });
+const canSubmit = computed(() => email.value.trim() !== '');
 const { BASE_URL, PUBLIC_SUPABASE_REDIRECT_URL } = import.meta.env;
 
 supabase.auth.onAuthStateChange((event, session) => {
-  if (event == "SIGNED_IN") {
+  if (event == 'SIGNED_IN') {
     window.location.assign(`${BASE_URL}`);
   }
 });
@@ -76,25 +54,22 @@ supabase.auth.onAuthStateChange((event, session) => {
 const handleSendLink = async (e) => {
   e.preventDefault();
 
-  status.value = { error: "", success: false, isLoading: true };
+  status.value = { error: '', success: false, isLoading: true };
 
   try {
-    const { error, data } = await signinOrUp(
-      email.value,
-      PUBLIC_SUPABASE_REDIRECT_URL
-    );
+    const { error, data } = await signinOrUp(email.value, PUBLIC_SUPABASE_REDIRECT_URL);
 
     if (error?.message) {
       status.value = {
         error: error.message,
         success: false,
-        isLoading: false,
+        isLoading: false
       };
     } else {
-      status.value = { error: "", success: true, isLoading: false };
+      status.value = { error: '', success: true, isLoading: false };
     }
   } catch (error) {
-    console.log("ERROR", error);
+    console.log('ERROR', error);
   }
 };
 </script>

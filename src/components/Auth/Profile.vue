@@ -14,7 +14,7 @@
 
           <p class="text-center mb-2 font-light text-gray-500 dark:text-gray-400">Update your profile !</p>
 
-          <form class="space-y-4 md:space-y-6">
+          <form class="space-y-4 md:space-y-6" @submit.prevent="submit">
             <div>
               <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your firstname (how should we call you?)</label>
               <input
@@ -132,6 +132,7 @@
               ></textarea>
             </div>
             <button
+              type="submit"
               class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               @click="submit"
               :disabled="status.isLoading"
