@@ -12,7 +12,7 @@
         <div class="flex-1 flex gap-3 justify-center flex-col">
           <h2 class="text-center m-0 text-2xl leading-7 font-medium">Looks like you didn’t enroll any course yet, how about starting today ?</h2>
           <div class="text-center text-text-base m-0 leading-6">
-            <OButton tag="a" href="/courses" variant="primary">Get started today !</OButton>
+            <OButton tag="a" href="/courses/" variant="primary">Get started today !</OButton>
           </div>
         </div>
       </div>

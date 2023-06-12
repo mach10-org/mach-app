@@ -28,8 +28,18 @@
           <div class="pl-4 text-sm font-normal">{{ message }}.</div>
         </div>
       </div>
-
-      <OButton :disabled="!canSubmit" @click="onSubmit" variant="primary" type="submit" class="mt-4"> Submit </OButton>
+      <div class="flex content-center pt-4">
+        <OButton :disabled="!canSubmit" @click="onSubmit" variant="primary" type="submit"> Submit </OButton>
+        <div v-if="points" class="flex content-center ml-auto items-center text-sm text-gray-500 dark:text-gray-400">
+          <span>
+            This would get you +{{ points }}XP
+            <span v-if="!$profile">
+              <br />
+              <a href="/login/" class="link">Signup to track</a> your progress over time, it’s free
+            </span>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -64,6 +74,10 @@ const answer = ref<string | undefined>();
 const message = ref<string | undefined>();
 const success = ref<boolean | null>(null);
 const canSubmit = computed(() => answer.value);
+console.log('props', props);
+
+const points = computed(() => options?.value?.find((o) => o.xp)?.xp);
+console.log('points', points);
 
 const onSubmit = async () => {
   if (typeof answer.value !== 'undefined') {
