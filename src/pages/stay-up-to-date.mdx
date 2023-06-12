@@ -1,1 +1,21 @@
-TODO
+---
+layout: "@IntroLayout"
+title: Stay up to date
+description: We are on a mission to transform lives of 10,000 people. Why not you? It starts today 👩🏻‍🚀
+preview:
+---
+
+import NoTag from "@components/NoTag.astro";
+import Newsletter from "@components/Block/Newsletter.vue";
+import TitleDescription from "@components/Block/TitleDescription.astro";
+
+<TitleDescription classes="sm:px-8 lg:px-32 xl:px-64 min-h-[60vh] pt-20 lg:pt-28" isCentered={true} isH1={true}>
+  <NoTag slot="title">Stay up to date</NoTag>
+  <NoTag slot="description">
+    Do you want to get notified about our updates and new available courses? Sign up for our newsletter and you will be notified about our updates and new online courses.
+  </NoTag>
+
+  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Notify me" inputId="email-newsletter-footer" client:only="vue" classes="mx-auto max-w-screen-sm mt-6" focus={true}>
+    <NoTag slot="description">We take privacy seriously. Be subscribing, you agree to our [privacy policy](/privacy-policy/).</NoTag>
+  </Newsletter>
+</TitleDescription>
