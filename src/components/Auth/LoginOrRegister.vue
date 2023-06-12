@@ -5,7 +5,7 @@
       <h3 class="text-base">To log in, or register. Use the form below to get a magic link to your email.</h3>
       <form class="w-full" @submit.prevent="handleSendLink">
         <OField label="Email">
-          <OInput type="email" name="email" v-model="email" size="large" required />
+          <OInput ref="input" type="email" name="email" v-model="email" size="large" required />
         </OField>
 
         <OButton variant="primary" @click="handleSendLink" :disabled="!canSubmit || status.isLoading" expanded size="large">
@@ -36,7 +36,7 @@
 <script lang="ts" setup>
 import { OButton, OInput, OField } from '@oruga-ui/oruga-next';
 import { signinOrUp } from '@stores/auth';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { supabase } from '@utils/supabase';
 
 const email = ref('');
@@ -72,4 +72,13 @@ const handleSendLink = async (e) => {
     console.log('ERROR', error);
   }
 };
+
+const input = ref(null);
+
+onMounted(() => {
+  if (input.value) {
+    // @ts-ignore
+    input.value.focus()
+  }
+})
 </script>
