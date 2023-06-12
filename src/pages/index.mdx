@@ -18,7 +18,9 @@ import CheckListItem from '@components/Block/CheckListItem.astro'
 <Hero>
   <NoTag slot="title">Ready to take off for a new life?</NoTag>
   <NoTag slot="description">We are on a mission to transform lives of 10,000 people. Why not you? It starts **today 👩🏻‍🚀👇**</NoTag>
-  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Apply now" description="Apply today, free forever. First course starting in 2023." inputId="email-newsletter-hero" client:only="vue" />
+  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Notify me" inputId="email-newsletter-hero" client:only="vue">
+    <NoTag slot="description">We’ll notify you when our first course is ready. First course starting in 2023.</NoTag>
+  </Newsletter>
 </Hero>
 
 <TitleDescription link="mission/" linkText="Why are we doing this?">
@@ -139,5 +141,7 @@ import CheckListItem from '@components/Block/CheckListItem.astro'
     The best time to start was yesterday. The next best time is now. Your choice today might be one the best decision of your life. Why not give it a try? It's 100% free.
   </NoTag>
 
-  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Apply now" description="Apply today, free forever. First course starting in 2023." inputId="email-newsletter-footer" client:only="vue" classes="mx-auto max-w-screen-sm mt-6" />
+  <Newsletter label="Email address" placeholder="Enter your email" buttonText="Notify me" inputId="email-newsletter-footer" client:only="vue" classes="mx-auto max-w-screen-sm mt-6">
+    <NoTag slot="description">We’ll notify you when our first course is ready. First course starting in 2023.</NoTag>
+  </Newsletter>
 </TitleDescription>
