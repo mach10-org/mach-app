@@ -1,45 +1,16 @@
 <template>
   <section class="flex flex-col min-h-[60vh] pt-16 pb-10 lg:pt-20 px-2">
     <div class="max-w-[450px] mx-auto">
-      <div
-        class="flex flex-col items-center justify-center p-6 bg-background-base border border-border-input rounded-lg space-y-4 md:space-y-6"
-      >
-        <h2 class="text-xl font-bold text-text-title">
-          Signup to create an account, it’s free and you can track your progress
-          over time
-        </h2>
-        <h3 class="text-base">
-          To log in, or register. Use the form below to get a magic link to your
-          email.
-        </h3>
+      <div class="flex flex-col items-center justify-center p-6 bg-background-base border border-border-input rounded-lg space-y-4 md:space-y-6">
+        <h2 class="text-xl font-bold text-text-title">Signup to create an account, it’s free and you can track your progress over time</h2>
+        <h3 class="text-base">To log in, or register. Use the form below to get a magic link to your email.</h3>
         <form class="w-full" @submit.prevent="handleSendLink">
           <OField label="Email">
-            <OInput
-              ref="input"
-              type="email"
-              name="email"
-              v-model="email"
-              size="large"
-              required
-            />
+            <OInput ref="input" type="email" name="email" v-model="email" size="large" required />
           </OField>
 
-          <OButton
-            variant="primary"
-            @click="handleSendLink"
-            :disabled="!canSubmit || status.isLoading"
-            expanded
-            size="large"
-          >
-            <svg
-              v-if="status.isLoading"
-              aria-hidden="true"
-              role="status"
-              class="inline w-4 h-4 mr-2 animate-spin"
-              viewBox="0 0 100 101"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <OButton variant="primary" @click="handleSendLink" :disabled="!canSubmit || status.isLoading" expanded size="large">
+            <svg v-if="status.isLoading" aria-hidden="true" role="status" class="inline w-4 h-4 mr-2 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                 fill="currentColor"
@@ -62,10 +33,7 @@
       </div>
       <p class="text-center my-8 text-text-muted">OR</p>
       <div class="px-6">
-        <a
-          class="github-login"
-          :href="`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`"
-        >
+        <a class="github-login" href="#" @click="signInWithGitHub">
           <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
             <path
               fill-rule="evenodd"
@@ -89,8 +57,8 @@ import { supabase } from '@utils/supabase';
 
 const email = ref('');
 
-const client_id = "TODO";
-const redirect_uri = "TODO";
+const client_id = 'TODO';
+const redirect_uri = 'TODO';
 
 const status = ref({ error: '', success: false, isLoading: false });
 const canSubmit = computed(() => email.value.trim() !== '');
@@ -101,6 +69,18 @@ supabase.auth.onAuthStateChange((event, session) => {
     window.location.assign(`${BASE_URL}`);
   }
 });
+
+const signInWithGitHub = async () => {
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'github'
+    });
+    console.log('error', error);
+    console.log('data', data);
+  } catch (error) {
+    console.error('error', error);
+  }
+};
 
 const handleSendLink = async (e) => {
   e.preventDefault();
