@@ -193,7 +193,7 @@ onMounted(async () => {
   const goalsListRes = await goalChoices();
   goalsList.value = goalsListRes;
   user.value = userProfile;
-  xp.value = userProfile?.user_metadata.xp;
+  xp.value = userProfile?.user_metadata.xp || 0;
 });
 
 const submit = async (e: Event) => {

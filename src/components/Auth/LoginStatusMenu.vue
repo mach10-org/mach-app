@@ -1,7 +1,7 @@
 <template>
   <div class="px-4 py-3">
     <span id="userName" class="block text-sm text-gray-900 dark:text-white">{{ $profile?.email }}</span>
-    <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ $profile?.user_metadata?.xp }} Points</span>
+    <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ $profile?.user_metadata?.xp || 0 }} Points</span>
   </div>
   <ul class="py-2" aria-labelledby="user-menu-button">
     <li>
