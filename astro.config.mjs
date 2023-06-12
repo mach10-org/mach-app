@@ -14,8 +14,7 @@ import image from '@astrojs/image';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mach10-org.github.io/',
-  base: process.env.NODE_ENV === 'development' ? '' : '/mach-app/',
+  site: 'https://mach10.jp',
   trailingSlash: 'always',
   markdown: {
     remarkPlugins: [remarkMermaid, remarkGFM, remarkReadingTime],
