@@ -1,7 +1,7 @@
 <template>
   <div class="quiz-section my-6 w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="p-4">
-      <h4>{{ label }}</h4>
+      <h4 class="mt-0">{{ label }}</h4>
 
       <Option v-for="a in options" :key="a.id" :label="a.label" :id="a.id">
         <input type="radio" :id="a.id" :name="optionsName" :value="a.id" class="hidden peer" v-model="answer" required @change="$emit('update:answer', ($event.target as HTMLInputElement).value)" />
@@ -28,20 +28,17 @@
           <div class="pl-4 text-sm font-normal">{{ message }}.</div>
         </div>
       </div>
-      <button
-        @click="onSubmit"
-        type="submit"
-        class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Submit
-      </button>
+
+      <OButton :disabled="!canSubmit" @click="onSubmit" variant="primary" type="submit" class="mt-4"> Submit </OButton>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { OButton, OInput, OField, OSelect } from '@oruga-ui/oruga-next';
+
 import Option from './OptionDetail.vue';
-import { useSlots, ref, onMounted } from 'vue';
+import { useSlots, computed, ref, onMounted } from 'vue';
 import { QuizOption } from '@models/courses';
 import { saveAnswer } from '@utils/quiz';
 import { isConnected, profile, increasePoints } from '@stores/profile';
@@ -66,6 +63,7 @@ const optionsName = ref<string>('');
 const answer = ref<string | undefined>();
 const message = ref<string | undefined>();
 const success = ref<boolean | null>(null);
+const canSubmit = computed(() => answer.value);
 
 const onSubmit = async () => {
   if (typeof answer.value !== 'undefined') {
