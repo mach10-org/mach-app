@@ -27,7 +27,7 @@ export default defineConfig({
     imports: [{
       './src/components/Quiz': ['Quiz']
     }]
-  }), tailwind(), mdx(), vue({
+  }), tailwind({ config:{ applyBaseStyles: false } }), mdx(), vue({
     jsx: true
   }), sitemap(), react(), image({
     serviceEntryPoint: '@astrojs/image/sharp'
