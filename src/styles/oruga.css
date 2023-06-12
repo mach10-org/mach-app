@@ -68,6 +68,20 @@
   }
 
   &--large {
-    --oruga-input-font-size-large: theme('fontSize.lg')
+    --oruga-input-font-size-large: theme('fontSize.lg');
+  }
+}
+
+/* Field */
+.o-field {
+  .form > &:not(:last-child) {
+    @apply mb-4;
+  }
+
+  &__label {
+    --oruga-field-label-color: theme('colors.text-base');
+    --oruga-base-font-size: theme('fontSize.sm')
+    --oruga-field-label-font-weight: theme('fontWeight.semibold');
+    @apply mb-1;
   }
 }
