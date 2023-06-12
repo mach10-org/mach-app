@@ -3,7 +3,7 @@
     <div class="flex items-center mb-3">
       <div class="relative flex-1 mr-3">
         <label :for="inputId" class="sr-only">{{ label }}</label>
-        <OInput ref="input" :placeholder="placeholder" type="email" name="email" :id="inputId" v-model="email" required size="large" />
+        <OInput ref="input" :placeholder="placeholder" type="email" name="email" :id="inputId" v-model="email" required size="large" class="bg-page" />
       </div>
       <OButton type="submit" @click="handleSendMail" variant="primary" size="large" name="member_submit">{{ buttonText }}</OButton>
     </div>
