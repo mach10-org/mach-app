@@ -1,6 +1,6 @@
 ---
 layout: '@PageLayout'
-title: Page Quiz
+title: 'Page Quiz : How to'
 description: Testing quizz!
 quiz:
   label: 'From frontmatter : Which term does NOT describe JavaScript ?'
@@ -15,11 +15,39 @@ quiz:
       xp: 5
 ---
 
-# Hi there Hello, World!
+## To create a Quizz, you have 2 options:
 
-This Markdown file creates a page at `your-domain.com/page-1/` It probably isn't styled much, but Markdown does support:
+1. Frontmatter (positioned at the bottom of the page)
+2. JSX (can be positioned anywhere)
 
-## Video test
+### 1. Frontmatter
+
+```
+quiz:
+  label: 'From frontmatter : Which term does NOT describe JavaScript ?'
+  options:
+    - label: Garbage collected
+      explain: no prize for you
+    - label: Intrepreted
+      explain: Yeah, that ain't it
+    - label: Statically Typed
+      explain: hella good job
+      isAnswer: true
+      xp: 5
+
+```
+
+### 2. JSX
+
+```
+<Quiz slug='page-quizz' client:only='vue' label='Which term does NOT describe JavaScript?'>
+  <Quiz.Option label='Garbage collected' explain='no prize for you' />
+  <Quiz.Option label='Intrepreted' explain="Yeah, that ain't it" />
+  <Quiz.Option isAnswer xp='5' label='Statically Typed' explain='hella good job' />
+</Quiz>
+```
+
+#### Quizz Example JSX
 
 <Quiz slug='page-quizz' client:only='vue' label='Which term does NOT describe JavaScript?'>
   <Quiz.Option label='Garbage collected' explain='no prize for you' />
