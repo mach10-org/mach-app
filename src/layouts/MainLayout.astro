@@ -4,7 +4,7 @@ const { title, description } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <main class='content-page prose prose-lg lg:prose-xl bg-background-base rounded'>
+  <main>
     <slot />
   </main>
 </BaseLayout>

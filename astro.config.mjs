@@ -31,7 +31,7 @@ export default defineConfig({
         }
       ]
     }),
-    tailwind(),
+    tailwind({ config: { applyBaseStyles: false } }),
     mdx(),
     vue({
       jsx: true
