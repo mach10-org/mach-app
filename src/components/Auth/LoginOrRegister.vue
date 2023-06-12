@@ -51,10 +51,10 @@
             </svg>
             Send magic link
           </OButton>
-          <div v-if="status.error" class="text-sm text-red-400">
+          <div v-if="status.error" class="text-sm text-red-400 text-center mt-4">
             {{ status.error }}
           </div>
-          <div v-if="status.success" className="text-sm text-green-600">
+          <div v-if="status.success" className="text-sm text-green-600 text-center mt-4">
             An email should arrive in your inbox shortly ! <br />
             {{ email }}
           </div>
