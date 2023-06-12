@@ -89,13 +89,12 @@ export const saveCourse = async (userId: string, payload: PayloadCourseTaken) =>
     if (!courseList.length) {
       const dataToSave = {
         created_at: new Date().toISOString(),
-        quantity: payload?.courseInfo?.quantity,
+        quantity: payload?.courseInfo?.quantity || 0,
         slug: payload.course,
         title: payload?.courseInfo?.title,
         user: userId
       };
       const { data: courseCreated, error } = await supabase.from('learning').insert(dataToSave).select().single();
-      console.log('courseCreated', courseCreated);
 
       if (!error) {
         courseId = courseCreated.id;
