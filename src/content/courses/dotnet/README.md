@@ -5,8 +5,8 @@ tags:
   - GoLang
   - BAKEND
 preview: course-dotnet.jpg
-previewRatio: "9:4"
-lastmod: 2023-05-25T22:14:35.923Z
+previewRatio: 9:4
+lastmod: 2023-06-12T03:48:55.768Z
 ---
 
 ## 🍱 What will I build?
