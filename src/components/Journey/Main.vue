@@ -1,6 +1,6 @@
 <template>
-  <div class="space-y-20">
-    <template v-if="coursesDone.length">
+  <div class="space-y-12">
+    <template v-if="coursesDone.length > 0">
       <Summary :courses="coursesDone.length" :lessonsCompleted="lessonsCompleted" />
       <Progress :percentage="percentageTotalCompleted" :done="lessonsCompleted" :total="totalLessons" />
       <div class="space-y-6">
@@ -24,6 +24,7 @@ import Detail from './Detail.vue';
 import { courseTaken } from '@stores/courses';
 import { allTasks } from 'nanostores';
 import { computed } from 'vue';
+
 await allTasks();
 const coursesDone = courseTaken.get();
 

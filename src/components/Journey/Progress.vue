@@ -1,11 +1,9 @@
 <template>
-  <div class="p-0 mx-auto mt-10 lg:mt-13 gap-4 md:gap-12 h-full group bg-background-base flex px-6 py-8 rounded no-underline transition-colors border border-border-input">
-    <div class="flex-1 flex gap-3 justify-center flex-col">
-      <h2 class="text-center m-0 text-2xl leading-7 mt-1 font-medium">
-        You're <span class="text-link">{{ percentage }}%</span> through your enrolled Courses.
-      </h2>
-      <p class="text-center text-text-base m-0 leading-6">{{ done }} / {{ total }} lessons completed</p>
-    </div>
+  <div class="py-6 flex flex-col justify-center items-center">
+    <h2 class="text-center mb-1 text-xl lg:text-2xl font-medium">
+      You're <span class="text-text-title font-extrabold border-b-2 border-border-input">{{ percentage }}%</span> through your enrolled Courses.
+    </h2>
+    <p class="text-center text-text-muted m-0 leading-6">{{ done }} / {{ total }} lessons completed</p>
   </div>
 </template>
 <script setup lang="ts">
