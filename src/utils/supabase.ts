@@ -9,9 +9,6 @@ const options: SupabaseClientOptions<'public'> = {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true
-  },
-  global: {
-    headers: { 'x-mach-header': 'mach10' }
   }
 };
 
