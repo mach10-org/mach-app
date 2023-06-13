@@ -1,6 +1,6 @@
 ---
 import Profile from '@components/Auth/Profile.vue';
-import ContentLayout from '@layouts/ContentLayout.astro';
+import MainLayout from '@layouts/MainLayout.astro';
 
 const pageData = {
   title: 'Mach10',
@@ -8,6 +8,6 @@ const pageData = {
 };
 ---
 
-<ContentLayout {...pageData}>
+<MainLayout {...pageData}>
   <Profile client:only='vue' />
-</ContentLayout>
+</MainLayout>
