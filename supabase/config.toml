@@ -82,6 +82,6 @@ gcp_project_number = ""
 gcp_jwt_path = "supabase/gcloud.json"
 
 
-[functions.hello-world]
-verify_jwt = false
+# [functions.hello-world]
+# verify_jwt = false
 
