@@ -2,21 +2,22 @@
   <div
     class="bg-background-base p-4 md:p-6 rounded border border-border-input md:max-w-[600px] mx-2 md:mx-auto mt-6 md:mt-10"
   >
-    <h2
-      class="text-center text-2xl md:text-4xl text-transparent font-bold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-2"
-    >
-      {{ user?.email }}
+    <h2 class="text-center text-2xl md:text-4xl mb-2">
+      <span
+        class="text-transparent font-bold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
+        >{{ user?.email }}</span
+      >
     </h2>
     <h3 class="text-center text-lg font-bold mb-6">{{ xp }} XP</h3>
 
     <p class="mb-2 md:text-lg lg:text-xl">
       We’d love to learn more about you. Could you share with us what is your
       main goal applying here? Even if it’s just curiosity, we’re interested to
-      hear ☺. 
+      hear ☺.
     </p>
     <p class="md:text-lg lg:text-xl">
-      This is also helping us to know our audience and adapt our
-      content accordingly.
+      This is also helping us to know our audience and adapt our content
+      accordingly.
     </p>
 
     <form class="form mt-10" @submit.prevent="submit">
@@ -143,7 +144,10 @@
       <p v-if="status.error" class="text-sm text-red-400 mt-3 text-center">
         {{ status.error }}
       </p>
-      <p v-if="status.success" className="text-sm text-green-600 mt-3 text-center">
+      <p
+        v-if="status.success"
+        className="text-sm text-green-600 mt-3 text-center"
+      >
         Your profile has been saved
       </p>
     </form>
