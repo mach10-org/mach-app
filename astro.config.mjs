@@ -27,6 +27,9 @@ export default defineConfig({
       imports: [
         {
           './src/components/Quiz': ['Quiz']
+        },
+        {
+          './src/components/Compiler': ['Compiler']
         }
       ]
     }),

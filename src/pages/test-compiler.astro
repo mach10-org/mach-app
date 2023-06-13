@@ -1,0 +1,40 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+import { Compiler } from '@components/Compiler';
+const pageData = {
+  title: 'Mach10 - Test compiler',
+  description: 'Test compiler'
+};
+
+const firstState = 'package main\n\nimport "fmt";\n\nfunc main() {\n  fmt.Println("Hello,BARTOLINI")\n}';
+const initialState = `
+package main
+
+import "fmt";
+
+func main() {
+  fmt.Println("Hello,from initialState")
+}
+`;
+---
+
+<MainLayout {...pageData}>
+  <section class='max-w-[800px] mx-auto'>
+    <h2>load compiler here</h2>
+    <a href='https://hrishikeshpathak.com/blog/golang-code-playground/' class='link my-3 block' target='_blank'>golang-code-playground</a>
+
+    <Compiler initialState={initialState}>
+      {
+        `
+      package main
+      
+      import "fmt";
+      
+      func main() {
+        fmt.Println("Log from slot file.astro")
+      }
+      `
+      }
+    </Compiler>
+  </section>
+</MainLayout>

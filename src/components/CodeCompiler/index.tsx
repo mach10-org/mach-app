@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { editor } from 'monaco-editor';
+// import { editor } from 'monaco-editor';
 // import { Editor } from '@monaco-editor/react';
-import { Editor, DiffEditor, useMonaco, loader, OnMount } from '@monaco-editor/react';
+// import { Editor, DiffEditor, useMonaco, loader, OnMount } from '@monaco-editor/react';
 
 export interface Langages {
   url: string;
@@ -18,7 +18,7 @@ try {
 }
 */
 const CodeCompiler = () => {
-  const editorRef = useRef<editor.ICodeEditor>();
+  // const editorRef = useRef<editor.ICodeEditor>();
   const [langages, setLangages] = useState<Langages[]>();
 
   useEffect(() => {
@@ -43,38 +43,38 @@ const CodeCompiler = () => {
     console.log('handleEditorChange', value, event);
   };
 
-  const handleEditorDidMount: OnMount = (editor, monaco) => {
-    editorRef.current = editor;
-    console.log('onMount: the editor instance:', editor);
-    console.log('onMount: the monaco instance:', monaco);
-  };
+  // const handleEditorDidMount: OnMount = (editor, monaco) => {
+  //   editorRef.current = editor;
+  //   console.log('onMount: the editor instance:', editor);
+  //   console.log('onMount: the monaco instance:', monaco);
+  // };
 
-  const handleEditorWillMount = (monaco) => {
-    console.log('beforeMount: the monaco instance:', monaco);
-  };
+  // const handleEditorWillMount = (monaco) => {
+  //   console.log('beforeMount: the monaco instance:', monaco);
+  // };
 
-  const handleEditorValidation = (markers) => {
-    console.log('handleEditorValidation', markers);
-    // model markers
-    // markers.forEach(marker => console.log('onValidate:', marker.message));
-  };
+  // const handleEditorValidation = (markers) => {
+  //   console.log('handleEditorValidation', markers);
+  //   // model markers
+  //   // markers.forEach(marker => console.log('onValidate:', marker.message));
+  // };
 
-  const showValue = async () => {
-    const content = editorRef?.current?.getValue();
-    console.log('content', content);
-    const gloTdata = { files: [{ name: 'main.js', content }], stdin: '', command: '' };
-    const formdata = new FormData();
-    formdata.append('files', JSON.stringify(gloTdata));
-    try {
-      // const response = await glot.run('javascript', gloTdata);
-      // console.log('response', response);
-      const res = await fetch('/api/glot-run.json', { method: 'POST', body: formdata });
-      const response = await res.json();
-      console.log('response', response);
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
+  // const showValue = async () => {
+  //   const content = editorRef?.current?.getValue();
+  //   console.log('content', content);
+  //   const gloTdata = { files: [{ name: 'main.js', content }], stdin: '', command: '' };
+  //   const formdata = new FormData();
+  //   formdata.append('files', JSON.stringify(gloTdata));
+  //   try {
+  //     // const response = await glot.run('javascript', gloTdata);
+  //     // console.log('response', response);
+  //     const res = await fetch('/api/glot-run.json', { method: 'POST', body: formdata });
+  //     const response = await res.json();
+  //     console.log('response', response);
+  //   } catch (error) {
+  //     console.log('error', error);
+  //   }
+  // };
   // return <Editor height='90vh' defaultLanguage='javascript' defaultValue='' />;
   return (
     <>
@@ -87,7 +87,7 @@ const CodeCompiler = () => {
           </>
         ))}
       </div>
-      <button onClick={showValue}>Run code</button>
+      {/* <button onClick={showValue}>Run code</button>
       <Editor
         height='40vh'
         defaultLanguage='javascript'
@@ -96,7 +96,7 @@ const CodeCompiler = () => {
         onMount={handleEditorDidMount}
         beforeMount={handleEditorWillMount}
         onValidate={handleEditorValidation}
-      />
+      /> */}
     </>
   );
 };

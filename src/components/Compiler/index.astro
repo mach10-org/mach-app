@@ -1,0 +1,112 @@
+---
+import { compile } from 'html-to-text';
+
+type Props = {
+  initialState?: string;
+};
+const slot = await Astro?.slots?.render('default');
+
+const options = {
+  wordwrap: 130
+};
+const compiledConvert = compile(options);
+
+const hasHtml = slot?.includes('astro-code');
+const slotTextArray = hasHtml ? null : slot?.split(`\n`);
+const texts = slotTextArray?.map(compiledConvert);
+const codeFromSlot = hasHtml ? compiledConvert(slot) : texts?.join('\n') || null;
+const initialState = codeFromSlot || Astro.props.initialState || '';
+---
+
+<div id='cm-main' class='cm-wrap ͼo' data-cm-state={initialState}>
+  <div id='codemirror-widget' class='pt-2'></div>
+  <div class='cm-footer px-2 divide-y divide-dashed divide-slate-400'>
+    <button id='run-code' class='bg-primary text-white font-outfit flex text-base font-medium items-center rounded px-3 py-1 my-3'> Run</button>
+    <div id='cm-result' class='py-3'>
+      <span id='loading' class='hidden'>⏳ Evaluating output...</span>
+      <span id='cm-output' class='hidden'></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  //https://www.raresportan.com/how-to-make-a-code-editor-with-codemirror6/
+  //https://codesandbox.io/s/codemirror-6-demo-pl8dc?file=/src/index.js
+  import { EditorView, keymap } from '@codemirror/view';
+  import $ from 'cash-dom';
+  import { supabase } from '@utils/supabase';
+  import { defaultKeymap } from '@codemirror/commands';
+  import { minimalSetup, basicSetup } from 'codemirror';
+  import { Compartment, EditorState } from '@codemirror/state';
+  import { StreamLanguage } from '@codemirror/language';
+  import { go } from '@codemirror/legacy-modes/mode/go';
+  import { boysAndGirls } from 'thememirror';
+  import { oneDark, oneDarkTheme } from '@codemirror/theme-one-dark';
+
+  $(function () {
+    const initialeState = $('#cm-main').attr('data-cm-state') || '';
+    console.log('initialeState', initialeState);
+
+    const myTheme = EditorView.baseTheme({
+      '&.cm-editor': {
+        fontSize: '16px'
+      },
+      '.cm-scroller': {
+        fontFamily: 'Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace'
+      }
+    });
+    let language = new Compartment(),
+      tabSize = new Compartment();
+
+    const firstState = 'package main\n\nimport "fmt";\n\nfunc main() {\n  fmt.Println("Hello,BARTO")\n}';
+    const state = EditorState.create({
+      doc: initialeState,
+      extensions: [basicSetup, StreamLanguage.define(go), tabSize.of(EditorState.tabSize.of(2)), oneDark, myTheme]
+    });
+
+    let myView = new EditorView({
+      state,
+      // extensions: [keymap.of(defaultKeymap)],
+      // extensions: [basicSetup, StreamLanguage.define(go), oneDarkTheme],
+      parent: document.querySelector('#codemirror-widget') as Element
+    });
+
+    const runCode = $('#run-code');
+    const loader = $('#loading');
+    const output = $('#cm-output');
+
+    runCode.on('click', async function onRunCode(e: Event) {
+      loader.removeClass('hidden');
+      output.addClass('hidden');
+
+      const code = myView.state.doc.toString();
+      try {
+        const { data, error } = await supabase.functions.invoke('go-compile', {
+          body: { code }
+        });
+        console.log('data', data);
+        const resultEvents = data?.Events?.map((e) => '<p class="m-0">' + e.Message.split('\n').join('<br>') + '</p>');
+        const resultErrors = '<p class="m-0">' + data?.Errors.split('\n').join('<br>') + '</p>';
+        loader.addClass('hidden');
+        output.removeClass('hidden');
+        output.html(resultEvents || resultErrors);
+      } catch (error) {}
+    });
+  });
+</script>
+
+<style is:inline>
+  /* .cm-scroller {
+    overflow: auto;
+  }
+  .cm-content,
+  .cm-gutter {
+    min-height: 250px;
+  }
+  .cm-gutters {
+    margin: 1px;
+  }
+  .cm-wrap {
+    border: 1px solid silver;
+  } */
+</style>
