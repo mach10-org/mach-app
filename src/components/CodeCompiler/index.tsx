@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import GlotAPI from 'glot-api';
 import { editor } from 'monaco-editor';
 // import { Editor } from '@monaco-editor/react';
 import { Editor, DiffEditor, useMonaco, loader, OnMount } from '@monaco-editor/react';
-//https://github.com/enkidevs/glot-api
-const token = 'f2c16827-22c0-4cdf-8bec-5b3ee5c4eb37'; // If you are logged in you will find your token here:  https://glot.io/account/token
-const glot = new GlotAPI(token);
-// const gloTdata = { files: [{ name: 'main.js', content: 'console.log(`Hello World!`);' }], stdin: '', command: '' };
 
 export interface Langages {
   url: string;

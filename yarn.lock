@@ -813,7 +813,6 @@ __metadata:
     cookie: ^0.5.0
     devicon: ^2.15.1
     flowbite: ^1.6.2
-    glot-api: guizmo/glot-api
     heroicons: ^2.0.14
     lodash: ^4.17.21
     mdast-util-to-string: ^3.2.0
@@ -1884,15 +1883,6 @@ __metadata:
   bin:
     autoprefixer: bin/autoprefixer
   checksum: e9f18e664a4e4a54a8f4ec5f6b49ed228ec45afaa76efcae361c93721795dc5ab644f36d2fdfc0dea446b02a8067b9372f91542ea431994399e972781ed46d95
-  languageName: node
-  linkType: hard
-
-"axios@npm:0.15.3":
-  version: 0.15.3
-  resolution: "axios@npm:0.15.3"
-  dependencies:
-    follow-redirects: 1.0.0
-  checksum: 201d250a9f59d31b9289751df4a9402dfd57b9ded5bf0015b3519c88b92fe6254d5c0f581b4b303f8820713a8be06e45170839361c53ecaa0854a144719f99f0
   languageName: node
   linkType: hard
 
@@ -3515,15 +3505,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:1.0.0":
-  version: 1.0.0
-  resolution: "follow-redirects@npm:1.0.0"
-  dependencies:
-    debug: ^2.2.0
-  checksum: 5e55af25108de12aa0df8cec1afa0a643a2c421fa51f3f410a0295d4d966fac7955fe18fa817df194c06f84b95e9115cbca006449e48a1e431e15e28da547e41
-  languageName: node
-  linkType: hard
-
 "format@npm:^0.2.0":
   version: 0.2.2
   resolution: "format@npm:0.2.2"
@@ -3710,15 +3691,6 @@ __metadata:
   version: 11.12.0
   resolution: "globals@npm:11.12.0"
   checksum: 67051a45eca3db904aee189dfc7cd53c20c7d881679c93f6146ddd4c9f4ab2268e68a919df740d39c71f4445d2b38ee360fc234428baea1dbdfe68bbcb46979e
-  languageName: node
-  linkType: hard
-
-glot-api@guizmo/glot-api:
-  version: 0.2.1
-  resolution: "glot-api@https://github.com/guizmo/glot-api.git#commit=17498b191aeaf3792913982b376f4e05cd6e4d1c"
-  dependencies:
-    axios: 0.15.3
-  checksum: ccec6497d459cfae9b32b41b8ead35649e83646552562910031976299b1e8175779855b6bc300f58d970c360b63c808c3be7d23f1fcfcd2e5848b0e12f701fc1
   languageName: node
   linkType: hard
 

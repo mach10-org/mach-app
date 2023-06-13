@@ -31,13 +31,19 @@ import { onMounted } from 'vue';
 import { OButton } from '@oruga-ui/oruga-next';
 import LoginStatusMenu from './LoginStatusMenu.vue';
 import { getCourseTaken } from '@stores/courses';
+import { supabase } from '@utils/supabase';
 const $isConnected = useStore(isConnected);
 const BASE_URL = import.meta.env.BASE_URL;
 
 onMounted(async () => {
   try {
     const user = await getUser();
+    const code = 'package main\n\nimport "fmt";\n\nfunc main() {\n  fmt.Println("Hello, Hrishi")\n}';
 
+    const { data, error } = await supabase.functions.invoke('hello-world', {
+      // body: { code }
+      body: { name: 'test' }
+    });
     if (user) {
       getCourseTaken(user.id);
     } else {
