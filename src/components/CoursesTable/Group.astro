@@ -1,8 +1,8 @@
 ---
-import { Collection, CourseDataProps, GroupCourse } from '@models/courses';
-import { CollectionEntry } from 'astro:content';
-import Icon from '@components/DynamicHeroIcon.vue';
-import GroupItem from './GroupItem.astro';
+import { Collection, CourseDataProps, GroupCourse } from "@models/courses";
+import { CollectionEntry } from "astro:content";
+import Icon from "@components/DynamicHeroIcon.vue";
+import GroupItem from "./GroupItem.astro";
 
 type Props = {
   sectionIdx: number;
@@ -12,12 +12,17 @@ type Props = {
 const { courses, key, sectionIdx } = Astro.props;
 ---
 
-<li class='space-y-4'>
-  <div class='p-3 bg-gray-200 border border-gray-200 rounded-md'>
-    <div>SECTION {sectionIdx + 1}</div>
-    <h3 class='m-0'>{key}</h3>
-  </div>
-  <ul class='list-none p-0' data-section={key}>
+<li class="space-y-4 p-0">
+  {
+    key && (
+      <div class="flex items-center justify-between px-4 py-2 border-l-[4px] border-r-[4px] border border-border-input rounded-md bg-background-page">
+        <h3 class="m-0 text-text-title font-bold text-lg">
+          {key}
+        </h3>
+      </div>
+    )
+  }
+  <ul class="list-none p-0" data-section={key}>
     {
       courses.map((c, idx) => {
         return <GroupItem course={c} lessonIdx={idx} />;
