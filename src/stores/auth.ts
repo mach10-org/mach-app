@@ -2,6 +2,7 @@ import moment from 'moment';
 import { User } from '@utils/auth';
 import { profile, setUser, removeUser } from './profile';
 import { supabase } from '@utils/supabase';
+import { Provider } from '@supabase/supabase-js';
 
 export type JwToken = {
   expires_in: string | undefined;
@@ -110,6 +111,16 @@ export const signinOrUp = async (email: string, emailRedirectTo: string) => {
         data: { username: '' },
         emailRedirectTo
       }
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+export const signInWithOAuth = async (provider: Provider) => {
+  try {
+    const response = await supabase.auth.signInWithOAuth({
+      provider
     });
     return response;
   } catch (error) {
