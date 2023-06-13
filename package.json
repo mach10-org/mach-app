@@ -40,7 +40,6 @@
     "cookie": "^0.5.0",
     "devicon": "^2.15.1",
     "flowbite": "^1.6.2",
-    "glot-api": "guizmo/glot-api",
     "heroicons": "^2.0.14",
     "lodash": "^4.17.21",
     "mdast-util-to-string": "^3.2.0",
