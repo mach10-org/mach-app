@@ -16,7 +16,7 @@
   "settings": {
     "files.exclude": {
       "node_modules/": true,
-      "app/": true,
+      "src/": true,
       "supabase/functions/": true
     },
     "deno.importMap": "./supabase/functions/import_map.json"
