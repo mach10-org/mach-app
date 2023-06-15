@@ -42,7 +42,26 @@ const initialState = codeFromSlot || Astro.props.initialState || '';
   import { go } from '@codemirror/legacy-modes/mode/go';
   import { boysAndGirls } from 'thememirror';
   import { oneDark, oneDarkTheme } from '@codemirror/theme-one-dark';
+  import { indentWithTab, indentSelection } from '@codemirror/commands';
 
+  interface GoCompilerRunEvent {
+    Message: string;
+    Kind: string;
+    Delay: number;
+  }
+  interface GoCompilerRun {
+    Errors: string;
+    Events: GoCompilerRunEvent[];
+    Error: string;
+  }
+  interface GoCompilerFMT {
+    Body: string;
+    Error: string;
+  }
+  interface GoCompiler {
+    events: GoCompilerRun;
+    formated: GoCompilerFMT;
+  }
   $(function () {
     const initialeState = $('#cm-main').attr('data-cm-state') || '';
     console.log('initialeState', initialeState);
@@ -64,7 +83,7 @@ const initialState = codeFromSlot || Astro.props.initialState || '';
       extensions: [basicSetup, StreamLanguage.define(go), tabSize.of(EditorState.tabSize.of(2)), oneDark, myTheme]
     });
 
-    let myView = new EditorView({
+    let view = new EditorView({
       state,
       // extensions: [keymap.of(defaultKeymap)],
       // extensions: [basicSetup, StreamLanguage.define(go), oneDarkTheme],
@@ -78,18 +97,26 @@ const initialState = codeFromSlot || Astro.props.initialState || '';
     runCode.on('click', async function onRunCode(e: Event) {
       loader.removeClass('hidden');
       output.addClass('hidden');
+      // state.update({ changes: { from: 0, to: state.doc.length, insert: 'foobar' } });
 
-      const code = myView.state.doc.toString();
+      const code = view.state.doc.toString();
       try {
-        const { data, error } = await supabase.functions.invoke('go-compile', {
-          body: { code }
+        const { data, error } = await supabase.functions.invoke<GoCompiler>('go-compile', {
+          body: { code, compile: true, fmt: true }
         });
-        console.log('data', data);
-        const resultEvents = data?.Events?.map((e) => '<p class="m-0">' + e.Message.split('\n').join('<br>') + '</p>');
-        const resultErrors = '<p class="m-0">' + data?.Errors.split('\n').join('<br>') + '</p>';
-        loader.addClass('hidden');
-        output.removeClass('hidden');
-        output.html(resultEvents || resultErrors);
+
+        if (data) {
+          const resultEvents = data.events?.Events?.map((e) => '<p class="m-0">' + e.Message.split('\n').join('<br>') + '</p>');
+
+          const resultErrors = '<p class="m-0">' + data.events?.Errors.split('\n').join('<br>') + '</p>';
+          loader.addClass('hidden');
+          output.removeClass('hidden');
+          output.html(resultEvents.join('') || resultErrors);
+
+          if (data.formated.Body) {
+            view.dispatch({ changes: { from: 0, to: state.doc.length, insert: data.formated.Body } });
+          }
+        }
       } catch (error) {}
     });
   });

@@ -1,0 +1,71 @@
+/**
+COMPILE CODE
+*/
+
+curl --location 'https://go.dev/_/compile?backend=' \
+--form 'version="2"' \
+--form 'body="// You can edit this code!
+// Click here and start typing.
+package main
+
+import \"fmt\"
+
+func main() { fmt.Println(\"Hello, 世界\")
+}"' \
+--form 'withVet="true"'
+
+var formdata = new FormData();
+formdata.append("version", "2");
+formdata.append("body", "// You can edit this code!\n// Click here and start typing.\npackage main\n\nimport \"fmt\"\n\nfunc main() { fmt.Println(\"Hello, 世界\")\n}");
+formdata.append("withVet", "true");
+
+var requestOptions = {
+  method: 'POST',
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("https://go.dev/_/compile?backend=", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+
+
+
+
+	/**
+
+GET FORMAT
+	*/
+
+
+curl --location 'https://go.dev/_/fmt?backend=' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'imports=true' \
+--data-urlencode 'body=// You can edit this code!
+// Click here and start typing.
+package main
+import "fmt"
+func main() {fmt.Println("Hello, 世界")
+}'
+
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("imports", "true");
+urlencoded.append("body", "// You can edit this code!\n// Click here and start typing.\npackage main\nimport \"fmt\"\nfunc main() {fmt.Println(\"Hello, 世界\")\n}");
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://go.dev/_/fmt?backend=", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
