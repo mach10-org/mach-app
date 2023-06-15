@@ -78,6 +78,10 @@
         </h4>
         <p class="text-center text-text-muted">When you started the course</p>
       </div>
+      <div class="col-span-2 text-center pt-4">
+        <a :href="`/courses/${course.slug}/`" class="link">Go to course</a>
+        <!-- TODO go to next chapter? -->
+      </div>
     </div>
   </div>
 </template>
