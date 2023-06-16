@@ -1,5 +1,6 @@
 ---
 import { compile } from 'html-to-text';
+import Icon from '@components/DynamicHeroIcon.vue';
 
 type Props = {
   initialState?: string;
@@ -16,15 +17,38 @@ const slotTextArray = hasHtml ? null : slot?.split(`\n`);
 const texts = slotTextArray?.map(compiledConvert);
 const codeFromSlot = hasHtml ? compiledConvert(slot) : texts?.join('\n') || null;
 const initialState = codeFromSlot || Astro.props.initialState || '';
+const widgetId = Math.floor(Math.random() * 1000);
 ---
 
-<div id='cm-main' class='cm-wrap ͼo' data-cm-state={initialState}>
-  <div id='codemirror-widget' class='pt-2'></div>
+<div id={'cm-main-' + widgetId} class='cm-widget cm-wrap ͼo mb-4' data-widget-id={widgetId} data-cm-state={initialState}>
+  <div class='cm-header p-2 bg-slate-900 flex justify-between items-center'>
+    <h5 class='title m-0 text-slate-400 font-bold'>Go Playground</h5>
+    <div class='menu space-x-2'>
+      <button id='run-code' class='run-code-btn o-btn o-btn--small o-btn--primary'>
+        <span class='o-btn__wrapper'>
+          <span class='o-o-btn__label'>Run</span>
+        </span>
+      </button>
+      <button class='run-code-btn o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
+        <span class='o-btn__wrapper'>
+          <span class='o-o-btn__label text-slate-400'>Format</span>
+        </span>
+      </button>
+      <button class='toggleFullScreen o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
+        <span class='o-btn__wrapper'>
+          <span class='o-o-btn__label text-slate-400'>
+            <Icon name='ArrowsPointingOutIcon' outline={true} classes='w-5 h-5 show-fullscreen' />
+            <Icon name='ArrowsPointingInIcon' outline={true} classes='w-5 h-5 hide-fullscreen hidden' />
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class='codemirror-widget pt-2 border-t border-slate-500 border-b'></div>
   <div class='cm-footer px-2 divide-y divide-dashed divide-slate-400'>
-    <button id='run-code' class='bg-primary text-white font-outfit flex text-base font-medium items-center rounded px-3 py-1 my-3'> Run</button>
-    <div id='cm-result' class='py-3'>
-      <span id='loading' class='hidden'>⏳ Evaluating output...</span>
-      <span id='cm-output' class='hidden'></span>
+    <div class='py-3 cm-result log-wrapper text-base'>
+      <div class='loading hidden'>⏳ Evaluating output...</div>
+      <div class='cm-output hidden pl-4'></div>
     </div>
   </div>
 </div>
@@ -63,77 +87,99 @@ const initialState = codeFromSlot || Astro.props.initialState || '';
     formated: GoCompilerFMT;
   }
   $(function () {
-    const initialeState = $('#cm-main').attr('data-cm-state') || '';
-    console.log('initialeState', initialeState);
-
-    const myTheme = EditorView.baseTheme({
-      '&.cm-editor': {
-        fontSize: '16px'
-      },
-      '.cm-scroller': {
-        fontFamily: 'Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace'
-      }
-    });
-    let language = new Compartment(),
-      tabSize = new Compartment();
-
-    const firstState = 'package main\n\nimport "fmt";\n\nfunc main() {\n  fmt.Println("Hello,BARTO")\n}';
-    const state = EditorState.create({
-      doc: initialeState,
-      extensions: [basicSetup, StreamLanguage.define(go), tabSize.of(EditorState.tabSize.of(2)), oneDark, myTheme]
-    });
-
-    let view = new EditorView({
-      state,
-      // extensions: [keymap.of(defaultKeymap)],
-      // extensions: [basicSetup, StreamLanguage.define(go), oneDarkTheme],
-      parent: document.querySelector('#codemirror-widget') as Element
-    });
-
-    const runCode = $('#run-code');
-    const loader = $('#loading');
-    const output = $('#cm-output');
-
-    runCode.on('click', async function onRunCode(e: Event) {
-      loader.removeClass('hidden');
-      output.addClass('hidden');
-      // state.update({ changes: { from: 0, to: state.doc.length, insert: 'foobar' } });
-
-      const code = view.state.doc.toString();
-      try {
-        const { data, error } = await supabase.functions.invoke<GoCompiler>('go-compile', {
-          body: { code, compile: true, fmt: true }
-        });
-
-        if (data) {
-          const resultEvents = data.events?.Events?.map((e) => '<p class="m-0">' + e.Message.split('\n').join('<br>') + '</p>');
-
-          const resultErrors = '<p class="m-0">' + data.events?.Errors.split('\n').join('<br>') + '</p>';
-          loader.addClass('hidden');
-          output.removeClass('hidden');
-          output.html(resultEvents.join('') || resultErrors);
-
-          if (data.formated.Body) {
-            view.dispatch({ changes: { from: 0, to: state.doc.length, insert: data.formated.Body } });
-          }
+    $('.cm-widget').each((idx, elem) => {
+      const widget = $(elem);
+      const widgetId = widget.attr('data-widget-id');
+      const initialeState = widget.attr('data-cm-state') || '';
+      const myTheme = EditorView.baseTheme({
+        '&.cm-editor': {
+          fontSize: '16px'
+        },
+        '.cm-scroller': {
+          fontFamily: 'Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace'
         }
-      } catch (error) {}
+      });
+      let language = new Compartment(),
+        tabSize = new Compartment();
+
+      // const firstState = 'package main\n\nimport "fmt";\n\nfunc main() {\n  fmt.Println("Hello,BARTO")\n}';
+      const state = EditorState.create({
+        doc: initialeState,
+        extensions: [basicSetup, StreamLanguage.define(go), tabSize.of(EditorState.tabSize.of(2)), oneDark, myTheme]
+      });
+      const widgetCm = widget.find('.codemirror-widget')[0];
+      let view = new EditorView({
+        state,
+        parent: widgetCm
+      });
+
+      const runCodeBtn = widget.find('.run-code-btn');
+      const loader = widget.find('.loading');
+      const output = widget.find('.cm-output');
+      const toggleFullScreen = widget.find('.toggleFullScreen');
+      const bodyElem = $('body');
+
+      toggleFullScreen.on('click', function (e: Event) {
+        const buttonClicked = $(e.currentTarget as Element);
+        const iconShowFullScreen = buttonClicked.find('.show-fullscreen');
+        const iconHideFullScreen = buttonClicked.find('.hide-fullscreen');
+        iconShowFullScreen.toggleClass('hidden');
+        iconHideFullScreen.toggleClass('hidden');
+        widget.toggleClass('fullscreen');
+        bodyElem.toggleClass('cm-fullscreen');
+      });
+
+      runCodeBtn.on('click', async function (e: Event) {
+        loader.removeClass('hidden');
+        output.addClass('hidden');
+        const buttonClicked = $(e.currentTarget as Element).attr('id');
+
+        const code = view.state.doc.toString();
+        const body = { code, compile: buttonClicked === 'run-code', fmt: true };
+        try {
+          const { data, error } = await supabase.functions.invoke<GoCompiler>('go-compile', { body });
+          if (data) {
+            const resultEvents = data?.events?.Events?.map((e) => '<p class="m-0">' + e.Message.split('\n').join('<br>') + '</p>');
+
+            const resultErrors = data?.events?.Errors ? '<p class="m-0 text-rose-500">' + data.events.Errors.split('\n').join('<br>') + '</p>' : '';
+
+            loader.addClass('hidden');
+            output.html(data?.events?.Events ? resultEvents.join('') : resultErrors);
+            if (output.html()) {
+              output.removeClass('hidden');
+            }
+
+            if (data.formated.Body) {
+              view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: data.formated.Body } });
+            }
+          }
+        } catch (error) {}
+      });
     });
   });
 </script>
 
 <style is:inline>
-  /* .cm-scroller {
-    overflow: auto;
+  .cm-output:before {
+    content: '›';
+    opacity: 0.8;
+    margin-left: -1rem;
+    width: 0.5rem;
+    position: absolute;
+    text-align: center;
+    font-size: 1.125rem;
   }
-  .cm-content,
-  .cm-gutter {
-    min-height: 250px;
+
+  body.cm-fullscreen {
+    overflow: hidden !important;
   }
-  .cm-gutters {
-    margin: 1px;
+
+  .fullscreen {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+    left: 0;
   }
-  .cm-wrap {
-    border: 1px solid silver;
-  } */
 </style>
