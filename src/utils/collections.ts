@@ -10,13 +10,21 @@ export const getAllCourseIndex = async (collection: Collection) => {
   const list = await getCollection(collection, ({ id, data }) => {
     return data.draft !== true && id.toLowerCase().includes(idxKey.toLowerCase());
   });
-  const test = list.map((c) => {
-    const slug: any = c.slug.toLowerCase().replace(idxKey.toLowerCase(), '/');
-    c.slug = slug;
-    return c;
-  });
 
-  return test;
+  for await (const c of list) {
+    c.slug = c.slug.toLowerCase().replace(idxKey.toLowerCase(), '/') as any;
+  
+    if (!c.data.totalHours) {
+      const courseInfo = await getCourseInfo('courses', c.slug.replace('/', ''));
+      if (courseInfo?.duration) {
+        c.data.totalHours = Math.ceil(courseInfo?.duration)
+      }
+    }
+  }
+
+  console.log(list);
+
+  return list;
 };
 
 /**

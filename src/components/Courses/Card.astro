@@ -1,7 +1,6 @@
 ---
 import { CourseDataProps, CourseProps } from '@models/courses';
 import { Picture } from '@astrojs/image/components';
-import { getCourseInfo } from '@utils/collections';
 
 interface Props extends CourseProps {}
 const { href, course } = Astro.props;
@@ -10,11 +9,6 @@ const { title, description, preview, totalHours } = course?.data as CourseDataPr
 let computedTotalHours: null | number = null
 if (totalHours) {
   computedTotalHours = totalHours
-} else if (course.slug) {
-  const courseInfo = await getCourseInfo('courses', course.slug.replace('/', ''));
-  if (courseInfo?.duration) {
-    computedTotalHours = Math.ceil(courseInfo?.duration)
-  }
 }
 ---
 
