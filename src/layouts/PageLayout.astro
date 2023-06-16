@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Quiz from '@components/Quiz/Question.vue';
+import TimeToComplete from '@components/TimeToComplete.vue';
 
 const { title, frontmatter } = Astro.props;
 const pageTitle = title || frontmatter?.title;
@@ -9,8 +10,9 @@ const slug = Astro.url.pathname;
 ---
 
 <BaseLayout {...props}>
-  <div class='max-w-[46.8rem] lg:max-w-[50.9rem] mx-auto px-4 lg:px-8 pb-3 pt-10'>
-    <a href={`${import.meta.env.BASE_URL}courses/`} class="link">&larr; Courses</a>
+  <div class='flex flex-col lg:flex-row justify-between lg:items-center max-w-[46.8rem] lg:max-w-[50.9rem] mx-auto px-4 lg:px-8 pb-3 pt-10'>
+    <a href={`${import.meta.env.BASE_URL}courses/`} class="link mb-3 lg:mb-0">&larr; Courses</a>
+    <TimeToComplete totalHours={props.totalHours}  client:only='vue' />
   </div>
   <main class='content-page prose prose-lg lg:prose-xl bg-background-base rounded'>
     <h1>{pageTitle}</h1>

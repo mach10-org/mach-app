@@ -1,13 +1,15 @@
 ---
-import { CourseDataProps, CourseProps, CourseRender } from '@models/courses';
+import { CourseDataProps, CourseProps } from '@models/courses';
 import { Picture } from '@astrojs/image/components';
 
 interface Props extends CourseProps {}
 const { href, course } = Astro.props;
-const { title, description, preview } = course?.data as CourseDataProps;
-const { remarkPluginFrontmatter } = (await course.render()) as CourseRender;
+const { title, description, preview, totalHours } = course?.data as CourseDataProps;
 
-// console.log('remarkPluginFrontmatter', remarkPluginFrontmatter);
+let computedTotalHours: null | number = null
+if (totalHours) {
+  computedTotalHours = totalHours
+}
 ---
 
 <li>
@@ -21,16 +23,9 @@ const { remarkPluginFrontmatter } = (await course.render()) as CourseRender;
       <p class='transition-colors text-text-base m-0 leading-6 flex-1'>
         {description}
       </p>
-      <span class='transition-colors text-text-muted text-sm  block mt-2'>
-        {remarkPluginFrontmatter?.minutesRead?.text && remarkPluginFrontmatter?.minutesRead?.text}
-        {
-          remarkPluginFrontmatter?.section && (
-            <span>
-              <span> - </span> Section : {remarkPluginFrontmatter?.section}
-            </span>
-          )
-        }
-      </span>
+      {computedTotalHours && <span class='transition-colors text-text-muted text-sm  block mt-2'>
+        {computedTotalHours} hours
+      </span> }
     </div>
   </a>
 </li>

@@ -3,7 +3,6 @@ import PageLayout from '@PageLayout';
 import { getCourseDirectories } from '@utils/collections';
 import { Collection, CollectionStaticProps } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
-import TOC from '@components/TOC/index.astro';
 import CoursesTable from '@components/CoursesTable/index.astro';
 
 interface Props {
@@ -32,15 +31,10 @@ export async function getStaticPaths() {
 }
 
 const { entry, courses } = Astro.props;
-const { Content, headings, remarkPluginFrontmatter } = await entry.render();
+const { Content } = await entry.render();
 ---
 
 <PageLayout {...entry.data}>
-  <!-- <TOC pageHeadings={headings} /> -->
-
   <Content />
-
   {Astro.params?.course && <CoursesTable courseId={Astro.params.course} courses={courses} coursePage={true} />}
-
-  <!-- {courses.map((course) => <Card href={`${course.collection}/${course.slug}`} course={course} />)} -->
 </PageLayout>

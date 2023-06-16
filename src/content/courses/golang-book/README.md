@@ -7,6 +7,7 @@ tags:
 preview: course-go.jpg
 previewRatio: "4:3"
 lastmod: 2023-05-31T04:32:01.353Z
+totalHours: 120
 ---
 
 # Go from the beginning

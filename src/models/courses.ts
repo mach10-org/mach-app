@@ -59,6 +59,7 @@ export interface CourseDataProps {
   preview: string;
   previewRatio: `${number}:${number}`;
   tags: string[];
+  totalHours?: number;
 }
 export interface MinutesRead {
   text: string;

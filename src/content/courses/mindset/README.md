@@ -6,6 +6,7 @@ tags:
 preview: course-prepare-your-mindset.png
 previewRatio: "224:109"
 lastmod: 2023-05-24T04:28:53.384Z
+# totalHours: 4
 ---
 
 ## Introduction

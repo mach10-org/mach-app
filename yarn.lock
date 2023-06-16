@@ -933,6 +933,7 @@ __metadata:
     codemirror: ^6.0.1
     colord: ^2.9.3
     cookie: ^0.5.0
+    dayjs: ^1.11.8
     devicon: ^2.15.1
     flowbite: ^1.6.2
     heroicons: ^2.0.14
@@ -2982,7 +2983,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.11.7":
+"dayjs@npm:^1.11.7, dayjs@npm:^1.11.8":
   version: 1.11.8
   resolution: "dayjs@npm:1.11.8"
   checksum: 4fe04b6df98ba6e5f89b49d80bba603cbf01e21a1b4a24ecb163c94c0ba5324a32ac234a139cee654f89d5277a2bcebca5347e6676c28a0a6d1a90f1d34a42b8
