@@ -1,3 +1,8 @@
+---
+import Newsletter from '@components/Block/Newsletter.vue';
+import NoTag from '@components/NoTag.astro';
+---
+
 <footer class='py-4 sm:pt-14 sm:pb-6'>
   <div class='mx-auto container'>
     <div class='md:flex md:justify-between'>
@@ -6,6 +11,11 @@
           <span class='text-2xl mr-3 sm:text-3xl'>👩🏻‍🚀</span>
           <span class='self-center text-2xl font-semibold whitespace-nowrap'>{import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME}</span>
         </a>
+      </div>
+      <div class='px-0 md:px-8 mb-16 md:mb-0'>
+        <Newsletter label='Email address' placeholder='Enter your email' buttonText='Notify me' inputId='email-newsletter-footer' client:only='vue'>
+          <NoTag slot='description'>We’ll notify you when our first course is ready. First course starting in 2023.</NoTag>
+        </Newsletter>
       </div>
       <div class='grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3'>
         <div>
