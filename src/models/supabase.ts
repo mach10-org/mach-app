@@ -131,7 +131,7 @@ export interface Database {
           id: string;
           updated_at: string | null;
           username: string | null;
-          website: string | null;
+          devices: string[];
           xp: number;
         };
         Insert: {
@@ -146,7 +146,7 @@ export interface Database {
           id: string;
           updated_at?: string | null;
           username?: string | null;
-          website?: string | null;
+          devices: string[];
           xp?: number;
         };
         Update: {
@@ -161,7 +161,7 @@ export interface Database {
           id?: string;
           updated_at?: string | null;
           username?: string | null;
-          website?: string | null;
+          devices: string[];
           xp?: number;
         };
       };

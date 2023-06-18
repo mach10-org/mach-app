@@ -29,7 +29,7 @@ const defaultProfile = {
   xp: 0,
   updated_at: null,
   username: null,
-  website: null,
+  devices: [],
 
   ...profile.get()?.user_metadata
 };
