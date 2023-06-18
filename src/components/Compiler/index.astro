@@ -67,6 +67,7 @@ const widgetId = Math.floor(Math.random() * 1000);
   import { boysAndGirls } from 'thememirror';
   import { oneDark, oneDarkTheme } from '@codemirror/theme-one-dark';
   import { indentWithTab, indentSelection } from '@codemirror/commands';
+  console.log('oneDark', oneDark);
 
   interface GoCompilerRunEvent {
     Message: string;
@@ -96,7 +97,7 @@ const widgetId = Math.floor(Math.random() * 1000);
           fontSize: '16px'
         },
         '.cm-scroller': {
-          fontFamily: 'Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace'
+          fontFamily: 'Andale Mono, monospace, Consolas, Menlo, Monaco, source-code-pro, Courier New '
         }
       });
       let language = new Compartment(),
@@ -160,6 +161,13 @@ const widgetId = Math.floor(Math.random() * 1000);
 </script>
 
 <style is:inline>
+  @font-face {
+    font-family: 'Andale Mono';
+    src: url('/fonts/andale-mono.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
   .cm-output:before {
     content: '›';
     opacity: 0.8;
