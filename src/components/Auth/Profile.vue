@@ -1,24 +1,12 @@
 <template>
-  <div
-    class="bg-background-base p-4 md:p-6 rounded border border-border-input md:max-w-[600px] mx-2 md:mx-auto mt-6 md:mt-10"
-  >
+  <div class="bg-background-base p-4 md:p-6 rounded border border-border-input md:max-w-[600px] mx-2 md:mx-auto mt-6 md:mt-10">
     <h2 class="text-center text-2xl md:text-4xl mb-2">
-      <span
-        class="text-transparent font-bold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
-        >{{ user?.email }}</span
-      >
+      <span class="text-transparent font-bold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">{{ user?.email }}</span>
     </h2>
     <h3 class="text-center text-lg font-bold mb-6">{{ xp }} XP</h3>
 
-    <p class="mb-2 md:text-lg lg:text-xl">
-      We’d love to learn more about you. Could you share with us what is your
-      main goal applying here? Even if it’s just curiosity, we’re interested to
-      hear ☺.
-    </p>
-    <p class="md:text-lg lg:text-xl">
-      This is also helping us to know our audience and adapt our content
-      accordingly.
-    </p>
+    <p class="mb-2 md:text-lg lg:text-xl">We’d love to learn more about you. Could you share with us what is your main goal applying here? Even if it’s just curiosity, we’re interested to hear ☺.</p>
+    <p class="md:text-lg lg:text-xl">This is also helping us to know our audience and adapt our content accordingly.</p>
 
     <form class="form mt-10" @submit.prevent="submit">
       <OField>
@@ -26,21 +14,11 @@
           Your firstname
           <span class="text-xs text-text-muted">(how should we call you?)</span>
         </template>
-        <OInput
-          type="text"
-          v-model="full_nameModel"
-          id="full_name"
-          placeholder="Firstname"
-        />
+        <OInput type="text" v-model="full_nameModel" id="full_name" placeholder="Firstname" />
       </OField>
 
       <OField label="Gender" labelFor="gender">
-        <OSelect
-          id="gender"
-          v-model="genderModel"
-          placeholder="Choose"
-          expanded
-        >
+        <OSelect id="gender" v-model="genderModel" placeholder="Choose" expanded>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
@@ -48,22 +26,11 @@
       </OField>
 
       <OField label="Birthdate" labelFor="dob">
-        <OInput
-          datepicker
-          id="dob"
-          v-model="dobModel"
-          type="date"
-          placeholder="Select date"
-        />
+        <OInput datepicker id="dob" v-model="dobModel" type="date" placeholder="Select date" />
       </OField>
 
       <OField label="Education level" labelFor="education">
-        <OSelect
-          id="education"
-          v-model="educationModel"
-          placeholder="Choose"
-          expanded
-        >
+        <OSelect id="education" v-model="educationModel" placeholder="Choose" expanded>
           <option value="Primary education">Primary education</option>
           <option value="Secondary education">Secondary education</option>
           <option value="High education">High education</option>
@@ -72,24 +39,22 @@
       </OField>
 
       <OField label="Experience with computers" labelFor="computer_xp">
-        <OSelect
-          id="computer_xp"
-          v-model="computer_xpModel"
-          placeholder="Choose"
-          expanded
-        >
+        <OSelect id="computer_xp" v-model="computer_xpModel" placeholder="Choose" expanded>
           <option value="Never used it">Never used it</option>
-          <option
-            value="I know how to use a computer but never did technical work"
-          >
-            I know how to use a computer but never did technical work
-          </option>
-          <option value="I have already programming experience">
-            I have already programming experience
-          </option>
+          <option value="I know how to use a computer but never did technical work">I know how to use a computer but never did technical work</option>
+          <option value="I have already programming experience">I have already programming experience</option>
         </OSelect>
       </OField>
 
+      <OField label="What kind of devices do you own?">
+        <div class="grid grid-cols-2 gap-2">
+          <div v-for="(value, index) in deviceList" class="">
+            <OCheckbox :key="index" v-model="devicesModel" :native-value="value">
+              {{ value }}
+            </OCheckbox>
+          </div>
+        </div>
+      </OField>
       <OField label="What is your goal with this program?">
         <div class="grid grid-cols-2 gap-2">
           <div v-for="(value, index) in goalsList" class="">
@@ -100,27 +65,11 @@
         </div>
       </OField>
 
-      <OField
-        label="Could you tell us more about you and your objectives?"
-        labelFor="about"
-      >
-        <OInput
-          id="about"
-          v-model="aboutModel"
-          name="about"
-          rows="4"
-          type="textarea"
-          placeholder="Write your thoughts here..."
-        ></OInput>
+      <OField label="Could you tell us more about you and your objectives?" labelFor="about">
+        <OInput id="about" v-model="aboutModel" name="about" rows="4" type="textarea" placeholder="Write your thoughts here..."></OInput>
       </OField>
 
-      <OButton
-        variant="primary"
-        type="submit"
-        @click="submit"
-        :disabled="status.isLoading"
-        expanded
-      >
+      <OButton variant="primary" type="submit" @click="submit" :disabled="status.isLoading" expanded>
         <svg
           v-if="status.isLoading"
           aria-hidden="true"
@@ -144,57 +93,36 @@
       <p v-if="status.error" class="text-sm text-red-400 mt-3 text-center">
         {{ status.error }}
       </p>
-      <p
-        v-if="status.success"
-        className="text-sm text-green-600 mt-3 text-center"
-      >
-        Your profile has been saved
-      </p>
+      <p v-if="status.success" className="text-sm text-green-600 mt-3 text-center">Your profile has been saved</p>
     </form>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {
-  OButton,
-  OInput,
-  OField,
-  OSelect,
-  OCheckbox,
-} from "@oruga-ui/oruga-next";
-import { User } from "@utils/auth";
-import {
-  upsertProfile,
-  profile,
-  profileData,
-  goalChoices,
-} from "@stores/profile";
-import { onMounted, ref } from "vue";
-import { useVModel } from "@nanostores/vue";
+import { OButton, OInput, OField, OSelect, OCheckbox } from '@oruga-ui/oruga-next';
+import { User } from '@utils/auth';
+import { upsertProfile, profile, profileData, goalChoices } from '@stores/profile';
+import { onMounted, ref } from 'vue';
+import { useVModel } from '@nanostores/vue';
 
 // const firstname = useVModel(profileData, 'firstname');
-const {
-  full_nameModel,
-  genderModel,
-  dobModel,
-  educationModel,
-  computer_xpModel,
-  goalModel,
-  aboutModel,
-} = useVModel(profileData, [
-  "full_name",
-  "gender",
-  "dob",
-  "education",
-  "dob",
-  "computer_xp",
-  "goal",
-  "about",
+const { full_nameModel, genderModel, dobModel, educationModel, computer_xpModel, goalModel, aboutModel, devicesModel } = useVModel(profileData, [
+  'full_name',
+  'gender',
+  'dob',
+  'education',
+  'dob',
+  'computer_xp',
+  'goal',
+  'about',
+  'devices'
 ]);
 const user = ref<User | null>(null);
 const xp = ref(0);
-const status = ref({ error: "", success: false, isLoading: false });
+const status = ref({ error: '', success: false, isLoading: false });
 const goalsList = ref<string[]>();
+const deviceList = ref(['iPad', 'Other tablet', 'Mac', 'Windows computer', 'Other', 'None of these']);
+
 onMounted(async () => {
   const userProfile = profile.get();
   const goalsListRes = await goalChoices();
@@ -206,7 +134,7 @@ onMounted(async () => {
 const submit = async (e: Event) => {
   e.preventDefault();
   const data = profileData.get();
-  status.value = { error: "", success: false, isLoading: true };
+  status.value = { error: '', success: false, isLoading: true };
   const id = user?.value?.id as string;
   try {
     const { error } = await upsertProfile({ ...data, id });
@@ -215,16 +143,16 @@ const submit = async (e: Event) => {
       status.value = {
         error: error.message,
         success: false,
-        isLoading: false,
+        isLoading: false
       };
     } else {
-      status.value = { error: "", success: true, isLoading: false };
+      status.value = { error: '', success: true, isLoading: false };
     }
   } catch (error) {
     status.value = {
       error: error.message,
       success: false,
-      isLoading: false,
+      isLoading: false
     };
   }
 };
