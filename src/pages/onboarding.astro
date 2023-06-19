@@ -1,0 +1,13 @@
+---
+import OnboardingWidget from '@components/Auth/Onboarding.vue';
+import MainLayout from '@layouts/MainLayout.astro';
+
+const pageData = {
+  title: 'Onboarding Widget',
+  description: 'Onboarding Widget'
+};
+---
+
+<MainLayout {...pageData}>
+  <OnboardingWidget client:only='vue' />
+</MainLayout>
