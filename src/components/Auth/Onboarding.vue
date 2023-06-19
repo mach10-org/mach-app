@@ -149,6 +149,43 @@
         </button> -->
       </form>
     </Splide>
+    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-modal-backdrop="static" class="link m-auto flex" type="button">Why we ask</button>
+
+    <div
+      id="popup-modal"
+      data-modal-backdrop="static"
+      tabindex="-1"
+      class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen bg-slate-900 bg-opacity-50"
+    >
+      <div class="relative w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <button
+            type="button"
+            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+            data-modal-hide="popup-modal"
+          >
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+          <div class="p-6 space-y-6">
+            <h3 class="text-2xl font-medium text-primary text-center dark:text-white">Why we ask</h3>
+
+            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              We would like to ask you a few question in order to know our audience better and create the most relevant experience for you. Knowing who is using our content makes us better at crafting
+              the best possible content.
+            </p>
+            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">These answers are optional and you are completely free not to answer anything, we get it</p>
+            <button data-modal-hide="popup-modal" type="button" class="link flex m-auto">Got it</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -164,10 +201,11 @@ import { useVModel } from '@nanostores/vue';
 import { upsertProfile, profile, profileData, goalChoices } from '@stores/profile';
 import { sleep } from '@utils/index';
 import { User } from '@utils/auth';
+import { initModals } from 'flowbite';
 
 const { full_nameModel, computer_xpModel, goalModel, devicesModel, ageModel } = useVModel(profileData, ['full_name', 'computer_xp', 'goal', 'devices', 'age']);
 
-const props = defineProps({
+defineProps({
   siteName: String
 });
 
@@ -185,6 +223,7 @@ onMounted(async () => {
   goalsList.value = goalsListRes;
   user.value = userProfile;
   xp.value = userProfile?.user_metadata.xp || 0;
+  initModals();
 });
 
 onMounted(async () => {
@@ -222,11 +261,9 @@ const options: Options = {
   height: 'calc(100vh - 100px)',
   speed: 650
 };
-let timer = null;
 
 const onSplideMove = async (splide: Core, index: number) => {
   setBarProgress(splide);
-
   if (index === 1) {
     await sleep(3500);
     goNext();
