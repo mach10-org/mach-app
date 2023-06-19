@@ -129,6 +129,7 @@ export interface Database {
           gender: string | null;
           goal: string[];
           id: string;
+          age: string | null;
           updated_at: string | null;
           username: string | null;
           devices: string[];
@@ -144,9 +145,10 @@ export interface Database {
           gender?: string | null;
           goal?: string[];
           id: string;
+          age?: string | null;
           updated_at?: string | null;
           username?: string | null;
-          devices: string[];
+          devices?: string[];
           xp?: number;
         };
         Update: {
@@ -159,9 +161,10 @@ export interface Database {
           gender?: string | null;
           goal?: string[];
           id?: string;
+          age?: string | null;
           updated_at?: string | null;
           username?: string | null;
-          devices: string[];
+          devices?: string[];
           xp?: number;
         };
       };

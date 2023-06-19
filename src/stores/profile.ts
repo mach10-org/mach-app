@@ -30,6 +30,7 @@ const defaultProfile = {
   updated_at: null,
   username: null,
   devices: [],
+  age: null,
 
   ...profile.get()?.user_metadata
 };

@@ -30,6 +30,7 @@
     "@nanostores/vue": "^0.8.2",
     "@oruga-ui/oruga-next": "^0.6.0",
     "@programming-languages-logos/go": "^0.0.0",
+    "@splidejs/vue-splide": "^0.6.12",
     "@supabase/supabase-js": "^2.24.0",
     "@tailwindcss/typography": "^0.5.9",
     "@types/cookie": "^0.5.1",
