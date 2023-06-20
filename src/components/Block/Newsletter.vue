@@ -16,7 +16,14 @@
 <script setup lang="ts">
 import { OButton, OInput } from '@oruga-ui/oruga-next';
 import { supabase } from '@utils/supabase';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { showToast, notifyStatus } from '@utils/notify';
+import { locales } from '@constants/localize';
+
+const {
+  notifications: { newsletter: localNotif },
+  errors
+} = locales;
 
 const props = defineProps({
   label: String,
@@ -28,6 +35,11 @@ const props = defineProps({
 });
 const email = ref('');
 const input = ref(null);
+
+const validateEmail = (email: string) => {
+  const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return regex.test(email);
+};
 
 onMounted(() => {
   if (props.focus && input.value) {
@@ -41,8 +53,22 @@ const handleSendMail = async (e) => {
   if (!email.value) {
     return;
   }
+  const notifTitle = localNotif.title;
+  if (!validateEmail(email.value)) {
+    showToast({ status: 'error', text: localNotif.not_valid_email, title: notifTitle });
+    return;
+  }
   try {
-    const { data, error } = await supabase.from('newsletter').insert({ email: email.value });
-  } catch (error) {}
+    const { error } = await supabase.from('newsletter').insert({ email: email.value });
+    let status: notifyStatus = 'success';
+    let msg = localNotif.email_saved;
+    if (error?.code === '23505') {
+      status = 'info';
+      msg = localNotif.email_already_saved;
+    }
+    showToast({ status, text: msg, title: notifTitle });
+  } catch (error) {
+    showToast({ status: 'error', text: errors.default, title: notifTitle });
+  }
 };
 </script>
