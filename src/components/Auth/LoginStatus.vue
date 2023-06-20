@@ -41,7 +41,13 @@ onMounted(async () => {
   try {
     const user = await getUser();
     if (user) {
-      getCourseTaken(user.id);
+      const redirectOptions = ['/onboarding/', '/profile/'];
+      const { pathname } = window.location;
+      if (!(user?.user_metadata?.updated_at && user?.user_metadata?.full_name) && !redirectOptions.includes(pathname)) {
+        window.location.assign(`${BASE_URL}onboarding/`);
+      } else {
+        getCourseTaken(user.id);
+      }
     } else {
       logout();
     }
