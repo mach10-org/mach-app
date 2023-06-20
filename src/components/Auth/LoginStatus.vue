@@ -1,5 +1,5 @@
 <template>
-  <div id="isLoggedIn" v-if="$isConnected" class="relative ml-5 mr-2">
+  <div id="isLoggedIn" v-if="$isConnected" class="relative ml-5 mr-2 p-2 flex">
     <button
       type="button"
       class="transition-colors p-0 rounded-full text-center inline-flex items-center focus:ring-4 focus:ring-link/70 focus:outline-none hover:text-link"
@@ -9,7 +9,7 @@
       @click="isOpen = !isOpen"
     >
       <span class="sr-only">Open user menu</span>
-      <img :src="avatar" class="h-10 h-10 rounded-full" />
+      <img :src="avatar" class="block h-8 h-8 rounded-full" />
     </button>
     <!-- Dropdown menu -->
     <div
