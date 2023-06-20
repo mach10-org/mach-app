@@ -4,6 +4,7 @@ import Icon from '@components/DynamicHeroIcon.vue';
 
 type Props = {
   initialState?: string;
+  title?: string;
 };
 const slot = await Astro?.slots?.render('default');
 
@@ -18,11 +19,12 @@ const texts = slotTextArray?.map(compiledConvert);
 const codeFromSlot = hasHtml ? compiledConvert(slot) : texts?.join('\n') || null;
 const initialState = codeFromSlot || Astro.props.initialState || '';
 const widgetId = Math.floor(Math.random() * 1000);
+const { title } = Astro.props;
 ---
 
 <div id={'cm-main-' + widgetId} class='cm-widget cm-wrap ͼo mb-4' data-widget-id={widgetId} data-cm-state={initialState}>
   <div class='cm-header p-2 bg-slate-900 flex justify-between items-center'>
-    <h5 class='title m-0 text-slate-400 font-bold'>Go Playground</h5>
+    <h5 class='title m-0 text-slate-400 font-bold'>{title}</h5>
     <div class='menu space-x-2'>
       <button id='run-code' class='run-code-btn o-btn o-btn--small o-btn--primary'>
         <span class='o-btn__wrapper'>
@@ -56,18 +58,15 @@ const widgetId = Math.floor(Math.random() * 1000);
 <script>
   //https://www.raresportan.com/how-to-make-a-code-editor-with-codemirror6/
   //https://codesandbox.io/s/codemirror-6-demo-pl8dc?file=/src/index.js
-  import { EditorView, keymap } from '@codemirror/view';
+  import { EditorView } from '@codemirror/view';
   import $ from 'cash-dom';
   import { supabase } from '@utils/supabase';
-  import { defaultKeymap } from '@codemirror/commands';
-  import { minimalSetup, basicSetup } from 'codemirror';
+  import { basicSetup } from 'codemirror';
   import { Compartment, EditorState } from '@codemirror/state';
   import { StreamLanguage } from '@codemirror/language';
   import { go } from '@codemirror/legacy-modes/mode/go';
-  import { boysAndGirls } from 'thememirror';
-  import { oneDark, oneDarkTheme } from '@codemirror/theme-one-dark';
-  import { indentWithTab, indentSelection } from '@codemirror/commands';
-  console.log('oneDark', oneDark);
+  import { oneDark } from '@codemirror/theme-one-dark';
+  // import { indentWithTab, indentSelection } from '@codemirror/commands';
 
   interface GoCompilerRunEvent {
     Message: string;
