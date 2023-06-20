@@ -6,7 +6,7 @@
         <span class="self-center font-semibold whitespace-nowrap text-text-base text-xl"> {{ siteName }} </span>
       </div>
     </div>
-    <div v-if="!profileModel" class="m-auto h-[calc(100vh_-_30rem)] text-center py-20 justify-center flex items-center">
+    <div v-if="!profileLoaded" class="m-auto h-[calc(100vh_-_30rem)] text-center py-20 justify-center flex items-center">
       <span><Spinner /> Loading...</span>
     </div>
     <div v-else>
@@ -186,7 +186,7 @@ import { OButton, OInput, OField, OSelect, OCheckbox } from '@oruga-ui/oruga-nex
 import Icon from '@components/DynamicHeroIcon.vue';
 import OverlayLoader from '@components/OverlayLoader.vue';
 import SplideSlideWrapper from '@components/Auth/SplideSlideWrapper.vue';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import '@splidejs/vue-splide/css';
 import '@splidejs/vue-splide/css/skyblue';
 import { useVModel } from '@nanostores/vue';
@@ -201,7 +201,6 @@ defineProps({
 });
 
 const profileModel = useVModel(profileData, ['full_name', 'computer_xp', 'goal', 'devices', 'age']);
-console.log('profileModel', profileModel);
 
 const { full_nameModel, computer_xpModel, goalModel, devicesModel, ageModel } = profileModel;
 const splide = ref<InstanceType<typeof Splide>>();
@@ -221,6 +220,7 @@ const options: Options = {
   height: 'calc(100vh - 100px)',
   speed: 650
 };
+const profileLoaded = computed(() => !!profileData.get());
 
 onMounted(async () => {
   const userProfile = profile.get();
