@@ -45,7 +45,7 @@ import { supabase } from '@utils/supabase';
             if (access_token && expires_in && refresh_token) {
               try {
                 const user = await getUser();
-                if ((user?.user_metadata as Profile)?.full_name) {
+                if (user?.user_metadata?.updated_at || user?.user_metadata?.full_name) {
                   return window.location.assign(`${import.meta.env.BASE_URL}`);
                 } else {
                   return window.location.assign(`${import.meta.env.BASE_URL}onboarding/`);
