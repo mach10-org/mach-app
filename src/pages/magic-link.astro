@@ -48,7 +48,7 @@ import { supabase } from '@utils/supabase';
                 if ((user?.user_metadata as Profile)?.full_name) {
                   return window.location.assign(`${import.meta.env.BASE_URL}`);
                 } else {
-                  return window.location.assign(`${import.meta.env.BASE_URL}profile/`);
+                  return window.location.assign(`${import.meta.env.BASE_URL}onboarding/`);
                 }
               } catch (error) {
                 //TODO: handle error
