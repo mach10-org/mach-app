@@ -13,16 +13,14 @@ export const getAllCourseIndex = async (collection: Collection) => {
 
   for await (const c of list) {
     c.slug = c.slug.toLowerCase().replace(idxKey.toLowerCase(), '/') as any;
-  
+
     if (!c.data.totalHours) {
       const courseInfo = await getCourseInfo('courses', c.slug.replace('/', ''));
       if (courseInfo?.duration) {
-        c.data.totalHours = Math.ceil(courseInfo?.duration)
+        c.data.totalHours = Math.ceil(courseInfo?.duration);
       }
     }
   }
-
-  console.log(list);
 
   return list;
 };

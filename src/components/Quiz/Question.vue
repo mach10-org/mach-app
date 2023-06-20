@@ -65,7 +65,6 @@ const props = defineProps({
   }
 });
 defineEmits(['update:answer']);
-// console.log('props quiz', props);
 
 const options = ref<QuizOption[]>([]);
 const slots = useSlots();
