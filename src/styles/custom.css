@@ -1,8 +1,17 @@
+@import 'simple-notify/dist/simple-notify.min.css';
 @layer components {
   .menu-item {
     @apply transition-colors block px-4 py-1 text-gray-700 rounded hover:text-primary dark:text-gray-400 dark:hover:text-white;
   }
   .menu-item.active {
     @apply text-primary dark:text-white;
+  }
+}
+.toast-mach {
+  @apply text-gray-500 bg-white rounded-lg  dark:bg-gray-900;
+  @apply shadow drop-shadow-md !important;
+  .notify__text,
+  .notify__title {
+    @apply dark:text-gray-400;
   }
 }
