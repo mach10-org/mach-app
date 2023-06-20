@@ -25,8 +25,15 @@
         </OSelect>
       </OField>
 
-      <OField label="Birthdate" labelFor="dob">
-        <OInput datepicker id="dob" v-model="dobModel" type="date" placeholder="Select date" />
+      <OField label="What's your age?" labelFor="age">
+        <OSelect id="age" v-model="ageModel" placeholder="Choose" expanded>
+          <option value="13 - 18">13 - 18</option>
+          <option value="19 – 24">19 – 24</option>
+          <option value="25 – 34">25 – 34</option>
+          <option value="35 – 44">35 – 44</option>
+          <option value="More than 45">More than 45</option>
+          <option value="It’s a secret!">It’s a secret!</option>
+        </OSelect>
       </OField>
 
       <OField label="Education level" labelFor="education">
@@ -106,12 +113,12 @@ import { onMounted, ref } from 'vue';
 import { useVModel } from '@nanostores/vue';
 
 // const firstname = useVModel(profileData, 'firstname');
-const { full_nameModel, genderModel, dobModel, educationModel, computer_xpModel, goalModel, aboutModel, devicesModel } = useVModel(profileData, [
+const { full_nameModel, genderModel, ageModel, educationModel, computer_xpModel, goalModel, aboutModel, devicesModel } = useVModel(profileData, [
   'full_name',
   'gender',
   'dob',
   'education',
-  'dob',
+  'age',
   'computer_xp',
   'goal',
   'about',
