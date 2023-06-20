@@ -15,7 +15,7 @@
           <div class="my-carousel-progress-bar bg-gradient-to-r from-purple-400 to-pink-600"></div>
         </div>
 
-        <form class="form mt-10" @submit.prevent="submit">
+        <form class="form mt-10" @submit.prevent="goNext">
           <SplideTrack>
             <SplideSlide>
               <SplideSlideWrapper inner-class="max-w-3xl w-96">
@@ -187,14 +187,14 @@ import Icon from '@components/DynamicHeroIcon.vue';
 import OverlayLoader from '@components/OverlayLoader.vue';
 import SplideSlideWrapper from '@components/Auth/SplideSlideWrapper.vue';
 import { computed, onMounted, ref } from 'vue';
-import '@splidejs/vue-splide/css';
-import '@splidejs/vue-splide/css/skyblue';
 import { useVModel } from '@nanostores/vue';
 import { upsertProfile, profile, profileData, goalChoices } from '@stores/profile';
 import { sleep } from '@utils/index';
 import { User } from '@utils/auth';
 import { initModals } from 'flowbite';
 import Spinner from '@components/svg/Spinner.vue';
+import '@splidejs/vue-splide/css';
+import '@splidejs/vue-splide/css/skyblue';
 
 defineProps({
   siteName: String
@@ -251,7 +251,12 @@ const setBarProgress = (splide: Core) => {
 };
 
 const goNext = () => {
-  splide?.value?.splide?.go('+1');
+  const index = splide?.value?.splide?.index;
+  if (index !== 1 && index !== 6) {
+    splide?.value?.splide?.go('+1');
+  } else if (index === 6) {
+    submit();
+  }
 };
 
 const goPrev = () => {
@@ -265,12 +270,12 @@ const onSplideMove = async (splide: Core, index: number) => {
   setBarProgress(splide);
   if (index === 1) {
     await sleep(3500);
-    goNext();
+    splide.go('+1');
   }
 };
 
-const submit = async (e: Event) => {
-  e.preventDefault();
+const submit = async (e: Event | null = null) => {
+  e?.preventDefault();
   const data = profileData.get();
   const id = user?.value?.id as string;
   loading.value = true;
