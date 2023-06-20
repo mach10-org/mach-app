@@ -6,6 +6,7 @@
         <span class="self-center font-semibold whitespace-nowrap text-text-base text-xl"> {{ siteName }} </span>
       </div>
     </div>
+
     <Splide ref="splide" :has-track="false" :options="options" aria-label="Vue Splide Example" @splide:move="onSplideMove">
       <div class="my-carousel-progress">
         <div class="my-carousel-progress-bar bg-gradient-to-r from-purple-400 to-pink-600"></div>
@@ -135,7 +136,7 @@
                   <h2 class="text-center text-2xl md:text-4xl mb-10 text-transparent font-bold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
                     Perfect! We’re here to help you every step of your journey. Let’s get started!
                   </h2>
-                  <OButton class="m-auto flex" variant="primary" @click="submit" size="large">Next</OButton>
+                  <OButton class="m-auto flex" variant="primary" @click="submit" :disabled="loading" size="large">Next</OButton>
                 </div>
               </div>
             </div>
@@ -149,7 +150,24 @@
         </button> -->
       </form>
     </Splide>
-    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-modal-backdrop="static" class="link m-auto flex" type="button">Why we ask</button>
+
+    <div class="justify-between flex px-2 md:px-10">
+      <div class="w-24 justify-start flex">
+        <button @click="goPrev" v-if="showBack" class="link link-back flex items-center space-x-1" type="button">
+          <Icon name="ArrowLeftIcon" :outline="true" classes="h-5 h-5" />
+          <span>Back</span>
+        </button>
+      </div>
+      <div class="w-24 justify-center flex">
+        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-modal-backdrop="static" class="link m-auto flex" type="button">Why we ask</button>
+      </div>
+      <div class="w-24 justify-end flex">
+        <button @click="submit" v-if="showSkip" class="link link-skip flex items-center space-x-1" type="button">
+          <span>Skip</span>
+          <Icon name="ArrowTopRightOnSquareIcon" :outline="true" classes="h-5 h-5" />
+        </button>
+      </div>
+    </div>
 
     <div
       id="popup-modal"
@@ -186,6 +204,8 @@
         </div>
       </div>
     </div>
+
+    <OverlayLoader :show="loading" />
   </div>
 </template>
 
@@ -194,6 +214,7 @@ import { Splide, SplideSlide, SplideTrack, Options } from '@splidejs/vue-splide'
 import { Splide as Core } from '@splidejs/splide';
 import { OButton, OInput, OField, OSelect, OCheckbox } from '@oruga-ui/oruga-next';
 import Icon from '@components/DynamicHeroIcon.vue';
+import OverlayLoader from '@components/OverlayLoader.vue';
 import { onMounted, ref } from 'vue';
 import '@splidejs/vue-splide/css';
 import '@splidejs/vue-splide/css/skyblue';
@@ -203,19 +224,28 @@ import { sleep } from '@utils/index';
 import { User } from '@utils/auth';
 import { initModals } from 'flowbite';
 
-const { full_nameModel, computer_xpModel, goalModel, devicesModel, ageModel } = useVModel(profileData, ['full_name', 'computer_xp', 'goal', 'devices', 'age']);
-
 defineProps({
   siteName: String
 });
 
+const { full_nameModel, computer_xpModel, goalModel, devicesModel, ageModel } = useVModel(profileData, ['full_name', 'computer_xp', 'goal', 'devices', 'age']);
 const splide = ref<InstanceType<typeof Splide>>();
-
+const loading = ref(false);
+const showSkip = ref(false);
+const showBack = ref(false);
 const user = ref<User | null>(null);
 const xp = ref(0);
-
 const goalsList = ref<string[]>();
 const deviceList = ref(['iPad', 'Other tablet', 'Mac', 'Windows computer', 'Other', 'None of these']);
+const options: Options = {
+  drag: false,
+  pagination: false,
+  rewind: false,
+  arrows: false,
+  autoplay: false,
+  height: 'calc(100vh - 100px)',
+  speed: 650
+};
 
 onMounted(async () => {
   const userProfile = profile.get();
@@ -248,21 +278,15 @@ const setBarProgress = (splide: Core) => {
 const goNext = () => {
   splide?.value?.splide?.go('+1');
 };
+
 const goPrev = () => {
   splide?.value?.splide?.go('-1');
 };
 
-const options: Options = {
-  drag: false,
-  pagination: false,
-  rewind: false,
-  arrows: false,
-  autoplay: false,
-  height: 'calc(100vh - 100px)',
-  speed: 650
-};
-
 const onSplideMove = async (splide: Core, index: number) => {
+  showSkip.value = index > 1;
+  showBack.value = index > 2;
+
   setBarProgress(splide);
   if (index === 1) {
     await sleep(3500);
@@ -274,16 +298,11 @@ const submit = async (e: Event) => {
   e.preventDefault();
   const data = profileData.get();
   const id = user?.value?.id as string;
-
+  loading.value = true;
   try {
-    upsertProfile({ ...data, id });
-    /*const { error } = await upsertProfile({ ...data, id });
-    if (error?.message) {
-    } else {
-    }*/
+    const { error } = await upsertProfile({ ...data, id });
+    window.location.assign(`/courses/`);
   } catch (error) {}
-
-  window.location.assign(`/courses/`);
 };
 </script>
 
