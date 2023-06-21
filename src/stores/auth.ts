@@ -31,6 +31,7 @@ export const getUser = async (): Promise<User | null> => {
   }
 
   const { access_token, expires_at } = data.session;
+  console.log('data', data);
 
   if (expires_at && moment().isAfter(moment(expires_at * 1000))) {
     const userProfile = await refreshToken();
