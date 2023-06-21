@@ -36,7 +36,6 @@ import { showToast } from '@utils/notify';
 import { locales, erroMsg } from '@constants/localize';
 import Spinner from '@components/svg/Spinner.vue';
 import Github from '@components/svg/Github.vue';
-import { setSessionStartDate } from '@utils/index';
 
 const {
   notifications: { auth: localNotif }
@@ -60,7 +59,6 @@ const signInWithGitHub = async (e: Event) => {
   statusOAuth.value = { error: '', success: false, isLoading: true };
 
   try {
-    // setSessionStartDate();
     const { data, error } = await signInWithOAuth('github');
   } catch (error) {
     console.error('error', error);

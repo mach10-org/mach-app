@@ -1,13 +1,14 @@
 import Notify from 'simple-notify';
-import { notifyStatus } from 'simple-notify/dist/types';
+import { notifyPosition, notifyStatus } from 'simple-notify/dist/types';
 
-export interface ToastProps {
+type ToastProps = {
   status?: notifyStatus;
   autoclose?: boolean;
   title?: string;
   text?: string;
   autotimeout?: number;
-}
+  position?: notifyPosition;
+};
 
 let toast: Notify;
 
@@ -23,7 +24,7 @@ const customIcon = {
   info: '<div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8  bg-blue-100 rounded-lg dark:text-blue-300 dark:bg-blue-900"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"></path></svg><span class="sr-only">Info icon</span></div>'
 };
 
-const showToast = ({ status = 'success', autoclose = true, title = '', text = '', autotimeout = 3500 }: ToastProps) => {
+const showToast = ({ status = 'success', autoclose = true, title = '', text = '', autotimeout = 3500, position = 'right bottom' }: ToastProps) => {
   toast = new Notify({
     status,
     title,
@@ -39,7 +40,7 @@ const showToast = ({ status = 'success', autoclose = true, title = '', text = ''
     gap: 20,
     distance: 20,
     type: 1,
-    position: 'right bottom'
+    position
   });
 };
 
@@ -48,4 +49,4 @@ const closeToast = () => {
 };
 
 export { toast, showToast, closeToast };
-export type { notifyStatus };
+export type { notifyStatus, notifyPosition, ToastProps };

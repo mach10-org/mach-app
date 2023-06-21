@@ -19,6 +19,10 @@ export const locales = {
     profile: {
       title: 'Profile',
       profile_saved: 'Your profile has been saved'
+    },
+    user: {
+      title: 'Mach10 team',
+      welcome_back: (arg1: string) => `Hello ${arg1}! Welcome back!`
     }
   },
 

@@ -32,7 +32,15 @@ import { OButton } from '@oruga-ui/oruga-next';
 import LoginStatusMenu from './LoginStatusMenu.vue';
 import { getCourseTaken } from '@stores/courses';
 import avatar from '@assets/img/avatar.png?url';
+import { showToast } from '@utils/notify';
+import { erroMsg, locales } from '@constants/localize';
+import { getSessionStartDate, setSessionStartDate } from '@utils/index';
+import { User } from '@supabase/supabase-js';
 
+const {
+  notifications: { user: localNotif }
+} = locales;
+const notifTitle = localNotif.title;
 const $isConnected = useStore(isConnected);
 const BASE_URL = import.meta.env.BASE_URL;
 const isOpen = ref(false);
@@ -43,10 +51,13 @@ onMounted(async () => {
     if (user) {
       const redirectOptions = ['/onboarding/', '/profile/'];
       const { pathname } = window.location;
+      console.log('pathname', pathname);
+
       const hasName = typeof user?.user_metadata?.full_name === 'string';
       if (!(user?.user_metadata?.updated_at && hasName) && !redirectOptions.includes(pathname)) {
         window.location.assign(`${BASE_URL}onboarding/`);
       } else {
+        handleWelcomMessages(pathname, user);
         getCourseTaken(user.id);
       }
     } else {
@@ -54,4 +65,18 @@ onMounted(async () => {
     }
   } catch (error) {}
 });
+
+const handleWelcomMessages = (pathname: string, user: User) => {
+  const notofyPathCheck = '/courses/';
+  const hasValue = getSessionStartDate();
+  const allowedPath = notofyPathCheck === pathname || !pathname.includes(notofyPathCheck);
+  const name = user.user_metadata.full_name;
+  if (!hasValue && allowedPath) {
+    //Welcome back message on any age but a course
+    if (allowedPath) {
+      showToast({ status: 'info', text: `${localNotif.welcome_back(name)}`, title: notifTitle });
+    }
+    setSessionStartDate();
+  }
+};
 </script>
