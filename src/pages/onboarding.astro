@@ -16,7 +16,8 @@ const pageData = {
   import { getUser } from '@stores/auth';
   const BASE_URL = import.meta.env.BASE_URL;
   const user = await getUser();
-  if (!user || !!(user?.user_metadata?.updated_at && user?.user_metadata?.full_name)) {
+  const hasName = typeof user?.user_metadata?.full_name === 'string';
+  if (!user || !!(user?.user_metadata?.updated_at && hasName)) {
     const route = !!user ? 'profile/' : '';
     window.location.assign(`${BASE_URL}${route}`);
   }
