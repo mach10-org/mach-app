@@ -16,9 +16,9 @@ export const locales = {
       signup_text2: `your progress over time, it’s free`,
       success: (arg1: string | number) => `Great! You have now ${arg1}XP`
     },
-    onboarding: {
-      signup_text1: `Signup to track`,
-      signup_text2: `your progress over time, it’s free`
+    profile: {
+      title: 'Profile',
+      profile_saved: 'Your profile has been saved'
     }
   },
 
@@ -45,12 +45,25 @@ export const locales = {
         'We would like to ask you a few question in order to know our audience better and create the most relevant experience for you. Knowing who is using our content makes us better at crafting the best possible content.',
       why_text_2: 'These answers are optional and you are completely free not to answer anything, we get it',
       why_btn: 'Why we ask'
+    },
+    profile: {
+      intro: `We’d love to learn more about you. Could you share with us what is your main goal applying here? Even if it’s just curiosity, we’re interested to hear ☺.`,
+      intro_2: `This is also helping us to know our audience and adapt our content accordingly.`,
+      education_label: `Education level`,
+      education_list: ['Primary education', 'Secondary education', 'High education', 'Master’s'],
+      gender_label: `Gender`,
+      gender_list: ['Male', 'Female', 'Other'],
+      comment_label: `Could you tell us more about you and your objectives?`,
+      comment_placeholder: `Write your thoughts here...`,
+      xp: 'XP'
     }
   },
 
   common: {
     loading: 'Loading ...',
-    next: 'Next'
+    next: 'Next',
+    choose: 'Choose',
+    save: 'Save'
   },
 
   errors: {

@@ -70,7 +70,7 @@
             <SplideSlide>
               <SplideSlideWrapper inner-class="max-w-3xl w-96">
                 <OField labelClass="mb-4 text-xl" :label="localPage.form_4_label" labelFor="computer_xp">
-                  <OSelect size="large" @change="goNext" id="computer_xp" v-model="computer_xpModel" placeholder="Choose" expanded>
+                  <OSelect size="large" @change="goNext" id="computer_xp" v-model="computer_xpModel" :placeholder="common.choose" expanded>
                     <option v-for="(value, index) in computerXpList" :value="value">{{ value }}</option>
                   </OSelect>
                 </OField>
@@ -95,7 +95,7 @@
             <SplideSlide>
               <SplideSlideWrapper inner-class="max-w-3xl w-96">
                 <OField labelClass="mb-4 text-xl" :label="localPage.form_6_label" labelFor="age">
-                  <OSelect size="large" @change="goNext" id="age" v-model="ageModel" placeholder="Choose" expanded>
+                  <OSelect size="large" @change="goNext" id="age" v-model="ageModel" :placeholder="common.choose" expanded>
                     <option v-for="(value, index) in ageList" :value="value">{{ value }}</option>
                   </OSelect>
                 </OField>
