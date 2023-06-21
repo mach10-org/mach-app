@@ -1,10 +1,13 @@
 ---
 import MainLayout from '@layouts/MainLayout.astro';
 import OnboardingWidget from '@components/Auth/Onboarding.vue';
-
+import { locales } from '@constants/localize';
+const {
+  pages: { onboarding: localPage }
+} = locales;
 const pageData = {
-  title: 'Onboarding Widget',
-  description: 'Onboarding Widget'
+  title: localPage.title,
+  description: localPage.description
 };
 ---
 

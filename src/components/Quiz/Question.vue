@@ -32,10 +32,10 @@
         <OButton :disabled="!canSubmit" @click="onSubmit" variant="primary" type="submit"> Submit </OButton>
         <div v-if="points" class="flex content-center ml-auto items-center text-sm text-gray-500 dark:text-gray-400">
           <span>
-            This would get you +{{ points }}XP
+            {{ localNotif.no_profile_text(points) }}
             <span v-if="!$profile">
               <br />
-              <a href="/login/" class="link">Signup to track</a> your progress over time, it’s free
+              <a href="/login/" class="link">{{ localNotif.signup_text1 }}</a> {{ localNotif.signup_text2 }}
             </span>
           </span>
         </div>
@@ -46,16 +46,21 @@
 
 <script lang="ts" setup>
 import { OButton, OInput, OField, OSelect } from '@oruga-ui/oruga-next';
-
+import { showToast } from '@utils/notify';
+import { locales } from '@constants/localize';
 import Option from './OptionDetail.vue';
 import { useSlots, computed, ref, onMounted } from 'vue';
 import { QuizOption } from '@models/courses';
 import { saveAnswer } from '@utils/quiz';
 import { isConnected, profile, increasePoints } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
+
 const $isConnected = useStore(isConnected);
 const $profile = useStore(profile);
-
+const {
+  notifications: { quizz: localNotif }
+} = locales;
+const notifTitle = localNotif.title;
 const props = defineProps({
   slug: { type: String, required: true },
   label: { type: String, required: true },
@@ -83,11 +88,21 @@ const onSubmit = async () => {
       message.value = `Incorrect !`;
     } else {
       message.value = `Correct !`;
+      console.log('$profile', $profile);
+
+      if (!$profile?.value) {
+        showToast({ status: 'info', text: `${localNotif.signup_text1} ${localNotif.signup_text2}`, title: notifTitle });
+      }
     }
+
     success.value = option.isAnswer || false;
     message.value = `${message.value} ${option.explain}`;
     const points = await saveAnswer(option, props.slug);
-    increasePoints(points);
+    const newXp = increasePoints(points);
+
+    if (option.isAnswer && $profile?.value) {
+      showToast({ status: 'success', text: `${localNotif.success(newXp)}`, title: notifTitle });
+    }
   }
 };
 

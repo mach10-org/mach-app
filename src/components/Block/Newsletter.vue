@@ -18,11 +18,10 @@ import { OButton, OInput } from '@oruga-ui/oruga-next';
 import { supabase } from '@utils/supabase';
 import { onMounted, ref } from 'vue';
 import { showToast, notifyStatus } from '@utils/notify';
-import { locales } from '@constants/localize';
+import { locales, erroMsg } from '@constants/localize';
 
 const {
-  notifications: { newsletter: localNotif },
-  errors
+  notifications: { newsletter: localNotif }
 } = locales;
 
 const props = defineProps({
@@ -64,11 +63,11 @@ const handleSendMail = async (e) => {
     let msg = localNotif.email_saved;
     if (error?.code === '23505') {
       status = 'info';
-      msg = localNotif.email_already_saved;
+      msg = erroMsg(parseInt(error.code));
     }
     showToast({ status, text: msg, title: notifTitle });
   } catch (error) {
-    showToast({ status: 'error', text: errors.default, title: notifTitle });
+    showToast({ status: 'error', text: erroMsg(error.code), title: notifTitle });
   }
 };
 </script>

@@ -17,7 +17,7 @@ export const isConnected = persistentAtom<boolean>('isConnected', false, primiti
 export const profile = persistentAtom<User | null>('user', null, primitive);
 
 const defaultProfile = {
-  full_name: '',
+  full_name: null,
   gender: '',
   education: '',
   dob: null,
@@ -41,10 +41,11 @@ export const increasePoints = action(profile, 'increasePoints', (store, add) => 
   const user = store.get();
 
   if (user?.user_metadata) {
-    // user.user_metadata.xp = user.user_metadata.xp + add;
-    user.user_metadata.xp = add;
+    user.user_metadata.xp = user.user_metadata.xp + add;
+    // user.user_metadata.xp = add;
   }
-  return store.get();
+
+  return store.get()?.user_metadata.xp;
 });
 
 export const removeUser = action(profile, 'removeUser', (store) => {

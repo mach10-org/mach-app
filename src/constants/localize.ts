@@ -3,11 +3,65 @@ export const locales = {
     newsletter: {
       title: 'Newsletter',
       email_saved: `Your email has been saved !`,
-      email_already_saved: `You have already registered this email ! We'll be in touch !`,
       not_valid_email: 'The email address is not valid'
+    },
+    auth: {
+      title: 'Login',
+      magic_link_sent: 'An email should arrive in your inbox shortly !'
+    },
+    quizz: {
+      title: 'Quizz',
+      no_profile_text: (arg1: string | number) => `This would get you +${arg1}XP`,
+      signup_text1: `Signup to track`,
+      signup_text2: `your progress over time, it’s free`,
+      success: (arg1: string | number) => `Great! You have now ${arg1}XP`
+    },
+    onboarding: {
+      signup_text1: `Signup to track`,
+      signup_text2: `your progress over time, it’s free`
     }
   },
+
+  pages: {
+    onboarding: {
+      title: 'Welcome to Mach10',
+      description: 'Welcome to Mach10',
+      form_1_label: 'Your firstname',
+      form_1_label_1: '(how should we call you?)',
+      form_1_placeholder: 'Firstname',
+      form_2: (arg1: string | null) => `Nice to meet you, ${arg1} !`,
+      form_3_label: `What is your main goal with this website?`,
+      form_3_list: ['Get my first job', 'Change career', 'Just for fun or curiosity', 'Increase my skills', 'Another goal'],
+      form_3_help: 'Remember, learning is often challenging, but some of the most worthwhile things in life are. Consistency can take you to anywhere you want.',
+      form_4_label: `How would you rate your computer skills?`,
+      form_4_list: ['Never used it', 'I know how to use a computer but never did technical work', 'I have already programming experience'],
+      form_5_label: `What kind of devices do you own?`,
+      form_5_list: ['iPad', 'Other tablet', 'Mac', 'Windows computer', 'Other', 'None of these'],
+      form_6_label: `What's your age?`,
+      form_6_list: ['13 - 18', '19 – 24', '25 – 34', '35 – 44', 'More than 45', 'It’s a secret!'],
+      form_7: 'Perfect! We’re here to help you every step of your journey. Let’s get started!',
+      why_title: 'Why we ask',
+      why_text_1:
+        'We would like to ask you a few question in order to know our audience better and create the most relevant experience for you. Knowing who is using our content makes us better at crafting the best possible content.',
+      why_text_2: 'These answers are optional and you are completely free not to answer anything, we get it',
+      why_btn: 'Why we ask'
+    }
+  },
+
+  common: {
+    loading: 'Loading ...',
+    next: 'Next'
+  },
+
   errors: {
-    default: `An error has occured ! Please try again later !`
+    default: `An error has occured ! Please try again later !`,
+    code: {
+      429: `For security purposes, you can only request this after 60 seconds.`, // asking Magic link login more than once per minute
+      23505: `You have already registered this email! We'll be in touch!` // Newsletter register more than once with same email
+    }
   }
+};
+
+export const erroMsg = (code: number | null = null) => {
+  return code ? locales.errors.code?.[code] || locales.errors.default : locales.errors.default;
 };
