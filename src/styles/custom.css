@@ -7,11 +7,18 @@
     @apply text-primary dark:text-white;
   }
 }
-.toast-mach {
+.toast-mach,
+.toast-mach-bookmark {
   @apply text-gray-500 bg-white rounded-lg  dark:bg-gray-900;
   @apply shadow drop-shadow-md !important;
   .notify__text,
   .notify__title {
     @apply dark:text-gray-400;
+  }
+}
+
+.toast-mach-bookmark {
+  &.notify--info.notify--type-1 {
+    @apply border-blue-600 !important;
   }
 }

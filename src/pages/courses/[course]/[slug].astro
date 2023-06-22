@@ -1,5 +1,5 @@
 ---
-import { getAllCollectionLessons } from '@utils/collections';
+import { getAllCollectionLessons, getCourseInfo } from '@utils/collections';
 import PaginatedCourse from '@components/PaginatedCourse.astro';
 import ContentLayout from '@ContentLayout';
 import Quiz from '@components/Quiz/Question.vue';
@@ -16,6 +16,7 @@ export async function getStaticPaths() {
 
   return courses.map((entry) => {
     const directories = entry.slug.split('/');
+
     const course = [...directories].shift();
     const slug = [...directories].pop();
 
@@ -34,12 +35,47 @@ let params: CourseParams | undefined = undefined;
 if (course && slug) {
   params = { course, slug };
 }
+const courseInfo = await getCourseInfo('courses', `${course}`);
+
+const lastUrl = {
+  url: Astro.url.pathname,
+  title: entry.data.title,
+  course: courseInfo?.title || '',
+  main: false
+};
 ---
 
 <ContentLayout frontmatter={remarkPluginFrontmatter} courseDir={Astro.props} params={params}>
-  <!-- <TOC pageHeadings={headings} /> -->
-  <Content />
+  <astro-lesson-wrapper data-message={JSON.stringify(lastUrl)} }>
+    <Content />
+  </astro-lesson-wrapper>
   {entry?.data?.quiz && <Quiz client:only='vue' slug={`${course}/${slug}/`} label={entry.data.quiz.label} options={entry.data.quiz.options} />}
-
   <PaginatedCourse {...{ course, slug, title: entry.data.title }} />
 </ContentLayout>
+
+<script>
+  import { LastURLUpsert, saveLastUrl } from '@stores/courses';
+  import { getUser } from '@stores/auth';
+  class AstroLessonWrapper extends HTMLElement {
+    constructor() {
+      super();
+      if (!this?.dataset?.message) {
+        return;
+      }
+      const data: LastURLUpsert = JSON.parse(this.dataset.message);
+
+      this.saveUrlByUser(data);
+    }
+
+    saveUrlByUser = async (data: LastURLUpsert) => {
+      try {
+        const user = await getUser();
+        if (user?.id) {
+          data.id = user.id;
+          await saveLastUrl(data);
+        }
+      } catch (error) {}
+    };
+  }
+  customElements.define('astro-lesson-wrapper', AstroLessonWrapper);
+</script>

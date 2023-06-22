@@ -2,6 +2,19 @@ import { action, atom } from 'nanostores';
 import { supabase } from '@utils/supabase';
 import { getUser } from '@stores/auth';
 import { CoursesInfos } from '@models/courses';
+import { Database } from '@models/supabase';
+
+export type LastURL = Database['public']['Tables']['last_url'];
+export type LastURLRow = LastURL['Row'];
+export type LastURLUpsert = LastURL['Insert'];
+export type LastURLUpdate = LastURL['Update'];
+export type LastURLRowSingle = {
+  updated_at: string | null;
+  url: string;
+  title: string;
+  main: boolean | null;
+  course: string;
+};
 
 export interface PayloadCourseTaken {
   course: string;
@@ -36,12 +49,18 @@ export interface Learning {
 
 export const courseTaken = atom<Learning[]>([]);
 
+/**
+ * Get all course taken
+ */
 export const getCourseTaken = action(courseTaken, 'getCourseTaken', async (store, userId: string) => {
   const data = await getLearningRecords(userId);
   store.set([...data]);
   return store.get();
 });
 
+/**
+ * New course started
+ */
 export const setCourseTaken = action(courseTaken, 'setCourseTaken', async (store, payload: PayloadCourseTaken) => {
   try {
     let user = await getUser();
@@ -56,6 +75,9 @@ export const setCourseTaken = action(courseTaken, 'setCourseTaken', async (store
   return false;
 });
 
+/**
+ * Allow user to set lesson "undone"
+ */
 export const resetCourse = action(courseTaken, 'resetCourse', async (store, userId: string, payload: PayloadCourseTaken) => {
   const res = await deleteCourse(payload);
   if (res) {
@@ -64,6 +86,11 @@ export const resetCourse = action(courseTaken, 'resetCourse', async (store, user
   return store.get();
 });
 
+/**
+ * Add a new course by User
+ * @param profile
+ * @returns
+ */
 export const addCourse = async (profile: any) => {
   try {
     const { data, error } = await supabase.from('learning').insert(profile).select().single();
@@ -81,6 +108,8 @@ export const addCourse = async (profile: any) => {
  */
 export const saveCourse = async (userId: string, payload: PayloadCourseTaken) => {
   try {
+    console.log('saveCourse 1: learning select');
+
     const { data: courseList, error } = await supabase.from('learning').select('id').eq('user', userId).eq('slug', payload.course);
     if (error) {
       throw error;
@@ -114,6 +143,11 @@ export const saveCourse = async (userId: string, payload: PayloadCourseTaken) =>
   }
 };
 
+/**
+ * Delete course
+ * @param payload
+ * @returns
+ */
 export const deleteCourse = async (payload: PayloadCourseTaken) => {
   try {
     const { data, error } = await supabase.from('learning_lesson').delete().eq('id', payload.courseId);
@@ -127,6 +161,12 @@ export const deleteCourse = async (payload: PayloadCourseTaken) => {
   }
 };
 
+/**
+ * Save course lesson on "click next"
+ * @param courseId
+ * @param payload
+ * @returns
+ */
 export const saveLesson = async (courseId: string, payload: PayloadCourseTaken) => {
   const dataToSave = {
     slug: payload.slug,
@@ -145,10 +185,14 @@ export const saveLesson = async (courseId: string, payload: PayloadCourseTaken) 
   return true;
 };
 
+/**
+ * Get all lessons taken by User
+ * @param userId
+ * @returns
+ */
 export const getLearningRecords = async (userId: string): Promise<Learning[]> => {
   try {
     const { data, error } = await supabase.from('learning').select('*, learning_lesson(*)').eq('user', userId);
-
     if (error) {
       console.error(error);
       return [];
@@ -157,5 +201,29 @@ export const getLearningRecords = async (userId: string): Promise<Learning[]> =>
     }
   } catch (error) {
     return [];
+  }
+};
+
+export const saveLastUrl = async (payload: LastURLUpsert) => {
+  try {
+    const { data, error } = await supabase.from('last_url').upsert(payload);
+    if (error) {
+      throw error;
+    }
+  } catch (error) {
+    throw error;
+  }
+  return true;
+};
+
+export const getLastUrl = async (): Promise<LastURLRowSingle> => {
+  try {
+    const { data, error } = await supabase.from('last_url').select('updated_at, url, title, main, course').single();
+    if (error) {
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    throw error;
   }
 };

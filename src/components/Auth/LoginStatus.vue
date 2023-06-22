@@ -27,20 +27,21 @@
 import { getUser, logout } from '@stores/auth';
 import { isConnected } from '@stores/profile';
 import { useStore } from '@nanostores/vue';
+import { render, h } from 'vue';
 import { onMounted, ref } from 'vue';
 import { OButton } from '@oruga-ui/oruga-next';
 import LoginStatusMenu from './LoginStatusMenu.vue';
-import { getCourseTaken } from '@stores/courses';
+import { LastURLRowSingle, getCourseTaken, getLastUrl } from '@stores/courses';
 import avatar from '@assets/img/avatar.png?url';
-import { showToast } from '@utils/notify';
+import { showToast, toast, closeToast, notifyConfirm } from '@utils/notify';
 import { erroMsg, locales } from '@constants/localize';
 import { getSessionStartDate, setSessionStartDate } from '@utils/index';
 import { User } from '@supabase/supabase-js';
+import $ from 'cash-dom';
 
 const {
   notifications: { user: localNotif }
 } = locales;
-const notifTitle = localNotif.title;
 const $isConnected = useStore(isConnected);
 const BASE_URL = import.meta.env.BASE_URL;
 const isOpen = ref(false);
@@ -51,7 +52,6 @@ onMounted(async () => {
     if (user) {
       const redirectOptions = ['/onboarding/', '/profile/'];
       const { pathname } = window.location;
-      console.log('pathname', pathname);
 
       const hasName = typeof user?.user_metadata?.full_name === 'string';
       if (!(user?.user_metadata?.updated_at && hasName) && !redirectOptions.includes(pathname)) {
@@ -66,7 +66,11 @@ onMounted(async () => {
   } catch (error) {}
 });
 
-const handleWelcomMessages = (pathname: string, user: User) => {
+const handleWelcomMessages = async (pathname: string, user: User) => {
+  let lastUrl: LastURLRowSingle | null = null;
+  try {
+    lastUrl = await getLastUrl();
+  } catch (error) {}
   const notofyPathCheck = '/courses/';
   const hasValue = getSessionStartDate();
   const allowedPath = notofyPathCheck === pathname || !pathname.includes(notofyPathCheck);
@@ -74,7 +78,16 @@ const handleWelcomMessages = (pathname: string, user: User) => {
   if (!hasValue && allowedPath) {
     //Welcome back message on any age but a course
     if (allowedPath) {
-      showToast({ status: 'info', text: `${localNotif.welcome_back(name)}`, title: notifTitle });
+      const title = `${localNotif.welcome_back(name)}`;
+
+      if (lastUrl) {
+        const label = lastUrl.main ? 'Course' : 'Lesson';
+        const text = `<div>${localNotif.welcome_back_url(lastUrl.title, label)}</div>${notifyConfirm(localNotif.ok, localNotif.cancel, lastUrl.url)}`;
+        showToast({ status: 'info', iconName: 'bookmark', autoclose: false, text: `${text}`, title });
+        $('#close-toast').on('click', closeToast);
+      } else {
+        showToast({ status: 'info', autoclose: false, title });
+      }
     }
     setSessionStartDate();
   }

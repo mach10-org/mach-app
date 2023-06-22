@@ -69,7 +69,7 @@ if (course && slug) {
 </astro-message-wrapper>
 
 <script>
-  import { PayloadCourseTaken, setCourseTaken, getCourseTaken } from '@stores/courses';
+  import { PayloadCourseTaken, setCourseTaken, courseTaken } from '@stores/courses';
 
   class AstroMessageWrapper extends HTMLElement {
     constructor() {
@@ -82,6 +82,9 @@ if (course && slug) {
       if (button) {
         button?.addEventListener('click', onClickNext);
       }
+      /***
+       * Save lesson done on "click next"
+       */
       async function onClickNext(this: HTMLElement, ev: Event) {
         ev.preventDefault();
         this.removeEventListener('click', onClickNext);
@@ -95,6 +98,9 @@ if (course && slug) {
         window.location.assign(`${import.meta.env.BASE_URL}${url}`);
       }
 
+      /**
+       * save lesson done on scroll if is the last lesson
+       */
       if (data?.next === '') {
         const scrollEventListener = async function () {
           const result = isInViewport(elem);

@@ -4,6 +4,7 @@ import { getCourseDirectories } from '@utils/collections';
 import { Collection, CollectionStaticProps } from '@models/courses';
 import { CollectionEntry } from 'astro:content';
 import CoursesTable from '@components/CoursesTable/index.astro';
+import { LastURLUpdate } from '@stores/courses';
 
 interface Props {
   courses: CollectionEntry<Collection>[];
@@ -32,9 +33,44 @@ export async function getStaticPaths() {
 
 const { entry, courses } = Astro.props;
 const { Content } = await entry.render();
+
+const lastUrl = {
+  url: Astro.url.pathname,
+  title: entry.data.title,
+  course: entry.data.title,
+  main: true
+};
 ---
 
 <PageLayout {...entry.data}>
-  <Content />
+  <astro-course-wrapper data-message={JSON.stringify(lastUrl)} }>
+    <Content />
+  </astro-course-wrapper>
   {Astro.params?.course && <CoursesTable courseId={Astro.params.course} courses={courses} coursePage={true} />}
 </PageLayout>
+
+<script>
+  import { LastURLUpsert, saveLastUrl } from '@stores/courses';
+  import { getUser } from '@stores/auth';
+  class AstroCourseWrapper extends HTMLElement {
+    constructor() {
+      super();
+      if (!this?.dataset?.message) {
+        return;
+      }
+      const data: LastURLUpsert = JSON.parse(this.dataset.message);
+      this.saveUrlByUser(data);
+    }
+
+    saveUrlByUser = async (data: LastURLUpsert) => {
+      try {
+        const user = await getUser();
+        if (user?.id) {
+          data.id = user.id;
+          await saveLastUrl(data);
+        }
+      } catch (error) {}
+    };
+  }
+  customElements.define('astro-course-wrapper', AstroCourseWrapper);
+</script>

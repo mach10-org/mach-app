@@ -22,7 +22,10 @@ export const locales = {
     },
     user: {
       title: 'Mach10 team',
-      welcome_back: (arg1: string) => `Hello ${arg1}! Welcome back!`
+      welcome_back: (arg1: string) => `Welcome back ${arg1}!`,
+      welcome_back_url: (arg1: string, arg2: string) => `Pick up where you left off!<br>${arg2}: "${arg1}"`,
+      ok: 'Sure',
+      cancel: 'Not now'
     }
   },
 
