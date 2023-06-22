@@ -29,6 +29,14 @@ export const locales = {
     }
   },
 
+  compiler: {
+    run: 'Run',
+    running: 'Compiling',
+    format: 'Format',
+    formating: 'Reformatting',
+    eval: '⏳ Evaluating output...'
+  },
+
   pages: {
     onboarding: {
       title: 'Welcome to Mach10',

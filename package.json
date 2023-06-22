@@ -67,6 +67,7 @@
     "vue": "^3.2.30"
   },
   "devDependencies": {
+    "@catppuccin/tailwindcss": "^0.1.1",
     "colord": "^2.9.3",
     "tailwind-easy-theme": "^1.1.1"
   },

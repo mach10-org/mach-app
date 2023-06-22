@@ -1,6 +1,7 @@
 ---
 import { compile } from 'html-to-text';
 import Icon from '@components/DynamicHeroIcon.vue';
+import Spinner from '@components/svg/Spinner.vue';
 
 type Props = {
   initialState?: string;
@@ -20,20 +21,33 @@ const codeFromSlot = hasHtml ? compiledConvert(slot) : texts?.join('\n') || null
 const initialState = codeFromSlot || Astro.props.initialState || '';
 const widgetId = Math.floor(Math.random() * 1000);
 const { title } = Astro.props;
+import { erroMsg, locales } from '@constants/localize';
+const { compiler } = locales;
 ---
 
+<!-- <div class='frappe'>
+  <h1 class='bg-ctp-base text-ctp-pink'>Hello world!</h1>
+</div> -->
 <div id={'cm-main-' + widgetId} class='cm-widget cm-wrap ͼo mb-4' data-widget-id={widgetId} data-cm-state={initialState}>
   <div class='cm-header p-2 bg-slate-900 flex justify-between items-center'>
     <h5 class='title m-0 text-slate-400 font-bold'>{title}</h5>
     <div class='menu space-x-2'>
       <button id='run-code' class='run-code-btn o-btn o-btn--small o-btn--primary'>
         <span class='o-btn__wrapper'>
-          <span class='o-o-btn__label'>Run</span>
+          <span class='loader'>
+            <Spinner size={6} color='white' fill='primary-800' class='fill-primary-800' />
+            <span class='o-o-btn__label'>{compiler.running}</span>
+          </span>
+          <span class='o-o-btn__label not-loading'>{compiler.run}</span>
         </span>
       </button>
       <button class='run-code-btn o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
         <span class='o-btn__wrapper'>
-          <span class='o-o-btn__label text-slate-400'>Format</span>
+          <span class='loader'>
+            <Spinner size={6} color='white' fill='slate-600' class='fill-slate-600' />
+            <span class='o-o-btn__label text-slate-400'>{compiler.formating}</span>
+          </span>
+          <span class='o-o-btn__label text-slate-400 not-loading'>{compiler.format}</span>
         </span>
       </button>
       <button class='toggleFullScreen o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
@@ -49,7 +63,7 @@ const { title } = Astro.props;
   <div class='codemirror-widget pt-2 border-t border-slate-500 border-b'></div>
   <div class='cm-footer px-2 divide-y divide-dashed divide-slate-400'>
     <div class='py-3 cm-result log-wrapper text-base'>
-      <div class='loading hidden'>⏳ Evaluating output...</div>
+      <div class='loading hidden'>{compiler.eval}</div>
       <div class='cm-output hidden pl-4'></div>
     </div>
   </div>
@@ -66,7 +80,6 @@ const { title } = Astro.props;
   import { StreamLanguage } from '@codemirror/language';
   import { go } from '@codemirror/legacy-modes/mode/go';
   import { oneDark } from '@codemirror/theme-one-dark';
-  // import { indentWithTab, indentSelection } from '@codemirror/commands';
 
   interface GoCompilerRunEvent {
     Message: string;
@@ -130,9 +143,13 @@ const { title } = Astro.props;
       });
 
       runCodeBtn.on('click', async function (e: Event) {
-        loader.removeClass('hidden');
-        output.addClass('hidden');
         const buttonClicked = $(e.currentTarget as Element).attr('id');
+        const wrapper = $(e.currentTarget as Element).find('.o-btn__wrapper');
+        wrapper.addClass('is-loading');
+        if (buttonClicked === 'run-code') {
+          loader.removeClass('hidden');
+        }
+        output.addClass('hidden');
 
         const code = view.state.doc.toString();
         const body = { code, compile: buttonClicked === 'run-code', fmt: true };
@@ -140,10 +157,11 @@ const { title } = Astro.props;
           const { data, error } = await supabase.functions.invoke<GoCompiler>('go-compile', { body });
           if (data) {
             const resultEvents = data?.events?.Events?.map((e) => '<p class="m-0">' + e.Message.split('\n').join('<br>') + '</p>');
-
             const resultErrors = data?.events?.Errors ? '<p class="m-0 text-rose-500">' + data.events.Errors.split('\n').join('<br>') + '</p>' : '';
 
             loader.addClass('hidden');
+            wrapper.removeClass('is-loading');
+
             output.html(data?.events?.Events ? resultEvents.join('') : resultErrors);
             if (output.html()) {
               output.removeClass('hidden');
@@ -188,5 +206,16 @@ const { title } = Astro.props;
     z-index: 1000;
     top: 0;
     left: 0;
+  }
+
+  .run-code-btn .o-btn__wrapper .loader {
+    display: none;
+  }
+  .run-code-btn .o-btn__wrapper.is-loading .loader {
+    display: initial;
+  }
+
+  .run-code-btn .o-btn__wrapper.is-loading .not-loading {
+    display: none;
   }
 </style>
