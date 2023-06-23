@@ -28,43 +28,69 @@ const { compiler } = locales;
 <!-- <div class='frappe'>
   <h1 class='bg-ctp-base text-ctp-pink'>Hello world!</h1>
 </div> -->
-<div id={'cm-main-' + widgetId} class='cm-widget cm-wrap ͼo mb-4' data-widget-id={widgetId} data-cm-state={initialState}>
-  <div class='cm-header p-2 bg-slate-900 flex justify-between items-center'>
-    <h5 class='title m-0 text-slate-400 font-bold'>{title}</h5>
-    <div class='menu space-x-2'>
-      <button id='run-code' class='run-code-btn o-btn o-btn--small o-btn--primary'>
-        <span class='o-btn__wrapper'>
-          <span class='loader'>
-            <Spinner size={6} color='white' fill='primary-800' class='fill-primary-800' />
-            <span class='o-o-btn__label'>{compiler.running}</span>
+<div id={'cm-main-' + widgetId} class='cm-widget cm-wrap mb-4' data-widget-id={widgetId} data-cm-state={initialState}>
+  <div class='ͼo w-full'>
+    <div class='cm-header p-2 bg-slate-900 flex justify-between items-center'>
+      <h5 class='title m-0 text-slate-400 font-bold'>{title}</h5>
+      <div class='menu space-x-2'>
+        <button id='run-code' class='run-code-btn o-btn o-btn--small o-btn--primary'>
+          <span class='o-btn__wrapper'>
+            <span class='loader'>
+              <Spinner size={6} color='white' fill='primary-800' class='fill-primary-800' />
+              <span class='o-o-btn__label'>{compiler.running}</span>
+            </span>
+            <span class='o-o-btn__label not-loading'>{compiler.run}</span>
           </span>
-          <span class='o-o-btn__label not-loading'>{compiler.run}</span>
-        </span>
-      </button>
-      <button class='run-code-btn o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
-        <span class='o-btn__wrapper'>
-          <span class='loader'>
-            <Spinner size={6} color='white' fill='slate-600' class='fill-slate-600' />
-            <span class='o-o-btn__label text-slate-400'>{compiler.formating}</span>
+        </button>
+        <button class='run-code-btn o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
+          <span class='o-btn__wrapper'>
+            <span class='loader'>
+              <Spinner size={6} color='white' fill='slate-600' class='fill-slate-600' />
+              <span class='o-o-btn__label text-slate-400'>{compiler.formating}</span>
+            </span>
+            <span class='o-o-btn__label text-slate-400 not-loading'>{compiler.format}</span>
           </span>
-          <span class='o-o-btn__label text-slate-400 not-loading'>{compiler.format}</span>
-        </span>
-      </button>
-      <button class='toggleFullScreen o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
-        <span class='o-btn__wrapper'>
-          <span class='o-o-btn__label text-slate-400'>
-            <Icon name='ArrowsPointingOutIcon' outline={true} classes='w-5 h-5 show-fullscreen' />
-            <Icon name='ArrowsPointingInIcon' outline={true} classes='w-5 h-5 hide-fullscreen hidden' />
+        </button>
+        <button class='toggleFullScreen o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
+          <span class='o-btn__wrapper'>
+            <span class='o-o-btn__label text-slate-400'>
+              <Icon name='ArrowsPointingOutIcon' outline={true} classes='w-5 h-5 show-fullscreen' />
+              <Icon name='ArrowsPointingInIcon' outline={true} classes='w-5 h-5 hide-fullscreen hidden' />
+            </span>
           </span>
-        </span>
-      </button>
+        </button>
+      </div>
     </div>
+    <div class='codemirror-widget pt-2 border-t border-slate-500 border-b'></div>
   </div>
-  <div class='codemirror-widget pt-2 border-t border-slate-500 border-b'></div>
-  <div class='cm-footer px-2 divide-y divide-dashed divide-slate-400'>
-    <div class='py-3 cm-result log-wrapper text-base'>
-      <div class='loading hidden'>{compiler.eval}</div>
-      <div class='cm-output hidden pl-4'></div>
+  <div class='cm-footer w-full mt-4 shadow-xl ctp-frappe'>
+    <div class='fakeMenu flex justify-end space-x-1.5 p-1.5 bg-ctp-crust'>
+      <div class='fakeButtons bg-slate-600'></div>
+      <div class='fakeButtons bg-slate-600'></div>
+      <div class='fakeButtons bg-slate-600'></div>
+    </div>
+    <div class='terminalScreen px-4 pb-4 bg-ctp-base'>
+      <div class='header-bar flex flex-col md:flex-row justify-between pt-2'>
+        <div class='flex'>
+          <span class='bg-ctp-sapphire whitespace-nowrap truncate px-4 lowercase user'>user@mach10 ~</span>
+          <span class='arrow-right h-full border-l-ctp-sapphire'></span>
+        </div>
+        <div class='flex'>
+          <span class='arrow-left h-full border-r-slate-400'></span>
+          <span class='bg-slate-400 px-4 time'>10:30:30</span>
+        </div>
+
+        <!-- <div class='bg-ctp-green'>02</div> -->
+      </div>
+      <div class='text-ctp-flamingo py-3 cm-result log-wrapper text-lg space-y-2'>
+        <div class='goRun'>
+          <span id='goRun'></span>
+        </div>
+        <div class='goBinary'>
+          <span id='goBinary'></span>
+        </div>
+        <div class='cm-output hidden text-ctp-green pl-5'></div>
+      </div>
     </div>
   </div>
 </div>
@@ -73,13 +99,17 @@ const { compiler } = locales;
   //https://www.raresportan.com/how-to-make-a-code-editor-with-codemirror6/
   //https://codesandbox.io/s/codemirror-6-demo-pl8dc?file=/src/index.js
   import { EditorView } from '@codemirror/view';
-  import $ from 'cash-dom';
+  import $, { Cash } from 'cash-dom';
   import { supabase } from '@utils/supabase';
   import { basicSetup } from 'codemirror';
   import { Compartment, EditorState } from '@codemirror/state';
   import { StreamLanguage } from '@codemirror/language';
   import { go } from '@codemirror/legacy-modes/mode/go';
   import { oneDark } from '@codemirror/theme-one-dark';
+  import Typed from 'typed.js';
+  import { normalizer, sleep } from '@utils/index';
+  import moment from 'moment';
+  import { getUser } from '@stores/auth';
 
   interface GoCompilerRunEvent {
     Message: string;
@@ -109,7 +139,7 @@ const { compiler } = locales;
           fontSize: '16px'
         },
         '.cm-scroller': {
-          fontFamily: 'Jet Brains Mono, monospace, Consolas, Menlo, Monaco, source-code-pro, Courier New '
+          fontFamily: 'Jet Brains Mono, monospace'
         }
       });
       let language = new Compartment(),
@@ -127,46 +157,105 @@ const { compiler } = locales;
       });
 
       const runCodeBtn = widget.find('.run-code-btn');
-      const loader = widget.find('.loading');
+      const time = widget.find('.time');
+      const userName = widget.find('.user');
       const output = widget.find('.cm-output');
+      const terminalScreen = widget.find('.terminalScreen');
+      let buildTypedObj: Typed | null = null;
+      let typedBinary: Typed | null = null;
+
+      getUser().then((u) => {
+        if (u?.user_metadata?.full_name) {
+          const name = normalizer(u.user_metadata.full_name) + '@mach10 ~';
+          userName.text(name);
+        }
+      });
+
       const toggleFullScreen = widget.find('.toggleFullScreen');
       const bodyElem = $('body');
 
+      time.text(moment().format('HH:MM:ss'));
+
+      const typedBuildPromise = (terminalScreen: Cash) =>
+        new Promise((resolve) => {
+          terminalScreen.removeClass('binary-typed output-done');
+          terminalScreen.addClass('run-typed');
+          if (typedBinary) {
+            typedBinary.destroy();
+          }
+          if (buildTypedObj) {
+            buildTypedObj.destroy();
+          }
+          buildTypedObj = new Typed('#goRun', {
+            strings: [`<span class='text-ctp-teal'>$</span> go build programe.go`],
+            typeSpeed: 50,
+            onComplete: (self: Typed) => {
+              resolve(self);
+            }
+          });
+          return buildTypedObj;
+        });
       toggleFullScreen.on('click', function (e: Event) {
         const buttonClicked = $(e.currentTarget as Element);
         const iconShowFullScreen = buttonClicked.find('.show-fullscreen');
         const iconHideFullScreen = buttonClicked.find('.hide-fullscreen');
         iconShowFullScreen.toggleClass('hidden');
         iconHideFullScreen.toggleClass('hidden');
-        widget.toggleClass('fullscreen');
+        widget.toggleClass('fullscreen bg-ctp-crust bg-gradient-to-b flex justify-between flex-col from-ctp-base items-center justify-center  to-ctp-crust');
         bodyElem.toggleClass('cm-fullscreen');
       });
 
       runCodeBtn.on('click', async function (e: Event) {
+        // binary.addClass('hidden');
         const buttonClicked = $(e.currentTarget as Element).attr('id');
         const wrapper = $(e.currentTarget as Element).find('.o-btn__wrapper');
         wrapper.addClass('is-loading');
-        if (buttonClicked === 'run-code') {
-          loader.removeClass('hidden');
-        }
-        output.addClass('hidden');
 
+        if (buttonClicked === 'run-code') {
+          terminalScreen.removeClass('run-typed');
+          output.addClass('hidden');
+        }
         const code = view.state.doc.toString();
         const body = { code, compile: buttonClicked === 'run-code', fmt: true };
         try {
-          const { data, error } = await supabase.functions.invoke<GoCompiler>('go-compile', { body });
+          // const promises = Promise.all([promise1, promise2, promise3])
+          const promises: Promise<any>[] = [supabase.functions.invoke<GoCompiler>('go-compile', { body })];
+
+          if (buttonClicked === 'run-code') {
+            promises.push(typedBuildPromise(terminalScreen));
+          }
+
+          const promisesRes = await Promise.all(promises);
+          const { data, error } = promisesRes[0];
+          // const typedBuild = promisesRes[1];
           if (data) {
             const resultEvents = data?.events?.Events?.map((e) => '<p class="m-0">' + e.Message.split('\n').join('<br>') + '</p>');
             const resultErrors = data?.events?.Errors ? '<p class="m-0 text-rose-500">' + data.events.Errors.split('\n').join('<br>') + '</p>' : '';
-
-            loader.addClass('hidden');
+            const res = data?.events?.Events ? resultEvents.join('') : resultErrors;
             wrapper.removeClass('is-loading');
-
-            output.html(data?.events?.Events ? resultEvents.join('') : resultErrors);
-            if (output.html()) {
-              output.removeClass('hidden');
+            /**
+             * on Build
+             */
+            if (buttonClicked === 'run-code') {
+              await sleep(500);
+              terminalScreen.addClass('binary-typed');
+              typedBinary = new Typed('#goBinary', {
+                strings: [`<span class='text-ctp-teal'>$</span> ./programe.go`],
+                typeSpeed: 30,
+                onComplete: async (self: Typed) => {
+                  output.html(res);
+                  if (output.html()) {
+                    await sleep(500);
+                    output.removeClass('hidden');
+                    terminalScreen.addClass('output-done');
+                  }
+                }
+              });
             }
 
+            /**
+             * On FORMAT
+             */
             if (data.formated.Body) {
               view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: data.formated.Body } });
             }
@@ -178,6 +267,7 @@ const { compiler } = locales;
 </script>
 
 <style is:inline>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
   @font-face {
     font-family: 'Jet Brains Mono';
     src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
@@ -188,17 +278,23 @@ const { compiler } = locales;
   .cm-output:before {
     content: '›';
     opacity: 0.8;
-    margin-left: -1rem;
+    margin-left: -1.35rem;
     width: 0.5rem;
     position: absolute;
     text-align: center;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
   }
 
   body.cm-fullscreen {
     overflow: hidden !important;
   }
-
+  .cm-widget.fullscreen {
+    .cm-footer {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
   .fullscreen {
     position: fixed;
     height: 100vh;
@@ -217,5 +313,77 @@ const { compiler } = locales;
 
   .run-code-btn .o-btn__wrapper.is-loading .not-loading {
     display: none;
+  }
+
+  .cm-footer {
+    border-radius: 5px;
+  }
+  .terminalScreen {
+    font-family: 'IBM Plex Mono', monospace;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    min-height: 200px;
+  }
+
+  .run-typed.binary-typed {
+    .goRun .typed-cursor {
+      opacity: 0;
+    }
+  }
+  .run-typed.binary-typed.output-done {
+    .goBinary .typed-cursor {
+      opacity: 0;
+    }
+  }
+  .fakeMenu {
+    box-sizing: border-box;
+    height: 25px;
+    background-color: #bbb;
+    margin: 0 auto;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    .fakeButtons {
+      height: 13px;
+      width: 13px;
+      border-radius: 50%;
+      background-color: #ff3b47;
+      /* border-color: #9d252b; */
+      display: inline-block;
+    }
+
+    .fakeMinimize {
+      background-color: #ffc100;
+      /* border-color: #9d802c; */
+    }
+
+    .fakeZoom {
+      background-color: #00d742;
+      /* border-color: #049931; */
+    }
+  }
+
+  .typed-cursor {
+    display: inline-block;
+    width: 8px;
+    background: rgba(var(--ctp-flamingo), var(--tw-text-opacity)) !important;
+    border: none;
+    margin-left: 5px;
+  }
+  .arrow-right {
+    width: 0;
+    height: 0;
+    border-width: 18px 0 18px 15px;
+    border-color: transparent transparent transparent #ff0000;
+    border-style: solid;
+  }
+
+  .arrow-left {
+    width: 0;
+    height: 0;
+    border-width: 18px 15px 18px 0;
+    border-color: transparent #ff0000 transparent transparent;
+    border-style: solid;
   }
 </style>

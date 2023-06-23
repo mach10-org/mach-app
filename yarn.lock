@@ -974,6 +974,7 @@ __metadata:
     tailwind-easy-theme: ^1.1.1
     tailwindcss: ^3.0.24
     thememirror: ^2.0.1
+    typed.js: ^2.0.16
     vue: ^3.2.30
   languageName: unknown
   linkType: soft
@@ -7669,6 +7670,13 @@ __metadata:
   version: 2.7.2
   resolution: "type@npm:2.7.2"
   checksum: 0f42379a8adb67fe529add238a3e3d16699d95b42d01adfe7b9a7c5da297f5c1ba93de39265ba30ffeb37dfd0afb3fb66ae09f58d6515da442219c086219f6f4
+  languageName: node
+  linkType: hard
+
+"typed.js@npm:^2.0.16":
+  version: 2.0.132
+  resolution: "typed.js@npm:2.0.132"
+  checksum: f4a612b44f9d0d3cc8dc79739b6b1a22a021941a0889b9ae57edbbede0a2bc1ea698c2ad5cf1814e42859a4fcca2fae87b222ceca2a3f7425ece9affa1ff55c6
   languageName: node
   linkType: hard
 

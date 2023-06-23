@@ -28,3 +28,9 @@ export const isRecentSessionStartDate = () => {
 };
 // Remove all saved data from sessionStorage
 // sessionStorage.clear();
+
+export const normalizer = (str: string) =>
+  str
+    ?.normalize('NFD')
+    ?.replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s/g, '');
