@@ -29,67 +29,71 @@ const { compiler } = locales;
   <h1 class='bg-ctp-base text-ctp-pink'>Hello world!</h1>
 </div> -->
 <div id={'cm-main-' + widgetId} class='cm-widget cm-wrap mb-4' data-widget-id={widgetId} data-cm-state={initialState}>
-  <div class='ͼo w-full'>
-    <div class='cm-header p-2 bg-slate-900 flex justify-between items-center'>
-      <h5 class='title m-0 text-slate-400 font-bold'>{title}</h5>
-      <div class='menu space-x-2'>
-        <button id='run-code' class='run-code-btn o-btn o-btn--small o-btn--primary'>
-          <span class='o-btn__wrapper'>
-            <span class='loader'>
-              <Spinner size={6} color='white' fill='primary-800' class='fill-primary-800' />
-              <span class='o-o-btn__label'>{compiler.running}</span>
+  <div class='ͼo w-full flex-1'>
+    <div class='h-full flex flex-col'>
+      <div class='cm-header w-full p-2 bg-slate-900 flex justify-between items-center'>
+        <h5 class='title m-0 text-slate-400 font-bold'>{title}</h5>
+        <div class='menu space-x-2'>
+          <button id='run-code' class='run-code-btn o-btn o-btn--small o-btn--primary'>
+            <span class='o-btn__wrapper'>
+              <span class='loader'>
+                <Spinner size={6} color='white' fill='primary-800' class='fill-primary-800' />
+                <span class='o-o-btn__label'>{compiler.running}</span>
+              </span>
+              <span class='o-o-btn__label not-loading'>{compiler.run}</span>
             </span>
-            <span class='o-o-btn__label not-loading'>{compiler.run}</span>
-          </span>
-        </button>
-        <button class='run-code-btn o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
-          <span class='o-btn__wrapper'>
-            <span class='loader'>
-              <Spinner size={6} color='white' fill='slate-600' class='fill-slate-600' />
-              <span class='o-o-btn__label text-slate-400'>{compiler.formating}</span>
+          </button>
+          <button class='run-code-btn o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
+            <span class='o-btn__wrapper'>
+              <span class='loader'>
+                <Spinner size={6} color='white' fill='slate-600' class='fill-slate-600' />
+                <span class='o-o-btn__label text-slate-400'>{compiler.formating}</span>
+              </span>
+              <span class='o-o-btn__label text-slate-400 not-loading'>{compiler.format}</span>
             </span>
-            <span class='o-o-btn__label text-slate-400 not-loading'>{compiler.format}</span>
-          </span>
-        </button>
-        <button class='toggleFullScreen o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
-          <span class='o-btn__wrapper'>
-            <span class='o-o-btn__label text-slate-400'>
-              <Icon name='ArrowsPointingOutIcon' outline={true} classes='w-5 h-5 show-fullscreen' />
-              <Icon name='ArrowsPointingInIcon' outline={true} classes='w-5 h-5 hide-fullscreen hidden' />
+          </button>
+          <button class='toggleFullScreen o-btn o-btn--small o-btn--primary o-btn--outlined-primary border-slate-400'>
+            <span class='o-btn__wrapper'>
+              <span class='o-o-btn__label text-slate-400'>
+                <Icon name='ArrowsPointingOutIcon' outline={true} classes='w-5 h-5 show-fullscreen' />
+                <Icon name='ArrowsPointingInIcon' outline={true} classes='w-5 h-5 hide-fullscreen hidden' />
+              </span>
             </span>
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
+      <div class='codemirror-widget w-full grow pt-2 border-t border-slate-500 border-b'></div>
     </div>
-    <div class='codemirror-widget pt-2 border-t border-slate-500 border-b'></div>
   </div>
-  <div class='cm-footer w-full mt-4 shadow-xl ctp-frappe'>
-    <div class='fakeMenu flex justify-end space-x-1.5 p-1.5 bg-ctp-crust'>
-      <div class='fakeButtons bg-slate-600'></div>
-      <div class='fakeButtons bg-slate-600'></div>
-      <div class='fakeButtons bg-slate-600'></div>
-    </div>
-    <div class='terminalScreen px-4 pb-4 bg-ctp-base'>
-      <div class='header-bar flex flex-col md:flex-row justify-between pt-2'>
-        <div class='flex'>
-          <span class='bg-ctp-sapphire whitespace-nowrap truncate px-4 lowercase user'>user@mach10 ~</span>
-          <span class='arrow-right h-full border-l-ctp-sapphire'></span>
-        </div>
-        <div class='flex'>
-          <span class='arrow-left h-full border-r-slate-400'></span>
-          <span class='bg-slate-400 px-4 time'>10:30:30</span>
-        </div>
-
-        <!-- <div class='bg-ctp-green'>02</div> -->
+  <div class='cm-footer flex-1 w-full mt-4 shadow-xl ctp-frappe'>
+    <div class='h-full flex flex-col'>
+      <div class='fakeMenu flex justify-end w-full space-x-1.5 p-1.5 bg-ctp-crust'>
+        <div class='fakeButtons bg-slate-600'></div>
+        <div class='fakeButtons bg-slate-600'></div>
+        <div class='fakeButtons bg-slate-600'></div>
       </div>
-      <div class='text-ctp-flamingo py-3 cm-result log-wrapper text-lg space-y-2'>
-        <div class='goRun'>
-          <span id='goRun'></span>
+      <div class='terminalScreen w-full grow px-4 pb-4 bg-ctp-base'>
+        <div class='header-bar flex flex-col md:flex-row justify-between pt-2'>
+          <div class='flex'>
+            <span class='bg-ctp-sapphire whitespace-nowrap truncate px-4 lowercase user'>user@mach10 ~</span>
+            <span class='arrow-right h-full border-l-ctp-sapphire'></span>
+          </div>
+          <div class='flex'>
+            <span class='arrow-left h-full border-r-slate-400'></span>
+            <span class='bg-slate-400 px-4 time'>10:30:30</span>
+          </div>
+
+          <!-- <div class='bg-ctp-green'>02</div> -->
         </div>
-        <div class='goBinary'>
-          <span id='goBinary'></span>
+        <div class='text-ctp-flamingo py-3 cm-result log-wrapper text-lg space-y-2'>
+          <div class='goRun'>
+            <span id='goRun'></span>
+          </div>
+          <div class='goBinary'>
+            <span id='goBinary'></span>
+          </div>
+          <div class='cm-output hidden text-ctp-green pl-5'></div>
         </div>
-        <div class='cm-output hidden text-ctp-green pl-5'></div>
       </div>
     </div>
   </div>
@@ -291,8 +295,9 @@ const { compiler } = locales;
   }
   .cm-widget.fullscreen {
     .cm-footer {
-      margin-left: 1rem;
-      margin-right: 1rem;
+      /* margin-left: 1rem;
+      margin-right: 1rem; */
+      margin-top: 0 !important;
     }
   }
   .fullscreen {
