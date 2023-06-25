@@ -29,6 +29,33 @@ export const locales = {
     }
   },
 
+  menu: [
+    {
+      label: 'Home',
+      link: ''
+    },
+    {
+      label: 'Mission',
+      link: 'mission/'
+    },
+    {
+      label: 'Roadmap',
+      link: 'roadmap/'
+    },
+    {
+      label: 'Courses',
+      link: 'courses/'
+    },
+    {
+      label: 'Is it for me?',
+      link: 'who-for/'
+    },
+    {
+      label: 'Free?',
+      link: 'why-free/'
+    }
+  ],
+
   compiler: {
     run: 'Run',
     running: 'Compiling',

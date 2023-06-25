@@ -2,6 +2,10 @@
 import ThemeIcon from './ThemeIcon.vue';
 import LoginStatus from './Auth/LoginStatus.vue';
 import Brand from './Brand.astro';
+import { locales } from '@constants/localize';
+
+const { menu } = locales;
+console.log('base', import.meta.env.BASE_URL);
 ---
 
 <nav class='py-2'>
@@ -32,24 +36,15 @@ import Brand from './Brand.astro';
     </div>
     <div class='hidden w-full lg:block lg:w-auto' id='navbar'>
       <ul class='flex flex-col p-3 space-y-2 border-b border-border-input lg:border-0 lg:space-y-0 lg:flex-row lg:space-x-3 lg:text-base lg:font-medium'>
-        <li>
-          <a href={`${import.meta.env.BASE_URL}`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}` }]} aria-current='page'> Home</a>
-        </li>
-        <li>
-          <a href={`${import.meta.env.BASE_URL}mission/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}mission/` }]}> Mission</a>
-        </li>
-        <li>
-          <a href={`${import.meta.env.BASE_URL}roadmap/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}roadmap/` }]}> Roadmap</a>
-        </li>
-        <li>
-          <a href={`${import.meta.env.BASE_URL}courses/`} class:list={['menu-item', { active: Astro.url.pathname.startsWith(`${import.meta.env.BASE_URL}courses/`) }]}> Courses</a>
-        </li>
-        <li>
-          <a href={`${import.meta.env.BASE_URL}who-for/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}who-for/` }]}> Is it for me?</a>
-        </li>
-        <li>
-          <a href={`${import.meta.env.BASE_URL}why-free/`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}why-free/` }]}> Free?</a>
-        </li>
+        {
+          menu.map((m) => (
+            <li>
+              <a href={`${import.meta.env.BASE_URL}${m.link}`} class:list={['menu-item', { active: Astro.url.pathname === `${import.meta.env.BASE_URL}${m.link}` }]}>
+                {m.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>
