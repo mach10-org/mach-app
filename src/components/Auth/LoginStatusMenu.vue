@@ -8,7 +8,7 @@
       <a :href="`${BASE_URL}journey/`" class="login-menu__item">Journey</a>
     </li>
     <li>
-      <a :href="`${BASE_URL}profile/`" class="login-menu__item">Profil</a>
+      <a :href="`${BASE_URL}profile/`" class="login-menu__item">Profile</a>
     </li>
     <li>
       <button class="login-menu__item" type="button" @click="handleLogoutClick">
