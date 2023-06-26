@@ -109,12 +109,8 @@ const ageList = localPage.form_6_list;
 
 onMounted(async () => {
   const userProfile = profile.get();
-  if (!userProfile) {
-    window.location.assign(`/`);
-  } else {
-    user.value = userProfile;
-    xp.value = userProfile?.user_metadata.xp || 0;
-  }
+  user.value = userProfile;
+  xp.value = userProfile?.user_metadata.xp || 0;
 });
 
 const submit = async (e: Event) => {
