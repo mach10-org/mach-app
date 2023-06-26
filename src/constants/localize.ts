@@ -179,7 +179,16 @@ export const locales = {
     contact: {
       title_start: 'Get in touch to',
       title_email: 'hello@mach10.jp',
-      title_end: 'or use the form below'
+      title_end: 'or use the form below',
+      form_emailLabel: 'Your email address',
+      form_emailSublabel: '(So we can reply to you)',
+      form_topicLabel: 'Topic',
+      form_topicPlaceholder: 'Select a topic',
+      form_subjectLabel: 'Subject',
+      form_subjecPlaceholder: 'Let us know how we can help you',
+      form_messageLabel: 'Your message',
+      form_messagePlaceholder: 'Leave a comment...',
+      submit: 'Send message'
     }
   },
 
