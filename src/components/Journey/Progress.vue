@@ -25,7 +25,7 @@ defineProps({
   }
 });
 </script>
-<style>
+<style lang="postcss">
 .percent {
   @apply text-text-title font-extrabold border-b-2 border-border-input;
 }

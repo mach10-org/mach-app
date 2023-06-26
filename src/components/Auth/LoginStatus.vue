@@ -33,7 +33,7 @@ import { OButton } from '@oruga-ui/oruga-next';
 import LoginStatusMenu from './LoginStatusMenu.vue';
 import { LastURLRowSingle, getCourseTaken, getLastUrl } from '@stores/courses';
 import avatar from '@assets/img/avatar.png?url';
-import { showToast, toast, closeToast, notifyConfirm } from '@utils/notify';
+import { showToast, notifyConfirm } from '@utils/notify';
 import { erroMsg, locales } from '@constants/localize';
 import { getSessionStartDate, setSessionStartDate } from '@utils/index';
 import { User } from '@supabase/supabase-js';
@@ -85,12 +85,12 @@ const handleWelcomMessages = async (pathname: string, user: User) => {
         const label = lastUrl.main ? 'Course' : 'Lesson';
         const text = `<div>${localNotif.welcome_back_url(lastUrl.title, label)}</div>${notifyConfirm(localNotif.ok, localNotif.cancel, lastUrl.url)}`;
         const toastWelcome = showToast({ status: 'info', iconName: 'bookmark', autoclose: false, text: `${text}`, title });
-        setTimeout(() => {
+        /*setTimeout(() => {
           $('#close-toast')?.on('click', (e) => {
             e.preventDefault;
             toastWelcome?.close();
           });
-        }, 2000);
+        }, 2000);*/
       } else {
         showToast({ status: 'info', autoclose: false, title });
       }
