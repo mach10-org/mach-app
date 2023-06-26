@@ -35,7 +35,7 @@ import { LastURLRowSingle, getCourseTaken, getLastUrl } from '@stores/courses';
 import avatar from '@assets/img/avatar.png?url';
 import { showToast, notifyConfirm } from '@utils/notify';
 import { erroMsg, locales } from '@constants/localize';
-import { getSessionStartDate, setSessionStartDate } from '@utils/index';
+import { getSessionStartDate, isIOS, setSessionStartDate } from '@utils/index';
 import { User } from '@supabase/supabase-js';
 import $ from 'cash-dom';
 
@@ -46,26 +46,6 @@ const {
 const $isConnected = useStore(isConnected);
 const BASE_URL = import.meta.env.BASE_URL;
 const isOpen = ref(false);
-
-onMounted(async () => {
-  try {
-    const user = await getUser();
-    if (user) {
-      const redirectOptions = ['/onboarding/', '/profile/'];
-      const { pathname } = window.location;
-
-      const hasName = typeof user?.user_metadata?.full_name === 'string';
-      if (!(user?.user_metadata?.updated_at && hasName) && !redirectOptions.includes(pathname)) {
-        window.location.assign(`${BASE_URL}onboarding/`);
-      } else {
-        handleWelcomMessages(pathname, user);
-        getCourseTaken(user.id);
-      }
-    } else {
-      logout();
-    }
-  } catch (error) {}
-});
 
 const handleWelcomMessages = async (pathname: string, user: User) => {
   let lastUrl: LastURLRowSingle | null = null;
@@ -85,12 +65,10 @@ const handleWelcomMessages = async (pathname: string, user: User) => {
         const label = lastUrl.main ? 'Course' : 'Lesson';
         const text = `<div>${localNotif.welcome_back_url(lastUrl.title, label)}</div>${notifyConfirm(localNotif.ok, localNotif.cancel, lastUrl.url)}`;
         const toastWelcome = showToast({ status: 'info', iconName: 'bookmark', autoclose: false, text: `${text}`, title });
-        /*setTimeout(() => {
-          $('#close-toast')?.on('click', (e) => {
-            e.preventDefault;
-            toastWelcome?.close();
-          });
-        }, 2000);*/
+        $('#close-toast')?.on('click', (e) => {
+          e.preventDefault;
+          toastWelcome?.close();
+        });
       } else {
         showToast({ status: 'info', autoclose: false, title });
       }
@@ -98,4 +76,22 @@ const handleWelcomMessages = async (pathname: string, user: User) => {
     setSessionStartDate();
   }
 };
+
+try {
+  const user = await getUser();
+  if (user) {
+    const redirectOptions = ['/onboarding/', '/profile/'];
+    const { pathname } = window.location;
+
+    const hasName = typeof user?.user_metadata?.full_name === 'string';
+    if (!(user?.user_metadata?.updated_at && hasName) && !redirectOptions.includes(pathname)) {
+      window.location.assign(`${BASE_URL}onboarding/`);
+    } else {
+      handleWelcomMessages(pathname, user);
+      getCourseTaken(user.id);
+    }
+  } else {
+    logout();
+  }
+} catch (error) {}
 </script>

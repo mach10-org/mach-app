@@ -68,7 +68,6 @@ const signInWithGitHub = async (e: Event) => {
 const handleSendLink = async (e: Event) => {
   e.preventDefault();
   status.value = { error: '', success: false, isLoading: true };
-
   try {
     const { error, data } = await signinOrUp(email.value, PUBLIC_SUPABASE_REDIRECT_URL);
 
@@ -82,7 +81,7 @@ const handleSendLink = async (e: Event) => {
       showToast({ status: 'error', text: `${error.message}`, title: notifTitle });
     } else {
       status.value = { error: '', success: true, isLoading: false };
-      showToast({ status: 'success', text: `${localNotif.magic_link_sent} "${email.value}"`, title: notifTitle });
+      showToast({ status: 'success', text: `${localNotif.magic_link_sent} "${email.value}"`, autoclose: false, title: notifTitle });
     }
   } catch (error) {
     console.log('ERROR', error);

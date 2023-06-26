@@ -34,3 +34,7 @@ export const normalizer = (str: string) =>
     ?.normalize('NFD')
     ?.replace(/[\u0300-\u036f]/g, '')
     .replace(/\s/g, '');
+
+export const isIOS = () => {
+  return !!['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].filter((u) => navigator?.userAgent?.includes(u))?.length;
+};

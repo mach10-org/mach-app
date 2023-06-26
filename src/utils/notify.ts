@@ -1,5 +1,6 @@
 import Notify from 'simple-notify';
 import { notifyPosition, notifyStatus } from 'simple-notify/dist/types';
+import { isIOS } from './index';
 
 type ToastProps = {
   status?: notifyStatus;
@@ -31,14 +32,14 @@ const showToast = ({ status = 'success', autoclose = true, title = '', text = ''
     status,
     title,
     text,
-    effect: 'slide',
-    speed: 300,
+    effect: isIOS() ? 'fade' : 'slide',
+    speed: 500,
     customClass: `toast-mach${iconName ? '-' + iconName : ''}`,
     customIcon: customIcon[iconName || status],
     showIcon: true,
     showCloseButton: true,
-    autoclose: autoclose || status === 'success' ? true : false,
-    autotimeout: autotimeout || status === 'success' ? 3500 : 10000,
+    autoclose: typeof autoclose !== 'undefined' ? autoclose : status === 'success' ? true : false,
+    autotimeout: !!autotimeout ? autotimeout : status === 'success' ? 3500 : 10000,
     gap: 20,
     distance: 20,
     type: 1,
