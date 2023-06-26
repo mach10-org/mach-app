@@ -157,6 +157,7 @@ export const locales = {
       comment_placeholder: `Write your thoughts here...`
     },
     journey: {
+      title: 'Your learning',
       notEnrolled: `Looks like you didn’t enroll any course yet, how about starting today ?`,
       notEnrolledCTA: `Get started today !`,
       summary_left: 'Courses enrolled',
