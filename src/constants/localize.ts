@@ -168,7 +168,8 @@ export const locales = {
       detail_completed: 'exercises completed',
       detail_lastWeeks: 'Last 14 days',
       detail_dateStart: `When you started the course`
-    }
+    },
+    login: {}
   },
 
   common: {
