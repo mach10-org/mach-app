@@ -85,7 +85,9 @@ const handleWelcomMessages = async (pathname: string, user: User) => {
         const label = lastUrl.main ? 'Course' : 'Lesson';
         const text = `<div>${localNotif.welcome_back_url(lastUrl.title, label)}</div>${notifyConfirm(localNotif.ok, localNotif.cancel, lastUrl.url)}`;
         showToast({ status: 'info', iconName: 'bookmark', autoclose: false, text: `${text}`, title });
-        $('#close-toast').on('click', closeToast);
+        $('#close-toast').on('click', (e) => {
+          return closeToast();
+        });
       } else {
         showToast({ status: 'info', autoclose: false, title });
       }
