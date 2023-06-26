@@ -27,7 +27,7 @@ const customIcon = {
     '<div class="bg-blue-100  text-blue-500 dark:bg-blue-900 dark:text-blue-300 flex-shrink-0 h-8 inline-flex items-center justify-center rounded-lg w-8"><svg class="h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path  stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9"></path></svg></div>'
 };
 const showToast = ({ status = 'success', autoclose = true, title = '', text = '', autotimeout = 3500, position = 'right bottom', iconName }: ToastProps) => {
-  toast = new Notify({
+  return (toast = new Notify({
     status,
     title,
     text,
@@ -43,7 +43,7 @@ const showToast = ({ status = 'success', autoclose = true, title = '', text = ''
     distance: 20,
     type: 1,
     position
-  });
+  }));
 };
 
 const closeToast = () => {
