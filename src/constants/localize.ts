@@ -105,7 +105,8 @@ export const locales = {
     loading: 'Loading ...',
     next: 'Next',
     choose: 'Choose',
-    save: 'Save'
+    save: 'Save',
+    submit: 'Submit'
   },
 
   errors: {

@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="flex content-center pt-4">
-        <OButton :disabled="!canSubmit" @click="onSubmit" variant="primary" type="submit"> Submit </OButton>
+        <OButton :disabled="!canSubmit" @click="onSubmit" variant="primary" type="submit">{{ common.submit }}</OButton>
         <div v-if="points" class="flex content-center ml-auto items-center text-sm text-gray-500 dark:text-gray-400">
           <span>
             {{ localNotif.no_profile_text(points) }}
@@ -58,7 +58,8 @@ import { useStore } from '@nanostores/vue';
 const $isConnected = useStore(isConnected);
 const $profile = useStore(profile);
 const {
-  notifications: { quizz: localNotif }
+  notifications: { quizz: localNotif },
+  common
 } = locales;
 const notifTitle = localNotif.title;
 const props = defineProps({
