@@ -155,6 +155,18 @@ export const locales = {
       gender_list: ['Male', 'Female', 'Other'],
       comment_label: `Could you tell us more about you and your objectives?`,
       comment_placeholder: `Write your thoughts here...`
+    },
+    journey: {
+      notEnrolled: `Looks like you didn’t enroll any course yet, how about starting today ?`,
+      notEnrolledCTA: `Get started today !`,
+      summary_left: 'Courses enrolled',
+      summary_right: 'Lessons completed',
+      progress_percentTitle: (arg1: string) => `You're <span class="percent">${arg1}%</span> through your enrolled Courses.`,
+      progress_percentSubtile: `lessons completed`,
+      detail_goToCourse: `Go to course`,
+      detail_completed: 'exercises completed',
+      detail_lastWeeks: 'Last 14 days',
+      detail_dateStart: `When you started the course`
     }
   },
 

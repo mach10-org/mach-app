@@ -8,9 +8,9 @@
       </div>
     </template>
     <div v-else class="flex justify-center flex-col mt-24">
-      <p class="text-center text-xl lg:text-2xl font-medium mb-4">Looks like you didn’t enroll any course yet, how about starting today ?</p>
+      <p class="text-center text-xl lg:text-2xl font-medium mb-4">{{ localJourney.notEnrolled }}</p>
       <div class="text-center text-text-base m-0 leading-6">
-        <OButton tag="a" href="/courses/" variant="primary">Get started today !</OButton>
+        <OButton tag="a" href="/courses/" variant="primary">{{ localJourney.notEnrolledCTA }}</OButton>
       </div>
     </div>
   </div>
@@ -24,6 +24,10 @@ import Detail from './Detail.vue';
 import { courseTaken } from '@stores/courses';
 import { allTasks } from 'nanostores';
 import { computed } from 'vue';
+import { locales } from '@constants/localize';
+const {
+  pages: { journey: localJourney }
+} = locales;
 
 await allTasks();
 const coursesDone = courseTaken.get();
