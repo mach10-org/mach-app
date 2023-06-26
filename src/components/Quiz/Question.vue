@@ -89,7 +89,6 @@ const onSubmit = async () => {
       message.value = `Incorrect !`;
     } else {
       message.value = `Correct !`;
-      console.log('$profile', $profile);
 
       if (!$profile?.value) {
         showToast({ status: 'info', text: `${localNotif.signup_text1} ${localNotif.signup_text2}`, title: notifTitle });
