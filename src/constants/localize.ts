@@ -55,6 +55,64 @@ export const locales = {
       link: 'why-free/'
     }
   ],
+  header: {
+    login: 'Login',
+    journey: 'Journey',
+    profile: 'profile',
+    signout: 'Sign out'
+  },
+  footer: {
+    tagLine: ` - made with ❤️ and plenty of 🍵 in 🗾🇯🇵`,
+    menu_title_1: `RESOURCES`,
+    menu_title_2: `FOLLOW US`,
+    menu_title_3: `LEGAL`,
+    menu_1: [
+      {
+        label: 'Manifesto',
+        link: 'manifesto/',
+        external: false
+      },
+      {
+        label: 'Code of conduct',
+        link: 'code-conduct/',
+        external: false
+      },
+      {
+        label: 'Get in touch',
+        link: 'contact/',
+        external: false
+      }
+    ],
+    menu_2: [
+      {
+        label: 'Instagram',
+        link: 'https://github.com/themesberg/flowbite',
+        external: true
+      },
+      {
+        label: 'Twitter',
+        link: 'https://github.com/themesberg/flowbite',
+        external: true
+      }
+    ],
+    menu_3: [
+      {
+        label: 'Privacy Policy',
+        link: 'privacy-policy/',
+        external: false
+      },
+      {
+        label: 'Terms & Conditions',
+        link: 'terms-and-conditions/',
+        external: false
+      },
+      {
+        label: 'Licence',
+        link: 'licence/',
+        external: false
+      }
+    ]
+  },
 
   compiler: {
     run: 'Run',
@@ -96,8 +154,7 @@ export const locales = {
       gender_label: `Gender`,
       gender_list: ['Male', 'Female', 'Other'],
       comment_label: `Could you tell us more about you and your objectives?`,
-      comment_placeholder: `Write your thoughts here...`,
-      xp: 'XP'
+      comment_placeholder: `Write your thoughts here...`
     }
   },
 
@@ -106,7 +163,8 @@ export const locales = {
     next: 'Next',
     choose: 'Choose',
     save: 'Save',
-    submit: 'Submit'
+    submit: 'Submit',
+    xp: 'XP'
   },
 
   errors: {

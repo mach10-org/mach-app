@@ -3,7 +3,7 @@
     <h2 class="text-center text-2xl md:text-4xl mb-2">
       <span class="text-transparent font-bold bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">{{ user?.email }}</span>
     </h2>
-    <h3 class="text-center text-lg font-bold mb-6">{{ xp }} {{ localPageProfile.xp }}</h3>
+    <h3 class="text-center text-lg font-bold mb-6">{{ xp }} {{ common.xp }}</h3>
 
     <p class="mb-2 md:text-lg lg:text-xl">{{ localPageProfile.intro }}</p>
     <p class="md:text-lg lg:text-xl">{{ localPageProfile.intro_2 }}</p>

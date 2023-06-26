@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <OButton v-else id="isNotLoggedIn" tag="a" :href="`${BASE_URL}login/`" class="mr-5" variant="primary"> Login </OButton>
+  <OButton v-else id="isNotLoggedIn" tag="a" :href="`${BASE_URL}login/`" class="mr-5" variant="primary">{{ localHeader.login }}</OButton>
 </template>
 <script lang="ts" setup>
 import { getUser, logout } from '@stores/auth';
@@ -40,7 +40,8 @@ import { User } from '@supabase/supabase-js';
 import $ from 'cash-dom';
 
 const {
-  notifications: { user: localNotif }
+  notifications: { user: localNotif },
+  header: localHeader
 } = locales;
 const $isConnected = useStore(isConnected);
 const BASE_URL = import.meta.env.BASE_URL;

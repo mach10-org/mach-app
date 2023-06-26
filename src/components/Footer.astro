@@ -2,6 +2,9 @@
 import Newsletter from '@components/Block/Newsletter.vue';
 import NoTag from '@components/NoTag.astro';
 import Brand from './Brand.astro';
+import { locales } from '@constants/localize';
+
+const { common, footer: localFooter } = locales;
 ---
 
 <footer class='py-4 sm:pt-14 sm:pb-6'>
@@ -17,49 +20,55 @@ import Brand from './Brand.astro';
       </div>
       <div class='grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3'>
         <div>
-          <h2 class='mb-6 text-sm font-semibold uppercase'>Resources</h2>
+          <h2 class='mb-6 text-sm font-semibold uppercase'>{localFooter.menu_title_1}</h2>
           <ul class='text-text-muted'>
-            <li class='mb-4'>
-              <a href=`${import.meta.env.BASE_URL}manifesto/` class='hover:underline'>Manifesto</a>
-            </li>
-            <li class='mb-4'>
-              <a href=`${import.meta.env.BASE_URL}code-conduct/` class='hover:underline'>Code of conduct</a>
-            </li>
-            <li>
-              <a href=`${import.meta.env.BASE_URL}contact/` class='hover:underline'>Get in touch</a>
-            </li>
+            {
+              localFooter.menu_1.map((m) => (
+                <li class='mb-4'>
+                  <a href={`${!m.external ? import.meta.env.BASE_URL : ''}` + m.link} target={m.external ? '_blank' : '_self'} class='hover:underline'>
+                    {m.label}
+                  </a>
+                </li>
+              ))
+            }
           </ul>
         </div>
+
+        {
+          localFooter.menu_2.length > 0 && (
+            <div>
+              <h2 class='mb-6 text-sm font-semibold uppercase'>{localFooter.menu_title_2}</h2>
+              <ul class='text-text-muted'>
+                {localFooter.menu_2.map((m) => (
+                  <li class='mb-4'>
+                    <a href={`${!m.external ? import.meta.env.BASE_URL : ''}` + m.link} target={m.external ? '_blank' : '_self'} class='hover:underline'>
+                      {m.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
         <div>
-          <h2 class='mb-6 text-sm font-semibold uppercase'>Follow us</h2>
+          <h2 class='mb-6 text-sm font-semibold uppercase'>{localFooter.menu_title_3}</h2>
           <ul class='text-text-muted'>
-            <li class='mb-4'>
-              <a href='https://github.com/themesberg/flowbite' target='_blank' class='hover:underline'>Instagram</a>
-            </li>
-            <li>
-              <a href='https://discord.gg/4eeurUVvTy' target='_blank' class='hover:underline'>Twitter</a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 class='mb-6 text-sm font-semibold uppercase'>Legal</h2>
-          <ul class='text-text-muted'>
-            <li class='mb-4'>
-              <a href=`${import.meta.env.BASE_URL}privacy-policy/` class='hover:underline'>Privacy Policy</a>
-            </li>
-            <li class='mb-4'>
-              <a href=`${import.meta.env.BASE_URL}terms-and-conditions/` class='hover:underline'>Terms &amp; Conditions</a>
-            </li>
-            <li>
-              <a href=`${import.meta.env.BASE_URL}licence/` class='hover:underline'>Licence</a>
-            </li>
+            {
+              localFooter.menu_3.map((m) => (
+                <li class='mb-4'>
+                  <a href={`${!m.external ? import.meta.env.BASE_URL : ''}` + m.link} target={m.external ? '_blank' : '_self'} class='hover:underline'>
+                    {m.label}
+                  </a>
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
     </div>
     <hr class='my-6 border-border-input sm:mx-auto lg:my-8' />
     <div class='sm:flex sm:items-center sm:center content-center justify-center'>
-      <span class='text-sm text-text-muted sm:text-center'>© {import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME} - made with ❤️ and plenty of 🍵 in 🗾🇯🇵</span>
+      <span class='text-sm text-text-muted sm:text-center'>© {import.meta.env.PUBLIC_SITE_NAME || process.env.PUBLIC_SITE_NAME} {localFooter.tagLine}</span>
     </div>
   </div>
 </footer>
