@@ -175,6 +175,11 @@ export const locales = {
       magicLink_btn: `Send magic link`,
       github_btn: `Login with GitHub`,
       inputEmail: 'Email'
+    },
+    contact: {
+      title_start: 'Get in touch to',
+      title_email: 'hello@mach10.jp',
+      title_end: 'or use the form below'
     }
   },
 
