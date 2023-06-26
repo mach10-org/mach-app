@@ -1,0 +1,56 @@
+---
+layout: '@PageLayout'
+title: 'Page Quiz : How to'
+description: Testing quizz!
+quiz:
+  label: 'From frontmatter : Which term does NOT describe JavaScript ?'
+  options:
+    - label: Garbage collected
+      explain: no prize for you
+    - label: Statically Typed
+      explain: hella good job
+      isAnswer: true
+      xp: 5
+    - label: Intrepreted
+      explain: Yeah, that ain't it
+---
+
+## To create a Quizz, you have 2 options:
+
+1. Frontmatter (positioned at the bottom of the page)
+2. JSX (can be positioned anywhere)
+
+### 1. Frontmatter
+
+```
+quiz:
+  label: 'From frontmatter : Which term does NOT describe JavaScript ?'
+  options:
+    - label: Garbage collected
+      explain: no prize for you
+    - label: Statically Typed
+      explain: hella good job
+      isAnswer: true
+      xp: 5
+    - label: Intrepreted
+      explain: Yeah, that ain't it
+
+```
+
+### 2. JSX
+
+```
+<Quiz slug='page-quizz' client:only='vue' label='Which term does NOT describe JavaScript?'>
+  <Quiz.Option label='Garbage collected' explain='no prize for you' />
+  <Quiz.Option label='Intrepreted' explain="Yeah, that ain't it" />
+  <Quiz.Option isAnswer xp='5' label='Statically Typed' explain='hella good job' />
+</Quiz>
+```
+
+#### Quizz Example JSX
+
+<Quiz slug='page-quizz' client:only='vue' label='Which term does NOT describe JavaScript?'>
+  <Quiz.Option label='Garbage collected' explain='no prize for you' />
+  <Quiz.Option label='Intrepreted' explain="Yeah, that ain't it" />
+  <Quiz.Option isAnswer xp='5' label='Statically Typed' explain='hella good job' />
+</Quiz>
