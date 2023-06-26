@@ -169,7 +169,13 @@ export const locales = {
       detail_lastWeeks: 'Last 14 days',
       detail_dateStart: `When you started the course`
     },
-    login: {}
+    login: {
+      intro: `Signup to create an account, it’s free and you can track your progress over time`,
+      description: `To log in, or register. Use the form below to get a magic link to your email.`,
+      magicLink_btn: `Send magic link`,
+      github_btn: `Login with GitHub`,
+      inputEmail: 'Email'
+    }
   },
 
   common: {

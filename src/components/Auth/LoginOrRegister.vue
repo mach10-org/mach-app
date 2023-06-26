@@ -2,16 +2,16 @@
   <section class="flex flex-col min-h-[60vh] pt-16 pb-10 lg:pt-20 px-2">
     <div class="max-w-[450px] mx-auto">
       <div class="flex flex-col items-center justify-center p-6 bg-background-base border border-border-input rounded-lg space-y-4 md:space-y-6">
-        <h2 class="text-xl font-bold text-text-title">Signup to create an account, it’s free and you can track your progress over time</h2>
-        <h3 class="text-base">To log in, or register. Use the form below to get a magic link to your email.</h3>
+        <h2 class="text-xl font-bold text-text-title">{{ localLogin.intro }}</h2>
+        <h3 class="text-base">{{ localLogin.description }}</h3>
         <form class="w-full" @submit.prevent="handleSendLink">
-          <OField label="Email">
+          <OField :label="localLogin.inputEmail">
             <OInput ref="input" type="email" name="email" v-model="email" size="large" required />
           </OField>
 
           <OButton variant="primary" @click="handleSendLink" :disabled="!canSubmit || status.isLoading" expanded size="large">
             <Spinner v-if="status.isLoading" :size="6" color="white" fill="primary" class="fill-primary" />
-            Send magic link
+            {{ localLogin.magicLink_btn }}
           </OButton>
         </form>
       </div>
@@ -20,7 +20,7 @@
         <button class="github-login" @click="signInWithGitHub" :disabled="statusOAuth.isLoading">
           <Spinner v-if="statusOAuth.isLoading" :size="6" color="white" fill="blue-500" class="fill-blue-500" />
           <Github v-else />
-          Login with GitHub
+          {{ localLogin.github_btn }}
         </button>
       </div>
     </div>
@@ -38,7 +38,8 @@ import Spinner from '@components/svg/Spinner.vue';
 import Github from '@components/svg/Github.vue';
 
 const {
-  notifications: { auth: localNotif }
+  notifications: { auth: localNotif },
+  pages: { login: localLogin }
 } = locales;
 const notifTitle = localNotif.title;
 
