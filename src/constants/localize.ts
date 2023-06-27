@@ -26,6 +26,9 @@ export const locales = {
       welcome_back_url: (arg1: string, arg2: string) => `Pick up where you left off!<br>${arg2}: "${arg1}"`,
       ok: 'Sure',
       cancel: 'Not now'
+    },
+    contact: {
+      email_sent: `Your mail has been sent to a team member!`
     }
   },
 
@@ -180,10 +183,12 @@ export const locales = {
       title_start: 'Get in touch to',
       title_email: 'hello@mach10.jp',
       title_end: 'or use the form below',
+      form_nameLabel: 'Full name',
       form_emailLabel: 'Your email address',
       form_emailSublabel: '(So we can reply to you)',
       form_topicLabel: 'Topic',
       form_topicPlaceholder: 'Select a topic',
+      form_topicList: ['I have a question', `I'd like to offer help`, 'I have an issue with my account'],
       form_subjectLabel: 'Subject',
       form_subjecPlaceholder: 'Let us know how we can help you',
       form_messageLabel: 'Your message',
@@ -205,7 +210,8 @@ export const locales = {
     default: `An error has occured ! Please try again later !`,
     code: {
       429: `For security purposes, you can only request this after 60 seconds.`, // asking Magic link login more than once per minute
-      23505: `You have already registered this email! We'll be in touch!` // Newsletter register more than once with same email
+      23505: `You have already registered this email! We'll be in touch!`, // Newsletter register more than once with same email
+      missing_parameter: `Email is missing`
     }
   }
 };

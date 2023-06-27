@@ -19,6 +19,7 @@ import { supabase } from '@utils/supabase';
 import { onMounted, ref } from 'vue';
 import { showToast, notifyStatus } from '@utils/notify';
 import { locales, erroMsg } from '@constants/localize';
+import { validateEmail } from '@utils/index';
 
 const {
   notifications: { newsletter: localNotif }
@@ -34,11 +35,6 @@ const props = defineProps({
 });
 const email = ref('');
 const input = ref(null);
-
-const validateEmail = (email: string) => {
-  const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  return regex.test(email);
-};
 
 onMounted(() => {
   if (props.focus && input.value) {

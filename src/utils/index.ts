@@ -38,3 +38,8 @@ export const normalizer = (str: string) =>
 export const isIOS = () => {
   return !!['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].filter((u) => navigator?.userAgent?.includes(u))?.length;
 };
+
+export const validateEmail = (email: string) => {
+  const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return regex.test(email);
+};

@@ -11,7 +11,8 @@
     "astro": "astro",
     "puppeteer-fix": "node node_modules/puppeteer/install.js",
     "update-types": "npx supabase gen types typescript --project-id \"teenfvdmlapuzevrxwtl\" --schema public > src/models/supabase.ts",
-    "deploy-go-compiler": "npx supabase functions deploy go-compile --project-ref teenfvdmlapuzevrxwtl  --no-verify-jwt"
+    "deploy-go-compiler": "npx supabase functions deploy go-compile --project-ref teenfvdmlapuzevrxwtl  --no-verify-jwt",
+    "deploy-send-contact-email": "npx supabase functions deploy send-contact-email --project-ref teenfvdmlapuzevrxwtl  --no-verify-jwt"
   },
   "dependencies": {
     "@astrojs/image": "^0.17.0",
