@@ -20,7 +20,7 @@ serve(async (req) => {
       headers: {
         accept: 'application/json',
         'content-type': 'application/json',
-        'api-key': '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'
+        'api-key': Deno.env.get(BREVO_API_KEY)
       },
       body: JSON.stringify({
         sender: { name: `${mach10.name} - Contact form`, email: mach10.email },
