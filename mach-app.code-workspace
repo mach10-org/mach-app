@@ -10,7 +10,13 @@
     },
     {
       "name": "supabase-functions",
-      "path": "supabase/functions"
+      "path": "supabase/functions",
+      "settings": {
+        // "deno.importMap": "./supabase/functions/import_map.json",
+        "deno.enable": true,
+        "deno.unstable": true
+        // "deno.importMap": "./supabase/functions/import_map.json",
+      }
     }
   ],
   "settings": {
@@ -19,8 +25,7 @@
       "src/": true,
       "supabase/functions/": true
     },
-    // "deno.importMap": "./supabase/functions/import_map.json",
-    "deno.enable": true,
+    "deno.enable": false,
     "deno.unstable": true
   }
 }
