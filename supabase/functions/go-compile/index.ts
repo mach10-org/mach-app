@@ -9,7 +9,7 @@ serve(async (req) => {
   try {
     const { code, compile, fmt } = await req.json();
     // const goCode = 'package main\n\nimport "fmt";\n\nfunc main() {\n  fmt.Println("Hello, Guillaume")\n}';
-    let data = {
+    const data = {
       events: {},
       formated: ''
     };
