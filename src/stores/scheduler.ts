@@ -1,7 +1,7 @@
-import { defaultDayRange, weekdayNames } from '@components/Schedule/utils';
+import { defaultDayRange, getAvailabilityFromSchedule, weekdayNames } from '@components/Schedule/utils';
 import { Database } from '@models/supabase';
 import { supabase } from '@utils/supabase';
-import { Schedule, TimeRange } from '@components/Schedule/models';
+import { Schedule, ScheduleAvailibility, TimeRange } from '@models/schedule';
 import { action, atom } from 'nanostores';
 
 export type AvailabilityDB = Database['public']['Tables']['availability'];
@@ -24,39 +24,63 @@ export const weekdays = weekdayNames('en', weekStart, 'long');
 
 export const schedule = atom<Schedule>(
   weekdays.map((d) => {
-    return weekend.includes(d) ? [] : [defaultDayRange];
+    return weekend.includes(d) ? [] : [JSON.parse(JSON.stringify(defaultDayRange))];
   })
 );
 
-export const updateSchedule = action(schedule, 'updateSchedule', (store, index: number, date: number, field: 'start' | 'end') => {
+export const setSchedule = action(schedule, 'updateSchedule', (store, data: Schedule) => {
+  store.set(data);
+  return store.get();
+});
+
+export const updateSchedule = action(schedule, 'updateSchedule', (store, index: number, date: number | Date, field: 'start' | 'end') => {
   const schedule = store.get();
+  console.log('schedule', index, schedule);
+
   schedule[index][0][field] = date;
   store.set([...schedule]);
   return store.get();
 });
 
-export const getSchedule = async (userId: string): Promise<ScheduleRow[]> => {
+export const getSchedule = async (userId: string): Promise<ScheduleAvailibility> => {
   try {
     const { data, error } = await supabase.from('schedule').select('*, availability(*)').eq('id', userId);
     if (error) {
       console.error(error);
-      return [];
+      throw error;
     } else {
-      return data;
+      return data?.[0];
     }
   } catch (error) {
-    return [];
+    return error;
   }
 };
 
 export const saveSchedule = async (payload: ScheduleUpsert) => {
   try {
-    const { data, error } = await supabase.from('schedule').upsert(payload).select().single();
-
-    if (error) {
-      throw error;
+    const { data: scheduleData, error: scheduleError } = await supabase.from('schedule').upsert(payload).select().single();
+    if (scheduleError) {
+      throw scheduleError;
     }
-    return { data, error };
+
+    const avails = getAvailabilityFromSchedule(schedule.get());
+    avails.map((avail) => {
+      avail.scheduleId = scheduleData?.id;
+      return avail;
+    });
+
+    const { error: errorDelete } = await supabase.from('availability').delete().eq('scheduleId', scheduleData.id);
+    if (errorDelete) {
+      throw errorDelete;
+    }
+
+    const { data: availabilityData, error: availabilityError } = await supabase.from('availability').insert(avails).select();
+    console.log('availabilityData', availabilityData);
+    if (availabilityError) {
+      throw availabilityError;
+    }
+
+    return { scheduleData, availabilityData };
   } catch (error) {
     throw error;
   }

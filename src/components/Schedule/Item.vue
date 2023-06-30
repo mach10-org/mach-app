@@ -77,12 +77,12 @@
 import { OSwitch, OInput, ODropdown, ODropdownItem, OButton } from '@oruga-ui/oruga-next';
 import { computed, onMounted, ref } from 'vue';
 import Icon from '@components/DynamicHeroIcon.vue';
-import { IOption, TimeRange } from './models';
+import { IOption, TimeRange } from '@models/schedule';
 import moment from 'moment';
-import { INCREMENT, defaultDayRange, timeFormat, timeHumanUtc } from './utils';
+import { INCREMENT, defaultDayRange, getAvailabilityFromSchedule, timeFormat, timeHumanUtc } from './utils';
 import { updateSchedule } from '@stores/scheduler';
 interface ListItem {
-  value: number;
+  value: number | Date;
   label: string;
 }
 
@@ -109,11 +109,11 @@ const props = defineProps({
   }
 });
 
-console.log('props', props);
 const maxHeight = 200;
 const { start, end } = defaultDayRange;
 const timeStart = ref<ListItem>({ value: start, label: timeHumanUtc(start, 12) });
 const timeEnd = ref<ListItem>({ value: end, label: timeHumanUtc(end, 12) });
+console.log('props.timeOptions', props.timeOptions[36]);
 
 const isSwitched = computed(() => !!props.control?.length);
 
@@ -126,14 +126,10 @@ onMounted(() => {
   }
 });
 
-console.log('timeStart', timeStart);
-
 const onChange = (item: ListItem, field: 'start' | 'end') => {
-  console.log('onChange', field, item);
-
+  // console.log('onChange', field, item);
   const res = updateSchedule(props.controlIndex, item.value, field);
-
-  console.log('res', res);
+  // console.log('res', res);
 };
 
 // if (props.weekdayIndex === 0) {

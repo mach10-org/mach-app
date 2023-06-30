@@ -1,6 +1,6 @@
 import moment, { Moment } from 'moment';
-import { IOption, Schedule, TimeRange } from './models';
-import { AvailabilityUpsert as Availability } from '@stores/scheduler';
+import { IOption, Schedule, ScheduleAvailibility, TimeRange } from '../../models/schedule';
+import { AvailabilityUpsert as Availability, AvailabilityRow, Scheduler } from '@stores/scheduler';
 
 type WeekdayFormat = 'short' | 'long';
 
@@ -19,7 +19,7 @@ export const INCREMENT = 15;
 const defaultDate = '2000-01-01';
 export const timeFormat = (type: 12 | 24) => (type === 12 ? 'h:mma' : 'HH:mm');
 
-export const timeHumanUtc = (date: number | Moment, formatType: 12 | 24) => moment(date).utc(false).format(timeFormat(formatType));
+export const timeHumanUtc = (date: number | Moment | Date, formatType: 12 | 24) => moment(date).utc(false).format(timeFormat(formatType));
 
 export const getTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -48,26 +48,47 @@ export const setOptions = () => {
 
 export function getAvailabilityFromSchedule(schedule: Schedule): Availability[] {
   return schedule.reduce((availability: Availability[], times: TimeRange[], day: number) => {
-    const addNewTime = (time: TimeRange) => ({
+    const addNewTime = (time: TimeRange): Availability => ({
       days: [day],
       startTime: time.start,
-      endTime: time.end
-    }); /*as Availability*/
+      endTime: time.end,
+      scheduleId: ''
+    });
 
     const filteredTimes = times.filter((time) => {
-      let idx;
-      if ((idx = availability.findIndex((schedule) => schedule.startTime.toString() === time.start.toString() && schedule.endTime.toString() === time.end.toString())) !== -1) {
-        availability[idx].days.push(day);
+      let idx = availability.findIndex((schedule) => {
+        return schedule.startTime.toString() === time.start.toString() && schedule.endTime.toString() === time.end.toString();
+      });
+
+      if (idx !== -1) {
+        availability?.[idx]?.days?.push(day);
         return false;
       }
       return true;
     });
+
     filteredTimes.forEach((time) => {
       availability.push(addNewTime(time));
     });
+
     return availability;
   }, [] as Availability[]);
 }
+
+export const convertScheduleToAvailability = (schedule: ScheduleAvailibility) => {
+  return schedule.availability.reduce(
+    (schedule: Schedule, availability) => {
+      availability?.days?.forEach((day) => {
+        schedule[day].push({
+          start: availability.startTime as number,
+          end: availability.endTime as number
+        });
+      });
+      return schedule;
+    },
+    Array.from([...Array(7)]).map(() => [])
+  );
+};
 
 /*
 

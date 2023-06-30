@@ -35,48 +35,37 @@
 import ScheduleDay from './Item.vue';
 import { OButton } from '@oruga-ui/oruga-next';
 import Spinner from '@components/svg/Spinner.vue';
-import { IOption } from './models';
+import { IOption } from '@models/schedule';
 import { computed, onMounted, ref } from 'vue';
-import { setOptions, weekdayNames, getTimeZone } from './utils';
-import { ScheduleUpsert, schedule, getSchedule, saveSchedule, weekdays, weekStart } from '@stores/scheduler';
+import { setOptions, weekdayNames, getTimeZone, getAvailabilityFromSchedule, convertScheduleToAvailability } from './utils';
+import { ScheduleUpsert, schedule, getSchedule, saveSchedule, weekdays, weekStart, setSchedule } from '@stores/scheduler';
 import { locales } from '@constants/localize';
-import { useVModel } from '@nanostores/vue';
 
 const {
   pages: { schedule: localSchedule },
   notifications: { schedule: localNotif }
 } = locales;
 
-const scheduleModel = schedule.get();
-const options = ref<IOption[]>([]);
+const scheduleModel = ref(schedule.get());
+const options = ref<IOption[]>(setOptions());
 const isLoading = ref(false);
 const isValid = computed(() => true);
 
-onMounted(() => {
-  options.value = setOptions();
-});
-
 try {
   const list = await getSchedule('ca8b5e07-f5b1-48fc-81f1-ce8e8267bfb3');
-  console.log('list');
+  console.log('list', list);
+  scheduleModel.value = convertScheduleToAvailability(list);
+  setSchedule(scheduleModel.value);
+  console.log('scheduleAvails', scheduleModel.value);
 } catch (error) {}
 
 const submit = async (e: Event) => {
-  console.log('scheduleModel', scheduleModel);
-
-  return;
   const payload: ScheduleUpsert = {
     id: 'ca8b5e07-f5b1-48fc-81f1-ce8e8267bfb3',
     name: 'My Schedule',
     timeZone: getTimeZone
   };
-
-  console.log('payload', payload);
-
   const res = await saveSchedule(payload);
-
-  console.log('res', res);
-
   e.preventDefault();
   try {
   } catch (error) {}
