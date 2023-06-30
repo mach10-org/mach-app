@@ -2,7 +2,7 @@
 
 - Create a branch "translation"
 - Content files (.md and .mdx) files can be translated directly
-- Code files (.jsx, .vue, .astro) have variables set for all text. There are in ./src/constants/localize.ts
+- Code files (.jsx, .vue, .astro) have variables set for all text. They are in ./src/constants/localize.ts
 - translate all needed files then merge the new branch
 
 #### "localize.ts" file
