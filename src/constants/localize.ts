@@ -29,7 +29,8 @@ export const locales = {
     },
     contact: {
       email_sent: `Your mail has been sent to a team member!`
-    }
+    },
+    schedule: {}
   },
 
   menu: [
@@ -173,7 +174,8 @@ export const locales = {
       detail_dateStart: `When you started the course`
     },
     schedule: {
-      title: 'Your Schedule'
+      title: 'Your Schedule',
+      submit: 'Save'
     },
     login: {
       intro: `Signup to create an account, it’s free and you can track your progress over time`,

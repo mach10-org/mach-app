@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
@@ -39,6 +39,40 @@ export interface Database {
             foreignKeyName: "answers_user_fkey"
             columns: ["user"]
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      availability: {
+        Row: {
+          date: string | null
+          days: number[] | null
+          endTime: string
+          id: number
+          scheduleId: string
+          startTime: string
+        }
+        Insert: {
+          date?: string | null
+          days?: number[] | null
+          endTime: string
+          id?: number
+          scheduleId: string
+          startTime: string
+        }
+        Update: {
+          date?: string | null
+          days?: number[] | null
+          endTime?: string
+          id?: number
+          scheduleId?: string
+          startTime?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "availability_scheduleId_fkey"
+            columns: ["scheduleId"]
+            referencedRelation: "schedule"
             referencedColumns: ["id"]
           }
         ]
@@ -241,6 +275,34 @@ export interface Database {
             foreignKeyName: "profiles_id_fkey"
             columns: ["id"]
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      schedule: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string | null
+          timeZone: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          name?: string | null
+          timeZone?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string | null
+          timeZone?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedule_id_fkey"
+            columns: ["id"]
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
         ]
