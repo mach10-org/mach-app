@@ -8,7 +8,7 @@ Being able to organize thoughts is a powerful tool. To make my point here, I wou
 
 Look at figure below for 10 seconds, then look away and try to write out your phone number with these symbols (Use a space for ’0’.) When you are finished, continue to read below.
 
-![random](/img/mindset/005-organize/_scattered.png)
+![random](/img/mindset/005-organize/scattered.png)
 
 .
 
@@ -22,7 +22,7 @@ Now look at the representation below, these are actually the exact same patterns
 
 Now try to do the same exercise again. Do you see how much easier are the symbols to remember when the pattern is made explicit?
 
-![logical](/img/mindset/005-organize/_unscattered.png)
+![logical](/img/mindset/005-organize/unscattered.png)
 
 This example was just to give you an example that the brain works better when it can make sense of a model. Remembering things that do not make sense is more complicated and less effective.
 
