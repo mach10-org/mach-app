@@ -55,7 +55,6 @@ export const updateSchedule = action(schedule, 'updateSchedule', (store, payload
   } else {
     schedule[dayIndex][index][field] = date;
   }
-  console.log('schedule', schedule);
 
   store.set(schedule);
   return store.get();
