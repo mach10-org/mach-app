@@ -17,28 +17,47 @@ export interface Scheduler {
   name: string;
   schedule: Schedule;
 }
+
+export interface UpdateSchedule {
+  dayIndex: number;
+  index: number;
+  date: number | Date | TimeRange;
+  field: 'start' | 'end' | 'create' | 'delete' | 'add' | 'remove';
+}
 export const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 export const weekend = ['Sunday', 'Saturday'];
 export const weekStart = week.indexOf('Monday');
 export const weekdays = weekdayNames('en', weekStart, 'long');
-
-export const schedule = atom<Schedule>(
-  weekdays.map((d) => {
-    return weekend.includes(d) ? [] : [JSON.parse(JSON.stringify(defaultDayRange))];
-  })
-);
+export const DEFAULT_SCHEDULE: Schedule = weekdays.map((d) => (weekend.includes(d) ? [] : [JSON.parse(JSON.stringify(defaultDayRange))]));
+export const schedule = atom<Schedule>(DEFAULT_SCHEDULE);
 
 export const setSchedule = action(schedule, 'updateSchedule', (store, data: Schedule) => {
   store.set(data);
   return store.get();
 });
 
-export const updateSchedule = action(schedule, 'updateSchedule', (store, index: number, date: number | Date, field: 'start' | 'end') => {
+export const updateSchedule = action(schedule, 'updateSchedule', (store, payload: UpdateSchedule) => {
   const schedule = store.get();
-  console.log('schedule', index, schedule);
+  const { dayIndex, index, field, date } = payload;
 
-  schedule[index][0][field] = date;
-  store.set([...schedule]);
+  if (['create', 'delete'].includes(field)) {
+    if (field === 'create') {
+      schedule[dayIndex] = [date as TimeRange];
+    } else {
+      schedule[dayIndex] = [];
+    }
+  } else if (['add', 'remove'].includes(field)) {
+    if (field === 'add') {
+      schedule[dayIndex][index + 1] = date as TimeRange;
+    } else {
+      schedule[dayIndex].splice(index, 1);
+    }
+  } else {
+    schedule[dayIndex][index][field] = date;
+  }
+  console.log('schedule', schedule);
+
+  store.set(schedule);
   return store.get();
 });
 
