@@ -30,7 +30,9 @@ export const locales = {
     contact: {
       email_sent: `Your mail has been sent to a team member!`
     },
-    schedule: {}
+    schedule: {
+      success: 'Your schedule has been saved'
+    }
   },
 
   menu: [

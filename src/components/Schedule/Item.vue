@@ -19,19 +19,29 @@
             <div class="inline-block w-[100px]">
               <span aria-live="polite" aria-atomic="false" aria-relevant="additions text"></span>
               <div class="flex gap-1">
-                <ODropdown :scrollable="true" :max-height="maxHeight" v-model="controlRange(index).value.timeStart" @change="onChangeTime($event, index, 'start')" aria-role="list" class="w-full">
+                <ODropdown
+                  ref="dropdownStart"
+                  :scrollable="true"
+                  :max-height="maxHeight"
+                  v-model="controlRange(index).value.timeStart"
+                  @change="onChangeTime($event, index, 'start')"
+                  aria-role="list"
+                  class="w-full"
+                >
                   <template #trigger>
                     <div class="text-sm leading-4 rounded-md border py-2 px-3 h-fit">
                       <div class="">{{ controlRange(index)?.value?.timeStart?.label }}</div>
                     </div>
                   </template>
 
-                  <ODropdownItem v-for="(option, index) in timeOptions" :key="index" :value="option" aria-role="listitem">
-                    <div class="media">
-                      <div class="media-content">
-                        <span>{{ option.label }}</span>
-                      </div>
-                    </div>
+                  <ODropdownItem
+                    v-for="option in timeOptions"
+                    :itemClass="option.value === controlRange(index).value.timeStart.value ? 'o-drop__item--active' : ''"
+                    :key="option.value"
+                    :value="option"
+                    aria-role="listitem"
+                  >
+                    <span>{{ option.label }}</span>
                   </ODropdownItem>
                 </ODropdown>
               </div>
@@ -47,7 +57,13 @@
                     </div>
                   </template>
 
-                  <ODropdownItem v-for="(option, index) in timeOptions" :key="index" :value="option" aria-role="listitem">
+                  <ODropdownItem
+                    v-for="option in timeOptions"
+                    :key="option.value"
+                    :value="option"
+                    aria-role="listitem"
+                    :itemClass="option.value === controlRange(index).value.timeEnd.value ? 'o-drop__item--active' : ''"
+                  >
                     <div class="media">
                       <div class="media-content">
                         <span>{{ option.label }}</span>
@@ -77,7 +93,7 @@
 
 <script lang="ts" setup>
 import { OSwitch, ODropdown, ODropdownItem } from '@oruga-ui/oruga-next';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import Icon from '@components/DynamicHeroIcon.vue';
 import { IOption, TimeRange } from '@models/schedule';
 import { defaultDayRange, timeHumanUtc } from './utils';
@@ -120,6 +136,7 @@ const controlRange = (index: number) =>
     const end = props.control[index]?.end;
     const timeStart = { value: start, label: timeHumanUtc(start, 12) };
     const timeEnd = { value: end, label: timeHumanUtc(end, 12) };
+
     return { timeStart, timeEnd };
   });
 

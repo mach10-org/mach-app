@@ -26,7 +26,8 @@ import { IOption } from '@models/schedule';
 import { computed, ref } from 'vue';
 import { setOptions, getTimeZone, convertScheduleToAvailability } from './utils';
 import { ScheduleUpsert, schedule, getSchedule, saveSchedule, weekdays, weekStart, setSchedule, DEFAULT_SCHEDULE } from '@stores/scheduler';
-import { locales } from '@constants/localize';
+import { erroMsg, locales } from '@constants/localize';
+import { showToast } from '@utils/notify';
 
 const {
   pages: { schedule: localSchedule },
@@ -45,15 +46,21 @@ try {
 } catch (error) {}
 
 const submit = async (e: Event) => {
+  isLoading.value = true;
   const payload: ScheduleUpsert = {
     id: 'ca8b5e07-f5b1-48fc-81f1-ce8e8267bfb3',
     name: 'My Schedule',
     timeZone: getTimeZone
   };
-  const res = await saveSchedule(payload);
   e.preventDefault();
   try {
-  } catch (error) {}
+    const res = await saveSchedule(payload);
+
+    showToast({ status: 'success', text: localNotif.success });
+  } catch (error) {
+    showToast({ status: 'error', text: erroMsg(error?.code) });
+  }
+  isLoading.value = false;
 };
 </script>
 
