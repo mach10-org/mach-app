@@ -48,10 +48,7 @@ const BASE_URL = import.meta.env.BASE_URL;
 const isOpen = ref(false);
 
 const handleWelcomMessages = async (pathname: string, user: User) => {
-  let lastUrl: LastURLRowSingle | null = null;
-  try {
-    lastUrl = await getLastUrl();
-  } catch (error) {}
+  let lastUrl =  await getLastUrl();
   const notofyPathCheck = '/courses/';
   const hasValue = getSessionStartDate();
   const allowedPath = notofyPathCheck === pathname || !pathname.includes(notofyPathCheck);

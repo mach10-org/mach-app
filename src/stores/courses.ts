@@ -216,9 +216,9 @@ export const saveLastUrl = async (payload: LastURLUpsert) => {
   return true;
 };
 
-export const getLastUrl = async (): Promise<LastURLRowSingle> => {
+export const getLastUrl = async (): Promise<LastURLRowSingle | null> => {
   try {
-    const { data, error } = await supabase.from('last_url').select('updated_at, url, title, main, course').single();
+    const { data, error } = await supabase.from('last_url').select('updated_at, url, title, main, course').maybeSingle();
     if (error) {
       throw error;
     }
