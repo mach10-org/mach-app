@@ -108,7 +108,6 @@ export const signinOrUp = async (email: string, emailRedirectTo: string) => {
     const response = await supabase.auth.signInWithOtp({
       email,
       options: {
-        data: { username: '' },
         emailRedirectTo
       }
     });
