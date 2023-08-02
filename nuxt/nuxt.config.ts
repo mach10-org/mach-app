@@ -2,6 +2,20 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  extends: [
+    'nuxt-seo-kit',
+  ],
+
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL,
+      siteName: 'Mach10',
+      siteDescription: 'We are on a mission to transform lives of 10,000 people. Why not you? It starts today 👩🏻‍🚀',
+      language: 'en-US',
+      trailingSlash: true,
+    },
+  },
+
   modules: [
     'nuxt-lodash',
     '@vueuse/nuxt',
@@ -10,7 +24,23 @@ export default defineNuxtConfig({
     'nuxt-font-loader',
     '@nuxtjs/supabase',
     '@nuxt/content',
+    '@nuxtjs/i18n',
+    '@unocss/nuxt',
   ],
+
+  i18n: {
+    strategy: 'no_prefix',
+    locales: [
+      { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },
+      { code: 'ja', iso: 'ja-JP', file: 'ja.json', name: '日本語' },
+    ],
+    defaultLocale: 'en',
+    langDir: 'locales',
+    detectBrowserLanguage: false,
+    trailingSlash: true,
+    baseUrl: process.env.BASE_URL,
+    vueI18n: './i18n.config.ts',
+  },
 
   lodash: {
     prefix: '_',

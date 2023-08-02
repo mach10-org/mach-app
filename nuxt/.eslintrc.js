@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['@nuxtjs/eslint-config-typescript'],
+  extends: ['@nuxtjs/eslint-config-typescript', '@unocss'],
   plugins: [],
   // add your custom rules here
   rules: {
