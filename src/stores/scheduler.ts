@@ -28,7 +28,7 @@ export const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Fr
 export const weekend = ['Sunday', 'Saturday'];
 export const weekStart = week.indexOf('Monday');
 export const weekdays = weekdayNames('en', weekStart, 'long');
-export const DEFAULT_SCHEDULE: Schedule = weekdays.map((d) => (weekend.includes(d) ? [] : [JSON.parse(JSON.stringify(defaultDayRange))]));
+export const DEFAULT_SCHEDULE: Schedule = weekdays.map((d) => ([]));
 export const schedule = atom<Schedule>(DEFAULT_SCHEDULE);
 
 export const setSchedule = action(schedule, 'updateSchedule', (store, data: Schedule) => {
