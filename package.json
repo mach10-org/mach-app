@@ -73,5 +73,5 @@
     "colord": "^2.9.3",
     "tailwind-easy-theme": "^1.1.1"
   },
-  "packageManager": "yarn@3.6.0"
+  "packageManager": "yarn@3.6.1"
 }
