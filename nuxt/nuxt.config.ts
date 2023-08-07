@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/i18n',
     '@unocss/nuxt',
+    '@bg-dev/nuxt-naiveui',
   ],
 
   i18n: {
