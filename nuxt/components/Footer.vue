@@ -11,9 +11,9 @@
         </Newsletter> -->
         </div>
         <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
-          <FooterMenu :menu="menu1" menu-index="1" />
-          <FooterMenu :menu="menu2" menu-index="2" />
-          <FooterMenu :menu="menu3" menu-index="3" />
+          <FooterMenu :menu="i18n.tm('footer.menu_1')" menu-index="1" />
+          <FooterMenu :menu="i18n.tm('footer.menu_2')" menu-index="2" />
+          <FooterMenu :menu="i18n.tm('footer.menu_3')" menu-index="3" />
         </div>
       </div>
       <hr class="border-border-input my-6 lg:my-8 sm:mx-auto">
@@ -26,10 +26,4 @@
 
 <script setup lang="ts">
 const i18n = useI18n()
-
-// TODO better
-const localFooter = computed(() => i18n.messages.value[i18n.locale.value].footer)
-const menu1 = computed(() => localFooter.value.menu_1)
-const menu2 = computed(() => localFooter.value.menu_2)
-const menu3 = computed(() => localFooter.value.menu_3)
 </script>
