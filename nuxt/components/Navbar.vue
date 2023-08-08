@@ -1,12 +1,18 @@
 <template>
-  <NaiveNavbar :routes="navbarRoutes" :menu-inverted="false" drawer-closable menu-placement="left" class="mx-auto flex flex-wrap items-center justify-between container">
-    <template #start>
-      <Brand size="md" />
-    </template>
-    <template #end>
-      <NaiveColorModeSwitch />
-    </template>
-  </NaiveNavbar>
+  <div class="mx-auto container">
+    <NaiveNavbar :routes="navbarRoutes" :menu-inverted="false" drawer-closable menu-placement="left" class="w-full">
+      <template #start>
+        <Brand size="md" />
+      </template>
+      <template #end>
+        <ButtonLink to="/login/" size="large">
+          {{ $t('header.login') }}
+        </ButtonLink>
+        <!-- TODO dark mode doesn't work -->
+        <NaiveColorModeSwitch />
+      </template>
+    </NaiveNavbar>
+  </div>
 </template>
 
 <script setup lang="ts">

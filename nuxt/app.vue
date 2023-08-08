@@ -2,9 +2,11 @@
   <NaiveConfig :theme-config="themeConfig">
     <SeoKit />
     <!-- <n-global-style /> -->
-    <Navbar />
-    <NuxtPage />
-    <Footer />
+    <NuxtLayout class="root-dark root">
+      <Navbar />
+      <NuxtPage />
+      <Footer />
+    </NuxtLayout>
   </NaiveConfig>
 </template>
 

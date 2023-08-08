@@ -29,6 +29,16 @@ export default defineNuxtConfig({
     '@bg-dev/nuxt-naiveui',
   ],
 
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'icon', type: 'image/x-icon', href: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩🏻‍🚀</text></svg>',
+        },
+      ],
+    },
+  },
+
   i18n: {
     strategy: 'no_prefix',
     locales: [
@@ -57,5 +67,13 @@ export default defineNuxtConfig({
         fallback: 'sans-serif',
       },
     ],
+  },
+
+  unocss: {
+    preflight: true,
+  },
+
+  naiveui: {
+    colorModePreference: 'system',
   },
 })

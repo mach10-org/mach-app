@@ -4,12 +4,20 @@ import transformerDirectives from '@unocss/transformer-directives'
 import { themeConfig } from './theme.config'
 
 export default defineConfig({
-  preflight: false,
   shortcuts: [
     ['root', `
         selector-[:root]:(
           [--primary:${themeConfig.shared?.common?.primaryColor}]
-          [--primaryHover:${themeConfig.shared?.common?.primaryColorHover}]
+          [--primary-hover:${themeConfig.shared?.common?.primaryColorHover}]
+          [--text-muted:#89939F]
+          [--link:#be185d]
+          [--link-hover:#9d174f]
+        )
+    `],
+    ['root-dark', `
+        selector-[.dark]:(
+          [--link:#f9a8ca]
+          [--link-hover:#f472a8]
         )
     `],
   ],

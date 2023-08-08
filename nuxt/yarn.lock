@@ -2603,6 +2603,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/reset@npm:^0.54.2":
+  version: 0.54.2
+  resolution: "@unocss/reset@npm:0.54.2"
+  checksum: 48377f0f3750059b39f59f3b72724d8b1fc31fd53ce489e0736d3f06b4d727e90e4f259b5264173401f817dc65c6764a497e47c4d1fb2f7629ad9d5cad2892dd
+  languageName: node
+  linkType: hard
+
 "@unocss/scope@npm:0.54.1":
   version: 0.54.1
   resolution: "@unocss/scope@npm:0.54.1"
@@ -9121,6 +9128,7 @@ __metadata:
     "@types/node": ^18.17.1
     "@unocss/eslint-config": ^0.54.1
     "@unocss/nuxt": ^0.54.1
+    "@unocss/reset": ^0.54.2
     "@unocss/transformer-directives": ^0.54.1
     "@unocss/transformer-variant-group": ^0.54.1
     "@vueuse/nuxt": ^10.3.0

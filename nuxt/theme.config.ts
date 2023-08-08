@@ -5,8 +5,8 @@ export const themeConfig: ThemeConfig = {
     common: {
       fontFamily: 'Inter,ui-sans-serif,system-ui,-apple-system,sans-serif',
       textColorBase: '#232E4A',
-      primaryColor: '#457D00',
-      primaryColorHover: '#ce3077',
+      primaryColor: '#be185d',
+      primaryColorHover: '#9d174f',
       bodyColor: '#FCFCFC',
       baseColor: '#F9F9F9',
     },
