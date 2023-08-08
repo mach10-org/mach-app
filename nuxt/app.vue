@@ -2,7 +2,7 @@
   <NaiveConfig :theme-config="themeConfig">
     <SeoKit />
     <!-- <n-global-style /> -->
-    <NuxtLayout class="root-dark root">
+    <NuxtLayout class="root rootdark">
       <Navbar />
       <NuxtPage />
       <Footer />

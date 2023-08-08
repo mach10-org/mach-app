@@ -7,15 +7,17 @@ export default defineConfig({
   shortcuts: [
     ['root', `
         selector-[:root]:(
-          [--primary:${themeConfig.shared?.common?.primaryColor}]
-          [--primary-hover:${themeConfig.shared?.common?.primaryColorHover}]
+          [--primary:${themeConfig.light?.common?.primaryColor}]
+          [--primary-hover:${themeConfig.light?.common?.primaryColorHover}]
           [--text-muted:#89939F]
           [--link:#be185d]
           [--link-hover:#9d174f]
         )
     `],
-    ['root-dark', `
-        selector-[.dark]:(
+    ['rootdark', `
+        selector-[html.dark]:(
+          [--primary:${themeConfig.dark?.common?.primaryColor}]
+          [--primary-hover:${themeConfig.dark?.common?.primaryColorHover}]
           [--link:#f9a8ca]
           [--link-hover:#f472a8]
         )
