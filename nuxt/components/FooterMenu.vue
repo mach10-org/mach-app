@@ -3,10 +3,10 @@
     <h2 class="mb-6 text-sm font-semibold uppercase">
       {{ $t(`footer.menu_title_${menuIndex}`) }}
     </h2>
-    <ul class="text-text-muted">
+    <ul class="text-$text-muted">
       <li v-for="(_m, index) in menu" :key="index" class="mb-4">
-        <a v-if="$t(`footer.menu_${menuIndex}.${index}.external`) === 'true'" :href="$t(`footer.menu_${menuIndex}.${index}.link`)" target="_blank">{{ $t(`footer.menu_${menuIndex}.${index}.label`) }}</a>
-        <NuxtLink v-else :to="`/${$t(`footer.menu_${menuIndex}.${index}.link`)}`">
+        <a v-if="$t(`footer.menu_${menuIndex}.${index}.external`) === 'true'" :href="$t(`footer.menu_${menuIndex}.${index}.link`)" target="_blank" class="hover:underline">{{ $t(`footer.menu_${menuIndex}.${index}.label`) }}</a>
+        <NuxtLink v-else :to="`/${$t(`footer.menu_${menuIndex}.${index}.link`)}`" class="hover:underline">
           {{ $t(`footer.menu_${menuIndex}.${index}.label`) }}
         </NuxtLink>
       </li>
