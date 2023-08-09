@@ -5,7 +5,9 @@
     :has-header="data.hasHeader"
     :title="data.title"
     :description="data.description"
-    :preview="`/img/${data.preview}`"
+    :preview="data.preview"
+    :show-toc="data.showToc"
+    :toc-links="data.body.toc.links"
   >
     <ContentRenderer :value="data" />
   </NuxtLayout>

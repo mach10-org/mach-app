@@ -2,7 +2,7 @@
 title: What is our mission?
 description: Why do we want to train more software engineers Japan?
 preview: mission.jpg
-showTOC: false
+showToc: false
 hasHeader: true
 ---
 The world is changing. Fast. We can already see that software and AI are reshaping a lot of industries.

@@ -7,8 +7,8 @@ export default defineConfig({
   shortcuts: [
     ['root', `
         selector-[:root]:(
-          [--primary:${themeConfig.light?.common?.primaryColor}]
-          [--primary-hover:${themeConfig.light?.common?.primaryColorHover}]
+          [--primary:${themeConfig.shared?.common?.primaryColor}]
+          [--primary-hover:${themeConfig.shared?.common?.primaryColorHover}]
           [--text-base:${themeConfig.light?.common?.textColorBase}]
           [--text-title:#111827]
           [--text-muted:#89939F]

@@ -1,10 +1,10 @@
 <template>
   <main :class="{'lg:space-y-10': !hasHeader}">
     <template v-if="hasHeader">
-      <header class="relative h-[360px] w-full md:h-[460px] xl:h-[537px]">
+      <header class="relative h-[360px] w-full text-[larger] md:h-[460px] xl:h-[537px]">
         <nuxt-img
-          v-if="preview"
-          :src="preview"
+          v-if="computedPreview"
+          :src="computedPreview"
           class="absolute left-0 top-0 h-full w-full w-full object-cover -z-1"
           densities="x1 x2"
         />
@@ -19,14 +19,12 @@
         </div>
       </header>
       <div class="relative z-20 mx-4 mb-8 max-w-screen-xl flex justify-between rounded bg-$background-base p-6 xl:mx-auto -mt-36 xl:p-9 xl:-mt-32">
-        <div class="article max-w-none flex-1 text-lg prose">
+        <div ref="nuxtContent" class="article max-w-none flex-1 text-lg prose">
           <slot />
         </div>
-        <!-- {showTOC && (
-        <div class="hidden w-[340px] pl-10 lg:block">
-          <TOC page-headings="{headings}" max-depth="{2}" classes="sticky top-[20px] bg-$background-base w-full" />
+        <div v-if="showToc" class="hidden w-[340px] pl-10 lg:block">
+          <TableOfContent class="sticky top-[20px] w-full bg-$background-base" :toc-links="tocLinks" :active-toc-id="activeTocId" />
         </div>
-        )} -->
       </div>
     </template>
     <template v-else>
@@ -36,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   hasHeader: {
     type: Boolean,
     default: false,
@@ -51,7 +49,52 @@ defineProps({
   },
   preview: {
     type: String,
-    default: '',
+    default: undefined,
   },
+  showToc: {
+    type: Boolean,
+    default: true,
+  },
+  tocLinks: {
+    type: Array,
+    required: true,
+  },
+})
+
+const computedPreview = computed(() => props.preview ? `/img/${props.preview}` : undefined)
+
+useSeoMeta({
+  title: () => props.title,
+  description: () => props.description,
+  ogImage: () => computedPreview.value,
+})
+
+// Observer
+const activeTocId = ref<null | string>(null)
+const nuxtContent = ref(null)
+
+const observer: Ref<IntersectionObserver | null | undefined> = ref(null)
+const observerOptions = reactive({
+  root: nuxtContent.value,
+  threshold: 0.5,
+})
+
+onMounted(() => {
+  observer.value = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute('id')
+      if (entry.isIntersecting) {
+        activeTocId.value = id
+      }
+    })
+  }, observerOptions)
+
+  document.querySelectorAll(':is(article,.article) :is(h2)').forEach((section) => {
+    observer.value?.observe(section)
+  })
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
 })
 </script>

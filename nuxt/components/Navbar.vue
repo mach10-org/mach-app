@@ -8,7 +8,6 @@
         <ButtonLink to="/login/" size="large">
           {{ $t('header.login') }}
         </ButtonLink>
-        <!-- TODO dark mode doesn't work -->
         <NaiveColorModeSwitch />
       </template>
     </NaiveNavbar>
@@ -26,6 +25,10 @@ const navbarRoutes: NavbarRoute[] = [
   {
     label: 'Mission',
     path: '/mission/',
+  },
+  {
+    label: 'Roadmap',
+    path: '/roadmap/',
   },
 ]
 </script>
