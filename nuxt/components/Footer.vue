@@ -1,6 +1,6 @@
 <template>
   <footer class="py-4 sm:pb-6 sm:pt-14">
-    <div class="mx-auto container">
+    <div class="container">
       <div class="md:flex md:justify-between">
         <div class="mb-6 md:mb-0">
           <Brand size="lg" />

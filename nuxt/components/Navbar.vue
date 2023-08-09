@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto container">
+  <div class="container">
     <NaiveNavbar :routes="navbarRoutes" :menu-inverted="false" drawer-closable menu-placement="left" class="w-full">
       <template #start>
         <Brand size="md" />

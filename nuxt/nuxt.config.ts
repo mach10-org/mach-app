@@ -27,6 +27,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@unocss/nuxt',
     '@bg-dev/nuxt-naiveui',
+    '@nuxt/image',
   ],
 
   app: {

@@ -16,8 +16,8 @@ export const themeConfig: ThemeConfig = {
       textColorBase: '#232E4A',
       primaryColor: '#be185d',
       primaryColorHover: '#9d174f',
-      bodyColor: '#FCFCFC',
-      baseColor: '#F9F9F9',
+      baseColor: '#FCFCFC',
+      bodyColor: '#F9F9F9',
     },
   }, // Theme options applied on light mode
   dark: {
@@ -25,8 +25,8 @@ export const themeConfig: ThemeConfig = {
       textColorBase: '#e2e5e8',
       primaryColor: '#be185d',
       primaryColorHover: '#9d174f',
-      bodyColor: '#242F4C',
-      baseColor: '#232E4A',
+      baseColor: '#242F4C',
+      bodyColor: '#232E4A',
     },
     Button: {
       textColorPrimary: '#fff',
