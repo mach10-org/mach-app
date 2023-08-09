@@ -26,7 +26,7 @@
 
 defineProps({
   tocLinks: {
-    type: Array,
+    type: Array as () => any[],
     required: true,
   },
   activeTocId: {

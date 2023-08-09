@@ -12,8 +12,8 @@ export default defineConfig({
           [--text-base:${themeConfig.light?.common?.textColorBase}]
           [--text-title:#111827]
           [--text-muted:#89939F]
-          [--background-page:${themeConfig.light?.common?.baseColor}]
-          [--background-base:${themeConfig.light?.common?.bodyColor}]
+          [--background-base:${themeConfig.light?.common?.baseColor}]
+          [--background-body:${themeConfig.light?.common?.bodyColor}]
           [--link:#be185d]
           [--link-hover:#9d174f]
           [--un-prose-headings:var(--text-title)]
@@ -29,8 +29,8 @@ export default defineConfig({
         selector-[html.dark]:(
           [--text-base:${themeConfig.dark?.common?.textColorBase}]
           [--text-title:#EDF1F5]
-          [--background-page:${themeConfig.dark?.common?.baseColor}]
-          [--background-base:${themeConfig.dark?.common?.bodyColor}]
+          [--background-base:${themeConfig.dark?.common?.baseColor}]
+          [--background-body:${themeConfig.dark?.common?.bodyColor}]
           [--link:#f9a8ca]
           [--link-hover:#f472a8]
         )
@@ -79,6 +79,7 @@ export default defineConfig({
         'h1 a,h2 a,h3 a,h4 a,h5 a,h6 a': {
           color: 'var(--un-prose-headings)',
           'text-decoration': 'none',
+          'font-weight': 700,
         },
         h1: {
           'font-weight': 700,
