@@ -1,8 +1,7 @@
 {
   "notifications": {
     "newsletter": {
-      "title": "Newsletter",
-      "email_saved": "Your email has been saved !",
+      "email_saved": "Your email has been saved!",
       "not_valid_email": "The email address is not valid"
     },
     "auth": {

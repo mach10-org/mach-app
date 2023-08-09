@@ -6,9 +6,11 @@
           <Brand size="lg" />
         </div>
         <div class="mb-16 px-0 md:mb-0 md:px-8">
-        <!-- <Newsletter label='Email address' placeholder='Enter your email' buttonText='Notify me' inputId='email-newsletter-footer' client:only='vue'>
-          <NoTag slot='description'>We’ll notify you when our first course is ready. First course starting in 2023.</NoTag>
-        </Newsletter> -->
+          <Newsletter label="Email address" placeholder="Enter your email" button-text="Notify me" input-id="email-newsletter-footer">
+            <template #description>
+              We’ll notify you when our first course is ready. First course starting in 2023.
+            </template>
+          </Newsletter>
         </div>
         <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
           <FooterMenu :menu="i18n.tm('footer.menu_1')" menu-index="1" />

@@ -1,12 +1,13 @@
 <template>
   <NaiveConfig :theme-config="themeConfig">
-    <SeoKit />
-    <!-- <n-global-style /> -->
-    <NuxtLayout class="root rootdark">
-      <Navbar />
-      <NuxtPage />
-      <Footer />
-    </NuxtLayout>
+    <n-message-provider>
+      <SeoKit />
+      <NuxtLayout class="root rootdark">
+        <Navbar />
+        <NuxtPage />
+        <Footer />
+      </NuxtLayout>
+    </n-message-provider>
   </NaiveConfig>
 </template>
 
