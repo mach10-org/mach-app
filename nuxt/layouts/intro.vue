@@ -19,11 +19,11 @@
         </div>
       </header>
       <div class="relative z-20 mx-4 mb-8 max-w-screen-xl flex justify-between rounded bg-$background-base p-6 xl:mx-auto -mt-36 xl:p-9 xl:-mt-32">
-        <div ref="nuxtContent" class="article max-w-none flex-1 text-lg prose">
+        <div class="article max-w-none flex-1 text-lg prose">
           <slot />
         </div>
         <div v-if="showToc" class="hidden w-[340px] pl-10 lg:block">
-          <TableOfContent class="sticky top-[20px] w-full bg-$background-base" :toc-links="tocLinks" :active-toc-id="activeTocId" />
+          <TableOfContent class="sticky top-[20px] w-full bg-$background-base" :toc-links="tocLinks" />
         </div>
       </div>
     </template>
@@ -67,34 +67,5 @@ useSeoMeta({
   title: () => props.title,
   description: () => props.description,
   ogImage: () => computedPreview.value,
-})
-
-// Observer
-const activeTocId = ref<null | string>(null)
-const nuxtContent = ref(null)
-
-const observer: Ref<IntersectionObserver | null | undefined> = ref(null)
-const observerOptions = reactive({
-  root: nuxtContent.value,
-  threshold: 0.5,
-})
-
-onMounted(() => {
-  observer.value = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const id = entry.target.getAttribute('id')
-      if (entry.isIntersecting) {
-        activeTocId.value = id
-      }
-    })
-  }, observerOptions)
-
-  document.querySelectorAll(':is(article,.article) :is(h2)').forEach((section) => {
-    observer.value?.observe(section)
-  })
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
 })
 </script>

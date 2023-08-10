@@ -21,12 +21,22 @@ export const themeConfig: ThemeConfig = {
       baseColor: '#FCFCFC',
       bodyColor: '#F9F9F9',
     },
+    Anchor: {
+      linkTextColorActive: '#be185d',
+      linkTextColorHover: '#be185d',
+      linkTextColorPressed: '#9d174f',
+    },
   }, // Theme options applied on light mode
   dark: {
     common: {
       textColorBase: '#e2e5e8',
       baseColor: '#242F4C',
       bodyColor: '#232E4A',
+    },
+    Anchor: {
+      linkTextColorActive: '#f9a8ca',
+      linkTextColorHover: '#f9a8ca',
+      linkTextColorPressed: '#f9a8ca',
     },
   }, // Theme options applied on dark mode
 }

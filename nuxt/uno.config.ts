@@ -14,8 +14,8 @@ export default defineConfig({
           [--text-muted:#89939F]
           [--background-base:${themeConfig.light?.common?.baseColor}]
           [--background-body:${themeConfig.light?.common?.bodyColor}]
-          [--link:#be185d]
-          [--link-hover:#9d174f]
+          [--link:${themeConfig.light?.Anchor?.linkTextColorActive}]
+          [--link-hover:${themeConfig.light?.Anchor?.linkTextColorPressed}]
           [--un-prose-headings:var(--text-title)]
           [--un-prose-links:var(--link)]
           [--un-prose-lists:var(--text-muted)]
@@ -31,8 +31,8 @@ export default defineConfig({
           [--text-title:#EDF1F5]
           [--background-base:${themeConfig.dark?.common?.baseColor}]
           [--background-body:${themeConfig.dark?.common?.bodyColor}]
-          [--link:#f9a8ca]
-          [--link-hover:#f472a8]
+          [--link:${themeConfig.dark?.Anchor?.linkTextColorActive}]
+          [--link-hover:${themeConfig.dark?.Anchor?.linkTextColorPressed}]
         )
     `],
   ],
