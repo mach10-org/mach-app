@@ -12,6 +12,15 @@ export const themeConfig: ThemeConfig = {
       textColorPrimary: '#fff',
       textColorHoverPrimary: '#fff',
     },
+    Message: {
+      fontSize: '16px',
+    },
+    Card: {
+      titleFontSizeLarge: '20px',
+      titleFontWeight: 700,
+      borderRadius: '8px',
+      // TODO style
+    },
   }, // Common theme options
   // mobileOrTablet: {}, // Theme options applied on mobile and tablet
   // mobile: {}, // Theme options applied on mobile only

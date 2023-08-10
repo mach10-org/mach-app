@@ -5,7 +5,11 @@
         <Brand size="md" />
       </template>
       <template #end>
-        <ButtonLink to="/login/" size="large">
+        <template v-if="user">
+          <!-- TODO dropdown -->
+          {{ user.email }}
+        </template>
+        <ButtonLink v-else to="/login/" size="large">
           {{ $t('header.login') }}
         </ButtonLink>
         <NaiveColorModeSwitch />
@@ -16,6 +20,7 @@
 
 <script setup lang="ts">
 import { NavbarRoute } from '@bg-dev/nuxt-naiveui'
+const user = useSupabaseUser()
 
 const navbarRoutes: NavbarRoute[] = [
   {

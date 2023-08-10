@@ -25,4 +25,6 @@ defineProps({
     required: true,
   },
 })
+
+// TODO fix warnings
 </script>

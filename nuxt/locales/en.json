@@ -4,10 +4,6 @@
       "email_saved": "Your email has been saved!",
       "not_valid_email": "The email address is not valid"
     },
-    "auth": {
-      "title": "Login",
-      "magic_link_sent": "An email should arrive in your inbox shortly !"
-    },
     "quizz": {
       "title": "Quizz",
       "no_profile_text": "This would get you +{arg1}XP",
@@ -211,7 +207,8 @@
       "description": "To log in, or register. Use the form below to get a magic link to your email.",
       "magicLink_btn": "Send magic link",
       "github_btn": "Login with GitHub",
-      "inputEmail": "Email"
+      "inputEmail": "Email",
+      "magic_link_sent": "An email should arrive in your inbox shortly!"
     },
     "contact": {
       "title_start": "Get in touch to",
