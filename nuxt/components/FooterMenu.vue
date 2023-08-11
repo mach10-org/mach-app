@@ -5,7 +5,7 @@
     </h2>
     <ul class="text-$text-muted">
       <li v-for="(_m, index) in menu" :key="index" class="mb-4">
-        <a v-if="$t(`footer.menu_${menuIndex}.${index}.external`) === 'true'" :href="$t(`footer.menu_${menuIndex}.${index}.link`)" target="_blank" class="hover:underline">{{ $t(`footer.menu_${menuIndex}.${index}.label`) }}</a>
+        <a v-if="$t(`footer.menu_${menuIndex}.${index}.external`)" :href="$t(`footer.menu_${menuIndex}.${index}.link`)" target="_blank" class="hover:underline">{{ $t(`footer.menu_${menuIndex}.${index}.label`) }}</a>
         <NuxtLink v-else :to="`/${$t(`footer.menu_${menuIndex}.${index}.link`)}`" class="hover:underline">
           {{ $t(`footer.menu_${menuIndex}.${index}.label`) }}
         </NuxtLink>
