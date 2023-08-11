@@ -16,6 +16,7 @@ export default defineConfig({
           [--background-body:${themeConfig.light?.common?.bodyColor}]
           [--link:${themeConfig.light?.Anchor?.linkTextColorActive}]
           [--link-hover:${themeConfig.light?.Anchor?.linkTextColorPressed}]
+          [--border-input:${themeConfig.light?.Card?.borderColor}]
           [--un-prose-headings:var(--text-title)]
           [--un-prose-links:var(--link)]
           [--un-prose-lists:var(--text-muted)]
@@ -33,6 +34,7 @@ export default defineConfig({
           [--background-body:${themeConfig.dark?.common?.bodyColor}]
           [--link:${themeConfig.dark?.Anchor?.linkTextColorActive}]
           [--link-hover:${themeConfig.dark?.Anchor?.linkTextColorPressed}]
+          [--border-input:${themeConfig.dark?.Card?.borderColor}]
         )
     `],
   ],

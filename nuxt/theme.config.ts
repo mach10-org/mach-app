@@ -35,6 +35,9 @@ export const themeConfig: ThemeConfig = {
       linkTextColorHover: '#be185d',
       linkTextColorPressed: '#9d174f',
     },
+    Card: {
+      borderColor: '#dee5ed',
+    },
   }, // Theme options applied on light mode
   dark: {
     common: {
@@ -45,7 +48,10 @@ export const themeConfig: ThemeConfig = {
     Anchor: {
       linkTextColorActive: '#f9a8ca',
       linkTextColorHover: '#f9a8ca',
-      linkTextColorPressed: '#f9a8ca',
+      linkTextColorPressed: '#f472a8',
+    },
+    Card: {
+      borderColor: '#3a4959',
     },
   }, // Theme options applied on dark mode
 }

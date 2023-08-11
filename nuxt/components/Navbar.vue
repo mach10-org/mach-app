@@ -35,5 +35,9 @@ const navbarRoutes: NavbarRoute[] = [
     label: 'Roadmap',
     path: '/roadmap/',
   },
+  {
+    label: 'Courses',
+    path: '/courses/',
+  },
 ]
 </script>
