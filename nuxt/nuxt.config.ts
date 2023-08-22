@@ -28,6 +28,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@bg-dev/nuxt-naiveui',
     '@nuxt/image',
+    'nuxt-icon',
   ],
 
   app: {

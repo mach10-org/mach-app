@@ -1,3 +1,3 @@
 <template>
-  <div />
+  <IntroPage page="home" />
 </template>
