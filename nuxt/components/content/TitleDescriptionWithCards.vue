@@ -1,7 +1,7 @@
 <template>
-  <TitleDescription :is-centered="true">
+  <TitleDescription :is-centered="true" :class="{'mb-16 sm:px-8 lg:px-32 xl:px-64': hasPadding}">
     <template #title>
-      <slot name="title" />
+      <ContentSlot :use="$slots.title" unwrap="p" />
     </template>
     <template #description>
       <slot name="description" />
@@ -12,3 +12,10 @@
     </div>
   </TitleDescription>
 </template>
+
+<script setup lang="ts">
+interface Props {
+  hasPadding?: boolean
+}
+defineProps<Props>()
+</script>

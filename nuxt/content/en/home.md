@@ -64,3 +64,87 @@ Software engineering for complete beginners
 #description
 Since covid19, many of us realized it's more important than ever to build new skills. In the digital economy, being able to code opens new opportunities and change your life forever.
 ::
+
+::title-description-image{imageSrc="/img/home-no-experience-needed.jpg" imagePosition="right" imageAlt="office feature image" :addSeparator="true"}
+::check-list
+  ::check-list-item
+  #title
+  Learn at your own pace
+  ::
+  ::check-list-item
+  #title
+  Gain practical knowledge companies are looking for
+  ::
+  ::check-list-item
+  #title
+  Broaden your skills
+  ::
+::
+
+::bigger
+Never used a computer before? No problem.
+::
+
+#title
+No experience needed
+
+#description
+Many online courses assume you have already some programming background or even math. We are focused on bringing people from level 0.
+::
+
+::title-description-image{imageSrc="/img/home-invest-in-yourself.jpg" imagePosition="left" imageAlt="office feature image" :addSeparator="true"}
+::check-list
+  ::check-list-item
+  #title
+  Unlock new opportunities
+  ::
+  ::check-list-item
+  #title
+  Ability to choose your own future
+  ::
+  ::check-list-item
+  #title
+  Turn your ideas into a startup
+  ::
+  ::check-list-item
+  #title
+  Get help and support from the community
+  ::
+::
+
+#title
+Invest in yourself
+
+#description
+Creating software is an art and even a way of thinking. Wether you consider changing career in the future or just by curiosity, learning to code will transform your life for the better.
+::
+
+::title-description-with-cards{:hasPadding="true"}
+  ::card-small{:isLargeText="true"}
+  goal of trained software engineers
+
+  #title
+  10K
+  ::
+
+  ::card-small{:isLargeText="true"}
+  opening of our first online program
+
+  #title
+  2023
+  ::
+
+  ::card-small{:isLargeText="true"}
+  tuition fees. no hidden costs.
+
+  #title
+  $0
+  ::
+
+#title
+Together we are stronger
+
+
+#description
+The world and economy are changing, then it's also time to rethink education. We believe it should be free and accessible from anywhere.
+::
