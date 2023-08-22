@@ -44,5 +44,9 @@ const navbarRoutes = computed<NavbarRoute[]>(() => [
     label: i18n.t('menu.whoFor'),
     path: '/who-for/',
   },
+  {
+    label: i18n.t('menu.whyFree'),
+    path: '/why-free/',
+  },
 ])
 </script>
