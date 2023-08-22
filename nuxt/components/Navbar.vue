@@ -21,23 +21,28 @@
 <script setup lang="ts">
 import { NavbarRoute } from '@bg-dev/nuxt-naiveui'
 const user = useSupabaseUser()
+const i18n = useI18n()
 
-const navbarRoutes: NavbarRoute[] = [
+const navbarRoutes = computed<NavbarRoute[]>(() => [
   {
-    label: 'Home',
+    label: i18n.t('menu.home'),
     path: '/',
   },
   {
-    label: 'Mission',
+    label: i18n.t('menu.mission'),
     path: '/mission/',
   },
   {
-    label: 'Roadmap',
+    label: i18n.t('menu.roadmap'),
     path: '/roadmap/',
   },
   {
-    label: 'Courses',
+    label: i18n.t('menu.courses'),
     path: '/courses/',
   },
-]
+  {
+    label: i18n.t('menu.whoFor'),
+    path: '/who-for/',
+  },
+])
 </script>

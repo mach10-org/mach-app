@@ -30,32 +30,14 @@
     }
   },
 
-  "menu": [
-    {
-      "label": "Home",
-      "link": ""
-    },
-    {
-      "label": "Mission",
-      "link": "mission/"
-    },
-    {
-      "label": "Roadmap",
-      "link": "roadmap/"
-    },
-    {
-      "label": "Courses",
-      "link": "courses/"
-    },
-    {
-      "label": "Is it for me?",
-      "link": "who-for/"
-    },
-    {
-      "label": "Free?",
-      "link": "why-free/"
-    }
-  ],
+  "menu": {
+    "home": "Home",
+    "mission": "Mission",
+    "roadmap": "Roadmap",
+    "courses": "Courses",
+    "whoFor": "Is it for me?",
+    "free": "Free?"
+  },
   "header": {
     "login": "Login",
     "journey": "Journey",
