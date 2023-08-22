@@ -30,23 +30,23 @@ const navbarRoutes = computed<NavbarRoute[]>(() => [
   },
   {
     label: i18n.t('menu.mission'),
-    path: '/mission/',
+    path: '/mission',
   },
   {
     label: i18n.t('menu.roadmap'),
-    path: '/roadmap/',
+    path: '/roadmap',
   },
   {
     label: i18n.t('menu.courses'),
-    path: '/courses/',
+    path: '/courses',
   },
   {
     label: i18n.t('menu.whoFor'),
-    path: '/who-for/',
+    path: '/who-for',
   },
   {
     label: i18n.t('menu.whyFree'),
-    path: '/why-free/',
+    path: '/why-free',
   },
 ])
 </script>

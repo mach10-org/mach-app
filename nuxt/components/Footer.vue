@@ -13,14 +13,12 @@
           </Newsletter>
         </div>
         <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
-          <FooterMenu :menu="i18n.tm('footer.menu_1')" menu-index="1" />
-          <FooterMenu :menu="i18n.tm('footer.menu_2')" menu-index="2" />
-          <FooterMenu :menu="i18n.tm('footer.menu_3')" menu-index="3" />
+          <FooterMenu v-for="(m, index) in menus" :key="index" :menu="m.menu" :title="m.title" />
         </div>
       </div>
-      <hr class="border-border-input my-6 lg:my-8 sm:mx-auto">
+      <hr class="my-6 border-$border-input lg:my-8 sm:mx-auto">
       <div class="sm:center content-center justify-center sm:flex sm:items-center">
-        <span class="text-text-muted text-sm sm:text-center">© {{ $config.public.siteName }} {{ $t('footer.tagLine') }}</span>
+        <span class="text-sm text-$text-muted sm:text-center">© {{ $config.public.siteName }} {{ $t('footer.tagLine') }}</span>
       </div>
     </div>
   </footer>
@@ -28,4 +26,59 @@
 
 <script setup lang="ts">
 const i18n = useI18n()
+
+const menus = computed<Array<{
+  title: string
+  menu: Array<{
+    label: string
+    path: string
+  }>
+}>>(() => [{
+  title: i18n.t('footer.resources'),
+  menu: [
+    {
+      label: i18n.t('footer.manifesto'),
+      path: '/manifesto/',
+    },
+    {
+      label: i18n.t('footer.codeOfConduct'),
+      path: '/code-conduct/',
+    },
+    {
+      label: i18n.t('footer.getInTouch'),
+      path: '/contact/',
+    },
+  ],
+},
+{
+  title: i18n.t('footer.followUs'),
+  menu: [
+    {
+      label: i18n.t('footer.instagram'),
+      path: 'https://instagram.com/TODO',
+    },
+    {
+      label: i18n.t('footer.twitter'),
+      path: 'https://twitter.com/TODO',
+    },
+  ],
+},
+{
+  title: i18n.t('footer.legal'),
+  menu: [
+    {
+      label: i18n.t('footer.privacyPolicy'),
+      path: '/privacy-policy/',
+    },
+    {
+      label: i18n.t('footer.termsAndConditions'),
+      path: '/terms-and-conditions/',
+    },
+    {
+      label: i18n.t('footer.licence'),
+      path: '/licence/',
+    },
+  ],
+},
+])
 </script>

@@ -24,7 +24,7 @@
         <CoursesCard
           title="More to come!"
           description="We’ll keep adding content in the future"
-          href="/stay-up-to-date/"
+          :href="localePath('/stay-up-to-date/')"
           preview="coming-soon.jpg"
         />
       </ul>

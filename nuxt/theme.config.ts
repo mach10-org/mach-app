@@ -21,6 +21,9 @@ export const themeConfig: ThemeConfig = {
       borderRadius: '8px',
       // TODO style
     },
+    Menu: {
+      fontSize: '16px',
+    },
   }, // Common theme options
   // mobileOrTablet: {}, // Theme options applied on mobile and tablet
   // mobile: {}, // Theme options applied on mobile only
@@ -52,6 +55,13 @@ export const themeConfig: ThemeConfig = {
     },
     Card: {
       borderColor: '#3a4959',
+    },
+    Menu: {
+      itemTextColorActiveHorizontal: '#f9a8ca',
+      itemTextColorActiveHoverHorizontal: '#f472a8',
+      itemTextColorHoverHorizontal: '#f472a8',
+      itemTextColorActive: '#f9a8ca',
+      itemTextColorActiveHover: '#f472a8',
     },
   }, // Theme options applied on dark mode
 }

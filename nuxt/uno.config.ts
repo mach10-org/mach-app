@@ -48,6 +48,7 @@ export default defineConfig({
         md: '1.5rem',
         lg: '2rem',
         xl: '2rem',
+        '2xl': '2rem',
       },
       maxWidth: {
         sm: '640px',

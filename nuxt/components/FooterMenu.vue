@@ -1,13 +1,13 @@
 <template>
   <div>
     <h2 class="mb-6 text-sm font-semibold uppercase">
-      {{ $t(`footer.menu_title_${menuIndex}`) }}
+      {{ title }}
     </h2>
     <ul class="text-$text-muted">
-      <li v-for="(_m, index) in menu" :key="index" class="mb-4">
-        <a v-if="$t(`footer.menu_${menuIndex}.${index}.external`)" :href="$t(`footer.menu_${menuIndex}.${index}.link`)" target="_blank" class="hover:underline">{{ $t(`footer.menu_${menuIndex}.${index}.label`) }}</a>
-        <NuxtLink v-else :to="`/${$t(`footer.menu_${menuIndex}.${index}.link`)}`" class="hover:underline">
-          {{ $t(`footer.menu_${menuIndex}.${index}.label`) }}
+      <li v-for="(m, index) in menu" :key="index" class="mb-4">
+        <a v-if="m.path.startsWith('http')" :href="m.path" target="_blank" class="hover:underline">{{ m.label }}</a>
+        <NuxtLink v-else :to="localePath(m.path)" class="hover:underline">
+          {{ m.label }}
         </NuxtLink>
       </li>
     </ul>
@@ -17,14 +17,17 @@
 <script setup lang="ts">
 defineProps({
   menu: {
-    type: Array,
+    type: Array as () => Array<{
+    label: string
+    path: string
+  }>,
     required: true,
   },
-  menuIndex: {
+  title: {
     type: String,
     required: true,
   },
 })
 
-// TODO fix warnings
+const localePath = useLocalePath()
 </script>

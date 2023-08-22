@@ -20,8 +20,8 @@
         </div>
       </div>
 
-      <div class="notMobileOrTablet pt-2" :style="{ flexGrow: 1, textAlign: menuPlacement }">
-        <n-menu v-model:value="activePath" :inverted="menuInverted" mode="horizontal" :options="menuOptions" />
+      <div class="notMobileOrTablet" :style="{ flexGrow: 1, textAlign: menuPlacement }">
+        <n-menu v-model:value="activePath" :inverted="menuInverted" mode="horizontal" :options="menuOptions" class="font-medium" />
       </div>
 
       <div :style="menuPlacement === 'center' ? { flex: 1 } : {}">
@@ -83,6 +83,7 @@ import { ref, computed, h, useRoute, useRouter, watchEffect, useNaiveTheme } fro
 const drawerActive = ref(false)
 const route = useRoute()
 const router = useRouter()
+const localePath = useLocalePath()
 const activePath = ref()
 watchEffect(() => {
   activePath.value = '/' + route.path.split('/')[1]
@@ -123,7 +124,7 @@ const menuOptions = computed<MenuOption[]>(() => {
   const cb = (routes: NavbarRoute[]) => routes.map((route) => {
     const menuOption: MenuOption =
       {
-        label: route.path ? () => h(NuxtLink, { to: route.path }, { default: () => route.label }) : route.label,
+        label: route.path ? () => h(NuxtLink, { to: localePath(route.path ?? '') }, { default: () => route.label }) : route.label,
         icon: route.icon ? () => h(NaiveIcon, { name: route.icon }) : undefined,
         key: route.path || route.label,
       }
@@ -138,6 +139,6 @@ const menuOptions = computed<MenuOption[]>(() => {
 
 <style lang="postcss">
 :root {
-  --navbar-height: 56px
+  --navbar-height: 72px
 }
 </style>
