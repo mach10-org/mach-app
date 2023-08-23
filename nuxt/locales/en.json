@@ -41,7 +41,7 @@
   "header": {
     "login": "Login",
     "journey": "Journey",
-    "profile": "profile",
+    "profile": "Profile",
     "signout": "Sign out"
   },
   "footer": {
@@ -151,6 +151,7 @@
       "description": "To log in, or register. Use the form below to get a magic link to your email.",
       "magicLink_btn": "Send magic link",
       "github_btn": "Login with GitHub",
+      "or": "OR",
       "inputEmail": "Email",
       "magic_link_sent": "An email should arrive in your inbox shortly!"
     },
@@ -181,8 +182,7 @@
     "next": "Next",
     "choose": "Choose",
     "save": "Save",
-    "submit": "Submit",
-    "xp": "XP"
+    "submit": "Submit"
   },
 
   "errors": {

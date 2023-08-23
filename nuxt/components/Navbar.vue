@@ -5,10 +5,7 @@
         <Brand size="md" />
       </template>
       <template #end>
-        <template v-if="user">
-          <!-- TODO dropdown -->
-          {{ user.email }}
-        </template>
+        <UserDropdown v-if="user" />
         <ButtonLink v-else to="/login/" size="large">
           {{ $t('header.login') }}
         </ButtonLink>
