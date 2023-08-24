@@ -21,11 +21,11 @@
         <SplideTrack>
           <SplideSlide>
             <SplideSlideWrapper inner-class="max-w-3xl w-96">
-              <n-form-item path="firstname" :label-props="{for: 'firstname'}" :show-feedback="false">
+              <n-form-item path="firstname" :label-props="{for: 'firstname'}" :show-feedback="false" style="--n-label-font-size: 20px">
                 <template #label>
                   {{ $t('pages.onboarding.form_1_label') }} <small class="text-$text-muted">{{ $t('pages.onboarding.form_1_label_1') }}</small>
                 </template>
-                <n-input ref="input" v-model:value="model.firstname" :input-props="{id: 'firstname'}" placeholder="" />
+                <n-input ref="firstnameInput" v-model:value="model.firstname" :input-props="{id: 'firstname'}" placeholder="" />
               </n-form-item>
               <n-form-item :show-label="false" :show-feedback="false" class="mt-6 flex justify-center">
                 <n-button type="primary" :disabled="!model.firstname.trim()" icon-placement="right" @click="goNext">
@@ -52,21 +52,103 @@
           </SplideSlide>
 
           <SplideSlide>
-            <SplideSlideWrapper inner-class="max-w-2xl" content-class="flex flex-col">
-              <n-form-item :label="$t('pages.onboarding.form_3_label')" path="firstname" :label-props="{for: 'goals'}" :show-feedback="false" class="mx-auto">
-                <n-checkbox-group>
-                  <n-grid :y-gap="10" :cols="2">
+            <SplideSlideWrapper inner-class="max-w-lg" content-class="flex flex-col">
+              <n-form-item :label="$t('pages.onboarding.form_3_label')" path="goals" :show-feedback="false" class="mx-auto" style="--n-label-padding:0 0 20px 2px; --n-label-font-size: 22px">
+                <n-checkbox-group v-model:value="model.goals">
+                  <n-grid :y-gap="10" :x-gap="14" :cols="2">
                     <n-gi v-for="(value, index) in goalsList" :key="index">
                       <n-checkbox :value="$rt(value)" :label="$rt(value)" />
                     </n-gi>
                   </n-grid>
                 </n-checkbox-group>
               </n-form-item>
-              <p class="mt-6 text-center text-lg font-medium text-$text-muted">
+              <p class="text-center text-lg font-medium text-$text-muted">
                 {{ $t('pages.onboarding.form_3_help') }}
               </p>
-              <n-form-item :show-label="false" :show-feedback="false" class="mt-6 flex justify-center">
+              <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
                 <n-button type="primary" icon-placement="right" @click="goNext">
+                  {{ $t('pages.onboarding.next') }}
+                  <template #icon>
+                    <Icon name="heroicons:arrow-right-solid" />
+                  </template>
+                </n-button>
+              </n-form-item>
+            </SplideSlideWrapper>
+          </SplideSlide>
+
+          <SplideSlide>
+            <SplideSlideWrapper inner-class="max-w-lg" content-class="flex flex-col">
+              <n-form-item :label="$t('pages.onboarding.form_4_label')" path="computerXp" :show-feedback="false" class="mx-auto" style="--n-label-padding:0 0 20px 2px; --n-label-font-size: 22px">
+                <n-radio-group v-model:value="model.computerXp">
+                  <n-grid :y-gap="10" :cols="1">
+                    <n-gi v-for="(value, index) in computerXpList" :key="index">
+                      <n-radio :value="$rt(value)" :label="$rt(value)" />
+                    </n-gi>
+                  </n-grid>
+                </n-radio-group>
+              </n-form-item>
+              <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
+                <n-button type="primary" icon-placement="right" @click="goNext">
+                  {{ $t('pages.onboarding.next') }}
+                  <template #icon>
+                    <Icon name="heroicons:arrow-right-solid" />
+                  </template>
+                </n-button>
+              </n-form-item>
+            </SplideSlideWrapper>
+          </SplideSlide>
+
+          <SplideSlide>
+            <SplideSlideWrapper inner-class="max-w-lg" content-class="flex flex-col">
+              <n-form-item :label="$t('pages.onboarding.form_5_label')" path="devices" :show-feedback="false" class="mx-auto" style="--n-label-padding:0 0 20px 2px; --n-label-font-size: 22px">
+                <n-checkbox-group v-model:value="model.devices">
+                  <n-grid :y-gap="10" :x-gap="14" :cols="2">
+                    <n-gi v-for="(value, index) in devicesList" :key="index">
+                      <n-checkbox :value="$rt(value)" :label="$rt(value)" />
+                    </n-gi>
+                  </n-grid>
+                </n-checkbox-group>
+              </n-form-item>
+              <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
+                <n-button type="primary" icon-placement="right" @click="goNext">
+                  {{ $t('pages.onboarding.next') }}
+                  <template #icon>
+                    <Icon name="heroicons:arrow-right-solid" />
+                  </template>
+                </n-button>
+              </n-form-item>
+            </SplideSlideWrapper>
+          </SplideSlide>
+
+          <SplideSlide>
+            <SplideSlideWrapper inner-class="max-w-lg" content-class="flex flex-col">
+              <n-form-item :label="$t('pages.onboarding.form_6_label')" path="age" :show-feedback="false" class="mx-auto" style="--n-label-padding:0 0 20px 2px; --n-label-font-size: 22px">
+                <n-radio-group v-model:value="model.age">
+                  <n-grid :y-gap="10" :cols="1">
+                    <n-gi v-for="(value, index) in agesList" :key="index">
+                      <n-radio :value="$rt(value)" :label="$rt(value)" />
+                    </n-gi>
+                  </n-grid>
+                </n-radio-group>
+              </n-form-item>
+              <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
+                <n-button type="primary" icon-placement="right" @click="goNext">
+                  {{ $t('pages.onboarding.next') }}
+                  <template #icon>
+                    <Icon name="heroicons:arrow-right-solid" />
+                  </template>
+                </n-button>
+              </n-form-item>
+            </SplideSlideWrapper>
+          </SplideSlide>
+
+          <SplideSlide>
+            <SplideSlideWrapper inner-class="max-w-3xl">
+              <h2 class="mb-10 from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl">
+                {{ $t('pages.onboarding.form_7') }}
+              </h2>
+              <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
+                <n-button type="primary" icon-placement="right" :loading="isLoading" @click="submit">
                   {{ $t('pages.onboarding.next') }}
                   <template #icon>
                     <Icon name="heroicons:arrow-right-solid" />
@@ -116,16 +198,24 @@ const options: Options = {
 
 const splide = ref<InstanceType<typeof Splide>>()
 const progressBar = ref<HTMLDivElement | null>(null)
+const firstnameInput = ref<InputInst | null>(null)
+const isLoading = ref(false)
 
 const model = ref({
   firstname: '',
   goals: [],
+  computerXp: '',
+  devices: [],
+  age: '',
 })
 const { formRef, rules, pending, apiErrors, edited, reset, onSubmit } = useNaiveForm(model)
 
 const showSkip = ref(false)
 const showBack = ref(false)
 const goalsList = computed(() => i18n.tm('pages.onboarding.form_3_list') as VueMessageType[])
+const computerXpList = computed(() => i18n.tm('pages.onboarding.form_4_list') as VueMessageType[])
+const devicesList = computed(() => i18n.tm('pages.onboarding.form_5_list') as VueMessageType[])
+const agesList = computed(() => i18n.tm('pages.onboarding.form_6_list') as VueMessageType[])
 
 const setBarProgress = () => {
   if (splide.value && splide.value.splide) {
@@ -140,6 +230,8 @@ const setBarProgress = () => {
 }
 
 const goNext = () => {
+  console.log(model.value)
+
   const index = splide?.value?.splide?.index
   if (index === 0) {
     if (model.value.firstname.trim()) {
@@ -151,6 +243,8 @@ const goNext = () => {
     submit()
   }
 }
+
+watch(() => [model.value.computerXp, model.value.age], goNext)
 
 const goPrev = () => {
   splide.value?.splide?.go('-1')
@@ -167,8 +261,8 @@ const onSplideMove = async (splide: Core, index: number) => {
   }
 }
 
-const submit = async (e: Event | null = null) => {
-  e?.preventDefault()
+const submit = async () => {
+  isLoading.value = true
   // const data = profileData.get();
   // const id = user?.value?.id as string;
   // loading.value = true;
@@ -178,7 +272,10 @@ const submit = async (e: Event | null = null) => {
   // } catch (error) {}
 }
 
-onMounted(async () => {
+onMounted(() => {
   setBarProgress()
+  if (firstnameInput.value) {
+    firstnameInput.value.focus()
+  }
 })
 </script>
