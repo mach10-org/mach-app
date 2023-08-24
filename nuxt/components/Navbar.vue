@@ -5,10 +5,12 @@
         <Brand size="md" />
       </template>
       <template #end>
-        <UserDropdown v-if="user" />
-        <ButtonLink v-else to="/login/" size="large">
-          {{ $t('header.login') }}
-        </ButtonLink>
+        <ClientOnly>
+          <UserDropdown v-if="user" />
+          <ButtonLink v-else to="/login/" size="large">
+            {{ $t('header.login') }}
+          </ButtonLink>
+        </ClientOnly>
         <NaiveColorModeSwitch />
       </template>
     </NaiveNavbar>

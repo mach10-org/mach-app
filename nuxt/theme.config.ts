@@ -1,5 +1,18 @@
 import { ThemeConfig } from '@bg-dev/nuxt-naiveui'
 
+const link = '#be185d'
+const linkHover = '#9d174f'
+const linkDark = '#f9a8ca'
+const linkHoverDark = '#f472a8'
+
+const baseColor = '#FCFCFC'
+const bodyColor = '#F9F9F9'
+const baseColorDark = '#242F4C'
+const bodyColorDark = '#232E4A'
+
+const border = '#dee5ed'
+const borderDark = '#3a4959'
+
 export const themeConfig: ThemeConfig = {
   shared: {
     common: {
@@ -14,6 +27,8 @@ export const themeConfig: ThemeConfig = {
     },
     Message: {
       fontSize: '16px',
+      padding: '18px 21px',
+      iconSize: '24px',
     },
     Card: {
       titleFontSizeLarge: '20px',
@@ -30,38 +45,48 @@ export const themeConfig: ThemeConfig = {
   light: {
     common: {
       textColorBase: '#232E4A',
-      baseColor: '#FCFCFC',
-      bodyColor: '#F9F9F9',
+      baseColor,
+      bodyColor,
     },
     Anchor: {
-      linkTextColorActive: '#be185d',
-      linkTextColorHover: '#be185d',
-      linkTextColorPressed: '#9d174f',
+      linkTextColorActive: link,
+      linkTextColorHover: link,
+      linkTextColorPressed: linkHover,
     },
     Card: {
-      borderColor: '#dee5ed',
+      color: baseColor,
+      borderColor: border,
+    },
+    Dropdown: {
+      color: baseColor,
+      dividerColor: border,
     },
   }, // Theme options applied on light mode
   dark: {
     common: {
       textColorBase: '#e2e5e8',
-      baseColor: '#242F4C',
-      bodyColor: '#232E4A',
+      baseColor: baseColorDark,
+      bodyColor: bodyColorDark,
     },
     Anchor: {
-      linkTextColorActive: '#f9a8ca',
-      linkTextColorHover: '#f9a8ca',
-      linkTextColorPressed: '#f472a8',
+      linkTextColorActive: linkDark,
+      linkTextColorHover: linkDark,
+      linkTextColorPressed: linkHoverDark,
     },
     Card: {
-      borderColor: '#3a4959',
+      color: baseColorDark,
+      borderColor: borderDark,
     },
     Menu: {
-      itemTextColorActiveHorizontal: '#f9a8ca',
-      itemTextColorActiveHoverHorizontal: '#f472a8',
-      itemTextColorHoverHorizontal: '#f472a8',
-      itemTextColorActive: '#f9a8ca',
-      itemTextColorActiveHover: '#f472a8',
+      itemTextColorActiveHorizontal: linkDark,
+      itemTextColorActiveHoverHorizontal: linkHoverDark,
+      itemTextColorHoverHorizontal: linkHoverDark,
+      itemTextColorActive: linkDark,
+      itemTextColorActiveHover: linkHoverDark,
+    },
+    Dropdown: {
+      color: baseColorDark,
+      dividerColor: borderDark,
     },
   }, // Theme options applied on dark mode
 }

@@ -1,11 +1,16 @@
 <template>
-  <n-dropdown trigger="hover" placement="bottom-end" :options="options" :render-label="renderDropdownLabel">
+  <n-dropdown
+    :trigger="hasTouch ? 'click' : 'hover'"
+    placement="bottom-end"
+    :options="options"
+    :render-label="renderDropdownLabel"
+  >
     <button
       id="user-menu-button"
       type="button"
       class="inline-flex items-center rounded-full p-0 text-center"
+      :title="$t('header.openUserMenu')"
     >
-      <span class="sr-only">Open user menu</span>
       <img src="/img/avatar.png" class="block h-8 h-8 rounded-full">
     </button>
   </n-dropdown>
@@ -16,11 +21,13 @@ import { h } from 'vue'
 import type { VNodeChild } from 'vue'
 import type { DropdownOption } from 'naive-ui'
 import { NuxtLink, UserDropdownHeader } from '#components'
-import { Database } from 'types/database.types';
+import { Database } from 'types/database.types'
 
 const supabase = useSupabaseClient<Database>()
 const localePath = useLocalePath()
 const i18n = useI18n()
+
+const hasTouch = useSupported(() => ('ontouchstart' in window) || (navigator.maxTouchPoints > 0))
 
 const options = computed(() => [{
   key: 'header',

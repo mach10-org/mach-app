@@ -1,6 +1,6 @@
 <template>
   <NaiveConfig :theme-config="themeConfig">
-    <n-message-provider>
+    <n-message-provider placement="bottom">
       <SeoKit />
       <NuxtLayout class="root rootdark">
         <Navbar />
