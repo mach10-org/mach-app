@@ -39,6 +39,10 @@ export const themeConfig: ThemeConfig = {
     Menu: {
       fontSize: '16px',
     },
+    Form: {
+      labelFontSizeTopLarge: '16px',
+      labelFontWeight: 500,
+    },
   }, // Common theme options
   // mobileOrTablet: {}, // Theme options applied on mobile and tablet
   // mobile: {}, // Theme options applied on mobile only

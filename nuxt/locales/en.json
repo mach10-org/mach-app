@@ -71,10 +71,11 @@
   "pages": {
     "onboarding": {
       "title": "Welcome to Mach10",
+      "next": "Next",
       "form_1_label": "Your firstname",
       "form_1_label_1": "(how should we call you?)",
       "form_1_placeholder": "Firstname",
-      "form_2": "Nice to meet you, {arg1} !",
+      "form_2": "Nice to meet you, {firstname} !",
       "form_3_label": "What is your main goal with this website?",
       "form_3_list": [
         "Get my first job",

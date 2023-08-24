@@ -8,8 +8,8 @@
     </div>
 
     <Splide ref="splide" :has-track="false" :options="options" :aria-label="$t('pages.onboarding.title')" @splide:move="onSplideMove">
-      <div class="my-carousel-progress">
-        <div class="my-carousel-progress-bar from-purple-400 to-pink-600 bg-gradient-to-r" />
+      <div class="h-2 bg-gray-300">
+        <div ref="progressBar" class="h-full from-purple-400 to-pink-600 bg-gradient-to-r" />
       </div>
 
       <n-form
@@ -27,9 +27,50 @@
                 </template>
                 <n-input ref="input" v-model:value="model.firstname" :input-props="{id: 'firstname'}" placeholder="" />
               </n-form-item>
-              <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center mt-6">
-                <n-button type="primary" :disabled="!model.firstname.trim()" @click="goNext">
-                  Next
+              <n-form-item :show-label="false" :show-feedback="false" class="mt-6 flex justify-center">
+                <n-button type="primary" :disabled="!model.firstname.trim()" icon-placement="right" @click="goNext">
+                  {{ $t('pages.onboarding.next') }}
+                  <template #icon>
+                    <Icon name="heroicons:arrow-right-solid" />
+                  </template>
+                </n-button>
+              </n-form-item>
+            </SplideSlideWrapper>
+          </SplideSlide>
+
+          <SplideSlide>
+            <SplideSlideWrapper inner-class="max-w-3xl" content-class="text-center">
+              <div>
+                <h2 class="mb-2 from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl">
+                  {{ $t('pages.onboarding.form_2', {firstname: model.firstname}) }}!
+                </h2>
+                <p class="text-8xl text-pink-600">
+                  ☺
+                </p>
+              </div>
+            </SplideSlideWrapper>
+          </SplideSlide>
+
+          <SplideSlide>
+            <SplideSlideWrapper inner-class="max-w-2xl" content-class="flex flex-col">
+              <n-form-item :label="$t('pages.onboarding.form_3_label')" path="firstname" :label-props="{for: 'goals'}" :show-feedback="false" class="mx-auto">
+                <n-checkbox-group>
+                  <n-grid :y-gap="10" :cols="2">
+                    <n-gi v-for="(value, index) in goalsList" :key="index">
+                      <n-checkbox :value="$rt(value)" :label="$rt(value)" />
+                    </n-gi>
+                  </n-grid>
+                </n-checkbox-group>
+              </n-form-item>
+              <p class="mt-6 text-center text-lg font-medium text-$text-muted">
+                {{ $t('pages.onboarding.form_3_help') }}
+              </p>
+              <n-form-item :show-label="false" :show-feedback="false" class="mt-6 flex justify-center">
+                <n-button type="primary" icon-placement="right" @click="goNext">
+                  {{ $t('pages.onboarding.next') }}
+                  <template #icon>
+                    <Icon name="heroicons:arrow-right-solid" />
+                  </template>
                 </n-button>
               </n-form-item>
             </SplideSlideWrapper>
@@ -52,6 +93,7 @@ import {
 } from 'naive-ui'
 import '@splidejs/vue-splide/css'
 import '@splidejs/vue-splide/css/skyblue'
+import { VueMessageType } from '@nuxtjs/i18n/dist/runtime/composables'
 import { useProfileStore } from '~/stores/profile'
 
 definePageMeta({
@@ -60,6 +102,7 @@ definePageMeta({
 
 const config = useRuntimeConfig()
 const profile = useProfileStore()
+const i18n = useI18n()
 
 const options: Options = {
   drag: false,
@@ -72,21 +115,27 @@ const options: Options = {
 }
 
 const splide = ref<InstanceType<typeof Splide>>()
+const progressBar = ref<HTMLDivElement | null>(null)
 
 const model = ref({
   firstname: '',
+  goals: [],
 })
 const { formRef, rules, pending, apiErrors, edited, reset, onSubmit } = useNaiveForm(model)
 
 const showSkip = ref(false)
 const showBack = ref(false)
+const goalsList = computed(() => i18n.tm('pages.onboarding.form_3_list') as VueMessageType[])
 
-const setBarProgress = (splide: Core) => {
-  const bar = splide.root.querySelector('.my-carousel-progress-bar') as HTMLElement
-  if (bar) {
-    const end = splide.Components.Controller.getEnd() + 1
-    const rate = Math.min((splide.index + 1) / end, 1)
-    bar.style.width = `${100 * rate}%`
+const setBarProgress = () => {
+  if (splide.value && splide.value.splide) {
+    const sp = splide.value.splide
+
+    if (progressBar.value) {
+      const end = sp.Components.Controller.getEnd() + 1
+      const rate = Math.min((sp.index + 1) / end, 1)
+      progressBar.value.style.width = `${100 * rate}%`
+    }
   }
 }
 
@@ -104,14 +153,14 @@ const goNext = () => {
 }
 
 const goPrev = () => {
-  splide?.value?.splide?.go('-1')
+  splide.value?.splide?.go('-1')
 }
 
 const onSplideMove = async (splide: Core, index: number) => {
   showSkip.value = index > 1
   showBack.value = index > 2
 
-  setBarProgress(splide)
+  setBarProgress()
   if (index === 1) {
     await promiseTimeout(3500)
     splide.go('+1')
@@ -128,4 +177,8 @@ const submit = async (e: Event | null = null) => {
   //   window.location.assign(`/courses/`);
   // } catch (error) {}
 }
+
+onMounted(async () => {
+  setBarProgress()
+})
 </script>
