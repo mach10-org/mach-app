@@ -204,10 +204,7 @@ import { Splide, SplideSlide, SplideTrack, Options } from '@splidejs/vue-splide'
 import { Splide as Core } from '@splidejs/splide'
 import { promiseTimeout } from '@vueuse/core'
 import {
-  FormInst,
-  FormItemRule,
   InputInst,
-  useMessage,
 } from 'naive-ui'
 import '@splidejs/vue-splide/css'
 import '@splidejs/vue-splide/css/skyblue'
@@ -221,6 +218,7 @@ definePageMeta({
 const config = useRuntimeConfig()
 const profile = useProfileStore()
 const i18n = useI18n()
+const localePath = useLocalePath()
 
 const options: Options = {
   drag: false,
@@ -245,7 +243,7 @@ const model = ref({
   devices: [],
   age: '',
 })
-const { formRef, rules, pending, apiErrors, edited, reset, onSubmit } = useNaiveForm(model)
+const { formRef } = useNaiveForm(model)
 
 const showSkip = ref(false)
 const showBack = ref(false)
@@ -267,8 +265,6 @@ const setBarProgress = () => {
 }
 
 const goNext = () => {
-  console.log(model.value)
-
   const index = splide?.value?.splide?.index
   if (index === 0) {
     if (model.value.firstname.trim()) {
@@ -300,16 +296,21 @@ const onSplideMove = async (splide: Core, index: number) => {
 
 const submit = async () => {
   isLoading.value = true
-  // const data = profileData.get();
-  // const id = user?.value?.id as string;
-  // loading.value = true;
-  // try {
-  //   const { error } = await upsertProfile({ ...data, id });
-  //   window.location.assign(`/courses/`);
-  // } catch (error) {}
+  if (await profile.saveOnboarding(model.value.firstname, model.value.goals, model.value.computerXp, model.value.devices, model.value.age)) {
+    navigateTo(localePath('/courses'))
+  }
+  isLoading.value = false
 }
 
-onMounted(() => {
+const isLoadingProfile = computed(() => profile.isLoading)
+
+onMounted(async () => {
+  await until(isLoadingProfile).toBe(false)
+  if (profile.isOnBoarded) {
+    navigateTo(localePath('/courses'))
+    return
+  }
+
   setBarProgress()
   if (firstnameInput.value) {
     firstnameInput.value.focus()

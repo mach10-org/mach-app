@@ -56,6 +56,37 @@ export const useProfileStore = defineStore('profile', {
 
       this.isLoading = false
     },
+    async saveOnboarding (firstname: string,
+      goals: string[],
+      computerXp: string,
+      devices: string[],
+      age: string) {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+
+      try {
+        const { data: profile, error } = await supabase.from('profiles').upsert({
+          id: user.value.id,
+          full_name: firstname,
+          goal: goals,
+          computer_xp: computerXp,
+          devices,
+          age,
+        }).select().single()
+
+        this.age = profile?.age ?? null
+        this.computer_xp = profile?.computer_xp ?? null
+        this.devices = profile?.devices ?? null
+        this.full_name = profile?.full_name ?? null
+        this.goal = profile?.goal ?? []
+
+        return true
+      } catch (error) {
+        // TODO handle error
+      }
+
+      return false
+    },
     reset () {
       this.about = null
       this.age = null
