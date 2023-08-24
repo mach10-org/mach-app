@@ -3,9 +3,7 @@
     <n-message-provider placement="bottom">
       <SeoKit />
       <NuxtLayout class="root rootdark">
-        <Navbar />
         <NuxtPage />
-        <Footer />
       </NuxtLayout>
     </n-message-provider>
   </NaiveConfig>

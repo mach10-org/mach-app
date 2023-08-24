@@ -71,7 +71,6 @@
   "pages": {
     "onboarding": {
       "title": "Welcome to Mach10",
-      "description": "Welcome to Mach10",
       "form_1_label": "Your firstname",
       "form_1_label_1": "(how should we call you?)",
       "form_1_placeholder": "Firstname",

@@ -3,10 +3,12 @@ import { Database } from 'types/database.types'
 
 type rows = Database['public']['Tables']['profiles']['Row']
 interface State extends Omit<rows, 'id' | 'updated_at'> {
+  isLoading: boolean
 }
 
 export const useProfileStore = defineStore('profile', {
   state: (): State => ({
+    isLoading: false,
     about: null,
     age: null,
     avatar_url: null,
@@ -21,10 +23,16 @@ export const useProfileStore = defineStore('profile', {
     xp: 0,
   }),
   getters: {
+    isOnBoarded (state) {
+      return state.full_name !== null
+    },
   },
   actions: {
     async fetch () {
       const supabase = useSupabaseClient<Database>()
+
+      this.isLoading = true
+
       try {
         const { data: profile, error } = await supabase
           .from('profiles')
@@ -45,6 +53,8 @@ export const useProfileStore = defineStore('profile', {
       } catch (error) {
         // TODO handle error
       }
+
+      this.isLoading = false
     },
     reset () {
       this.about = null
