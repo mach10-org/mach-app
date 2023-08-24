@@ -110,10 +110,11 @@
         "It’s a secret!"
       ],
       "form_7": "Perfect! We’re here to help you every step of your journey. Let’s get started!",
-      "why_title": "Why we ask",
       "why_text_1": "We would like to ask you a few question in order to know our audience better and create the most relevant experience for you. Knowing who is using our content makes us better at crafting the best possible content.",
       "why_text_2": "These answers are optional and you are completely free not to answer anything, we get it",
-      "why_btn": "Why we ask"
+      "why_btn": "Why we ask",
+      "back": "Back",
+      "skip": "Skip"
     },
     "profile": {
       "intro": "We’d love to learn more about you. Could you share with us what is your main goal applying here? Even if it’s just curiosity, we’re interested to hear ☺.",

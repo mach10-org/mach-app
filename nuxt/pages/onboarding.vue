@@ -1,21 +1,28 @@
 <template>
-  <div class="h-[100vh]">
-    <div class="absolute w-full">
-      <div class="flex items-center justify-center p-8">
+  <div class="h-[100vh] flex flex-col">
+    <div class="h-2 bg-gray-300">
+      <div ref="progressBar" class="h-full from-purple-400 to-pink-600 bg-gradient-to-r" />
+    </div>
+    <div class="">
+      <div class="flex items-center justify-center pb-2 pt-8">
         <span class="mr-3 text-2xl sm:text-3xl">👩🏻‍🚀</span>
         <span class="text-text-base self-center whitespace-nowrap text-xl font-semibold"> {{ config.public.siteName }} </span>
       </div>
     </div>
 
-    <Splide ref="splide" :has-track="false" :options="options" :aria-label="$t('pages.onboarding.title')" @splide:move="onSplideMove">
-      <div class="h-2 bg-gray-300">
-        <div ref="progressBar" class="h-full from-purple-400 to-pink-600 bg-gradient-to-r" />
-      </div>
-
+    <Splide
+      ref="splide"
+      :has-track="false"
+      :options="options"
+      :aria-label="$t('pages.onboarding.title')"
+      class="flex-1"
+      @splide:move="onSplideMove"
+    >
       <n-form
         ref="formRef"
         :model="model"
         size="large"
+        class="h-full"
         @submit.prevent="goNext"
       >
         <SplideTrack>
@@ -160,6 +167,35 @@
         </SplideTrack>
       </n-form>
     </Splide>
+
+    <div class="flex justify-between px-2 pb-8 pt-6 text-base md:px-10">
+      <div class="w-24">
+        <button v-if="showBack" class="link flex items-center space-x-1" type="button" @click="goPrev">
+          <Icon name="heroicons:arrow-left-solid" />
+          <span>{{ $t('pages.onboarding.back') }}</span>
+        </button>
+      </div>
+      <n-popover class="max-w-sm" trigger="click">
+        <template #trigger>
+          <button class="link" type="button">
+            {{ $t('pages.onboarding.why_btn') }}
+          </button>
+        </template>
+        <div class="prose">
+          <p>
+            {{ $t('pages.onboarding.why_text_1') }}
+          </p>
+          <p>
+            {{ $t('pages.onboarding.why_text_2') }}
+          </p>
+        </div>
+      </n-popover>
+      <div class="w-24 flex justify-end">
+        <button v-if="showSkip" class="link flex items-center space-x-1" type="button" @click="submit">
+          {{ $t('pages.onboarding.skip') }}
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -192,8 +228,9 @@ const options: Options = {
   rewind: false,
   arrows: false,
   autoplay: false,
-  height: 'calc(100vh - 100px)',
+  height: '100%',
   speed: 650,
+
 }
 
 const splide = ref<InstanceType<typeof Splide>>()
@@ -279,3 +316,9 @@ onMounted(() => {
   }
 })
 </script>
+
+<style lang="postcss" scoped>
+.splide__track {
+  @apply h-full;
+}
+</style>
