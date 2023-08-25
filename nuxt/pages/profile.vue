@@ -157,4 +157,8 @@ onMounted(async () => {
   model.value.goals = profile.goal ?? []
   model.value.about = profile.about ?? ''
 })
+
+definePageMeta({
+  middleware: 'auth',
+})
 </script>

@@ -316,6 +316,10 @@ onMounted(async () => {
     firstnameInput.value.focus()
   }
 })
+
+definePageMeta({
+  middleware: 'auth',
+})
 </script>
 
 <style lang="postcss" scoped>
