@@ -8,7 +8,7 @@ interface State extends Omit<rows, 'id' | 'updated_at'> {
 
 export const useProfileStore = defineStore('profile', {
   state: (): State => ({
-    isLoading: false,
+    isLoading: true,
     about: null,
     age: null,
     avatar_url: null,
@@ -25,6 +25,9 @@ export const useProfileStore = defineStore('profile', {
   getters: {
     isOnBoarded (state) {
       return state.full_name !== null
+    },
+    getXp (state) {
+      return `Mach ${state.xp || 0}`
     },
   },
   actions: {
@@ -79,6 +82,46 @@ export const useProfileStore = defineStore('profile', {
         this.devices = profile?.devices ?? null
         this.full_name = profile?.full_name ?? null
         this.goal = profile?.goal ?? []
+
+        return true
+      } catch (error) {
+        // TODO handle error
+      }
+
+      return false
+    },
+    async saveProfile (firstname: string,
+      goals: string[],
+      computerXp: string,
+      devices: string[],
+      age: string,
+      gender: string,
+      education: string,
+      about: string) {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+
+      try {
+        const { data: profile, error } = await supabase.from('profiles').upsert({
+          id: user.value.id,
+          full_name: firstname,
+          goal: goals,
+          computer_xp: computerXp,
+          devices,
+          age,
+          gender,
+          education,
+          about,
+        }).select().single()
+
+        this.age = profile?.age ?? null
+        this.computer_xp = profile?.computer_xp ?? null
+        this.devices = profile?.devices ?? null
+        this.full_name = profile?.full_name ?? null
+        this.goal = profile?.goal ?? []
+        this.gender = profile?.gender ?? null
+        this.education = profile?.education ?? null
+        this.about = profile?.about ?? null
 
         return true
       } catch (error) {

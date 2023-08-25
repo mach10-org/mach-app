@@ -8,9 +8,9 @@
 import { useProfileStore } from '~/stores/profile'
 
 const user = useSupabaseUser()
+const localePath = useLocalePath()
 
 const profile = useProfileStore()
-profile.isLoading = true
 
 const isLoading = computed(() => profile.isLoading)
 
@@ -20,9 +20,9 @@ watch(user, async () => {
 
     if (profile.isOnBoarded) {
       // TODO show message welcome back
-      return navigateTo('/')
+      return navigateTo(localePath('/'))
     } else {
-      return navigateTo('/onboarding')
+      return navigateTo(localePath('/onboarding'))
     }
   }
 }, { immediate: true })

@@ -129,7 +129,8 @@
       "gender_label": "Gender",
       "gender_list": ["Male", "Female", "Other"],
       "comment_label": "Could you tell us more about you and your objectives?",
-      "comment_placeholder": "Write your thoughts here..."
+      "comment_placeholder": "Write your thoughts here...",
+      "successfullySaved": "Profile successfully saved"
     },
     "journey": {
       "title": "Your learning",
