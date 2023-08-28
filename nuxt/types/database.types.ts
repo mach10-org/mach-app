@@ -128,28 +128,25 @@ export interface Database {
       }
       last_url: {
         Row: {
-          course: string
           created_at: string | null
           id: string
-          main: boolean | null
+          main: boolean
           title: string
           updated_at: string | null
           url: string
         }
         Insert: {
-          course: string
           created_at?: string | null
           id: string
-          main?: boolean | null
+          main?: boolean
           title: string
           updated_at?: string | null
           url: string
         }
         Update: {
-          course?: string
           created_at?: string | null
           id?: string
-          main?: boolean | null
+          main?: boolean
           title?: string
           updated_at?: string | null
           url?: string

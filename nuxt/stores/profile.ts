@@ -4,6 +4,11 @@ import { Database } from 'types/database.types'
 type rows = Database['public']['Tables']['profiles']['Row']
 interface State extends Omit<rows, 'id' | 'updated_at'> {
   isLoading: boolean
+  lastCoursePage: {
+    url: string
+    title: string
+    main: boolean | null
+  } | null
 }
 
 export const useProfileStore = defineStore('profile', {
@@ -21,6 +26,7 @@ export const useProfileStore = defineStore('profile', {
     goal: [],
     username: null,
     xp: 0,
+    lastCoursePage: null,
   }),
   getters: {
     isOnBoarded (state) {
@@ -53,6 +59,10 @@ export const useProfileStore = defineStore('profile', {
         this.goal = profile?.goal ?? []
         this.username = profile?.username ?? null
         this.xp = profile?.xp ?? 0
+
+        const { data: lastCoursePage, error: errorCoursePage } = await supabase.from('last_url').select('url, title, main').maybeSingle()
+
+        this.lastCoursePage = lastCoursePage
       } catch (error) {
         // TODO handle error
       }
@@ -130,6 +140,27 @@ export const useProfileStore = defineStore('profile', {
 
       return false
     },
+    async saveLastCoursePage (url: string, title: string, main = false) {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+
+      try {
+        const { data, error } = await supabase.from('last_url').upsert({
+          id: user.value.id,
+          url,
+          title,
+          main,
+        }).select('url, title, main').single()
+
+        this.lastCoursePage = data ?? null
+
+        return true
+      } catch (error) {
+        // TODO handle error
+      }
+
+      return false
+    },
     reset () {
       this.about = null
       this.age = null
@@ -143,6 +174,7 @@ export const useProfileStore = defineStore('profile', {
       this.goal = []
       this.username = null
       this.xp = 0
+      this.lastCoursePage = null
     },
   },
 })

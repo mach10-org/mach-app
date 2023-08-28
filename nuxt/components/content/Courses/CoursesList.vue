@@ -33,10 +33,10 @@
 </template>
 
 <script setup lang="ts">
+import { indexFile } from '~/utils/course'
+
 const { locale } = useI18n()
 const localePath = useLocalePath()
-
-const indexFile = '00-index'
 
 const { data } = await useAsyncData('courses-list', () =>
   queryContent(
