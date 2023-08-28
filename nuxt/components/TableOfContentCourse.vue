@@ -47,7 +47,7 @@ const localePath = useLocalePath()
 const { data } = await useAsyncData(`course-${props.course}-pages`, () =>
   queryContent(
     locale.value, 'courses', props.course,
-  ).where({ _path: { $not: { $contains: indexFile } } }).only(['_path', 'title', '_dir']).sort({ order: 1 }).find(),
+  ).where({ _path: { $not: { $contains: indexFile } } }).only(['_path', 'title', '_dir']).find(),
 )
 
 const toc = computed(() => {
