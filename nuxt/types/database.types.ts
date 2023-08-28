@@ -160,70 +160,30 @@ export interface Database {
           }
         ]
       }
-      learning: {
-        Row: {
-          completed: boolean
-          created_at: string
-          id: string
-          quantity: number
-          slug: string
-          title: string
-          user: string
-        }
-        Insert: {
-          completed?: boolean
-          created_at?: string
-          id?: string
-          quantity: number
-          slug: string
-          title?: string
-          user: string
-        }
-        Update: {
-          completed?: boolean
-          created_at?: string
-          id?: string
-          quantity?: number
-          slug?: string
-          title?: string
-          user?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "learning_user_fkey"
-            columns: ["user"]
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       learning_lesson: {
         Row: {
-          course_id: string
-          id: string
+          created_at: string
           slug: string
-          title: string
-          updated_at: string
+          slug_course: string
+          user_id: string
         }
         Insert: {
-          course_id: string
-          id?: string
-          slug?: string
-          title?: string
-          updated_at?: string
+          created_at?: string
+          slug: string
+          slug_course: string
+          user_id: string
         }
         Update: {
-          course_id?: string
-          id?: string
+          created_at?: string
           slug?: string
-          title?: string
-          updated_at?: string
+          slug_course?: string
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "learning_lesson_course_id_fkey"
-            columns: ["course_id"]
-            referencedRelation: "learning"
+            foreignKeyName: "learning_lesson_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
         ]

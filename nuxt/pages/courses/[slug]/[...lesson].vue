@@ -49,10 +49,12 @@
 <script setup lang="ts">
 import { indexFile } from '~/utils/course'
 import { useProfileStore } from '~/stores/profile'
+import { useCourseStore } from '~/stores/course'
 
 const route = useRoute()
 const user = useSupabaseUser()
 const profile = useProfileStore()
+const course = useCourseStore()
 const { locale } = useI18n()
 const localePath = useLocalePath()
 
@@ -67,6 +69,11 @@ const { data } = await useAsyncData(contentKey.value, () =>
 )
 
 const hasTitleInBody = computed(() => data.value?.body.children.findIndex(el => el.tag === 'h1') !== -1)
+
+useSeoMeta({
+  title: () => data.value?.title ?? '',
+  description: () => data.value?.description,
+})
 
 const { data: dataIndex } = await useAsyncData(`course-${route.params.slug}-index`, () =>
   queryContent(
@@ -88,9 +95,7 @@ const prevNextIsVisible = useElementVisibility(prevNextRef)
 
 watch(prevNextIsVisible, (val) => {
   if (val) {
-    console.log('visible')
-
-    // TODO send lesson taken
+    course.setLessonLearned(route.params.slug as string, (route.params.lesson as string[]).join('/'))
   }
 })
 

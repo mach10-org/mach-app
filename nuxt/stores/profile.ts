@@ -1,14 +1,17 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
+import { useCourseStore } from './course'
 import { Database } from 'types/database.types'
+
+interface LastCoursePage {
+  url: string
+  title: string
+  main: boolean
+}
 
 type rows = Database['public']['Tables']['profiles']['Row']
 interface State extends Omit<rows, 'id' | 'updated_at'> {
   isLoading: boolean
-  lastCoursePage: {
-    url: string
-    title: string
-    main: boolean | null
-  } | null
+  lastCoursePage: LastCoursePage | null
 }
 
 export const useProfileStore = defineStore('profile', {
@@ -45,7 +48,7 @@ export const useProfileStore = defineStore('profile', {
       try {
         const { data: profile, error } = await supabase
           .from('profiles')
-          .select('*').single()
+          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course)').single()
 
         this.about = profile?.about ?? null
         this.age = profile?.age ?? null
@@ -60,9 +63,10 @@ export const useProfileStore = defineStore('profile', {
         this.username = profile?.username ?? null
         this.xp = profile?.xp ?? 0
 
-        const { data: lastCoursePage, error: errorCoursePage } = await supabase.from('last_url').select('url, title, main').maybeSingle()
+        this.lastCoursePage = (profile?.last_url as unknown as LastCoursePage) ?? null
 
-        this.lastCoursePage = lastCoursePage
+        const course = useCourseStore()
+        course.learningLessons = profile?.learning_lesson ?? []
       } catch (error) {
         // TODO handle error
       }
@@ -175,6 +179,9 @@ export const useProfileStore = defineStore('profile', {
       this.username = null
       this.xp = 0
       this.lastCoursePage = null
+
+      const course = useCourseStore()
+      course.learningLessons = []
     },
   },
 })
