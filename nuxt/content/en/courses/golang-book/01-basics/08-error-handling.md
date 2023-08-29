@@ -41,7 +41,7 @@ func Divide(nominator int, divider int) float32 {
 
 It has an `if` check. If `divider` is `0` then it calls `panic()`. So what happens then? You see something like:
 
-```output
+```
 panic: can't divide by 0
 
 goroutine 1 [running]:
@@ -237,7 +237,7 @@ In this exercise, we'll add error handling to our program.
 
    You should see output similar to:
 
-   ```output
+   ```
    panic: can't divide by 0
 
     goroutine 1 [running]:
@@ -259,7 +259,7 @@ In this exercise, we'll add error handling to our program.
 
    You should now see the following output:
 
-   ```output
+   ```
    Recovered  can't divide by 0
    0
    10
@@ -363,7 +363,7 @@ Let's improve our _panic.go_ file by adding error logging:
 
    You should see this output:
 
-   ```output
+   ```
    0
    10
    ```
@@ -372,7 +372,7 @@ Let's improve our _panic.go_ file by adding error logging:
 
 1. Inspect the _logs_ file that was just created, it should have content like the below:
 
-   ```output
+   ```
      2022/03/11 15:03:59 starting program
 
     2022/03/11 15:03:59 can't divide by 0 goroutine 1 [running]:

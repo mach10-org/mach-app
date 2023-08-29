@@ -26,7 +26,7 @@ There are two interesting use cases with modules:
 
 You want to split up your app in many different files. Let's say you have the following files:
 
-```output
+```
 /app
   main.go
   /helper
@@ -64,7 +64,7 @@ The _go.mod_ file tells you the name of your project and the currently used vers
 
 Imagine now we have this file structure in our project:
 
-```output
+```
 /app
   main.go
   /helper

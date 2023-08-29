@@ -31,13 +31,13 @@ RegEx shows up in many different contexts:
 
 Let's construct a simple RegEx to get a feel for it. Here it is:
 
-```text
+```
 an
 ```
 
 if you apply this search pattern `an` to the following text:
 
-```text
+```
 highlands is a part of Scotland
 ```
 
@@ -99,7 +99,7 @@ If you want to express repetition, there's two characters of interest:
 
 - `+`, matches 1 to many characters.
 
-  ```text
+  ```
   \w+
   ```
 
@@ -116,7 +116,7 @@ If you want to express repetition, there's two characters of interest:
 
 - `*`, matches 0 to many characters. Lets say you want to match a postal address that starts with "PA" and may contain 0 or many numbers. It should then match strings:
 
-  ```text
+  ```
   PA
   PA111
   ```
@@ -130,20 +130,20 @@ If you want to express repetition, there's two characters of interest:
 
 - `?`, also known as a greedy or optional quantifier. It looks backwards and makes it optional and takes it, if it can. Consider this case:
 
-  ```text
+  ```
   http
   https
   ```
 
   If you want to match them both, you can type:
 
-  ```text
+  ```
   https?
   ```
 
   Another example is:
 
-  ```text
+  ```
   r, _ := regexp.Compile("an.")
   matches := r.FindAllString("and ant an", -1)
   ```
@@ -156,13 +156,13 @@ There are different anchors you can use like for example:
 
 - `^`, beginning of the string. The following states that the string needs to begin with the following string "INV" to signify the start of an invoice row:
 
-  ```text
+  ```
   ^INV
   ```
 
 - `$`, end of the string. An example could be matching a string ends with a certain domain ".com":
 
-  ```text
+  ```
   \.com$
   ```
 
@@ -170,7 +170,7 @@ There are different anchors you can use like for example:
 
 Groups are way to capture part of a string and have that returned. It's very useful for parsing out the info you need. Consider this example parsing out the info from a CSV row:
 
-```text
+```
 Name: myarticle, Price: 114, Quantity: 3
 ```
 
@@ -202,13 +202,13 @@ So how can we break it apart and give it a name?
 
 Well, to break it apart, we will use something called named groups, it will allow us to look at our matches and know what's what. So instead of getting:
 
-```text
+```
 http
 ```
 
 We will get a key and value that says:
 
-```text
+```
 protocol: http
 ```
 
@@ -216,7 +216,7 @@ Syntax wise, we need to use `?<name of our group>` within our parenthesis ().
 
 You use the following syntax:
 
-```text
+```
 (?<mygroup>\w+)
 ```
 
@@ -232,13 +232,13 @@ Let's approach this problem then given the string "http://myapi.com/products?pag
 
 - matching the protocol:
 
-  ```text
+  ```
   ^(?<protocol>\w+):
   ```
 
 - domain, to match the domain as well, we're looking to capture everything after http:// and until the next /:
 
-  ```text
+  ```
   ^(?<protocol>\w+):\/\/(?<domain>\w+\.\w+)\/?
   ```
 
@@ -288,7 +288,7 @@ fmt.Println(result["route"]) // products
 
 From the above use case on named groups, write a Go program that takes a URL and analyzes it. It should work like so:
 
-```output
+```
 Type URL: http://myapi.com/products
 The URL consist of:
 protocol: http
@@ -402,7 +402,7 @@ Then we would not only rename the element `title` to `name` but also the content
 
 We need to restrict the replace operation to only target element, like so:
 
-```text
+```
 \<\/?(title)\>
 ```
 
@@ -420,13 +420,13 @@ nameShakespearename
 
 What happened, why did we loose `<>` ? We need a way to express keeping what was there before AND replace the name. A way to do that is to express capture groups on `<>` and the element name, like so:
 
-```text
+```
 (\<\/?)(title)(\>)
 ```
 
 Now we have three groups, we need to fit the result together, and this is something we can express like so:
 
-```text
+```
 ${1}name${3}
 ```
 

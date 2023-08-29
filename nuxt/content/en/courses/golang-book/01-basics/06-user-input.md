@@ -49,7 +49,7 @@ Note how you send in the string `response` as a reference, using the `&` operato
 
 When you run this code, you will see the below output:
 
-```output
+```
 hello
 User typed: hello
 ```
@@ -71,14 +71,14 @@ Note how `a1` and `a2` is sent into `Scan()` and they are comma-separated. So ho
 
 When you run this code, there are two ways for the user to input. The user can either separate the values by space like so:
 
-```output
+```
 hi you
 a1: hi a2: you
 ```
 
 or by newline:
 
-```output
+```
 hi
 you
 a1: hi a2: you
@@ -104,7 +104,7 @@ The interesting part lies in the first argument of `Scanf()`, namely `3s%d`. Wha
 
 Running this program, you will get an output like so:
 
-```output
+```
 inv200
 prefix: inv, invoice no: 200
 ```
@@ -148,7 +148,7 @@ In this assignment, you will read user input for a card game. The objective is t
 
    You should see the following output:
 
-   ```output
+   ```
    Enter player names (separated by space or newline):
    Alice Bob
    Players are:  Alice Bob
@@ -158,7 +158,7 @@ In this assignment, you will read user input for a card game. The objective is t
 
 Try modifying the program so it takes several players first and then ensures all players get a name. Here's an example output of such a program:
 
-```output
+```
 Enter number of players:
 3
 Enter Player 1 name:

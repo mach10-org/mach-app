@@ -137,7 +137,7 @@ TODO, copy, rename, remove, check for existence
 
 Create the following files and directories like so:
 
-```text
+```
 tmp/
   a.txt
   b.xt
@@ -148,7 +148,7 @@ Your program should read the diretory _tmp_ and for each entry list, if it's a d
 
 The programs output should look something like:
 
-```output
+```
 Reading directory tmp:
 Name, Type, Size, Modified
 a.txt, file, 1kb, 2022-01-01

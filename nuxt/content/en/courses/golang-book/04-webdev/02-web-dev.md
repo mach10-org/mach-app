@@ -225,7 +225,7 @@ There are various ways, additionally to headers, to instruct the server program 
 
 - **HTTP verb**, the HTTP verb expresses intention. The POST verb means to create a resource and the GET verb says to only read the data for example. There are many HTTP verbs that we will cover later in this chapter. These two below requests mean different things:
 
-  ```text
+  ```
   GET /products # fetching a list of products
   POST /products # creating a new product resource
   ```

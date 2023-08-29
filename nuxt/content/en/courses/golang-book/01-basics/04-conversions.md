@@ -53,7 +53,7 @@ What type is `arg` in our code above? There are some ways to find out:
 
   You would get an output like so:
 
-  ```output
+  ```
   string
   int
   ```
@@ -66,7 +66,7 @@ What type is `arg` in our code above? There are some ways to find out:
 
   You get an error:
 
-  ```output
+  ```
   cannot use os.Args[1] (type string) as type int in assignment
   ```
 

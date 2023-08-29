@@ -70,7 +70,7 @@ func TestAdd(t *testing.T) {
 
 Make sure you've created a project with `go mod init`. Then create a file structure like so:
 
-```output
+```
 main.go
 math/
   math.go
@@ -78,7 +78,7 @@ math/
 
 What you want to do next is to create a test file. You want to keep the test file as close to the code you want to test as possible. Because you want to test _math.go_ you create `math_test.go` file in the math/ directory like so:
 
-```output
+```
 main.go
 math/
   math.go
@@ -109,13 +109,13 @@ To run a test, you invoke the `go test` command. Here are different ways to run 
 
 - `go test`, runs the test in the current working directory. Here's what it looks like:
 
-  ```output
+  ```
   ok      test-example/math       0.258s
   ```
 
 - `go test -v`, runs a verbose version. Here's what it can look like:
 
-  ```output
+  ```
   === RUN   TestAdd
    math_test.go:12: running TestAdd
 
@@ -159,7 +159,7 @@ it will list a set of commands.
 
 The tool is centred on the concept of having an out file. The out file contains instructions on where your code is covered by tests and where it isn't. An out file can look something like this:
 
-```output
+```
 mode: set
 test-example/math/math.go:3.32,5.2 1 1
 test-example/math/math.go:7.37,9.2 1 1

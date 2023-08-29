@@ -161,7 +161,7 @@ fmt.Println(address.string())
 
 We would get the following output when calling `string()`:
 
-```output
+```
 City: London, Street: Buckingham palace, Postal address: SW1
 ```
 
@@ -171,7 +171,7 @@ Define a struct representing a row in a shopping basket for an e-commerce store.
 
 Here's example data:
 
-```output
+```
 Title, Description, Quantity, Price per unit, Total
 LEGO set, 4000 pieces, 1, 600GBP, 600GBP
 ```
@@ -180,7 +180,7 @@ LEGO set, 4000 pieces, 1, 600GBP, 600GBP
 
 Write a program that iterates over the shopping basket and calculates the total:
 
-```output
+```
 Title, Description, Quantity, Price per unit, Total
 LEGO set, 4000 pieces, 1, 600GBP, 600GBP
 Plushy, plush toy, 3, 5 GBP, 15GBP

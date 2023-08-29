@@ -2,7 +2,6 @@
 title: Hello world
 description: Why use Go and how to write your first program
 lastmod: 2023-06-04T23:43:48.626Z
-preview: https://via.placeholder.com/450x300.png
 ---
 
 # Your first program

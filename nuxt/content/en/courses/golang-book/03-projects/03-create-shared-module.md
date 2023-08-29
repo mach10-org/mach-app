@@ -46,7 +46,7 @@ To create a module meant for wider use you need to first initialize a module.
 
    This will create a _go.mod_ file in your directory.
 
-   ```output
+   ```
    logger/
      go.mod
    ```
@@ -147,7 +147,7 @@ You can test your package locally. To do so you need a separate package that you
 
    You should see:
 
-   ```output
+   ```
    [LOG] hey there
    ```
 
@@ -229,7 +229,7 @@ To publish your package, you can put it on GitHub.
 
    You should see:
 
-   ```output
+   ```
    [LOG] hey there
    ```
 

@@ -329,7 +329,7 @@ type Spaceship interface {
 
 The output from running the program should be:
 
-```output
+```
 10
 0
 ```

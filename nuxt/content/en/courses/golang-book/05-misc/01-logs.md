@@ -68,7 +68,7 @@ func main() {
 
 It will produce an output like so:
 
-```output
+```
 2022/03/24 12:42:13 log message
 ```
 
@@ -124,7 +124,7 @@ In this assignment, you will add the `log` library to your code.
 
 1. Create a file _records.csv_ with the following content:
 
-   ```text
+   ```
    item,quantity
 
    112, 2
@@ -168,7 +168,7 @@ In this assignment, you will add the `log` library to your code.
 
    You should see the following output:
 
-   ```output
+   ```
    processing file 'records.csv'
 
    Do something with input:
@@ -214,7 +214,7 @@ In this assignment, you will add the `log` library to your code.
 
    your output should be similar to:
 
-   ```output
+   ```
     2022/03/28 13:57:57 processing file 'records.csv'
 
     2022/03/28 13:57:57 Do something with input:
@@ -237,7 +237,7 @@ In this assignment, you will add the `log` library to your code.
 
    You should see a similar output:
 
-   ```output
+   ```
    2022/03/28 14:04:52 processing file 'record.csv'
 
    2022/03/28 14:04:52 Error: open record.csv: no such file or directory
@@ -275,13 +275,13 @@ Someone examining the output of the program is likely to inspect a log file over
 
    You should now see the following output:
 
-   ```output
+   ```
    exit status 1
    ```
 
    All your log entries have moved to _logfile_, let's see what it looks like:
 
-   ```text
+   ```
    2022/03/28 14:11:24 processing file 'record.csv'
 
    2022/03/28 14:11:24 Error: open record.csv: no such file or directory

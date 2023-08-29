@@ -17,7 +17,7 @@ There are many reasons why we need to work with strings in different ways. Below
 
 Lets say we read user input and we want to interpret what we get as a number. To make our program robust, we're ok with the user typing spaces or newline characters. The following input should be allowed:
 
-```text
+```
 114
    114
 114\n
@@ -57,7 +57,7 @@ The above string has three whitespaces to the left and two to the right, giving 
 
 The output of the above code is:
 
-```output
+```
   114   , string length 8
 114 , string length 3
    114   , string length 8
@@ -70,19 +70,19 @@ Lets break down the output per row.
 
 For this output, using `Trim()`, the spaces are removed on both sides and we end up with something looking left aligned:
 
-```output
+```
 "114"
 ```
 
 The next output, using `TrimLeft()`, shows how the right spaces are still there:
 
-```output
+```
 "114   "
 ```
 
 Our final row, using `TrimRight()`, shows a right alignment and how the spaces on the left side still remains:
 
-```output
+```
 "   114"
 ```
 
@@ -143,7 +143,7 @@ Say you have customer management system and there's a lot of data to present. To
 
 Take the following multiline customer string:
 
-```text
+```
 Jean Normand
 123 Way
 Washington
@@ -151,7 +151,7 @@ Washington
 
 If you use `ToUpper()` on city you get a result like so:
 
-```output
+```
 Jean Normand
 123 Way
 WASHINGTON

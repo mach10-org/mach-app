@@ -128,7 +128,7 @@ arr := []string{"arg1", "arg2", "arg3"}
 
 `arr` is defined as an array and then the `range` construct is used to loop over the array. For each iteration, the current index is assigned to `i` and the array item is assigned to `s`. An output of the above code will look like so:
 
-```output
+```
 index: 0, item: arg1
 index: 1, item: arg2
 index: 2, item: arg3
@@ -152,7 +152,7 @@ So far, you've seen three ways you can use the `for` construct. There are also w
 
   The output will be:
 
-  ```output
+  ```
   -1
   ```
 
@@ -172,7 +172,7 @@ So far, you've seen three ways you can use the `for` construct. There are also w
 
   The output will be:
 
-  ```output
+  ```
   2
   3
   ```
@@ -216,7 +216,7 @@ When creating console apps, you often want to read user input. The user input co
 
    You should see an output like so:
 
-   ```output
+   ```
    Type command: command
    Type command: quit
    program exit

@@ -36,13 +36,13 @@ In Go, there are many ways to declare variables:
 
 - **Define a name and type**. Here, you declare a variable with the keyword `var`, give it a name and lastly a type `string`. Below is an example:
 
-  ```golang
+  ```go
   var firstName string
   ```
 
 - **Define a group** of variables. It's possible to define a group of variables. Using this way of declaring means you only type the `var` keyword once. The group is defined using parenthesis `()`:
 
-  ```golang
+  ```go
   var (
     firstName = "Chris"
     age = 20
@@ -113,7 +113,7 @@ fmt.Printf("Customer %s has %d$ on their bank account", customerName, accountBal
 
 Above, the `%s` represents a string and `%d` represents a number. By using these formatters as placeholders, the variables are correctly implemented, and the output becomes:
 
-```output
+```
 Customer Adam has 20$ on their bank account
 ```
 
@@ -168,7 +168,7 @@ Create a file _main.go_ and give it the following content:
 
    You should see the following output:
 
-   ```output
+   ```
     3
     false
     chris

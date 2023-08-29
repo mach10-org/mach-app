@@ -72,7 +72,7 @@ func main() {
 
 The result is now the following:
 
-```output
+```
 another function:  4
 another function:  5
 another function:  6
@@ -106,7 +106,7 @@ func main() {
 
 at this point, `anotherFunction()` finishes first as it has the shortest delay, which is to be expected. Here's what the output looks like now:
 
-```output
+```
 another function:  4
 another function:  5
 another function:  6
@@ -361,7 +361,7 @@ func main() {
 
 The output of running said code is:
 
-```output
+```
 1
 2
 channel closed

@@ -109,7 +109,7 @@ delete(phonebook, 555404)
 
 Here are your contacts:
 
-```output
+```
 Alice 555-123
 Bob 555-124
 Jean 555-125

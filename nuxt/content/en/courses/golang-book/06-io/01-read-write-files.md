@@ -95,7 +95,7 @@ f.WriteString("my text \n")
 
 Imagine you have a file _invoices.csv_ looking like so:
 
-```text
+```
 customer, amount, date
 Wood LTD, 100, 2020-01-01
 Metal, 345, 2020-01-29

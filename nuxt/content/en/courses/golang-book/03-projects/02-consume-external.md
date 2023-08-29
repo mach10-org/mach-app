@@ -136,7 +136,7 @@ Now, we need to resolve the external library.
 
    Running the program gives you the following output:
 
-   ```output
+   ```
    3
    ```
 

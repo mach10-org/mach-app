@@ -195,7 +195,7 @@ In this assignment, you are creating a program that tests out various Boolean lo
 
    You should see the following output:
 
-   ```output
+   ```
     Message
     Failed
     Can drive car
