@@ -1,6 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useCourseStore } from './course'
-import { Database } from 'types/database.types'
+import { Database } from '~/types/database.types'
 
 interface LastCoursePage {
   url: string
