@@ -10,7 +10,7 @@
 
     <h1>{{ data.title }}</h1>
     <ContentRenderer :value="data" />
-    <TableOfContentCourse :course="route.params.slug.toString()" />
+    <TableOfContentCourse :course-slug="route.params.slug.toString()" />
   </NuxtLayout>
 </template>
 

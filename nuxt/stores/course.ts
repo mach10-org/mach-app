@@ -4,7 +4,7 @@ import { Database } from 'types/database.types'
 type learningLessonRows = Database['public']['Tables']['learning_lesson']['Row']
 interface State {
   isLoading: boolean
-  learningLessons: Omit<learningLessonRows, 'created_at' | 'user_id'>[]
+  learningLessons: Omit<learningLessonRows, 'created_at' | 'user_id' | 'updated_at'>[]
 }
 
 export const useCourseStore = defineStore('course', {
@@ -13,6 +13,19 @@ export const useCourseStore = defineStore('course', {
     learningLessons: [],
   }),
   getters: {
+    learningLessonsByCourse (state) {
+      const courses: Record<string, string[]> = {}
+
+      state.learningLessons.forEach((element) => {
+        if (!courses[element.slug_course]) {
+          courses[element.slug_course] = []
+        }
+
+        courses[element.slug_course].push(element.slug)
+      })
+
+      return courses
+    },
   },
   actions: {
     async setLessonLearned (course: string, lesson: string) {
@@ -26,8 +39,12 @@ export const useCourseStore = defineStore('course', {
           slug_course: course,
         }).select('slug, slug_course').single()
 
-        if (data) {
-          this.learningLessons.push(data)
+        const index = this.learningLessons.findIndex(l => l.slug === lesson && l.slug_course === course)
+
+        if (index === -1) {
+          if (data) {
+            this.learningLessons.push(data)
+          }
         }
 
         return true

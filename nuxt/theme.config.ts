@@ -1,5 +1,8 @@
 import { ThemeConfig } from '@bg-dev/nuxt-naiveui'
 
+const textColor = '#232E4A'
+const textColorDark = '#e2e5e8'
+
 const link = '#be185d'
 const linkHover = '#9d174f'
 const linkDark = '#f9a8ca'
@@ -48,7 +51,7 @@ export const themeConfig: ThemeConfig = {
   // mobile: {}, // Theme options applied on mobile only
   light: {
     common: {
-      textColorBase: '#232E4A',
+      textColorBase: textColor,
       baseColor,
       bodyColor,
     },
@@ -65,10 +68,15 @@ export const themeConfig: ThemeConfig = {
       color: baseColor,
       dividerColor: border,
     },
+    Drawer: {
+      color: baseColor,
+      textColor,
+      dividerColor: border,
+    },
   }, // Theme options applied on light mode
   dark: {
     common: {
-      textColorBase: '#e2e5e8',
+      textColorBase: textColorDark,
       baseColor: baseColorDark,
       bodyColor: bodyColorDark,
     },
@@ -90,6 +98,11 @@ export const themeConfig: ThemeConfig = {
     },
     Dropdown: {
       color: baseColorDark,
+      dividerColor: borderDark,
+    },
+    Drawer: {
+      color: baseColorDark,
+      textColor: textColorDark,
       dividerColor: borderDark,
     },
   }, // Theme options applied on dark mode

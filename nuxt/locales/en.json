@@ -177,6 +177,10 @@
       "form_messageLabel": "Your message",
       "form_messagePlaceholder": "Leave a comment...",
       "submit": "Send message"
+    },
+    "course": {
+      "toc": "Table of content",
+      "showLessons": "Show all lessons"
     }
   },
 
