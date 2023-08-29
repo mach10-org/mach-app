@@ -179,7 +179,7 @@ func main() {
 
 Create a file _main.go_. Use the `fmt` library to print out to the console. Remember that your run programs with `go run <my program>.go`.
 
-<Compiler title="My Go Playground" >
+::compiler{title="My Go Playground"}
 
 ```go
 
@@ -191,9 +191,9 @@ func main() { fmt.Println("Hello, from code fence")
 }
 ```
 
-</Compiler>
+::
 
-<Compiler >
+::compiler
 
 ```go
 
@@ -205,4 +205,4 @@ func main() { fmt.Println("Hello, number 2")
 }
 ```
 
-</Compiler>
+::
