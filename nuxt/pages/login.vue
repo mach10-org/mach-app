@@ -59,7 +59,7 @@ import {
   InputInst,
   useMessage,
 } from 'naive-ui'
-import { Database } from 'types/database.types'
+import { Database } from '~/types/database.types'
 
 const supabase = useSupabaseClient<Database>()
 

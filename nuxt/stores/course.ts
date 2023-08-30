@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
-import { Database } from 'types/database.types'
+import { Database } from '~/types/database.types'
 
 type learningLessonRows = Database['public']['Tables']['learning_lesson']['Row']
 interface State {
@@ -50,6 +50,26 @@ export const useCourseStore = defineStore('course', {
         return true
       } catch (error) {
         // TODO handle error
+      }
+
+      return false
+    },
+    async setLessonNotFinished (course: string, lesson: string) {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+
+      try {
+        this.learningLessons = this.learningLessons.filter(l => !(l.slug === lesson && l.slug_course === course))
+
+        const { error } = await supabase.from('learning_lesson').delete().match({
+          user_id: user.value.id,
+          slug: lesson,
+          slug_course: course,
+        })
+        return true
+      } catch (error) {
+        // TODO handle error
+        this.learningLessons.push({ slug: lesson, slug_course: course })
       }
 
       return false

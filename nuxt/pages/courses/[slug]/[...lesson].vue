@@ -1,11 +1,7 @@
 <template>
-  <NuxtLayout v-if="data" name="course">
+  <NuxtLayout v-if="data && dataIndex" name="course">
     <template #header-bar>
-      <nuxt-link :to="localePath(`/courses/${route.params.slug}`)" class="link inline-flex items-center text-base">
-        <Icon name="heroicons:arrow-left-solid" class="mr-1" />
-        {{ dataIndex?.title }}
-      </nuxt-link>
-      <!-- TODO add progress -->
+      <CourseProgress :course-slug="route.params.slug.toString()" :active-lesson="route.params.lesson.toString()" :title="dataIndex.title?.toString() || ''" />
     </template>
 
     <h1 v-if="!hasTitleInBody">

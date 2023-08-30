@@ -21,7 +21,7 @@ import { h } from 'vue'
 import type { VNodeChild } from 'vue'
 import type { DropdownOption } from 'naive-ui'
 import { NuxtLink, UserDropdownHeader } from '#components'
-import { Database } from 'types/database.types'
+import { Database } from '~/types/database.types'
 
 const supabase = useSupabaseClient<Database>()
 const localePath = useLocalePath()
