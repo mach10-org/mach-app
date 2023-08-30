@@ -83,6 +83,10 @@ export default defineNuxtConfig({
     redirect: false,
   },
 
+  dayjs: {
+    plugins: ['advancedFormat'],
+  },
+
   content: {
     highlight: {
       theme: {

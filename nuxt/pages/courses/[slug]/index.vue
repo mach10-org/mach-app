@@ -5,7 +5,7 @@
         <Icon name="heroicons:arrow-left-solid" class="mr-1" />
         {{ $t('menu.courses') }}
       </nuxt-link>
-      <!-- TODO add spend hour widget -->
+      <TimeToComplete :total-hours="data.totalHours" />
     </template>
 
     <h1>{{ data.title }}</h1>

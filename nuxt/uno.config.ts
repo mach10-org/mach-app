@@ -84,7 +84,7 @@ export default defineConfig({
           'text-decoration': 'none',
           'font-weight': 700,
         },
-        h1: {
+        'h1,h2,h3,h4,h5,h6': {
           'font-weight': 700,
         },
       },
