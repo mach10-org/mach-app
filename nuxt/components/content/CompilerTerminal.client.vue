@@ -163,7 +163,7 @@ const writeGoRun = () => new Promise((resolve) => {
     strings: ['<span class=\'text-$ctp-teal\'>$</span> go build programe.go'],
     typeSpeed: 50,
     onComplete: (self: Typed) => {
-      // self.cursor.remove()
+      self.cursor.remove()
       resolve(true)
     },
   })
