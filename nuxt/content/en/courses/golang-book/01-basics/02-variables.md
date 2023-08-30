@@ -6,20 +6,6 @@ lastmod: 2023-05-26T02:25:00.751Z
 
 # Using variables
 
-::compiler
-
-```go
-package main
-
-import "fmt";
-
-func main() {
-  fmt.Println("Hello, number 2")
-}
-```
-
-::
-
 With variables, we can remember values and later refer to them via named references. using variables will make our code easier to read.
 
 ## Introduction

@@ -192,17 +192,3 @@ func main() { fmt.Println("Hello, from code fence")
 ```
 
 ::
-
-::compiler
-
-```go
-
-package main
-
-import "fmt";
-
-func main() { fmt.Println("Hello, number 2")
-}
-```
-
-::
