@@ -96,7 +96,7 @@ const props = defineProps<Props>()
 
 const profile = useProfileStore()
 const supabase = useSupabaseClient<Database>()
-const { $dayjs } = useNuxtApp()
+const dayjs = useDayjs()
 
 const initialStateComputed = computed(() => props.initialState)
 
@@ -183,7 +183,7 @@ const writeGoBinary = () => new Promise((resolve) => {
 })
 
 onMounted(async () => {
-  time.value = $dayjs().format('HH:MM:ss')
+  time.value = dayjs().format('HH:MM:ss')
 
   await until(initialStateComputed).not.toBeUndefined()
 

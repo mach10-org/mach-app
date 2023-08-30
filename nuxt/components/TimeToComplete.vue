@@ -20,7 +20,7 @@ const props = defineProps({
   },
 })
 
-const { $dayjs } = useNuxtApp()
+const dayjs = useDayjs()
 
 const hours = ref(2)
 
@@ -32,6 +32,6 @@ const endDate = computed(() => {
     return '...'
   }
 
-  return $dayjs().add(weeks, 'weeks').format('Do of MMMM YYYY')
+  return dayjs().add(weeks, 'weeks').format('Do of MMMM YYYY')
 })
 </script>

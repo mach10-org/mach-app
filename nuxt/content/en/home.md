@@ -5,16 +5,16 @@ preview: home-hero.jpg
 ---
 
 ::home-hero
+  ::newsletter{label="Email address" placeholder="Enter your email" buttonText="Notify me" inputId="email-newsletter-hero"}
+  #description
+  We’ll notify you when our first course is ready. First course starting in 2023.
+  ::
+
 #title
 Ready to take off for a new life?
 
 #description
 We are on a mission to transform lives of 10,000 people. Why not you? It starts **today 👩🏻‍🚀👇**
-
-  ::newsletter{label="Email address" placeholder="Enter your email" buttonText="Notify me" inputId="email-newsletter-hero"}
-  #description
-  We’ll notify you when our first course is ready. First course starting in 2023.
-  ::
 ::
 
 ::title-description{link="/mission/" linkText="Why are we doing this?"}
