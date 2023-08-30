@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout v-if="data && dataIndex" name="course">
     <template #header-bar>
-      <CourseProgress :course-slug="route.params.slug.toString()" :active-lesson="route.params.lesson.toString()" :title="dataIndex.title?.toString() || ''" />
+      <CourseProgress :course-slug="route.params.slug.toString()" :active-lesson="route.params.lesson" :title="dataIndex.title?.toString() || ''" />
     </template>
 
     <h1 v-if="!hasTitleInBody">

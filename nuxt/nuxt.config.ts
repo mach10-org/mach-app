@@ -12,7 +12,7 @@ export default defineNuxtConfig({
       siteName: 'Mach10',
       siteDescription: 'We are on a mission to transform lives of 10,000 people. Why not you? It starts today 👩🏻‍🚀',
       language: 'en-US',
-      trailingSlash: true,
+      trailingSlash: false,
     },
   },
 
@@ -50,7 +50,7 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     langDir: 'locales',
     detectBrowserLanguage: false,
-    trailingSlash: true,
+    trailingSlash: false,
     baseUrl: process.env.BASE_URL,
     vueI18n: './i18n.config.ts',
   },

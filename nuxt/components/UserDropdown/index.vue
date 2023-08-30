@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { h } from 'vue'
 import type { VNodeChild } from 'vue'
 import type { DropdownOption } from 'naive-ui'
+import { h } from '#imports'
 import { NuxtLink, UserDropdownHeader } from '#components'
 import { Database } from '~/types/database.types'
 

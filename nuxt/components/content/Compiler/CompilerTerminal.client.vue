@@ -98,6 +98,8 @@ const profile = useProfileStore()
 const supabase = useSupabaseClient<Database>()
 const { $dayjs } = useNuxtApp()
 
+const initialStateComputed = computed(() => props.initialState)
+
 const name = computed(() => profile.full_name || 'user')
 const time = ref('10:30:00')
 
@@ -182,6 +184,8 @@ const writeGoBinary = () => new Promise((resolve) => {
 
 onMounted(async () => {
   time.value = $dayjs().format('HH:MM:ss')
+
+  await until(initialStateComputed).not.toBeUndefined()
 
   const myTheme = EditorView.baseTheme({
     '&.cm-editor': {
