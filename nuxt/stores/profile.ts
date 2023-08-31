@@ -1,5 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useCourseStore } from './course'
+import { useQuizzStore } from './quizz'
 import { Database } from '~/types/database.types'
 
 interface LastCoursePage {
@@ -48,7 +49,7 @@ export const useProfileStore = defineStore('profile', {
       try {
         const { data: profile, error } = await supabase
           .from('profiles')
-          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course)').single()
+          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course), answers(id, slug, slug_course, label, is_correct)').single()
 
         this.about = profile?.about ?? null
         this.age = profile?.age ?? null
@@ -67,6 +68,9 @@ export const useProfileStore = defineStore('profile', {
 
         const course = useCourseStore()
         course.learningLessons = profile?.learning_lesson ?? []
+
+        const quizz = useQuizzStore()
+        quizz.answers = profile?.answers ?? []
       } catch (error) {
         // TODO handle error
       }

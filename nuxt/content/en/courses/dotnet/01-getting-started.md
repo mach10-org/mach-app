@@ -19,8 +19,19 @@ This Markdown file creates a page at `your-domain.com/page-1/`
 
 ### Quizz example
 
-<Quiz slug='dotnet-test' client:only='vue' label='Which term does NOT describe JavaScript?'>
-  <Quiz.Option label='Garbage collected' explain='no prize for you' />
-  <Quiz.Option label='Intrepreted' explain="Yeah, that ain't it" />
-  <Quiz.Option isAnswer xp='10' label='Statically Typed' explain='hella good job' />
-</Quiz>
+::quizz
+---
+title: Which term does NOT describe JavaScript?
+slug: dotnet-js
+xp: 10
+answers:
+  - label: Garbage collected
+    explanation: no prize for you
+  - label: Intrepreted
+    explanation: Yeah, that ain't it
+  - label: Statically Typed
+    explanation: hella good job
+    isCorrect: true
+---
+::
+

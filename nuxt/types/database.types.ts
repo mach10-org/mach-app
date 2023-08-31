@@ -36,33 +36,36 @@ export interface Database {
     Tables: {
       answers: {
         Row: {
-          course_slug: string | null
-          created_at: string | null
+          created_at: string
           id: string
-          success: boolean | null
-          title: string | null
-          user: string | null
+          is_correct: boolean
+          label: string
+          slug: string
+          slug_course: string
+          user_id: string | null
         }
         Insert: {
-          course_slug?: string | null
-          created_at?: string | null
+          created_at?: string
           id?: string
-          success?: boolean | null
-          title?: string | null
-          user?: string | null
+          is_correct: boolean
+          label?: string
+          slug?: string
+          slug_course?: string
+          user_id?: string | null
         }
         Update: {
-          course_slug?: string | null
-          created_at?: string | null
+          created_at?: string
           id?: string
-          success?: boolean | null
-          title?: string | null
-          user?: string | null
+          is_correct?: boolean
+          label?: string
+          slug?: string
+          slug_course?: string
+          user_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "answers_user_fkey"
-            columns: ["user"]
+            foreignKeyName: "answers_user_id_fkey"
+            columns: ["user_id"]
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
@@ -165,18 +168,21 @@ export interface Database {
           created_at: string
           slug: string
           slug_course: string
+          updated_at: string
           user_id: string
         }
         Insert: {
           created_at?: string
           slug: string
           slug_course: string
+          updated_at?: string
           user_id: string
         }
         Update: {
           created_at?: string
           slug?: string
           slug_course?: string
+          updated_at?: string
           user_id?: string
         }
         Relationships: [
