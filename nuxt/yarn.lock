@@ -7263,15 +7263,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-to-formatted-text@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "html-to-formatted-text@npm:2.7.0"
-  dependencies:
-    striptags: 3.1.1
-  checksum: de9fed327f580a9fec2f8dd17fb470dc1d2da7cd28d07a3025e2c234ef0d5cd31dd3f79d9695120f64d9079e1ddf16965b42bfdd9ac6261b4138b17edf6bec8e
-  languageName: node
-  linkType: hard
-
 "html-void-elements@npm:^2.0.0":
   version: 2.0.1
   resolution: "html-void-elements@npm:2.0.1"
@@ -10231,7 +10222,6 @@ __metadata:
     codemirror: ^6.0.1
     dayjs-nuxt: ^1.1.2
     eslint: 8.48.0
-    html-to-formatted-text: ^2.7.0
     nuxt: 3.7.0
     nuxt-font-loader: ^2.3.1
     nuxt-icon: ^0.5.0
@@ -12723,13 +12713,6 @@ __metadata:
   dependencies:
     acorn: ^8.10.0
   checksum: f5fa7e289df8ebe82e90091fd393974faf8871be087ca50114327506519323cf15f2f8fee6ebe68b5e58bfc795269cae8bdc7cb5a83e27b02b3fe953f37b0a89
-  languageName: node
-  linkType: hard
-
-"striptags@npm:3.1.1":
-  version: 3.1.1
-  resolution: "striptags@npm:3.1.1"
-  checksum: 9d01e9949dbfe8558354ae41a1a1e9c4ac1b5b5e7b2a2b33d0cc5630561abc8fd9653954c4e2463758d84d97876f8a33dc760ec0b5e3b1c8ae6d600e184a51c1
   languageName: node
   linkType: hard
 

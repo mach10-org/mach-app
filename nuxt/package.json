@@ -36,7 +36,6 @@
     "@vueuse/nuxt": "10.4.1",
     "codemirror": "^6.0.1",
     "dayjs-nuxt": "^1.1.2",
-    "html-to-formatted-text": "^2.7.0",
     "nuxt-font-loader": "^2.3.1",
     "nuxt-lodash": "^2.5.0",
     "typed.js": "^2.0.16"

@@ -179,16 +179,16 @@ func main() {
 
 Create a file _main.go_. Use the `fmt` library to print out to the console. Remember that your run programs with `go run <my program>.go`.
 
-::compiler{title="My Go Playground"}
+::compiler
+---
+title: My Go Playground
+code: |
+  package main
 
-```go
+  import "fmt"
 
-package main
-
-import "fmt";
-
-func main() { fmt.Println("Hello, from code fence")
-}
-```
-
+  func main() { 
+    fmt.Println("Hello, from code fence")
+  }
+---
 ::

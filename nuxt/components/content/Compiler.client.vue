@@ -90,15 +90,13 @@ interface GoCompiler {
 
 interface Props {
   title?: string
-  initialState?: string
+  code: string
 }
 const props = defineProps<Props>()
 
 const profile = useProfileStore()
 const supabase = useSupabaseClient<Database>()
 const dayjs = useDayjs()
-
-const initialStateComputed = computed(() => props.initialState)
 
 const name = computed(() => profile.full_name || 'user')
 const time = ref('10:30:00')
@@ -185,8 +183,6 @@ const writeGoBinary = () => new Promise((resolve) => {
 onMounted(async () => {
   time.value = dayjs().format('HH:MM:ss')
 
-  await until(initialStateComputed).not.toBeUndefined()
-
   const myTheme = EditorView.baseTheme({
     '&.cm-editor': {
       fontSize: '16px',
@@ -196,7 +192,7 @@ onMounted(async () => {
   const tabSize = new Compartment()
 
   const state = EditorState.create({
-    doc: props.initialState,
+    doc: props.code,
     extensions: [basicSetup, StreamLanguage.define(go), tabSize.of(EditorState.tabSize.of(2)), oneDark, myTheme],
   })
 
