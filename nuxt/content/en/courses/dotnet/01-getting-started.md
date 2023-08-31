@@ -1,0 +1,26 @@
+---
+title: Getting started with Dotnet
+description: Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae quies, praemiaque lepores.
+lastmod: 2023-06-12T03:52:49.718Z
+---
+
+## Getting started with mdx !
+
+This Markdown file creates a page at `your-domain.com/page-1/`
+
+It probably isn't styled much, but Markdown does support:
+
+- **bold** and _italics._
+- lists
+- [links](https://astro.build)
+- and more!
+
+This Markdown file creates a page at `your-domain.com/page-1/`
+
+### Quizz example
+
+<Quiz slug='dotnet-test' client:only='vue' label='Which term does NOT describe JavaScript?'>
+  <Quiz.Option label='Garbage collected' explain='no prize for you' />
+  <Quiz.Option label='Intrepreted' explain="Yeah, that ain't it" />
+  <Quiz.Option isAnswer xp='10' label='Statically Typed' explain='hella good job' />
+</Quiz>
