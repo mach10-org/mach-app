@@ -105,30 +105,6 @@ export interface Database {
           }
         ]
       }
-      goals: {
-        Row: {
-          active: boolean
-          created_at: string | null
-          id: string
-          label: string
-          order: number
-        }
-        Insert: {
-          active?: boolean
-          created_at?: string | null
-          id?: string
-          label?: string
-          order?: number
-        }
-        Update: {
-          active?: boolean
-          created_at?: string | null
-          id?: string
-          label?: string
-          order?: number
-        }
-        Relationships: []
-      }
       last_url: {
         Row: {
           created_at: string | null

@@ -61,3 +61,15 @@ yarn preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Generate Typescript
+
+```bash
+supabase gen types typescript --local > nuxt/types/database.types.ts
+```
+
+## Generate migration
+
+```bash
+supabase db diff --use-migra -f MIGRATION_NAME
+```
