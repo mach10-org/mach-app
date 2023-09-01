@@ -1,6 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useCourseStore } from './course'
-import { useQuizzStore } from './quizz'
+import { useQuizStore } from './quiz'
 import { Database } from '~/types/database.types'
 
 interface LastCoursePage {
@@ -69,8 +69,8 @@ export const useProfileStore = defineStore('profile', {
         const course = useCourseStore()
         course.learningLessons = profile?.learning_lesson ?? []
 
-        const quizz = useQuizzStore()
-        quizz.answers = profile?.answers ?? []
+        const quiz = useQuizStore()
+        quiz.answers = profile?.answers ?? []
       } catch (error) {
         // TODO handle error
       }
@@ -186,6 +186,27 @@ export const useProfileStore = defineStore('profile', {
 
       const course = useCourseStore()
       course.learningLessons = []
+    },
+    async incrementXP (value: number) {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+
+      // TODO function? https://stackoverflow.com/questions/76192402/supabase-update-with-incrementing-value
+
+      try {
+        const { error } = await supabase.from('profiles').upsert({
+          id: user.value.id,
+          xp: this.xp + value,
+        })
+
+        this.xp += value
+
+        return true
+      } catch (error) {
+        // TODO handle error
+      }
+
+      return false
     },
   },
 })

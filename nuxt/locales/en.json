@@ -4,13 +4,6 @@
       "email_saved": "Your email has been saved!",
       "not_valid_email": "The email address is not valid"
     },
-    "quizz": {
-      "title": "Quizz",
-      "no_profile_text": "This would get you +{arg1}XP",
-      "signup_text1": "Signup to track",
-      "signup_text2": "your progress over time, it’s free",
-      "success": "Great! You have now {arg1}XP"
-    },
     "profile": {
       "title": "Profile",
       "profile_saved": "Your profile has been saved"
@@ -58,6 +51,15 @@
     "privacyPolicy": "Privacy Policy",
     "termsAndConditions": "Terms & Conditions",
     "licence": "Licence"
+  },
+
+  "quiz": {
+    "plus_xp": "This would get you +Mach {xp}",
+    "signup_text1": "Signup to track",
+    "signup_text2": "your progress over time, it’s free",
+    "success": "Great! You have now Mach {xp}",
+    "correct": "Correct!",
+    "incorrect": "Incorrect!"
   },
 
   "compiler": {
