@@ -19,5 +19,4 @@
 const slots = useSlots()
 const hasHeader = computed(() => !!slots.header)
 const hasHeaderBar = computed(() => !!slots['header-bar'])
-const hasToc = computed(() => !!slots.toc) // TODO
 </script>
