@@ -2,7 +2,6 @@
   <div class="min-h-[60vh] flex">
     <n-spin size="large" class="mx-auto" />
   </div>
-  <!-- TODO handle error ?error=invalid_request&error_code=400&error_description=No+associated+flow+state+found.+400:+Flow+state+is+expired#error=invalid_request&error_code=400&error_description=No+associated+flow+state+found.+400%253A+Flow+state+is+expired -->
 </template>
 
 <script setup lang="ts">
@@ -14,6 +13,11 @@ const localePath = useLocalePath()
 const notification = useNotification()
 const message = useMessage()
 const i18n = useI18n()
+const route = useRoute()
+
+if (route.query.error) {
+  throw createError({ statusCode: route.query.error_code ? +route.query.error_code : 500, statusMessage: route.query.error_description?.toString() || 'Login error' })
+}
 
 const profile = useProfileStore()
 
