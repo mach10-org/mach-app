@@ -63,8 +63,6 @@ import { Database } from '~/types/database.types'
 
 const supabase = useSupabaseClient<Database>()
 
-// TODO redirect if logged
-
 const message = useMessage()
 const i18n = useI18n()
 const config = useRuntimeConfig()
@@ -138,4 +136,8 @@ const signInWithGitHub = async (e: Event) => {
     isLoadingGithub.value = false
   }
 }
+
+definePageMeta({
+  middleware: 'not-auth',
+})
 </script>
