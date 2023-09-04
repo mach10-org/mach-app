@@ -1,3 +1,3 @@
 <template>
-  <div>TODO</div>
+  <IntroPage page="code-conduct" />
 </template>
