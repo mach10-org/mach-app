@@ -10,8 +10,10 @@
     },
     "user": {
       "title": "Mach10 team",
-      "welcome_back": "Welcome back {arg1}!",
-      "welcome_back_url": "Pick up where you left off!{arg2}: \"{arg1}\"",
+      "welcome_back": "Welcome back {name}!",
+      "welcome_back_description": "Pick up where you left off!",
+      "course": "Course",
+      "lesson": "Lesson",
       "ok": "Sure",
       "cancel": "Not now"
     },

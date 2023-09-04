@@ -1,10 +1,12 @@
 <template>
   <NaiveConfig :theme-config="themeConfig">
     <n-message-provider placement="bottom">
-      <SeoKit />
-      <NuxtLayout class="root rootdark">
-        <NuxtPage />
-      </NuxtLayout>
+      <n-notification-provider placement="bottom">
+        <SeoKit />
+        <NuxtLayout class="root rootdark">
+          <NuxtPage />
+        </NuxtLayout>
+      </n-notification-provider>
     </n-message-provider>
   </NaiveConfig>
 </template>

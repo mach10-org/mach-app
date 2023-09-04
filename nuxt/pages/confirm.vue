@@ -1,14 +1,19 @@
 <template>
-  <!-- TODO better design -->
+  <div class="min-h-[60vh] flex">
+    <n-spin size="large" class="mx-auto" />
+  </div>
   <!-- TODO handle error ?error=invalid_request&error_code=400&error_description=No+associated+flow+state+found.+400:+Flow+state+is+expired#error=invalid_request&error_code=400&error_description=No+associated+flow+state+found.+400%253A+Flow+state+is+expired -->
-  <div>Waiting for login...</div>
 </template>
 
 <script setup lang="ts">
+import { NButton } from 'naive-ui'
 import { useProfileStore } from '~/stores/profile'
 
 const user = useSupabaseUser()
 const localePath = useLocalePath()
+const notification = useNotification()
+const message = useMessage()
+const i18n = useI18n()
 
 const profile = useProfileStore()
 
@@ -19,7 +24,43 @@ watch(user, async () => {
     await until(isLoading).toBe(false)
 
     if (profile.isOnBoarded) {
-      // TODO show message welcome back
+      if (profile.lastCoursePage !== null) {
+        const n = notification.info({
+          title: i18n.t('notifications.user.welcome_back', { name: profile.full_name }),
+          content: () =>
+            h('div', {}, [
+              h('p', { class: 'mb-1' }, i18n.t('notifications.user.welcome_back_description')),
+              h('p', {}, [
+                h('b', {}, profile.lastCoursePage?.main ? i18n.t('notifications.user.course') : i18n.t('notifications.user.lesson')),
+                h('span', {}, `: ${profile.lastCoursePage?.title}`),
+              ]),
+            ]),
+          meta: ' ', // To align buttons to the right
+          action: () =>
+            h(
+              'div',
+              { class: 'flex justify-end gap-3' },
+              [
+                h(NButton, {
+                  secondary: true,
+                  onClick: () => {
+                    n.destroy()
+                  },
+                }, { default: () => i18n.t('notifications.user.cancel') }),
+                h(NButton, {
+                  type: 'primary',
+                  onClick: () => {
+                    n.destroy()
+                    navigateTo(profile.lastCoursePage?.url ?? '/')
+                  },
+                }, { default: () => i18n.t('notifications.user.ok') }),
+              ],
+            ),
+        })
+      } else {
+        message.info(i18n.t('notifications.user.welcome_back', { name: profile.full_name }))
+      }
+
       return navigateTo(localePath('/'))
     } else {
       return navigateTo(localePath('/onboarding'))
