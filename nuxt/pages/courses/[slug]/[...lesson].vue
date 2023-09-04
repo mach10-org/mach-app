@@ -92,6 +92,10 @@ const { data } = await useAsyncData(contentKey.value, () =>
   queryContent(contentPath.value).findOne(),
 )
 
+if (!data.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
+
 const hasTitleInBody = computed(() => data.value?.body.children.findIndex(el => el.tag === 'h1') !== -1)
 
 useSeoMeta({
@@ -111,8 +115,6 @@ const { data: prevNext } = await useAsyncData(`${contentKey.value}-prev-next`, (
   ).where({ _path: { $not: { $containsAny: ['_dir', indexFile] } } }).only(['title', '_path'])
     .findSurround(contentPath.value),
 )
-
-// TODO handle 404
 
 const prevNextRef = ref<HTMLDivElement | null>(null)
 const prevNextIsVisible = useElementVisibility(prevNextRef)
