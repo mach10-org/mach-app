@@ -4,6 +4,11 @@ import transformerDirectives from '@unocss/transformer-directives'
 import { themeConfig } from './theme.config'
 
 export default defineConfig({
+  content: {
+    filesystem: [
+      'content/**/*.md',
+    ],
+  },
   shortcuts: [
     ['root', `
         selector-[:root]:(
