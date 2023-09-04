@@ -19,7 +19,7 @@ This Markdown file creates a page at `your-domain.com/page-1/`
 
 ### Quizz example
 
-::quizz
+::quiz
 ---
 title: Which term does NOT describe JavaScript?
 slug: dotnet-js
