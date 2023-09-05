@@ -5,10 +5,10 @@ preview: courses.jpg
 ---
 
 ::courses-list
-#updates-title
+#updatesTitle
 Updates
 
-#updates-description
+#updatesDescription
 Stay up to date with our future courses
 
 #title

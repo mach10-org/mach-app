@@ -264,10 +264,4 @@ export default defineNuxtConfig({
         'zenscript'],
     },
   },
-
-  // TODO remove https://github.com/nuxt/content/issues/2254
-  alias: {
-    'micromark/lib/preprocess.js': 'micromark',
-    'micromark/lib/postprocess.js': 'micromark',
-  },
 })
