@@ -27,6 +27,10 @@ export const useQuizStore = defineStore('quiz', {
           label,
         })
 
+        if (error) {
+          throw error
+        }
+
         this.answers.push({
           id: 'fake',
           slug,
@@ -42,7 +46,9 @@ export const useQuizStore = defineStore('quiz', {
 
         return true
       } catch (error) {
-        // TODO handle error
+        const discreteApi = useDiscreteApi()
+        console.error(error)
+        discreteApi.message.error('Error while saving the answer')
       }
 
       return false

@@ -39,6 +39,10 @@ export const useCourseStore = defineStore('course', {
           slug_course: course,
         }).select('slug, slug_course').single()
 
+        if (error) {
+          throw error
+        }
+
         const index = this.learningLessons.findIndex(l => l.slug === lesson && l.slug_course === course)
 
         if (index === -1) {
@@ -49,7 +53,9 @@ export const useCourseStore = defineStore('course', {
 
         return true
       } catch (error) {
-        // TODO handle error
+        const discreteApi = useDiscreteApi()
+        console.error(error)
+        discreteApi.message.error('Error while saving the lesson status')
       }
 
       return false
@@ -66,10 +72,17 @@ export const useCourseStore = defineStore('course', {
           slug: lesson,
           slug_course: course,
         })
+
+        if (error) {
+          throw error
+        }
+
         return true
       } catch (error) {
-        // TODO handle error
         this.learningLessons.push({ slug: lesson, slug_course: course })
+        const discreteApi = useDiscreteApi()
+        console.error(error)
+        discreteApi.message.error('Error while saving the lesson status')
       }
 
       return false

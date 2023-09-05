@@ -57,13 +57,11 @@ import {
   FormInst,
   FormItemRule,
   InputInst,
-  useMessage,
 } from 'naive-ui'
 import { Database } from '~/types/database.types'
 
 const supabase = useSupabaseClient<Database>()
 
-const message = useMessage()
 const i18n = useI18n()
 const config = useRuntimeConfig()
 const formRef = ref<FormInst | null>(null)
@@ -93,10 +91,11 @@ onMounted(() => {
 })
 
 const signInWithOtp = (e: Event) => {
+  const discreteApi = useDiscreteApi()
   e.preventDefault()
   formRef.value?.validate(async (errors) => {
     if (errors) {
-      message.error(i18n.t('notifications.newsletter.not_valid_email'))
+      discreteApi.message.error(i18n.t('notifications.newsletter.not_valid_email'))
       return
     }
 
@@ -109,13 +108,13 @@ const signInWithOtp = (e: Event) => {
       },
     })
     if (error) {
-      message.error(error.message)
+      discreteApi.message.error(error.message)
       console.error(error)
 
       return
     }
 
-    message.success(i18n.t('pages.login.magic_link_sent'))
+    discreteApi.message.success(i18n.t('pages.login.magic_link_sent'))
     isLoadingEmail.value = false
     formValue.value.email = ''
   })
@@ -130,7 +129,8 @@ const signInWithGitHub = async (e: Event) => {
 
   const { error } = await supabase.auth.signInWithOAuth({ provider: 'github' })
   if (error) {
-    message.error(error.message)
+    const discreteApi = useDiscreteApi()
+    discreteApi.message.error(error.message)
     console.error(error)
 
     isLoadingGithub.value = false

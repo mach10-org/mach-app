@@ -112,7 +112,6 @@ import { useProfileStore } from '~/stores/profile'
 const user = useSupabaseUser()
 const profile = useProfileStore()
 const i18n = useI18n()
-const message = useMessage()
 
 const model = ref({
   firstname: '',
@@ -138,7 +137,8 @@ const educationsList = computed(() => i18n.tm('pages.profile.education_list') as
 const submit = async () => {
   isLoading.value = true
   if (await profile.saveProfile(model.value.firstname, model.value.goals, model.value.computerXp, model.value.devices, model.value.age, model.value.gender, model.value.education, model.value.about)) {
-    message.success(i18n.t('pages.profile.successfullySaved'))
+    const discreteApi = useDiscreteApi()
+    discreteApi.message.success(i18n.t('pages.profile.successfullySaved'))
   }
   isLoading.value = false
 }

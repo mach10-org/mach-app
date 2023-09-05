@@ -51,6 +51,10 @@ export const useProfileStore = defineStore('profile', {
           .from('profiles')
           .select('*, last_url(url, title, main), learning_lesson(slug, slug_course), answers(id, slug, slug_course, label, is_correct)').single()
 
+        if (error) {
+          throw error
+        }
+
         this.about = profile?.about ?? null
         this.age = profile?.age ?? null
         this.avatar_url = profile?.avatar_url ?? null
@@ -72,7 +76,9 @@ export const useProfileStore = defineStore('profile', {
         const quiz = useQuizStore()
         quiz.answers = profile?.answers ?? []
       } catch (error) {
-        // TODO handle error
+        const discreteApi = useDiscreteApi()
+        console.error(error)
+        discreteApi.message.error('Error while loading the profile')
       }
 
       this.isLoading = false
@@ -95,6 +101,10 @@ export const useProfileStore = defineStore('profile', {
           age,
         }).select().single()
 
+        if (error) {
+          throw error
+        }
+
         this.age = profile?.age ?? null
         this.computer_xp = profile?.computer_xp ?? null
         this.devices = profile?.devices ?? null
@@ -103,7 +113,9 @@ export const useProfileStore = defineStore('profile', {
 
         return true
       } catch (error) {
-        // TODO handle error
+        const discreteApi = useDiscreteApi()
+        console.error(error)
+        discreteApi.message.error('Error while saving the onboarding')
       }
 
       return false
@@ -132,6 +144,10 @@ export const useProfileStore = defineStore('profile', {
           about,
         }).select().single()
 
+        if (error) {
+          throw error
+        }
+
         this.age = profile?.age ?? null
         this.computer_xp = profile?.computer_xp ?? null
         this.devices = profile?.devices ?? null
@@ -143,7 +159,9 @@ export const useProfileStore = defineStore('profile', {
 
         return true
       } catch (error) {
-        // TODO handle error
+        const discreteApi = useDiscreteApi()
+        console.error(error)
+        discreteApi.message.error('Error while saving the profile')
       }
 
       return false
@@ -160,11 +178,17 @@ export const useProfileStore = defineStore('profile', {
           main,
         }).select('url, title, main').single()
 
+        if (error) {
+          throw error
+        }
+
         this.lastCoursePage = data ?? null
 
         return true
       } catch (error) {
-        // TODO handle error
+        const discreteApi = useDiscreteApi()
+        console.error(error)
+        discreteApi.message.error('Error while saving the last page')
       }
 
       return false
@@ -199,11 +223,17 @@ export const useProfileStore = defineStore('profile', {
           xp: this.xp + value,
         })
 
+        if (error) {
+          throw error
+        }
+
         this.xp += value
 
         return true
       } catch (error) {
-        // TODO handle error
+        const discreteApi = useDiscreteApi()
+        console.error(error)
+        discreteApi.message.error('Error while incrementing the XP')
       }
 
       return false

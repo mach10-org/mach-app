@@ -54,7 +54,7 @@ const props = defineProps({
   focus: Boolean,
 })
 
-const message = useMessage()
+// const message = useMessage()
 const supabase = useSupabaseClient<Database>()
 const i18n = useI18n()
 const formRef = ref<FormInst | null>(null)
@@ -83,21 +83,22 @@ onMounted(() => {
 const handleSendMail = (e) => {
   e.preventDefault()
   formRef.value?.validate(async (errors) => {
+    const discreteApi = useDiscreteApi()
     // TODO handle errors in console
     if (!errors) {
       try {
         const { error } = await supabase.from('newsletter').insert({ email: formValue.value.email })
         if (error?.code === '23505') {
-          message.info(errorMsg(parseInt(error.code)))
+          discreteApi.message.info(errorMsg(parseInt(error.code)))
         } else {
-          message.success(i18n.t('notifications.newsletter.email_saved'))
+          discreteApi.message.success(i18n.t('notifications.newsletter.email_saved'))
           formValue.value.email = ''
         }
       } catch (error) {
-        message.error(errorMsg(parseInt(error.code)))
+        discreteApi.message.error(errorMsg(parseInt(error.code)))
       }
     } else {
-      message.error(i18n.t('notifications.newsletter.not_valid_email'))
+      discreteApi.message.error(i18n.t('notifications.newsletter.not_valid_email'))
     }
   })
 }

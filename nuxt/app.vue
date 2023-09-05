@@ -1,13 +1,9 @@
 <template>
   <NaiveConfig :theme-config="themeConfig">
-    <n-message-provider placement="bottom">
-      <n-notification-provider placement="bottom">
-        <SeoKit />
-        <NuxtLayout class="root rootdark">
-          <NuxtPage />
-        </NuxtLayout>
-      </n-notification-provider>
-    </n-message-provider>
+    <SeoKit />
+    <NuxtLayout class="root rootdark">
+      <NuxtPage />
+    </NuxtLayout>
   </NaiveConfig>
 </template>
 
@@ -26,5 +22,4 @@ watch(user, (val) => {
     profile.reset()
   }
 }, { immediate: true })
-
 </script>
