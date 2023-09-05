@@ -1,12 +1,15 @@
 import { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import { Dayjs } from 'dayjs'
+import { create } from 'lodash'
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { Database } from '~/types/database.types'
+import { sectionFile } from '~/utils/course'
 
 type learningLessonRows = Database['public']['Tables']['learning_lesson']['Row']
 interface State {
   isLoading: boolean
   list: Record<string, Pick<ParsedContent, string>[]>
-  learningLessons: Omit<learningLessonRows, 'created_at' | 'user_id' | 'updated_at'>[]
+  learningLessons: Omit<learningLessonRows, 'user_id' | 'updated_at'>[]
 }
 
 export const useCourseStore = defineStore('course', {
@@ -39,15 +42,31 @@ export const useCourseStore = defineStore('course', {
 
       return courses
     },
+    getLessonsByCourseWithoutSection () {
+      const courses: Record<string, Pick<ParsedContent, string>[]> = { ...this.getLessonsByCourse }
+
+      Object.keys(courses).forEach((key) => {
+        courses[key] = courses[key].filter(l => !l._path.endsWith(sectionFile))
+      })
+
+      return courses
+    },
     getLearningLessonsByCourse (state) {
-      const courses: Record<string, string[]> = {}
+      const dayjs = useDayjs()
+      const courses: Record<string, Array<{
+        slug: string
+        created_at: Dayjs
+      }>> = {}
 
       state.learningLessons.forEach((element) => {
         if (!courses[element.slug_course]) {
           courses[element.slug_course] = []
         }
 
-        courses[element.slug_course].push(element.slug)
+        courses[element.slug_course].push({
+          slug: element.slug,
+          created_at: dayjs(element.created_at),
+        })
       })
 
       return courses

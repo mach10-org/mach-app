@@ -142,7 +142,7 @@
       "notEnrolledCTA": "Get started today !",
       "summary_left": "Courses enrolled",
       "summary_right": "Lessons completed",
-      "progress_percentTitle": "You're {arg1}% through your enrolled Courses.",
+      "progress_percentTitle": "You're {percentage} through your enrolled Courses.",
       "progress_percentSubtile": "lessons completed",
       "detail_goToCourse": "Go to course",
       "detail_completed": "exercises completed",

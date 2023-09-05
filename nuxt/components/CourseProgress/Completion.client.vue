@@ -44,7 +44,7 @@ const isActiveLessonLearned = computed(() => learningLessons.value.findIndex(l =
 
 const hasTouch = useSupported(() => (process.client && (('ontouchstart' in window) || (navigator.maxTouchPoints > 0))))
 
-const lessons = computed(() => course.getLessonsByCourse[props.courseSlug].filter(l => !l._path.endsWith('_dir')))
+const lessons = computed(() => course.getLessonsByCourseWithoutSection[props.courseSlug])
 
 const percentage = computed(() => {
   if (!lessons.value) {

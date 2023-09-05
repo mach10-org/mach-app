@@ -84,7 +84,7 @@ export default defineNuxtConfig({
   },
 
   dayjs: {
-    plugins: ['advancedFormat'],
+    plugins: ['advancedFormat', 'isSameOrAfter', 'localizedFormat'],
   },
 
   content: {

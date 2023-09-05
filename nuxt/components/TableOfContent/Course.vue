@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import { useCourseStore } from '~/stores/course'
+import { sectionFile } from '~/utils/course'
 
 const props = defineProps({
   courseSlug: {
@@ -49,6 +50,6 @@ const data = computed(() => courses.getLessonsByCourse[props.courseSlug])
 const toc = computed(() => {
   const dirs = _sortBy(_uniqBy(data.value, '_dir').map(d => ({ title: data.value?.find(v => v._path.endsWith(`/${d._dir}/_dir`))?.title, id: d._dir })), 'id')
 
-  return dirs.map(d => ({ title: d.title, children: data.value?.filter(v => v._dir === d.id && !v._path.endsWith('_dir')) }))
+  return dirs.map(d => ({ title: d.title, children: data.value?.filter(v => v._dir === d.id && !v._path.endsWith(sectionFile)) }))
 })
 </script>

@@ -114,7 +114,7 @@ const prevNext = computed(() => {
   if (!dataIndex.value) {
     return ret
   }
-  const lessons = course.getLessonsByCourse[dataIndex.value._dir].filter(v => !v._path.endsWith('_dir'))
+  const lessons = course.getLessonsByCourseWithoutSection[dataIndex.value._dir]
   const index = lessons.findIndex(c => c._path.endsWith(route.fullPath))
 
   if (index === -1) {
