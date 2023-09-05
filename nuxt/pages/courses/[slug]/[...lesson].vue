@@ -135,7 +135,7 @@ const prevNextRef = ref<HTMLDivElement | null>(null)
 const prevNextIsVisible = useElementVisibility(prevNextRef)
 
 watch(prevNextIsVisible, (val) => {
-  if (val) {
+  if (user.value && val) {
     course.setLessonLearned(route.params.slug as string, (route.params.lesson as string[]).join('/'))
   }
 })
