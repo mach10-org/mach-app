@@ -54,28 +54,6 @@ export const useCourseStore = defineStore('course', {
     },
   },
   actions: {
-    async fetchCourses () {
-      this.isLoading = true
-
-      const { locales } = useI18n()
-
-      for await (const locale of locales.value) {
-        // console.log(locale)
-
-        const { data: list } = await useAsyncData(`courses-${locale.code}`, () =>
-          queryContent(
-            locale.code, 'courses',
-          ).where({ _path: { $not: { $eq: `/${locale.code}/courses` } } }).only(['title', 'description', 'lastmod', 'order', 'preview', 'totalHours', '_dir', '_path']).find(),
-        )
-        // console.log(list.value)
-
-        if (list.value) {
-          this.list[locale.code] = list.value
-        }
-      }
-
-      this.isLoading = false
-    },
     async setLessonLearned (course: string, lesson: string) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()

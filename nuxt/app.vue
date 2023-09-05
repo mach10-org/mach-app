@@ -17,7 +17,25 @@ const user = useSupabaseUser()
 const profile = useProfileStore()
 const course = useCourseStore()
 
-course.fetchCourses()
+const { locales } = useI18n()
+const index = ref(0)
+
+// Fetch courses
+for (const locale of locales.value) {
+  const { data: list } = await useAsyncData(`courses-${locale.code}`, () =>
+    queryContent(
+      locale.code, 'courses',
+    ).where({ _path: { $not: { $eq: `/${locale.code}/courses` } } }).only(['title', 'description', 'lastmod', 'order', 'preview', 'totalHours', '_dir', '_path']).find(),
+  )
+
+  if (list.value) {
+    course.list[locale.code] = list.value
+  }
+
+  if (++index.value === locales.value.length) {
+    course.isLoading = false
+  }
+}
 
 watch(user, (val) => {
   if (val) {
