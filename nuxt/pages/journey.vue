@@ -17,7 +17,7 @@
           <p class="mb-4 text-center text-xl font-medium lg:text-2xl">
             {{ $t('pages.journey.notEnrolled') }}
           </p>
-          <div class="text-text-base m-0 text-center leading-6">
+          <div class="m-0 text-center text-base leading-6">
             <ButtonLink size="large" :to="localePath('/courses')">
               {{ $t('pages.journey.notEnrolledCTA') }}
             </ButtonLink>

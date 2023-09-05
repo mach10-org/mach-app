@@ -1,7 +1,7 @@
 <template>
   <CourseProgressCircle v-if="percentage" :percentage="percentage" />
 
-  <p v-if="percentage" class="text-text-base ml-3 hidden font-medium lg:block md:text-lg">
+  <p v-if="percentage" class="ml-3 hidden font-medium text-$text-base lg:block md:text-lg">
     Completion
   </p>
 
@@ -40,7 +40,7 @@ const course = useCourseStore()
 
 const activeLessonComputed = computed(() => Array.isArray(props.activeLesson) ? props.activeLesson.join('/') : props.activeLesson)
 const learningLessons = computed(() => course.getLearningLessonsByCourse[props.courseSlug] ?? [])
-const isActiveLessonLearned = computed(() => learningLessons.value.findIndex(l => activeLessonComputed.value.endsWith(l)) !== -1)
+const isActiveLessonLearned = computed(() => learningLessons.value.findIndex(l => activeLessonComputed.value.endsWith(l.slug)) !== -1)
 
 const hasTouch = useSupported(() => (process.client && (('ontouchstart' in window) || (navigator.maxTouchPoints > 0))))
 

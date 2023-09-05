@@ -1,7 +1,7 @@
 <template>
   <ul class="grid mx-auto mt-14 max-w-3xl p-0 md:grid-cols-2">
     <li class="flex flex-col items-center justify-center border-b border-$border-input py-4 md:border-b-0 md:border-r">
-      <h2 class="text-text-title mb-1 text-2xl font-extrabold lg:text-3xl">
+      <h2 class="mb-1 text-2xl font-extrabold text-$text-title lg:text-3xl">
         {{ courses }}
       </h2>
       <p class="text-base text-$text-muted">

@@ -26,7 +26,7 @@
     <div v-show="isOpen" :id="'#' + course._dir + '-body'" :aria-labelledby="course._dir + '-heading'" class="mx-auto px-6 pb-6 md:grid-cols-2" :class="{ grid: isOpen }">
       <div class="flex flex-col items-center justify-center border-b border-$border-input py-4 md:border-b-0 md:border-r">
         <Icon name="heroicons:chart-bar-20-solid" class="mb-1 h-10 w-10 text-$text-muted" />
-        <h4 class="text-text-title text-2xl font-medium">
+        <h4 class="text-2xl font-medium text-$text-title">
           {{ $t('pages.journey.detail_lastWeeks') }}
         </h4>
         <p class="text-center">

@@ -6,7 +6,7 @@
     <div class="">
       <div class="flex items-center justify-center pb-2 pt-8">
         <span class="mr-3 text-2xl sm:text-3xl">👩🏻‍🚀</span>
-        <span class="text-text-base self-center whitespace-nowrap text-xl font-semibold"> {{ config.public.siteName }} </span>
+        <span class="self-center whitespace-nowrap text-xl font-semibold text-$text-base"> {{ config.public.siteName }} </span>
       </div>
     </div>
 
