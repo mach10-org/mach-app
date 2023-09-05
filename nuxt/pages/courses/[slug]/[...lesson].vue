@@ -70,6 +70,7 @@
 </template>
 
 <script setup lang="ts">
+import { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import { indexFile } from '~/utils/course'
 import { useProfileStore } from '~/stores/profile'
 import { useCourseStore } from '~/stores/course'
@@ -103,18 +104,32 @@ useSeoMeta({
   description: () => data.value?.description,
 })
 
-const { data: dataIndex } = await useAsyncData(`course-${route.params.slug}-index`, () =>
-  queryContent(
-    `${contentRootPath.value}/${indexFile}`,
-  ).findOne(),
-)
+const isLoadingCourses = computed(() => course.isLoading)
+await until(isLoadingCourses).toBe(false)
+const dataIndex = computed(() => course.getCourses.find(c => c._path.endsWith(`${route.params.slug}/${indexFile}`)))
 
-const { data: prevNext } = await useAsyncData(`${contentKey.value}-prev-next`, () =>
-  queryContent(
-    contentRootPath.value,
-  ).where({ _path: { $not: { $containsAny: ['_dir', indexFile] } } }).only(['title', '_path'])
-    .findSurround(contentPath.value),
-)
+const prevNext = computed(() => {
+  const ret: [Pick<ParsedContent, string> | null, Pick<ParsedContent, string> | null] = [null, null]
+
+  if (!dataIndex.value) {
+    return ret
+  }
+  const lessons = course.getLessonsByCourse[dataIndex.value._dir].filter(v => !v._path.endsWith('_dir'))
+  const index = lessons.findIndex(c => c._path.endsWith(route.fullPath))
+
+  if (index === -1) {
+    return ret
+  }
+
+  if (index > 0) {
+    ret[0] = lessons[index - 1]
+  }
+  if (index < lessons.length - 1) {
+    ret[1] = lessons[index + 1]
+  }
+
+  return ret
+})
 
 const prevNextRef = ref<HTMLDivElement | null>(null)
 const prevNextIsVisible = useElementVisibility(prevNextRef)

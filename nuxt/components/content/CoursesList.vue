@@ -13,7 +13,7 @@
       </p>
       <ul class="grid mt-10 max-w-3xl gap-4 p-0 md:grid-cols-2 lg:mt-13 md:gap-11">
         <CoursesCard
-          v-for="course in data"
+          v-for="course in courses.getCourses"
           :key="course._path"
           :title="course.title ?? ''"
           :description="course.description"
@@ -33,16 +33,14 @@
 </template>
 
 <script setup lang="ts">
+import { useCourseStore } from '~/stores/course'
 import { indexFile } from '~/utils/course'
 
-const { locale } = useI18n()
 const localePath = useLocalePath()
+const courses = useCourseStore()
 
-const { data } = await useAsyncData('courses-list', () =>
-  queryContent(
-    locale.value, 'courses',
-  ).where({ _path: { $contains: indexFile } }).sort({ order: 1 }).find(),
-)
+const isLoading = computed(() => courses.isLoading)
+await until(isLoading).toBe(false)
 
 const buildHref = (path: string) => {
   return localePath(getPathWithoutLocale(path).replace(indexFile, ''))

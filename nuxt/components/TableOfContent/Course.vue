@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { indexFile } from '~/utils/course'
+import { useCourseStore } from '~/stores/course'
 
 const props = defineProps({
   courseSlug: {
@@ -39,14 +39,12 @@ const props = defineProps({
   },
 })
 
-const { locale } = useI18n()
+const courses = useCourseStore()
 
-// eslint-disable-next-line vue/no-setup-props-destructure
-const { data } = await useAsyncData(`course-${props.courseSlug}-pages`, () =>
-  queryContent(
-    locale.value, 'courses', props.courseSlug,
-  ).where({ _path: { $not: { $contains: indexFile } } }).only(['_path', 'title', '_dir']).find(),
-)
+const isLoading = computed(() => courses.isLoading)
+await until(isLoading).toBe(false)
+
+const data = computed(() => courses.getLessonsByCourse[props.courseSlug])
 
 const toc = computed(() => {
   const dirs = _sortBy(_uniqBy(data.value, '_dir').map(d => ({ title: data.value?.find(v => v._path.endsWith(`/${d._dir}/_dir`))?.title, id: d._dir })), 'id')

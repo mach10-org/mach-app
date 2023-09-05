@@ -1,19 +1,45 @@
+import { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { Database } from '~/types/database.types'
 
 type learningLessonRows = Database['public']['Tables']['learning_lesson']['Row']
 interface State {
   isLoading: boolean
+  list: Record<string, Pick<ParsedContent, string>[]>
   learningLessons: Omit<learningLessonRows, 'created_at' | 'user_id' | 'updated_at'>[]
 }
 
 export const useCourseStore = defineStore('course', {
   state: (): State => ({
     isLoading: true,
+    list: {},
     learningLessons: [],
   }),
   getters: {
-    learningLessonsByCourse (state) {
+    getCourses (state) {
+      const { locale } = useI18n()
+
+      if (!state.list[locale.value]) {
+        return []
+      }
+
+      return state.list[locale.value].filter(l => l._path.endsWith(indexFile)).sort((a, b) => a.order - b.order)
+    },
+    getLessonsByCourse (state) {
+      const { locale } = useI18n()
+      const courses: Record<string, Pick<ParsedContent, string>[]> = {}
+
+      this.getCourses.forEach((element) => {
+        if (!state.list[locale.value]) {
+          courses[element._dir] = []
+        } else {
+          courses[element._dir] = state.list[locale.value].filter(l => l._path.startsWith(`/${locale.value}/courses/${element._dir}/`) && !l._path.endsWith(indexFile))
+        }
+      })
+
+      return courses
+    },
+    getLearningLessonsByCourse (state) {
       const courses: Record<string, string[]> = {}
 
       state.learningLessons.forEach((element) => {
@@ -28,6 +54,28 @@ export const useCourseStore = defineStore('course', {
     },
   },
   actions: {
+    async fetchCourses () {
+      this.isLoading = true
+
+      const { locales } = useI18n()
+
+      for await (const locale of locales.value) {
+        // console.log(locale)
+
+        const { data: list } = await useAsyncData(`courses-${locale.code}`, () =>
+          queryContent(
+            locale.code, 'courses',
+          ).where({ _path: { $not: { $eq: `/${locale.code}/courses` } } }).only(['title', 'description', 'lastmod', 'order', 'preview', 'totalHours', '_dir', '_path']).find(),
+        )
+        // console.log(list.value)
+
+        if (list.value) {
+          this.list[locale.code] = list.value
+        }
+      }
+
+      this.isLoading = false
+    },
     async setLessonLearned (course: string, lesson: string) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()

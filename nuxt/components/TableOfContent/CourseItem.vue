@@ -21,6 +21,6 @@ const props = defineProps<Props>()
 const localePath = useLocalePath()
 const course = useCourseStore()
 
-const learningLessons = computed(() => course.learningLessonsByCourse[props.courseSlug] ?? [])
+const learningLessons = computed(() => course.getLearningLessonsByCourse[props.courseSlug] ?? [])
 const isLearned = computed(() => learningLessons.value.findIndex(l => props.path.endsWith(l)) !== -1)
 </script>

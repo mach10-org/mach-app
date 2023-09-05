@@ -37,19 +37,14 @@ interface Props {
 
 const props = defineProps<Props>()
 const course = useCourseStore()
-const { locale } = useI18n()
 
 const activeLessonComputed = computed(() => Array.isArray(props.activeLesson) ? props.activeLesson.join('/') : props.activeLesson)
-const learningLessons = computed(() => course.learningLessonsByCourse[props.courseSlug] ?? [])
+const learningLessons = computed(() => course.getLearningLessonsByCourse[props.courseSlug] ?? [])
 const isActiveLessonLearned = computed(() => learningLessons.value.findIndex(l => activeLessonComputed.value.endsWith(l)) !== -1)
 
 const hasTouch = useSupported(() => (process.client && (('ontouchstart' in window) || (navigator.maxTouchPoints > 0))))
 
-const { data: lessons } = await useAsyncData(`course-${props.courseSlug}-lessons`, () =>
-  queryContent(
-    locale.value, 'courses', props.courseSlug,
-  ).where({ _path: { $not: { $containsAny: ['_dir', indexFile] } } }).only(['_path']).find(),
-)
+const lessons = computed(() => course.getLessonsByCourse[props.courseSlug].filter(l => !l._path.endsWith('_dir')))
 
 const percentage = computed(() => {
   if (!lessons.value) {
