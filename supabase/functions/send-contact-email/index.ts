@@ -11,7 +11,7 @@ serve(async (req) => {
 
     const mach10 = {
       email: 'hello@mach10.jp',
-      // email: 'guillaumebartolini@gmail.com', // Test width mail sender
+      // email: 'n.hamelin@ncit.nc', // Test width mail sender
       name: 'Mach10'
     };
 
@@ -23,17 +23,16 @@ serve(async (req) => {
         'api-key': Deno.env.get('BREVO_API_KEY') || ''
       },
       body: JSON.stringify({
-        sender: { name: `${mach10.name} - Contact form`, email: mach10.email },
+        sender: { name: mach10.name, email: mach10.email },
         to: [mach10],
         replyTo: { email, name },
-        subject: 'test send via edge function',
-        textContent: 'test send via edge function',
+        subject: `[Mach10 contact form] ${subject}}`,
+        textContent: message,
         htmlContent: `<html><head></head><body>
         <p><b>From:</b> ${name} - ${email}</p>
         <p><b>Topic:</b> ${topic}</p>
-        <p><b>Subject:</b> ${subject}</p>
         <p><b>Message:</b></br>${message}</p>
-        </body></html>`
+        </body></html>` 
       })
     };
 

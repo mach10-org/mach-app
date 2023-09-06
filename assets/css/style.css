@@ -1,0 +1,3 @@
+.link {
+  @apply text-$link underline underline-dashed hover:(text-$link-hover underline-solid);
+}

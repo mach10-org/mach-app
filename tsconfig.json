@@ -1,33 +1,4 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "compilerOptions": {
-    "strictNullChecks": true,
-    "allowJs": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "types": ["vite/client", "@astrojs/image/client"],
-    "plugins": [
-      {
-        "name": "@astrojs/ts-plugin"
-      }
-    ],
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@constants/*": ["src/constants/*"],
-      "@content/*": ["src/content/*"],
-      "@assets/*": ["src/assets/*"],
-      "@pages/*": ["src/pages/*"],
-      "@styles/*": ["src/styles/*"],
-      "@models/*": ["src/models/*"],
-      "@stores/*": ["src/stores/*"],
-      "@plugins/*": ["src/plugins/*"],
-      "@utils/*": ["src/utils/*"],
-      "@strores/*": ["src/strores/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@PageLayout": ["src/layouts/PageLayout.astro"],
-      "@ContentLayout": ["src/layouts/ContentLayout.astro"],
-      "@IntroLayout": ["src/layouts/IntroLayout.astro"]
-    },
-    "jsxImportSource": "react"
-  }
+  // https://nuxt.com/docs/guide/concepts/typescript
+  "extends": "./.nuxt/tsconfig.json"
 }

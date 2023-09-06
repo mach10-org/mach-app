@@ -1,25 +1,21 @@
 {
-  "files.associations": {
-    "*.mdx": "mdx"
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "[markdown]": {
-    "editor.fontSize": 14,
-    "editor.lineHeight": 26,
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 150,
-    "editor.lineNumbers": "off",
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    },
-    "editor.minimap.enabled": false
+  "[html]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "frontMatter.content.pageFolders": [
-    {
-      "title": "content",
-      "path": "[[workspace]]/src/content"
-    }
-  ],
-  "frontMatter.preview.host": "http://localhost:3000/"
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "cSpell.words": [
+    "Nuxt",
+    "supabase"
+  ]
 }
