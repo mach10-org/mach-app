@@ -213,6 +213,7 @@ import { useProfileStore } from '~/stores/profile'
 
 definePageMeta({
   layout: 'onboarding',
+  middleware: 'auth',
 })
 
 const config = useRuntimeConfig()
@@ -315,10 +316,6 @@ onMounted(async () => {
   if (firstnameInput.value) {
     firstnameInput.value.focus()
   }
-})
-
-definePageMeta({
-  middleware: 'auth',
 })
 </script>
 
