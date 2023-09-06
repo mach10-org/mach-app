@@ -91,4 +91,4 @@ Giving these kids access to computers and programming lessons would give them a 
 
 These are just a few random ideas. Ideas are cheap, executing them smoothly is the hard part. In any case, we can all witness that the world is undergoing very profound changes and they are accelerating. I also believe new challenges mean new ways of thinking and new solutions. The ideas above might seem unconventional and a bit strange, good, that's where we are heading.
 
-If what you read above found echo in you and you want to help somehow, [please contact us](/contact/).
+If what you read above found echo in you and you want to help somehow, [please contact us](/contact).

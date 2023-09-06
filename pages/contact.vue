@@ -3,7 +3,7 @@
     <template #header>
       <i18n-t keypath="pages.contact.title" tag="h1" class="text-text-title text-2xl font-extrabold tracking-tight lg:mb-8 md:text-4xl">
         <template #email>
-          <a href="`mailto:${localContact.title_email}`" class="from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-transparent">
+          <a href="mailto:hello@mach10.jp" class="from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-transparent">
             hello@mach10.jp
           </a>
         </template>
