@@ -17,9 +17,6 @@
       "ok": "Sure",
       "cancel": "Not now"
     },
-    "contact": {
-      "email_sent": "Your mail has been sent to a team member!"
-    },
     "schedule": {
       "success": "Your schedule has been saved"
     }
@@ -163,13 +160,15 @@
       "magic_link_sent": "An email should arrive in your inbox shortly!"
     },
     "contact": {
-      "title_start": "Get in touch to",
-      "title_email": "helloTODOmach10.jp",
-      "title_end": "or use the form below",
+      "title": "Get in touch to {email} or use the form below",
       "form_nameLabel": "Full name",
+      "form_nameRequired": "Full name is required",
       "form_emailLabel": "Your email address",
       "form_emailSublabel": "(So we can reply to you)",
+      "form_emailRequired": "Email is required",
+      "form_emailInvalid": "Email is invalid",
       "form_topicLabel": "Topic",
+      "form_topicRequired": "Topic is required",
       "form_topicPlaceholder": "Select a topic",
       "form_topicList": [
         "I have a question",
@@ -178,9 +177,13 @@
       ],
       "form_subjectLabel": "Subject",
       "form_subjecPlaceholder": "Let us know how we can help you",
+      "form_subjectRequired": "Subject is required",
       "form_messageLabel": "Your message",
       "form_messagePlaceholder": "Leave a comment...",
-      "submit": "Send message"
+      "form_messageRequired": "Message is required",
+      "submit": "Send message",
+      "error": "An error has occured! Please try again later!",
+      "success": "Your mail has been sent to a team member!"
     },
     "course": {
       "toc": "Table of content",
