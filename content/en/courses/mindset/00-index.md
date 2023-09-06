@@ -1,8 +1,6 @@
 ---
 title: Prepare your mindset
-description: This short introduction will give you a few tips to make the most of this course
-tags:
-  - mindset
+description: This will help you make the most of all the other courses
 preview: course-prepare-your-mindset.png
 lastmod: 2023-05-24T04:28:53.384Z
 totalHours: 4

@@ -26,7 +26,20 @@ export const useCourseStore = defineStore('course', {
         return []
       }
 
-      return state.list[locale.value].filter(l => l._path.endsWith(indexFile)).sort((a, b) => a.order - b.order)
+      const config = useRuntimeConfig()
+
+      return state.list[locale.value].filter(l => l._path.endsWith(indexFile)).sort((a, b) => a.order - b.order).map((c) => {
+        if (c.isComingSoon && config.public.platform === 'prod') {
+          return {
+            ...c,
+            _path: '/stay-up-to-date',
+            preview: 'coming-soon.jpg',
+            totalHours: 0,
+          }
+        }
+
+        return c
+      })
     },
     getLessonsByCourse (state) {
       const { locale } = useI18n()

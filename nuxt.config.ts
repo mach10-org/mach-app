@@ -12,6 +12,7 @@ export default defineNuxtConfig({
       siteName: 'Mach10',
       siteDescription: 'We are on a mission to transform lives of 10,000 people. Why not you? It starts today 👩🏻‍🚀',
       language: 'en-US',
+      platform: process.env.NUXT_PUBLIC_PLATFORM || 'local',
       trailingSlash: false,
     },
   },

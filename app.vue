@@ -25,7 +25,7 @@ for (const locale of locales.value) {
   const { data: list } = await useAsyncData(`courses-${locale.code}`, () =>
     queryContent(
       locale.code, 'courses',
-    ).where({ _path: { $not: { $eq: `/${locale.code}/courses` } } }).only(['title', 'description', 'lastmod', 'order', 'preview', 'totalHours', '_dir', '_path']).find(),
+    ).where({ _path: { $not: { $eq: `/${locale.code}/courses` } } }).only(['title', 'description', 'lastmod', 'order', 'preview', 'totalHours', 'isComingSoon', '_dir', '_path']).find(),
   )
 
   if (list.value) {

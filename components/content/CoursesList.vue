@@ -26,12 +26,6 @@
           :preview="course.preview"
           :total-hours="course.totalHours"
         />
-        <CoursesCard
-          title="More to come!"
-          description="We’ll keep adding content in the future"
-          :href="localePath('/stay-up-to-date/')"
-          preview="coming-soon.jpg"
-        />
       </ul>
     </div>
   </div>

@@ -1,9 +1,6 @@
 ---
-title: GOLANG BOOK
-description: Test Lorem markdownum fumante aura etiam potuit praebetis differt sagittam Thebae quies, praemiaque lepores.
-tags:
-  - GoLang
-  - BAKEND
+title: Software engineering with Go
+description: This course will teach you how to build software using the Go programming language.
 preview: course-go.jpg
 lastmod: 2023-05-31T04:32:01.353Z
 totalHours: 120
