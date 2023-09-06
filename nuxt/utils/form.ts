@@ -4,6 +4,5 @@ export const validateEmail = (email: string) => {
 }
 
 export const errorMsg = (code: number | null = null) => {
-  const i18n = useI18n()
-  return code ? i18n.t(`errors.code.${code}`) || i18n.t('errors.code.default') : i18n.t('errors.code.default')
+  return code ? `errors.code.${code}` || 'errors.code.default' : 'errors.code.default'
 }

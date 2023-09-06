@@ -84,18 +84,17 @@ const handleSendMail = (e) => {
   e.preventDefault()
   formRef.value?.validate(async (errors) => {
     const discreteApi = useDiscreteApi()
-    // TODO handle errors in console
     if (!errors) {
       try {
-        const { error } = await supabase.from('newsletter').insert({ email: formValue.value.email })
+        const { error } = await supabase.from('newsletter').upsert({ email: formValue.value.email })
         if (error?.code === '23505') {
-          discreteApi.message.info(errorMsg(parseInt(error.code)))
+          discreteApi.message.info(i18n.t(errorMsg(parseInt(error.code))))
         } else {
           discreteApi.message.success(i18n.t('notifications.newsletter.email_saved'))
-          formValue.value.email = ''
         }
+        formValue.value.email = ''
       } catch (error) {
-        discreteApi.message.error(errorMsg(parseInt(error.code)))
+        discreteApi.message.error(i18n.t(errorMsg(parseInt(error.code))))
       }
     } else {
       discreteApi.message.error(i18n.t('notifications.newsletter.not_valid_email'))

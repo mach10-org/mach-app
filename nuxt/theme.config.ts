@@ -37,7 +37,6 @@ export const themeConfig: ThemeConfig = {
       titleFontSizeLarge: '20px',
       titleFontWeight: 700,
       borderRadius: '8px',
-      // TODO style
     },
     Menu: {
       fontSize: '16px',
