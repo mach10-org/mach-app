@@ -1,75 +1,11 @@
-# Nuxt 3 Minimal Starter
+# Mach10
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Mach10 is based on [Nuxt 3](https://nuxt.com/docs/getting-started/introduction) and [Supabase](https://supabase.com/docs).
 
-## Setup
+## Contribution
 
-Make sure to install the dependencies:
+- [How to add a course](./HOW_TO_ADD_COURSE.md)
+- [How to add a Quiz in a lesson](./HOW_TO_ADD_QUIZ.md)
+- [How to translate](./HOW_TO_TRANSLATE.md)
 
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## Generate Typescript
-
-```bash
-supabase gen types typescript --local > nuxt/types/database.types.ts
-```
-
-## Generate migration
-
-```bash
-supabase db diff --use-migra -f MIGRATION_NAME
-```
+You'll need to run the server locally, [see how to](./DEVELOPERS.md).
