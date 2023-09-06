@@ -123,8 +123,6 @@ const signInWithOtp = (e: Event) => {
 const signInWithGitHub = async (e: Event) => {
   e.preventDefault()
 
-  // TODO test
-
   isLoadingGithub.value = true
 
   const { error } = await supabase.auth.signInWithOAuth({ provider: 'github' })
