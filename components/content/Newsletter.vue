@@ -29,7 +29,6 @@ import {
   FormInst,
   FormItemRule,
   InputInst,
-  useMessage,
 } from 'naive-ui'
 import type { Database } from '~/types/database.types'
 import { errorMsg, validateEmail } from '~/utils/form'
@@ -80,10 +79,11 @@ onMounted(() => {
   }
 })
 
+const discreteApi = useDiscreteApi()
+
 const handleSendMail = (e) => {
   e.preventDefault()
   formRef.value?.validate(async (errors) => {
-    const discreteApi = useDiscreteApi()
     if (!errors) {
       try {
         const { error } = await supabase.from('newsletter').upsert({ email: formValue.value.email })

@@ -60,7 +60,12 @@ import {
 } from 'naive-ui'
 import { Database } from '~/types/database.types'
 
+definePageMeta({
+  middleware: 'not-auth',
+})
+
 const supabase = useSupabaseClient<Database>()
+const discreteApi = useDiscreteApi()
 
 const i18n = useI18n()
 const config = useRuntimeConfig()
@@ -91,7 +96,6 @@ onMounted(() => {
 })
 
 const signInWithOtp = (e: Event) => {
-  const discreteApi = useDiscreteApi()
   e.preventDefault()
   formRef.value?.validate(async (errors) => {
     if (errors) {
@@ -127,15 +131,10 @@ const signInWithGitHub = async (e: Event) => {
 
   const { error } = await supabase.auth.signInWithOAuth({ provider: 'github' })
   if (error) {
-    const discreteApi = useDiscreteApi()
     discreteApi.message.error(error.message)
     console.error(error)
 
     isLoadingGithub.value = false
   }
 }
-
-definePageMeta({
-  middleware: 'not-auth',
-})
 </script>

@@ -4,6 +4,7 @@
     <NuxtLayout class="root rootdark">
       <NuxtPage />
     </NuxtLayout>
+    <UpdateTheme />
   </NaiveConfig>
 </template>
 

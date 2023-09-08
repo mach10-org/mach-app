@@ -2,11 +2,12 @@ import {
   createDiscreteApi,
   ConfigProviderProps,
 } from 'naive-ui'
+import { useUtilsStore } from '~/stores/utils'
 
 export default function useDiscreteApi () {
-  const theme = useNaiveTheme()
+  const utils = useUtilsStore()
   const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
-    themeOverrides: theme.value,
+    themeOverrides: utils.themeOverrides,
   }))
 
   const discreteApi = createDiscreteApi(

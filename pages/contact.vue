@@ -68,6 +68,7 @@ const user = useSupabaseUser()
 const profile = useProfileStore()
 const i18n = useI18n()
 const supabase = useSupabaseClient()
+const discreteApi = useDiscreteApi()
 
 const model = ref({
   name: '',
@@ -102,8 +103,6 @@ const nameRef = ref<InputInst | null>(null)
 const topicsList = computed(() => (i18n.tm('pages.contact.form_topicList') as VueMessageType[]).map(t => ({ label: i18n.rt(t), value: i18n.rt(t) })))
 
 const submit = async () => {
-  const discreteApi = useDiscreteApi()
-
   try {
     const { data, error } = await supabase.functions.invoke<any>('send-contact-email', { body: model.value })
 

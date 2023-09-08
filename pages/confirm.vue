@@ -12,6 +12,7 @@ const user = useSupabaseUser()
 const localePath = useLocalePath()
 const i18n = useI18n()
 const route = useRoute()
+const discreteApi = useDiscreteApi()
 
 if (route.query.error) {
   throw createError({ statusCode: route.query.error_code ? +route.query.error_code : 500, statusMessage: route.query.error_description?.toString() || 'Login error' })
@@ -26,7 +27,6 @@ watch(user, async () => {
     await until(isLoading).toBe(false)
 
     if (profile.isOnBoarded) {
-      const discreteApi = useDiscreteApi()
       if (profile.lastCoursePage !== null) {
         const n = discreteApi.notification.info({
           title: i18n.t('notifications.user.welcome_back', { name: profile.full_name }),

@@ -1,6 +1,5 @@
 import { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import { Dayjs } from 'dayjs'
-import { create } from 'lodash'
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { Database } from '~/types/database.types'
 import { sectionFile } from '~/utils/course'

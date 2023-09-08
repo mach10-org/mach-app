@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <NaiveNavbar :routes="navbarRoutes" :menu-inverted="false" drawer-closable menu-placement="left" class="w-full">
+    <NaiveNavbar :routes="navbarRoutes" :menu-inverted="false" drawer-closable menu-placement="left">
       <template #start>
         <Brand size="md" />
       </template>
       <template #end>
         <ClientOnly>
           <UserDropdown v-if="user" />
-          <ButtonLink v-else to="/login/" size="large">
+          <ButtonLink v-else :to="localePath('/login/')" size="large">
             {{ $t('header.login') }}
           </ButtonLink>
         </ClientOnly>
@@ -21,6 +21,7 @@
 import { NavbarRoute } from '@bg-dev/nuxt-naiveui'
 const user = useSupabaseUser()
 const i18n = useI18n()
+const localePath = useLocalePath()
 
 const navbarRoutes = computed<NavbarRoute[]>(() => [
   {
