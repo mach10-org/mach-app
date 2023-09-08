@@ -16,9 +16,6 @@
       "lesson": "Lesson",
       "ok": "Sure",
       "cancel": "Not now"
-    },
-    "schedule": {
-      "success": "Your schedule has been saved"
     }
   },
 
@@ -137,7 +134,8 @@
       "title": "Your learning",
       "notEnrolled": "Looks like you didn’t enroll any course yet, how about starting today ?",
       "notEnrolledCTA": "Get started today !",
-      "summary_left": "Courses enrolled",
+      "summary_left": "Weekly goal",
+      "summary_left_link": "Update your schedule",
       "summary_right": "Lessons completed",
       "progress_percentTitle": "You're {percentage} through your enrolled Courses.",
       "progress_percentSubtile": "lessons completed",
@@ -196,7 +194,8 @@
     "next": "Next",
     "choose": "Choose",
     "save": "Save",
-    "submit": "Submit"
+    "submit": "Submit",
+    "hours": "{hours} hours"
   },
 
   "errors": {
