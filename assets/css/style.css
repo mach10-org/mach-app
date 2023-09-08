@@ -1,3 +1,7 @@
 .link {
   @apply text-$link underline underline-dashed hover:(text-$link-hover underline-solid);
 }
+
+.n-button:default:hover {
+  background-color: var(--n-color-hover) !important; /* Fix unwanted edit from nuxt naive ui https://github.com/becem-gharbi/nuxt-naiveui/blob/main/src/runtime/assets/style.css */
+}

@@ -65,7 +65,6 @@ definePageMeta({
 })
 
 const supabase = useSupabaseClient<Database>()
-const discreteApi = useDiscreteApi()
 
 const i18n = useI18n()
 const config = useRuntimeConfig()
@@ -94,6 +93,8 @@ onMounted(() => {
     input.value.focus()
   }
 })
+
+const discreteApi = useDiscreteApi()
 
 const signInWithOtp = (e: Event) => {
   e.preventDefault()

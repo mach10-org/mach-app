@@ -68,6 +68,19 @@ const user = useSupabaseUser()
 const profile = useProfileStore()
 const i18n = useI18n()
 const supabase = useSupabaseClient()
+
+onMounted(async () => {
+  if (nameRef.value) {
+    nameRef.value.focus()
+  }
+
+  if (user.value) {
+    await until(isLoadingProfile).toBe(false)
+    model.value.name = profile.full_name ?? ''
+    model.value.email = user.value.email ?? ''
+  }
+})
+
 const discreteApi = useDiscreteApi()
 
 const model = ref({
@@ -122,16 +135,4 @@ const submit = async () => {
 }
 
 const isLoadingProfile = computed(() => profile.isLoading)
-
-onMounted(async () => {
-  if (nameRef.value) {
-    nameRef.value.focus()
-  }
-
-  if (user.value) {
-    await until(isLoadingProfile).toBe(false)
-    model.value.name = profile.full_name ?? ''
-    model.value.email = user.value.email ?? ''
-  }
-})
 </script>

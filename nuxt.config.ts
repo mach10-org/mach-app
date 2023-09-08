@@ -42,6 +42,10 @@ export default defineNuxtConfig({
     },
   },
 
+  css: [
+    '@unocss/reset/tailwind-compat.css',
+  ],
+
   i18n: {
     strategy: 'no_prefix',
     locales: [
@@ -73,7 +77,7 @@ export default defineNuxtConfig({
   },
 
   unocss: {
-    preflight: true,
+    preflight: false,
   },
 
   naiveui: {

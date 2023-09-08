@@ -112,7 +112,6 @@ import { useProfileStore } from '~/stores/profile'
 const user = useSupabaseUser()
 const profile = useProfileStore()
 const i18n = useI18n()
-const discreteApi = useDiscreteApi()
 
 const model = ref({
   firstname: '',
@@ -135,16 +134,6 @@ const agesList = computed(() => i18n.tm('pages.onboarding.form_6_list') as VueMe
 const genderList = computed(() => i18n.tm('pages.profile.gender_list') as VueMessageType[])
 const educationsList = computed(() => i18n.tm('pages.profile.education_list') as VueMessageType[])
 
-const submit = async () => {
-  isLoading.value = true
-  if (await profile.saveProfile(model.value.firstname, model.value.goals, model.value.computerXp, model.value.devices, model.value.age, model.value.gender, model.value.education, model.value.about)) {
-    discreteApi.message.success(i18n.t('pages.profile.successfullySaved'))
-  }
-  isLoading.value = false
-}
-
-const isLoadingProfile = computed(() => profile.isLoading)
-
 onMounted(async () => {
   await until(isLoadingProfile).toBe(false)
 
@@ -161,4 +150,16 @@ onMounted(async () => {
 definePageMeta({
   middleware: 'auth',
 })
+
+const discreteApi = useDiscreteApi()
+
+const submit = async () => {
+  isLoading.value = true
+  if (await profile.saveProfile(model.value.firstname, model.value.goals, model.value.computerXp, model.value.devices, model.value.age, model.value.gender, model.value.education, model.value.about)) {
+    discreteApi.message.success(i18n.t('pages.profile.successfullySaved'))
+  }
+  isLoading.value = false
+}
+
+const isLoadingProfile = computed(() => profile.isLoading)
 </script>
