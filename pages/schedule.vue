@@ -27,15 +27,18 @@ definePageMeta({
 const dayjs = useDayjs()
 const schedule = useScheduleStore()
 
-const items = ref(dayjs.weekdays().map((_day, index) => ({
-  // TODO utc
-  day: index,
-  isChecked: schedule.list.findIndex(item => item.day === index) !== -1,
-  list: schedule.list.filter(item => item.day === index).map(item => ({
-    start: item.start,
-    end: item.end,
-  })),
-})))
+const items = ref(dayjs.weekdays().map((_d, index) => {
+  // Convert to UTC
+  const dayIndex = dayjs().hour(0).day(index).utc().isoWeekday()
+  return {
+    day: index,
+    isChecked: schedule.list.findIndex(item => item.day === dayIndex) !== -1,
+    list: schedule.list.filter(item => item.day === dayIndex).map(item => ({
+      start: dayjs.utc(item.start, 'HH:mm:ss').local().format('HH:mm:ss'),
+      end: dayjs.utc(item.end, 'HH:mm:ss').local().format('HH:mm:ss'),
+    })),
+  }
+}))
 
 const isSaving = ref(false)
 
@@ -53,11 +56,14 @@ const save = async () => {
       item.list.forEach((time) => {
         if (!time.start || !time.end) { return }
 
-        // TODO utc
+        // Convert to UTC
+        const start = dayjs(time.start, 'HH:mm:ss').day(item.day).utc()
+        const end = dayjs(time.end, 'HH:mm:ss').day(item.day).utc()
+
         list.push({
-          day: item.day,
-          start: time.start,
-          end: time.end,
+          day: start.isoWeekday(),
+          start: start.format('HH:mm:ss'),
+          end: end.format('HH:mm:ss'),
         })
       })
     }
