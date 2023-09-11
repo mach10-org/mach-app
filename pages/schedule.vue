@@ -30,6 +30,7 @@ definePageMeta({
 const dayjs = useDayjs()
 const schedule = useScheduleStore()
 const profile = useProfileStore()
+const i18n = useI18n()
 
 interface Item {
     day: number;
@@ -45,34 +46,6 @@ const isLoadingProfile = computed(() => profile.isLoading)
 const model = ref<{items: Item[]}>({ items: [] })
 
 const { formRef, onSubmit, pending } = useNaiveForm(model)
-
-const save = async () => {
-  const list: Array<{
-    day: number
-    start: string
-    end: string
-  }> = []
-
-  model.value.items.forEach((item) => {
-    if (item.isChecked) {
-      item.list.forEach((time) => {
-        if (!time.start || !time.end) { return }
-
-        // Convert to UTC
-        const start = dayjs(time.start, 'HH:mm').second(0).day(item.day).tz(profile.timezone, true).utc()
-        const end = dayjs(time.end, 'HH:mm').second(0).day(item.day).tz(profile.timezone, true).utc()
-
-        list.push({
-          day: start.isoWeekday(),
-          start: start.format('HH:mm:ss'),
-          end: end.format('HH:mm:ss'),
-        })
-      })
-    }
-  })
-
-  await schedule.save(list)
-}
 
 const getItems = () => {
   // Init
@@ -106,4 +79,36 @@ onMounted(async () => {
   await until(isLoadingProfile).toBe(false)
   model.value.items = getItems()
 })
+
+const discreteApi = useDiscreteApi()
+
+const save = async () => {
+  const list: Array<{
+    day: number
+    start: string
+    end: string
+  }> = []
+
+  model.value.items.forEach((item) => {
+    if (item.isChecked) {
+      item.list.forEach((time) => {
+        if (!time.start || !time.end) { return }
+
+        // Convert to UTC
+        const start = dayjs(time.start, 'HH:mm').second(0).day(item.day).tz(profile.timezone, true).utc()
+        const end = dayjs(time.end, 'HH:mm').second(0).day(item.day).tz(profile.timezone, true).utc()
+
+        list.push({
+          day: start.isoWeekday(),
+          start: start.format('HH:mm:ss'),
+          end: end.format('HH:mm:ss'),
+        })
+      })
+    }
+  })
+
+  if (await schedule.save(list)) {
+    discreteApi.message.success(i18n.t('pages.schedule.successfullySaved'))
+  }
+}
 </script>
