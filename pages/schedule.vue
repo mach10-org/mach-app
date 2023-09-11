@@ -5,15 +5,66 @@
     </h1>
 
     <ClientOnly>
-      <div class="space-y-12">
-        
+      <div>
+        <ScheduleTimezone />
+        <ScheduleItem v-for="(item, index) in items" :key="item.day" v-model:value="items[index]" />
+        {{ items }}
+        <n-button type="primary" :loading="isSaving" @click="save">
+          Save
+        </n-button>
       </div>
     </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useScheduleStore } from '~/stores/schedule'
+
 definePageMeta({
   middleware: 'auth',
 })
+
+const dayjs = useDayjs()
+const schedule = useScheduleStore()
+
+const items = ref(dayjs.weekdays().map((_day, index) => ({
+  // TODO utc
+  day: index,
+  isChecked: schedule.list.findIndex(item => item.day === index) !== -1,
+  list: schedule.list.filter(item => item.day === index).map(item => ({
+    start: item.start,
+    end: item.end,
+  })),
+})))
+
+const isSaving = ref(false)
+
+const save = async () => {
+  isSaving.value = true
+
+  const list: Array<{
+    day: number
+    start: string
+    end: string
+  }> = []
+
+  items.value.forEach((item) => {
+    if (item.isChecked) {
+      item.list.forEach((time) => {
+        if (!time.start || !time.end) { return }
+
+        // TODO utc
+        list.push({
+          day: item.day,
+          start: time.start,
+          end: time.end,
+        })
+      })
+    }
+  })
+
+  await schedule.save(list)
+
+  isSaving.value = false
+}
 </script>

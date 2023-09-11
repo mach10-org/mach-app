@@ -71,40 +71,6 @@ export interface Database {
           }
         ]
       }
-      availability: {
-        Row: {
-          date: string | null
-          days: number[] | null
-          endTime: string
-          id: number
-          scheduleId: string
-          startTime: string
-        }
-        Insert: {
-          date?: string | null
-          days?: number[] | null
-          endTime: string
-          id?: number
-          scheduleId: string
-          startTime: string
-        }
-        Update: {
-          date?: string | null
-          days?: number[] | null
-          endTime?: string
-          id?: number
-          scheduleId?: string
-          startTime?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "availability_scheduleId_fkey"
-            columns: ["scheduleId"]
-            referencedRelation: "schedule"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       last_url: {
         Row: {
           created_at: string | null
@@ -198,6 +164,7 @@ export interface Database {
           gender: string | null
           goal: string[]
           id: string
+          timezone: string | null
           updated_at: string | null
           username: string | null
           xp: number
@@ -214,6 +181,7 @@ export interface Database {
           gender?: string | null
           goal?: string[]
           id: string
+          timezone?: string | null
           updated_at?: string | null
           username?: string | null
           xp?: number
@@ -230,6 +198,7 @@ export interface Database {
           gender?: string | null
           goal?: string[]
           id?: string
+          timezone?: string | null
           updated_at?: string | null
           username?: string | null
           xp?: number
@@ -246,26 +215,32 @@ export interface Database {
       schedule: {
         Row: {
           created_at: string | null
-          id: string
-          name: string | null
-          timeZone: string | null
+          day: number
+          end: string
+          id: number
+          start: string
+          user_id: string
         }
         Insert: {
           created_at?: string | null
-          id: string
-          name?: string | null
-          timeZone?: string | null
+          day: number
+          end: string
+          id?: number
+          start: string
+          user_id: string
         }
         Update: {
           created_at?: string | null
-          id?: string
-          name?: string | null
-          timeZone?: string | null
+          day?: number
+          end?: string
+          id?: number
+          start?: string
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "schedule_id_fkey"
-            columns: ["id"]
+            foreignKeyName: "schedule_user_id_fkey"
+            columns: ["user_id"]
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
