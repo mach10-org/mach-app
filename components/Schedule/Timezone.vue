@@ -1,5 +1,5 @@
 <template>
-  <n-form-item label="Timezone">
+  <n-form-item :label="$t('pages.schedule.timezone')" :show-feedback="false">
     <n-select v-model:value="timeZone" filterable class="w-full" :options="listTimeZones" />
   </n-form-item>
 </template>

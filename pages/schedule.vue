@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto mt-4 min-h-[60vh] max-w-screen-lg bg-$background-base p-4 lg:mt-8 lg:p-6">
+  <div class="mx-auto mb-8 mt-4 min-h-[60vh] max-w-screen-sm bg-$background-base p-4 lg:mt-8 lg:p-6">
     <h1 class="mb-4 text-center text-2xl lg:mb-8 md:text-4xl">
       <span class="from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text font-extrabold text-transparent">{{ $t('pages.schedule.title') }}</span>
     </h1>
@@ -7,9 +7,9 @@
     <ClientOnly>
       <div>
         <ScheduleTimezone @updated="save" />
+        <div class="mt-5 border-t border-$border-input pt-5" />
         <ScheduleItem v-for="(item, index) in items" :key="item.day" v-model:value="items[index]" />
-        {{ items }}
-        <n-button type="primary" :loading="isSaving" @click="save">
+        <n-button type="primary" size="large" class="w-full" :loading="isSaving" @click="save">
           Save
         </n-button>
       </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { useProfileStore } from '~/stores/profile';
+import { useProfileStore } from '~/stores/profile'
 import { useScheduleStore } from '~/stores/schedule'
 
 definePageMeta({
@@ -45,6 +45,7 @@ const items = ref(dayjs.weekdays().map((_d, index) => {
 const isSaving = ref(false)
 
 const save = async () => {
+  // TODO validation
   isSaving.value = true
 
   const list: Array<{

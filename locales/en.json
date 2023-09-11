@@ -146,6 +146,9 @@
     },
     "schedule": {
       "title": "Your Schedule",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "timezone": "Timezone",
       "submit": "Save"
     },
     "login": {
