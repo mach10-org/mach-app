@@ -14,6 +14,7 @@ type rows = Database['public']['Tables']['profiles']['Row']
 interface State extends Omit<rows, 'id' | 'updated_at'> {
   isLoading: boolean
   lastCoursePage: LastCoursePage | null
+  timezone: string
 }
 
 export const useProfileStore = defineStore('profile', {
@@ -32,7 +33,7 @@ export const useProfileStore = defineStore('profile', {
     username: null,
     xp: 0,
     lastCoursePage: null,
-    timezone: null,
+    timezone: '',
   }),
   getters: {
     isOnBoarded (state) {
@@ -69,7 +70,8 @@ export const useProfileStore = defineStore('profile', {
         this.goal = profile?.goal ?? []
         this.username = profile?.username ?? null
         this.xp = profile?.xp ?? 0
-        this.timezone = profile?.timezone ?? null
+        const dayjs = useDayjs()
+        this.timezone = profile?.timezone ?? dayjs.tz.guess()
 
         this.lastCoursePage = (profile?.last_url as unknown as LastCoursePage) ?? null
 
@@ -236,7 +238,8 @@ export const useProfileStore = defineStore('profile', {
           throw error
         }
 
-        this.timezone = data.timezone ?? null
+        const dayjs = useDayjs()
+        this.timezone = data.timezone ?? dayjs.tz.guess()
 
         return true
       } catch (error) {
@@ -260,7 +263,8 @@ export const useProfileStore = defineStore('profile', {
       this.username = null
       this.xp = 0
       this.lastCoursePage = null
-      this.timezone = null
+      const dayjs = useDayjs()
+      this.timezone = dayjs.tz.guess()
 
       const course = useCourseStore()
       course.learningLessons = []

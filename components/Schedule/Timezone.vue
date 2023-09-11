@@ -13,6 +13,8 @@ interface TimeZoneItem {
   value: string
 }
 
+const emit = defineEmits(['updated'])
+
 const dayjs = useDayjs()
 const profile = useProfileStore()
 
@@ -30,11 +32,11 @@ const listTimeZones = computed<TimeZoneItem[]>(() => _orderBy(
   ['asc'],
 ))
 
-const profileTimeZone = computed(() => profile.timezone || dayjs.tz.guess())
+const timeZone = ref(profile.timezone)
 
-const timeZone = ref(profileTimeZone.value)
-
-watch(timeZone, (value) => {
-  profile.saveTimezone(value)
+watch(timeZone, async (value) => {
+  if (await profile.saveTimezone(value)) {
+    emit('updated')
+  }
 })
 </script>
