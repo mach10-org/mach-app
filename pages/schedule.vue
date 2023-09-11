@@ -36,8 +36,8 @@ const items = ref(dayjs.weekdays().map((_d, index) => {
     day: index,
     isChecked: schedule.list.findIndex(item => item.day === dayIndex) !== -1,
     list: schedule.list.filter(item => item.day === dayIndex).map(item => ({
-      start: dayjs.utc(item.start, 'HH:mm:ss').tz(profile.timezone).format('HH:mm:ss'),
-      end: dayjs.utc(item.end, 'HH:mm:ss').tz(profile.timezone).format('HH:mm:ss'),
+      start: dayjs.utc(item.start, 'HH:mm:ss').tz(profile.timezone).format('HH:mm'),
+      end: dayjs.utc(item.end, 'HH:mm:ss').tz(profile.timezone).format('HH:mm'),
     })),
   }
 }))
@@ -60,8 +60,8 @@ const save = async () => {
         if (!time.start || !time.end) { return }
 
         // Convert to UTC
-        const start = dayjs(time.start, 'HH:mm:ss').day(item.day).tz(profile.timezone, true).utc()
-        const end = dayjs(time.end, 'HH:mm:ss').day(item.day).tz(profile.timezone, true).utc()
+        const start = dayjs(time.start, 'HH:mm').second(0).day(item.day).tz(profile.timezone, true).utc()
+        const end = dayjs(time.end, 'HH:mm').second(0).day(item.day).tz(profile.timezone, true).utc()
 
         list.push({
           day: start.isoWeekday(),

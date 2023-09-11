@@ -12,14 +12,16 @@
           <n-time-picker
             ref="startRef"
             v-model:formatted-value="value.start"
-            :minutes="15"
+            format="HH:mm"
+            :minutes="5"
             :seconds="[0]"
             :placeholder="$t('pages.schedule.startTime')"
             class="mr-2"
           />
           <n-time-picker
             v-model:formatted-value="value.end"
-            :minutes="15"
+            format="HH:mm"
+            :minutes="5"
             :seconds="[0]"
             :placeholder="$t('pages.schedule.endTime')"
           />
