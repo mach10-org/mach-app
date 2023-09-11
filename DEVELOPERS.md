@@ -35,3 +35,9 @@ supabase gen types typescript --local > types/database.types.ts
 ```bash
 supabase db diff --use-migra -f MIGRATION_NAME
 ```
+
+### Apply migrations to cloud
+
+```bash
+supabase db push
+```
