@@ -29,18 +29,35 @@ const dayjs = useDayjs()
 const schedule = useScheduleStore()
 const profile = useProfileStore()
 
-const items = ref(dayjs.weekdays().map((_d, index) => {
-  // Convert to UTC
-  const dayIndex = dayjs().hour(0).day(index).utc().isoWeekday()
-  return {
+const getItems = () => {
+  // Init
+  const items = dayjs.weekdays().map((_d, index) => ({
     day: index,
-    isChecked: schedule.list.findIndex(item => item.day === dayIndex) !== -1,
-    list: schedule.list.filter(item => item.day === dayIndex).map(item => ({
-      start: dayjs.utc(item.start, 'HH:mm:ss').tz(profile.timezone).format('HH:mm'),
+    isChecked: false,
+    list: [] as Array<{
+      start: string
+      end: string
+    }>,
+  }))
+
+  schedule.list.forEach((item) => {
+    const start = dayjs.utc(item.start, 'HH:mm:ss').isoWeekday(item.day).tz(profile.timezone)
+    const period = {
+      start: start.format('HH:mm'),
       end: dayjs.utc(item.end, 'HH:mm:ss').tz(profile.timezone).format('HH:mm'),
-    })),
-  }
-}))
+    }
+
+    // Get the day after converting to the user's timezone
+    const dayPeriod = start.day()
+
+    items[dayPeriod].isChecked = true
+    items[dayPeriod].list.push(period)
+  })
+
+  return items
+}
+
+const items = ref(getItems())
 
 const isSaving = ref(false)
 

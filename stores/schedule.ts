@@ -36,7 +36,11 @@ export const useScheduleStore = defineStore('schedule', {
           throw errorDelete
         }
 
-        const { data, error } = await supabase.from('schedule').insert(list.map(l => ({ ...l, user_id: user.value.id }))).select('day, start, end')
+        const { data, error } = await supabase.from('schedule').insert(list.map(l => ({
+          ...l,
+          // @ts-ignore
+          user_id: user.value.id,
+        }))).select('day, start, end')
 
         if (error) {
           throw error

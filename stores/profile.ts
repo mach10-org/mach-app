@@ -70,8 +70,11 @@ export const useProfileStore = defineStore('profile', {
         this.goal = profile?.goal ?? []
         this.username = profile?.username ?? null
         this.xp = profile?.xp ?? 0
-        const dayjs = useDayjs()
-        this.timezone = profile?.timezone ?? dayjs.tz.guess()
+        this.timezone = profile?.timezone ?? ''
+        if (process.client) {
+          const dayjs = useDayjs()
+          this.timezone = profile?.timezone ?? dayjs.tz.guess()
+        }
 
         this.lastCoursePage = (profile?.last_url as unknown as LastCoursePage) ?? null
 
