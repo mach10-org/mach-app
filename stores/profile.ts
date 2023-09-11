@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useCourseStore } from './course'
 import { useQuizStore } from './quiz'
+import { useScheduleStore } from './schedule'
 import { Database } from '~/types/database.types'
 
 interface LastCoursePage {
@@ -13,6 +14,7 @@ type rows = Database['public']['Tables']['profiles']['Row']
 interface State extends Omit<rows, 'id' | 'updated_at'> {
   isLoading: boolean
   lastCoursePage: LastCoursePage | null
+  timezone: string
 }
 
 export const useProfileStore = defineStore('profile', {
@@ -31,6 +33,7 @@ export const useProfileStore = defineStore('profile', {
     username: null,
     xp: 0,
     lastCoursePage: null,
+    timezone: '',
   }),
   getters: {
     isOnBoarded (state) {
@@ -49,7 +52,7 @@ export const useProfileStore = defineStore('profile', {
       try {
         const { data: profile, error } = await supabase
           .from('profiles')
-          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course, created_at), answers(id, slug, slug_course, label, is_correct)').maybeSingle()
+          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course, created_at), answers(id, slug, slug_course, label, is_correct), schedule(day, start, end)').maybeSingle()
 
         if (error) {
           throw error
@@ -67,6 +70,11 @@ export const useProfileStore = defineStore('profile', {
         this.goal = profile?.goal ?? []
         this.username = profile?.username ?? null
         this.xp = profile?.xp ?? 0
+        this.timezone = profile?.timezone ?? ''
+        if (process.client) {
+          const dayjs = useDayjs()
+          this.timezone = profile?.timezone ?? dayjs.tz.guess()
+        }
 
         this.lastCoursePage = (profile?.last_url as unknown as LastCoursePage) ?? null
 
@@ -75,6 +83,9 @@ export const useProfileStore = defineStore('profile', {
 
         const quiz = useQuizStore()
         quiz.answers = profile?.answers ?? []
+
+        const schedule = useScheduleStore()
+        schedule.list = profile?.schedule ?? []
       } catch (error) {
         const discreteApi = useDiscreteApi()
         console.error(error)
@@ -90,6 +101,13 @@ export const useProfileStore = defineStore('profile', {
       age: string) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
+      const dayjs = useDayjs()
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
 
       try {
         const { data: profile, error } = await supabase.from('profiles').upsert({
@@ -99,6 +117,7 @@ export const useProfileStore = defineStore('profile', {
           computer_xp: computerXp,
           devices,
           age,
+          timezone: dayjs.tz.guess(),
         }).select().single()
 
         if (error) {
@@ -113,7 +132,6 @@ export const useProfileStore = defineStore('profile', {
 
         return true
       } catch (error) {
-        const discreteApi = useDiscreteApi()
         console.error(error)
         discreteApi.message.error('Error while saving the onboarding')
       }
@@ -130,6 +148,12 @@ export const useProfileStore = defineStore('profile', {
       about: string) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
 
       try {
         const { data: profile, error } = await supabase.from('profiles').upsert({
@@ -159,7 +183,6 @@ export const useProfileStore = defineStore('profile', {
 
         return true
       } catch (error) {
-        const discreteApi = useDiscreteApi()
         console.error(error)
         discreteApi.message.error('Error while saving the profile')
       }
@@ -169,6 +192,12 @@ export const useProfileStore = defineStore('profile', {
     async saveLastCoursePage (url: string, title: string, main = false) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
 
       try {
         const { data, error } = await supabase.from('last_url').upsert({
@@ -186,9 +215,39 @@ export const useProfileStore = defineStore('profile', {
 
         return true
       } catch (error) {
-        const discreteApi = useDiscreteApi()
         console.error(error)
         discreteApi.message.error('Error while saving the last page')
+      }
+
+      return false
+    },
+    async saveTimezone (timezone: string) {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
+
+      try {
+        const { data, error } = await supabase.from('profiles').upsert({
+          id: user.value.id,
+          timezone,
+        }).select('timezone').single()
+
+        if (error) {
+          throw error
+        }
+
+        const dayjs = useDayjs()
+        this.timezone = data.timezone ?? dayjs.tz.guess()
+
+        return true
+      } catch (error) {
+        console.error(error)
+        discreteApi.message.error('Error while saving the timezone')
       }
 
       return false
@@ -207,6 +266,8 @@ export const useProfileStore = defineStore('profile', {
       this.username = null
       this.xp = 0
       this.lastCoursePage = null
+      const dayjs = useDayjs()
+      this.timezone = dayjs.tz.guess()
 
       const course = useCourseStore()
       course.learningLessons = []
@@ -214,8 +275,14 @@ export const useProfileStore = defineStore('profile', {
     async incrementXP (value: number) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
 
       // TODO function? https://stackoverflow.com/questions/76192402/supabase-update-with-incrementing-value
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
 
       try {
         const { error } = await supabase.from('profiles').upsert({
@@ -231,7 +298,6 @@ export const useProfileStore = defineStore('profile', {
 
         return true
       } catch (error) {
-        const discreteApi = useDiscreteApi()
         console.error(error)
         discreteApi.message.error('Error while incrementing the XP')
       }

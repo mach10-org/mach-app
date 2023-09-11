@@ -1,5 +1,5 @@
 .link {
-  @apply text-$link underline underline-dashed hover:(text-$link-hover underline-solid);
+  @apply text-$link underline underline bg-transparent hover:(text-$link-hover no-underline);
 }
 
 .n-button:default:hover {
