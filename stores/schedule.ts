@@ -13,8 +13,18 @@ export const useScheduleStore = defineStore('schedule', {
   }),
   getters: {
     weeklyGoal (state) {
-      // TODO
-      return 5
+      const dayjs = useDayjs()
+
+      let duration = dayjs.duration(0)
+
+      state.list.forEach((l) => {
+        const start = dayjs(l.start, 'HH:mm')
+        const end = dayjs(l.end, 'HH:mm')
+
+        duration = duration.add(end.diff(start))
+      })
+
+      return duration.asHours()
     },
   },
   actions: {

@@ -31,6 +31,7 @@
     "login": "Login",
     "openUserMenu": "Open user menu",
     "journey": "Journey",
+    "schedule": "Schedule",
     "profile": "Profile",
     "signout": "Sign out"
   },
@@ -153,7 +154,8 @@
       "endTimeRequired": "End time is required",
       "endTimeBeforeStartTime": "End time must be after start time",
       "timezone": "Timezone",
-      "submit": "Save"
+      "submit": "Save",
+      "successfullySaved": "Schedule successfully saved"
     },
     "login": {
       "intro": "Signup to create an account, it’s free and you can track your progress over time",

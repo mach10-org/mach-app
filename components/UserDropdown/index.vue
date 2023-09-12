@@ -43,6 +43,10 @@ const options = computed(() => [{
   key: 'journey',
 },
 {
+  label: i18n.t('header.schedule'),
+  key: 'schedule',
+},
+{
   label: i18n.t('header.profile'),
   key: 'profile',
 },
