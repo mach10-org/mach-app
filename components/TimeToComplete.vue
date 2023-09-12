@@ -12,8 +12,8 @@
       <n-input-number
         v-model:value="hours"
         size="small"
-        class="mx-1 w-10"
-        :show-button="false"
+        class="mx-1 w-19"
+        :min="1"
         placeholder=""
       />
       hours per week, I will finish the course by the {{ endDate }}
@@ -41,9 +41,12 @@ const hours = ref(hasWeeklyGoal.value ? schedule.weeklyGoal : 2)
 const endDate = computed(() => {
   let weeks = 1
   try {
+    if (hours.value === Infinity || hours.value === null) {
+      throw new Error('Infinity')
+    }
     weeks = Math.ceil(props.totalHours / hours.value)
   } catch (error) {
-    return '...'
+    return '🤔'
   }
 
   return dayjs().add(weeks, 'weeks').format('Do of MMMM YYYY')
