@@ -4,7 +4,7 @@
       <i18n-t tag="h2" keypath="common.hours" class="text-base font-medium text-$text-title">
         <template #hours>
           <span class="text-2xl font-extrabold lg:text-3xl">
-            {{ schedule.weeklyGoal }}
+            {{ $n(schedule.weeklyGoal, { maximumFractionDigits:1 }) }}
           </span>
         </template>
       </i18n-t>
