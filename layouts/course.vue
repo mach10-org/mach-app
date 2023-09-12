@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div v-if="hasHeader || hasHeaderBar" class="mx-auto max-w-[46.8rem] lg:max-w-[50.9rem]">
-      <div v-if="hasHeader" class="flex flex-col justify-between px-4 pb-3 pt-10 lg:flex-row lg:items-center lg:px-8">
+      <div v-if="hasHeader" class="flex flex-col px-4 pb-3 pt-10 lg:flex-row lg:items-center lg:px-8">
         <slot name="header" />
       </div>
       <slot name="header-bar" />
