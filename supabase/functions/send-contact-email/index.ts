@@ -1,51 +1,51 @@
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
-import { corsHeaders } from '../_shared/cors.ts';
+import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
+import { corsHeaders } from '../_shared/cors.ts'
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+    return new Response('ok', { headers: corsHeaders })
   }
 
   try {
-    const { subject, email, name, message, topic } = await req.json();
+    const { subject, email, name, message, topic } = await req.json()
 
     const mach10 = {
       email: 'hello@mach10.jp',
       // email: 'n.hamelin@ncit.nc', // Test width mail sender
-      name: 'Mach10'
-    };
+      name: 'Mach10',
+    }
 
     const options = {
       method: 'POST',
       headers: {
         accept: 'application/json',
         'content-type': 'application/json',
-        'api-key': Deno.env.get('BREVO_API_KEY') || ''
+        'api-key': Deno.env.get('BREVO_API_KEY') || '',
       },
       body: JSON.stringify({
         sender: { name: mach10.name, email: mach10.email },
         to: [mach10],
         replyTo: { email, name },
-        subject: `[Mach10 contact form] ${subject}}`,
+        subject: `[Mach10 contact form] ${subject}`,
         textContent: message,
         htmlContent: `<html><head></head><body>
         <p><b>From:</b> ${name} - ${email}</p>
         <p><b>Topic:</b> ${topic}</p>
         <p><b>Message:</b></br>${message}</p>
-        </body></html>` 
-      })
-    };
+        </body></html>`,
+      }),
+    }
 
-    const response = await fetch('https://api.brevo.com/v3/smtp/email', options);
-    const result = await response.json();
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', options)
+    const result = await response.json()
     return new Response(JSON.stringify(result), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 200
-    });
+      status: 200,
+    })
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 400
-    });
+      status: 400,
+    })
   }
-});
+})
