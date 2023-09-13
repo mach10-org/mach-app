@@ -26,7 +26,13 @@ serve(async (req) => {
     const supabaseClient = createClient<Database>(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-      { global: { headers: { Authorization: req.headers.get('Authorization')! } } }, // Needs to be invoked with the service api key to have all the schedule
+      {
+        global: {
+          // Needs to be invoked with the service api key to have all the schedule
+          headers: { Authorization: req.headers.get('Authorization')! },
+        },
+        auth: { persistSession: false },
+      },
     )
 
     const { time } = await req.json()
@@ -118,7 +124,9 @@ Mach10 team<br/>
       }
     }
 
-    return new Response(JSON.stringify({ reminderSent, reminderToSend: usersToRemind.length }), {
+    console.info(`${reminderSent} reminder(s) sent`)
+
+    return new Response(JSON.stringify({ message: 'ok' }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 200,
     })
