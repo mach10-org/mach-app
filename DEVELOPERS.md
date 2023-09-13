@@ -41,3 +41,9 @@ supabase db diff --use-migra -f MIGRATION_NAME
 ```bash
 supabase db push
 ```
+
+### Deploying function to cloud
+
+```bash
+supabase functions deploy FUNCTION_NAME
+```

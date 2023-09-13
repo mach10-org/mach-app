@@ -78,10 +78,10 @@ export default defineConfig({
     presetTypography({
       cssExtend: {
         a: {
-          'text-decoration-style': 'dashed',
+          'text-decoration': 'underline',
         },
         'a:hover': {
-          'text-decoration-style': 'solid',
+          'text-decoration': 'none',
           color: 'var(--link-hover)',
         },
         'h1 a,h2 a,h3 a,h4 a,h5 a,h6 a': {
