@@ -48,6 +48,10 @@ const menus = computed<Array<{
       label: i18n.t('footer.getInTouch'),
       path: '/contact/',
     },
+    {
+      label: i18n.t('footer.faq'),
+      path: '/faq/',
+    },
   ],
 },
 {

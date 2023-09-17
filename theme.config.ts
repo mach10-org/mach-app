@@ -45,6 +45,10 @@ export const themeConfig: ThemeConfig = {
       labelFontSizeTopLarge: '16px',
       labelFontWeight: 500,
     },
+    Collapse: {
+      titleFontSize: '18px',
+      titleFontWeight: 500,
+    },
   }, // Common theme options
   // mobileOrTablet: {}, // Theme options applied on mobile and tablet
   // mobile: {}, // Theme options applied on mobile only
@@ -71,6 +75,10 @@ export const themeConfig: ThemeConfig = {
       color: baseColor,
       textColor,
       dividerColor: border,
+    },
+    Collapse: {
+      dividerColor: border,
+      arrowColor: link,
     },
   }, // Theme options applied on light mode
   dark: {
@@ -103,6 +111,10 @@ export const themeConfig: ThemeConfig = {
       color: baseColorDark,
       textColor: textColorDark,
       dividerColor: borderDark,
+    },
+    Collapse: {
+      dividerColor: borderDark,
+      arrowColor: linkDark,
     },
   }, // Theme options applied on dark mode
 }
