@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center py-6">
     <h2 class="mb-1 text-center text-xl font-medium lg:text-2xl">
-      <i18n-t keypath="pages.journey.progress_percentTitle" :tag="false">
+      <i18n-t keypath="pages.journey.progress_percentTitle">
         <template #percentage>
           <span class="border-b-2 border-$border-input font-extrabold text-$text-title">
             {{ percentage }}%

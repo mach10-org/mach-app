@@ -8,7 +8,7 @@
         <div class="mb-16 px-0 md:mb-0 md:px-8">
           <Newsletter label="Email address" placeholder="Enter your email" button-text="Notify me" input-id="email-newsletter-footer">
             <template #description>
-              We’ll notify you when our first course is ready. First course starting in 2023.
+              {{ $t('footer.notifyNewsletter') }}
             </template>
           </Newsletter>
         </div>
@@ -47,6 +47,10 @@ const menus = computed<Array<{
     {
       label: i18n.t('footer.getInTouch'),
       path: '/contact/',
+    },
+    {
+      label: i18n.t('footer.faq'),
+      path: '/faq/',
     },
   ],
 },

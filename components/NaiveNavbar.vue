@@ -25,7 +25,7 @@
       class="inner-middle notMobileOrTablet"
       :style="{textAlign: menuPlacement}"
     >
-      <n-menu
+      <LazyNMenu
         v-model:value="activePath"
         :inverted="menuInverted"
         mode="horizontal"
@@ -53,38 +53,38 @@
     </div>
   </div>
 
-  <LazyNaiveContainer>
-    <n-drawer
-      v-model:show="drawerActive"
-      :placement="drawerPlacement"
-      :width="drawerWidth"
+  <n-drawer
+    v-model:show="drawerActive"
+    :placement="drawerPlacement"
+    :width="drawerWidth"
+  >
+    <LazyNDrawerContent
+      title="Menu"
+      :body-content-style="{ padding: 0 }"
+      :header-style="{
+        padding: '15px',
+      }"
+      :footer-style="{ justifyContent: 'start' }"
+      :closable="drawerClosable"
     >
-      <n-drawer-content
-        title="Menu"
-        :body-content-style="{ padding: 0 }"
-        :header-style="{
-          padding: '15px',
-        }"
-        :footer-style="{ justifyContent: 'start' }"
-        :closable="drawerClosable"
-      >
-        <template #header>
-          <slot name="drawer-header" />
-        </template>
+      <template #header>
+        <slot name="drawer-header" />
+      </template>
 
-        <n-menu
-          v-model:value="activePath"
-          mode="vertical"
-          :inverted="menuInverted"
-          :options="menuOptions"
-        />
+      <slot name="drawer-content" />
 
-        <template #footer>
-          <slot name="drawer-footer" />
-        </template>
-      </n-drawer-content>
-    </n-drawer>
-  </LazyNaiveContainer>
+      <LazyNMenu
+        v-model:value="activePath"
+        mode="vertical"
+        :inverted="menuInverted"
+        :options="menuOptions"
+      />
+
+      <template #footer>
+        <slot name="drawer-footer" />
+      </template>
+    </LazyNDrawerContent>
+  </n-drawer>
 </template>
 
 <script setup lang="ts">
@@ -101,6 +101,7 @@ import {
   watchEffect,
   useThemeVars,
   useNaiveDevice,
+  defineAsyncComponent,
 } from '#imports'
 
 const drawerActive = ref(false)
@@ -108,8 +109,14 @@ const route = useRoute()
 const router = useRouter()
 const activePath = ref()
 const naiveTheme = useThemeVars()
-
 const { isMobileOrTablet } = useNaiveDevice()
+
+const LazyNDrawerContent = defineAsyncComponent(
+  () => import('naive-ui/es/drawer/src/DrawerContent'),
+)
+const LazyNMenu = defineAsyncComponent(
+  () => import('naive-ui/es/menu/src/Menu'),
+)
 
 watchEffect(() => {
   activePath.value = '/' + route.path.split('/')[1]
@@ -119,6 +126,7 @@ watchEffect(() => {
 const props = withDefaults(
   defineProps<{
     routes?: NavbarRoute[];
+    drawerRoutes?: NavbarRoute[];
     menuToggleIcon?: string;
     menuToggleIconSize?: number;
     backIcon?: boolean;
@@ -132,6 +140,7 @@ const props = withDefaults(
   }>(),
   {
     routes: () => [],
+    drawerRoutes: () => [],
     menuToggleIcon: 'ph:equals',
     menuPlacement: 'left',
     drawerPlacement: 'left',
@@ -141,6 +150,7 @@ const props = withDefaults(
     backIcon: false,
     backIconSize: 26,
     drawerWidth: '100%',
+    drawerClosable: true,
   },
 )
 
@@ -165,7 +175,11 @@ const menuOptions = computed<MenuOption[]>(() => {
       return menuOption
     })
 
-  return cb(props.routes)
+  return cb(
+    drawerActive.value && props.drawerRoutes.length
+      ? props.drawerRoutes
+      : props.routes,
+  )
 })
 </script>
 

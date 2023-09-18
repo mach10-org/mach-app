@@ -1,6 +1,7 @@
 import { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import { Dayjs } from 'dayjs'
 import { defineStore, acceptHMRUpdate } from 'pinia'
+import { useProfileStore } from './profile'
 import { Database } from '~/types/database.types'
 import { sectionFile } from '~/utils/course'
 
@@ -9,6 +10,14 @@ interface State {
   isLoading: boolean
   list: Record<string, Pick<ParsedContent, string>[]>
   learningLessons: Omit<learningLessonRows, 'user_id' | 'updated_at'>[]
+}
+
+const xpPerFinishedLesson = 1
+const xpPerFinishedCourse = 50
+const xpPerCourseHour = 1
+
+const getXpForCourse = (hours: number) => {
+  return xpPerFinishedCourse + (hours * xpPerCourseHour)
 }
 
 export const useCourseStore = defineStore('course', {
@@ -83,11 +92,25 @@ export const useCourseStore = defineStore('course', {
 
       return courses
     },
+    isCourseFinished () {
+      const courses = this.getLearningLessonsByCourse
+
+      return (course: string) => {
+        if (!courses[course]) {
+          return false
+        }
+
+        const lessons = courses[course]
+
+        return lessons.length === this.getLessonsByCourseWithoutSection[course].length
+      }
+    },
   },
   actions: {
     async setLessonLearned (course: string, lesson: string) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()
+      const profile = useProfileStore()
 
       try {
         const { data, error } = await supabase.from('learning_lesson').upsert({
@@ -106,6 +129,12 @@ export const useCourseStore = defineStore('course', {
           if (data) {
             this.learningLessons.push(data)
           }
+
+          if (this.isCourseFinished(course)) {
+            profile.incrementXP(getXpForCourse(this.getCourses.find(c => c._dir === course)?.totalHours ?? 0) + xpPerFinishedLesson)
+          } else {
+            profile.incrementXP(xpPerFinishedLesson)
+          }
         }
 
         return true
@@ -120,8 +149,11 @@ export const useCourseStore = defineStore('course', {
     async setLessonNotFinished (course: string, lesson: string) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()
+      const profile = useProfileStore()
 
       try {
+        const wasCourseFinished = this.isCourseFinished(course)
+
         this.learningLessons = this.learningLessons.filter(l => !(l.slug === lesson && l.slug_course === course))
 
         const { error } = await supabase.from('learning_lesson').delete().match({
@@ -132,6 +164,12 @@ export const useCourseStore = defineStore('course', {
 
         if (error) {
           throw error
+        }
+
+        if (wasCourseFinished) {
+          profile.decrementXP(getXpForCourse(this.getCourses.find(c => c._dir === course)?.totalHours ?? 0))
+        } else {
+          profile.decrementXP(xpPerFinishedLesson)
         }
 
         return true

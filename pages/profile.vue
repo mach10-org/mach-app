@@ -3,7 +3,7 @@
     <NCard class="mx-2 mt-6 md:mx-auto md:mt-10 md:max-w-[600px]">
       <template #header>
         <h2 class="mb-2 text-center text-2xl md:text-4xl">
-          <span class="from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text font-bold text-transparent">{{ user.email }}</span>
+          <span class="from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text font-bold text-transparent">{{ user?.email }}</span>
         </h2>
         <h3 class="mb-6 text-center text-lg font-bold">
           {{ profile.getXp }}

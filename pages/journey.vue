@@ -7,7 +7,7 @@
     <ClientOnly>
       <div class="space-y-12">
         <template v-if="courseEnrolled.length > 0">
-          <JourneySummary :courses="courseEnrolled.length" :lessons-completed="lessonsCompleted" />
+          <JourneySummary :courses="courseEnrolled.length" />
           <JourneyProgress :percentage="percentageTotalCompleted" :done="lessonsCompleted" :total="totalLessons" />
           <div class="space-y-6">
             <JourneyDetail v-for="c in courseEnrolled" :key="c" :slug="c" />

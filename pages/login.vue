@@ -130,7 +130,10 @@ const signInWithGitHub = async (e: Event) => {
 
   isLoadingGithub.value = true
 
-  const { error } = await supabase.auth.signInWithOAuth({ provider: 'github' })
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'github',
+    options: { redirectTo: `${config.public.siteUrl}/confirm` },
+  })
   if (error) {
     discreteApi.message.error(error.message)
     console.error(error)

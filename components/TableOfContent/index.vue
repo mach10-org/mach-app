@@ -2,7 +2,7 @@
   <div id="toc">
     <nav class="">
       <h2 class="mb-4 font-medium tracking-widest uppercase">
-        Table of content
+        {{ $t('pages.course.toc') }}
       </h2>
       <n-anchor
         :bound="115"
