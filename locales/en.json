@@ -5,11 +5,9 @@
       "not_valid_email": "The email address is not valid"
     },
     "profile": {
-      "title": "Profile",
       "profile_saved": "Your profile has been saved"
     },
     "user": {
-      "title": "Mach10 team",
       "welcome_back": "Welcome back {name}!",
       "welcome_back_description": "Pick up where you left off!",
       "course": "Course",
@@ -18,7 +16,6 @@
       "cancel": "Not now"
     }
   },
-
   "menu": {
     "home": "Home",
     "mission": "Mission",
@@ -51,24 +48,17 @@
     "faq": "FAQ",
     "notifyNewsletter": "We’ll notify you when our first course is ready. First course starting in 2023."
   },
-
   "quiz": {
     "plus_xp": "This would get you +Mach {xp}",
     "signup_text1": "Signup to track",
     "signup_text2": "your progress over time, it’s free",
-    "success": "Great! You have now Mach {xp}",
     "correct": "Correct!",
     "incorrect": "Incorrect!"
   },
-
   "compiler": {
     "run": "Run",
-    "running": "Compiling",
-    "format": "Format",
-    "formating": "Reformatting",
-    "eval": "⏳ Evaluating output..."
+    "format": "Format"
   },
-
   "pages": {
     "onboarding": {
       "title": "Welcome to Mach10",
@@ -128,7 +118,11 @@
         "Master’s"
       ],
       "gender_label": "Gender",
-      "gender_list": ["Male", "Female", "Other"],
+      "gender_list": [
+        "Male",
+        "Female",
+        "Other"
+      ],
       "comment_label": "Could you tell us more about you and your objectives?",
       "comment_placeholder": "Write your thoughts here...",
       "successfullySaved": "Profile successfully saved"
@@ -156,7 +150,6 @@
       "endTimeRequired": "End time is required",
       "endTimeBeforeStartTime": "End time must be after start time",
       "timezone": "Timezone",
-      "submit": "Save",
       "successfullySaved": "Schedule successfully saved"
     },
     "login": {
@@ -205,24 +198,17 @@
       "markNotFinished": "Mark as not finished"
     }
   },
-
   "common": {
-    "loading": "Loading ...",
-    "next": "Next",
-    "choose": "Choose",
     "save": "Save",
     "submit": "Submit",
     "hours": "{hours} hours"
   },
-
   "timeToComplete": {
     "schedule": "schedule",
     "withScheduleFinish": "With my {schedule} I will finish the course by the {endDate}",
     "spendHoursFinish": "If I spend {hours} hours per week, I will finish the course by the {endDate}"
   },
-
   "errors": {
-    "default": "An error has occured ! Please try again later !",
     "code": {
       "429": "For security purposes, you can only request this after 60 seconds.",
       "23505": "You have already registered this email! We'll be in touch!",

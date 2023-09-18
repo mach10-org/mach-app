@@ -4594,6 +4594,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "commander@npm:10.0.1"
+  checksum: 436901d64a818295803c1996cd856621a74f30b9f9e28a588e726b2b1670665bccd7c1a77007ebf328729f0139838a88a19265858a0fa7a8728c4656796db948
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.20.0, commander@npm:^2.20.3":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -6068,6 +6075,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esm@npm:^3.2.25":
+  version: 3.2.25
+  resolution: "esm@npm:3.2.25"
+  checksum: 978aabe2de83541c105605a6d60a26ed8e627ef6bb0a7605fe15a95bbdea6b8348bd045255cb22219c054dd09a81a94823df00843d9e97f42419c92015ce3a64
+  languageName: node
+  linkType: hard
+
 "esno@npm:^0.16.3":
   version: 0.16.3
   resolution: "esno@npm:0.16.3"
@@ -7247,6 +7261,19 @@ __metadata:
   dependencies:
     ms: ^2.0.0
   checksum: 9c7a74a2827f9294c009266c82031030eae811ca87b0da3dceb8d6071b9bde22c9f3daef0469c3c533cc67a97d8a167cd9fc0389350e5f415f61a79b171ded16
+  languageName: node
+  linkType: hard
+
+"i18n-unused@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "i18n-unused@npm:0.14.0"
+  dependencies:
+    commander: ^10.0.1
+    esm: ^3.2.25
+    ts-import: ^2.0.40
+  bin:
+    i18n-unused: bin/i18n-unused.cjs
+  checksum: 9ef8328aa73e651ca07d6c6adca956a5b08ebfed1c5c28aad4e60c24e3e6bd28c0cd673b347a14b2835a1b7ecb232ded444678c87e79e387ec11d0dd8c5ce7fd
   languageName: node
   linkType: hard
 
@@ -10070,6 +10097,7 @@ __metadata:
     codemirror: ^6.0.1
     dayjs-nuxt: ^1.1.2
     eslint: 8.49.0
+    i18n-unused: ^0.14.0
     nuxt: 3.7.3
     nuxt-font-loader: 2.3.4
     nuxt-icon: ^0.5.0
@@ -10490,6 +10518,13 @@ __metadata:
     prelude-ls: ^1.2.1
     type-check: ^0.4.0
   checksum: 09281999441f2fe9c33a5eeab76700795365a061563d66b098923eb719251a42bdbe432790d35064d0816ead9296dbeb1ad51a733edf4167c96bd5d0882e428a
+  languageName: node
+  linkType: hard
+
+"options-defaults@npm:^2.0.39":
+  version: 2.0.40
+  resolution: "options-defaults@npm:2.0.40"
+  checksum: 2bb3697a1aabecee4b76ee68857bd857957f664b78b419306a05e9c36182305092b0fca39035f287c75d24568326e06a0234d168290a9e9c88f1f2ce6e6dd977
   languageName: node
   linkType: hard
 
@@ -12816,6 +12851,15 @@ __metadata:
   peerDependencies:
     typescript: ">=4.2.0"
   checksum: 441cc4489d65fd515ae6b0f4eb8690057add6f3b6a63a36073753547fb6ce0c9ea0e0530220a0b282b0eec535f52c4dfc315d35f8a4c9a91c0def0707a714ca6
+  languageName: node
+  linkType: hard
+
+"ts-import@npm:^2.0.40":
+  version: 2.0.40
+  resolution: "ts-import@npm:2.0.40"
+  dependencies:
+    options-defaults: ^2.0.39
+  checksum: 9d05df5825a88fcc57b069fab6ee52d405350a60d214c0df2d6288a69b6160ee80ac10f5bceab055698935987441f7f13fefb887654b32f157d3ef19ce4856b4
   languageName: node
   linkType: hard
 
