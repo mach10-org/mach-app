@@ -1,23 +1,29 @@
 <template>
   <div class="mt-2 flex flex-wrap items-center text-sm leading-[2.1] text-$text-muted lg:(ml-9 mt-0)" :class="{'lg:ml-auto': hasWeeklyGoal}">
-    <template v-if="hasWeeklyGoal">
-      With my
-      <nuxt-link-locale to="/schedule" class="link ml-1">
-        schedule
-      </nuxt-link-locale>,
-      I will finish the course by the {{ endDate }}
-    </template>
-    <template v-else>
-      If I spend
-      <n-input-number
-        v-model:value="hours"
-        size="small"
-        class="mx-1 w-19"
-        :min="1"
-        placeholder=""
-      />
-      hours per week, I will finish the course by the {{ endDate }}
-    </template>
+    <i18n-t v-if="hasWeeklyGoal" keypath="timeToComplete.withScheduleFinish">
+      <template #schedule>
+        <nuxt-link-locale to="/schedule" class="link ml-1">
+          {{ $t('timeToComplete.schedule') }}
+        </nuxt-link-locale>,
+      </template>
+      <template #endDate>
+        {{ endDate }}
+      </template>
+    </i18n-t>
+    <i18n-t v-else keypath="timeToComplete.spendHoursFinish">
+      <template #hours>
+        <n-input-number
+          v-model:value="hours"
+          size="small"
+          class="mx-1 w-19"
+          :min="1"
+          placeholder=""
+        />
+      </template>
+      <template #endDate>
+        {{ endDate }}
+      </template>
+    </i18n-t>
   </div>
 </template>
 

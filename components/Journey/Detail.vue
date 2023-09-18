@@ -2,7 +2,6 @@
   <div v-if="course" class="border border-$border-input rounded">
     <div :id="course._dir + '-heading'" class="group h-16 w-full flex cursor-pointer items-center rounded-2xl bg-$background-base px-4" @click="isOpen = !isOpen">
       <div class="w-1/3 flex items-center gap-4">
-        <!-- <DynamicDevIcon :name="iconName" style="normal" class="hidden sm:flex" /> -->
         <span class="truncate text-base text-$text-title">{{ course.title }}</span>
       </div>
 
@@ -76,21 +75,6 @@ const qtyLastWeeks = computed(() => {
 })
 
 const percentage = computed(() => (lessonsLearned.value.length / lessons.value.length) * 100)
-// const iconName = computed(() => {
-//   let name = 'dev'
-//   switch (props.course._dir) {
-//     case 'golang-book':
-//       name = 'go'
-//       break
-//     case 'dotnet':
-//       name = 'go'
-//       break
-//     default:
-//       name = 'dev'
-//       break
-//   }
-//   return name
-// })
 
 const isOpen = ref(false)
 </script>

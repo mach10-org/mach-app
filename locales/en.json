@@ -48,7 +48,8 @@
     "privacyPolicy": "Privacy Policy",
     "termsAndConditions": "Terms & Conditions",
     "licence": "Licence",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "notifyNewsletter": "We’ll notify you when our first course is ready. First course starting in 2023."
   },
 
   "quiz": {
@@ -195,7 +196,13 @@
     },
     "course": {
       "toc": "Table of content",
-      "showLessons": "Show all lessons"
+      "showLessons": "Show all lessons",
+      "nextChapter": "Next chapter:",
+      "previousChapter": "Previous chapter:",
+      "showNavigation": "Show navigation",
+      "completion": "Completion",
+      "chapterFinished": "Chapter finished",
+      "markNotFinished": "Mark as not finished"
     }
   },
 
@@ -206,6 +213,12 @@
     "save": "Save",
     "submit": "Submit",
     "hours": "{hours} hours"
+  },
+
+  "timeToComplete": {
+    "schedule": "schedule",
+    "withScheduleFinish": "With my {schedule} I will finish the course by the {endDate}",
+    "spendHoursFinish": "If I spend {hours} hours per week, I will finish the course by the {endDate}"
   },
 
   "errors": {
