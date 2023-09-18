@@ -17,23 +17,29 @@
     </li>
     <li class="flex flex-col items-center justify-center py-4">
       <h2 class="mb-1 text-2xl font-extrabold text-$text-title lg:text-3xl">
-        {{ lessonsCompleted }}
+        {{ $t('pages.journey.youreBadge', {badge: profile.getBadge}) }}
       </h2>
-      <p class="text-base text-$text-muted">
-        {{ $t('pages.journey.summary_right') }}
-      </p>
+      <i18n-t v-if="nextBadge" tag="p" keypath="pages.journey.keepPushing" class="max-w-55 text-center text-base text-$text-muted">
+        <template #badge>
+          <b>{{ nextBadge }}</b>
+        </template>
+      </i18n-t>
     </li>
   </ul>
 </template>
 <script setup lang="ts">
+import { machBadges, useProfileStore } from '~/stores/profile'
 import { useScheduleStore } from '~/stores/schedule'
 
-defineProps({
-  lessonsCompleted: {
-    type: Number,
-    required: true,
-  },
-})
-
 const schedule = useScheduleStore()
+const profile = useProfileStore()
+
+const nextBadge = computed(() => {
+  const currentBadge = profile.getBadge
+  const currentBadgeIndex = machBadges.findIndex(b => b === currentBadge)
+  if (currentBadgeIndex === machBadges.length - 1) {
+    return false
+  }
+  return machBadges[currentBadgeIndex + 1]
+})
 </script>

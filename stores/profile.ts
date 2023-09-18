@@ -17,6 +17,10 @@ interface State extends Omit<rows, 'id' | 'updated_at'> {
   timezone: string
 }
 
+export const machBadges = [
+  'Subsonic', 'Transonic', 'Sonic', 'Supersonic', 'Hypersonic', 'Hypervelocity',
+]
+
 export const useProfileStore = defineStore('profile', {
   state: (): State => ({
     isLoading: true,
@@ -39,8 +43,30 @@ export const useProfileStore = defineStore('profile', {
     isOnBoarded (state) {
       return state.full_name !== null
     },
-    getXp (state) {
-      return `Mach ${state.xp || 0}`
+    getMach (state) {
+      return state.xp / 100
+    },
+    getBadge () {
+      const mach = this.getMach
+      let badge = machBadges[0]
+
+      if (mach >= 10) {
+        badge = machBadges[5]
+      } else if (mach >= 5) {
+        badge = machBadges[4]
+      } else if (mach >= 1.3) {
+        badge = machBadges[3]
+      } else if (mach === 1) {
+        badge = machBadges[2]
+      } else if (mach >= 0.8) {
+        badge = machBadges[1]
+      }
+
+      return badge
+    },
+    getXp () {
+      const i18n = useI18n()
+      return `Mach ${i18n.n(this.getMach, { maximumFractionDigits: 2 }) || 0} - ${this.getBadge}`
     },
   },
   actions: {
@@ -300,6 +326,38 @@ export const useProfileStore = defineStore('profile', {
       } catch (error) {
         console.error(error)
         discreteApi.message.error('Error while incrementing the XP')
+      }
+
+      return false
+    },
+    async decrementXP (value: number) {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
+
+      // TODO function? https://stackoverflow.com/questions/76192402/supabase-update-with-incrementing-value
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
+
+      try {
+        const { error } = await supabase.from('profiles').upsert({
+          id: user.value.id,
+          xp: this.xp - value,
+        })
+
+        if (error) {
+          throw error
+        }
+
+        this.xp -= value
+
+        return true
+      } catch (error) {
+        console.error(error)
+        discreteApi.message.error('Error while decrementing the XP')
       }
 
       return false

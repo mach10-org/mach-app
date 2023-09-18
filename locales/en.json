@@ -133,13 +133,14 @@
       "notEnrolledCTA": "Get started today !",
       "summary_left": "Weekly goal",
       "summary_left_link": "Update your schedule",
-      "summary_right": "Lessons completed",
       "progress_percentTitle": "You're {percentage} through your enrolled Courses.",
       "progress_percentSubtile": "lessons completed",
       "detail_goToCourse": "Go to course",
       "detail_completed": "exercises completed",
       "detail_lastWeeks": "Last 14 days",
-      "detail_dateStart": "When you started the course"
+      "detail_dateStart": "When you started the course",
+      "youreBadge": "You're {badge}!",
+      "keepPushing": "Keep pushing to unlock the {badge} speed!"
     },
     "schedule": {
       "title": "Your Schedule",
