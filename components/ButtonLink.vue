@@ -1,5 +1,5 @@
 <template>
-  <NButton type="primary" :size="size" tag="a" :href="href" :on-click="navigate">
+  <NButton type="primary" secondary :size="size" tag="a" :href="href" :on-click="navigate">
     <slot />
   </NButton>
 </template>

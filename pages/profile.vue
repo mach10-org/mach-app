@@ -96,7 +96,7 @@
         </n-form-item>
 
         <n-form-item :show-label="false" :show-feedback="false">
-          <n-button attr-type="submit" type="primary" class="w-full" :loading="isLoading">
+          <n-button attr-type="submit" type="primary" secondary class="w-full" :loading="isLoading">
             {{ $t('common.save') }}
           </n-button>
         </n-form-item>

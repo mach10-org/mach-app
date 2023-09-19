@@ -18,6 +18,7 @@
             <n-button
               attr-type="submit"
               type="primary"
+              secondary
               class="w-full"
               :disabled="!canSubmit"
               :loading="isLoadingEmail"

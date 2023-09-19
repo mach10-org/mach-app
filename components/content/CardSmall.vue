@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
-    <Icon v-if="icon" :name="icon" class="mx-auto mb-4 h-12 w-12 text-$primary" />
-    <h3 class="mb-2 font-bold text-$text-title" :class="{ 'text-4xl': isLargeText, 'text-xl': !isLargeText }">
+    <Icon v-if="icon" :name="icon" class="mx-auto mb-4 h-12 w-12 text-$secondary" />
+    <h3 class="mb-2 font-bold text-$secondary" :class="{ 'text-4xl': isLargeText, 'text-xl': !isLargeText }">
       <ContentSlot :use="$slots.title" unwrap="p" />
     </h3>
     <div class="mb-4 max-w-none prose" :class="{ 'text-lg': isLargeText, 'text-base': !isLargeText }">

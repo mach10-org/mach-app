@@ -49,7 +49,7 @@
       </n-form-item>
 
       <n-form-item :show-label="false" :show-feedback="false">
-        <n-button attr-type="submit" type="primary" class="w-full" :loading="pending">
+        <n-button attr-type="submit" type="primary" secondary class="w-full" :loading="pending">
           {{ $t('pages.contact.submit') }}
         </n-button>
       </n-form-item>

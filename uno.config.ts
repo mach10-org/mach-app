@@ -12,11 +12,11 @@ export default defineConfig({
   shortcuts: [
     ['root', `
         selector-[:root]:(
-          [--primary:${themeConfig.shared?.common?.primaryColor}]
-          [--primary-hover:${themeConfig.shared?.common?.primaryColorHover}]
+          [--primary:${themeConfig.light?.common?.primaryColor}]
+          [--primary-hover:${themeConfig.light?.common?.primaryColorHover}]
           [--text-base:${themeConfig.light?.common?.textColorBase}]
-          [--text-title:#111827]
-          [--text-muted:#89939F]
+          [--text-title:#111827] 
+          [--text-muted:#6c6f85]
           [--background-base:${themeConfig.light?.common?.baseColor}]
           [--background-body:${themeConfig.light?.common?.bodyColor}]
           [--link:${themeConfig.light?.Anchor?.linkTextColorActive}]
@@ -33,8 +33,12 @@ export default defineConfig({
     `],
     ['rootdark', `
         selector-[html.dark]:(
+          [--primary:${themeConfig.dark?.common?.primaryColor}]
+          [--primary-hover:${themeConfig.dark?.common?.primaryColorHover}]
+          [--secondary:#8caaee]
           [--text-base:${themeConfig.dark?.common?.textColorBase}]
-          [--text-title:#EDF1F5]
+          [--text-title:#babbf1]
+          [--text-muted:#a5adce]
           [--background-base:${themeConfig.dark?.common?.baseColor}]
           [--background-body:${themeConfig.dark?.common?.bodyColor}]
           [--link:${themeConfig.dark?.Anchor?.linkTextColorActive}]

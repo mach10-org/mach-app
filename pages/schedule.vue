@@ -11,7 +11,14 @@
         <n-form ref="formRef" :model="model" class="space-y-3">
           <ScheduleItem v-for="(item, index) in model.items" :key="item.day" v-model:value="model.items[index]" />
         </n-form>
-        <n-button type="primary" size="large" class="mt-7 w-full" :loading="pending" @click="onSubmit(save)">
+        <n-button
+          type="primary"
+          secondary
+          size="large"
+          class="mt-7 w-full"
+          :loading="pending"
+          @click="onSubmit(save)"
+        >
           Save
         </n-button>
       </div>
