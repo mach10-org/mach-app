@@ -1,6 +1,7 @@
 import { defineConfig, presetWind, presetTypography } from 'unocss'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
 import transformerDirectives from '@unocss/transformer-directives'
+import { extendCatppuccin } from 'unocss-catppuccin'
 import { themeConfig } from './theme.config'
 
 export default defineConfig({
@@ -37,7 +38,7 @@ export default defineConfig({
           [--primary-hover:${themeConfig.dark?.common?.primaryColorHover}]
           [--secondary:#8caaee]
           [--text-base:${themeConfig.dark?.common?.textColorBase}]
-          [--text-title:#babbf1]
+          [--text-title:${themeConfig.dark?.Card?.titleTextColor}]
           [--text-muted:#a5adce]
           [--background-base:${themeConfig.dark?.common?.baseColor}]
           [--background-body:${themeConfig.dark?.common?.bodyColor}]
@@ -46,6 +47,8 @@ export default defineConfig({
           [--border-input:${themeConfig.dark?.Card?.borderColor}]
         )
     `],
+    ['super-gradient', 'from-ctp-frappe-mauve to-ctp-frappe-red bg-gradient-to-r'],
+    ['super-text-gradient', 'super-gradient bg-clip-text font-extrabold text-transparent'],
   ],
   theme: {
     fontFamily: {
@@ -98,6 +101,7 @@ export default defineConfig({
         },
       },
     }),
+    extendCatppuccin(),
   ],
   transformers: [
     transformerVariantGroup(),

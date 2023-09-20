@@ -1,7 +1,7 @@
 <template>
-  <div class="mx-auto mb-8 mt-4 min-h-[60vh] max-w-screen-sm bg-$background-base p-4 lg:mt-8 lg:p-6">
+  <NCard class="mx-auto mb-8 mt-4 min-h-[60vh] max-w-screen-sm lg:mt-8">
     <h1 class="mb-4 text-center text-2xl lg:mb-8 md:text-4xl">
-      <span class="from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text font-extrabold text-transparent">{{ $t('pages.schedule.title') }}</span>
+      <span class="super-text-gradient">{{ $t('pages.schedule.title') }}</span>
     </h1>
 
     <ClientOnly>
@@ -23,7 +23,7 @@
         </n-button>
       </div>
     </ClientOnly>
-  </div>
+  </NCard>
 </template>
 
 <script setup lang="ts">

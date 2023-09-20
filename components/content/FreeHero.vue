@@ -1,8 +1,8 @@
 <template>
   <div class="mx-auto pb-8 pt-10 text-center container lg:pt-20">
-    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-$text-title lg:text-6xl md:text-5xl">
+    <h1 class="mb-4 flex flex-col items-center text-4xl font-extrabold leading-none tracking-tight text-$text-title lg:text-6xl md:text-5xl">
       <ContentSlot :use="$slots.title1" unwrap="p" />
-      <div class="from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text font-extrabold text-transparent">
+      <div class="super-text-gradient inline">
         <ContentSlot :use="$slots.title2" unwrap="p" />
       </div>
     </h1>

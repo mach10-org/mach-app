@@ -1,7 +1,7 @@
 <template>
   <div class="h-[100vh] flex flex-col">
-    <div class="h-2 bg-gray-300">
-      <div ref="progressBar" class="h-full from-purple-400 to-pink-600 bg-gradient-to-r" />
+    <div class="h-2 dark:bg-ctp-frappe-text">
+      <div ref="progressBar" class="super-gradient h-full" />
     </div>
     <div class="">
       <div class="flex items-center justify-center pb-2 pt-8">
@@ -48,7 +48,7 @@
           <SplideSlide>
             <SplideSlideWrapper inner-class="max-w-3xl" content-class="text-center">
               <div>
-                <h2 class="mb-2 from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl">
+                <h2 class="super-text-gradient mb-2 text-center text-2xl font-bold md:text-4xl">
                   {{ $t('pages.onboarding.form_2', {firstname: model.firstname}) }}!
                 </h2>
                 <p class="text-8xl text-pink-600">
@@ -151,7 +151,7 @@
 
           <SplideSlide>
             <SplideSlideWrapper inner-class="max-w-3xl">
-              <h2 class="mb-10 from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl">
+              <h2 class="super-text-gradient mb-10 text-center text-2xl font-bold md:text-4xl">
                 {{ $t('pages.onboarding.form_7') }}
               </h2>
               <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">

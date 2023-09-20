@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-col items-center px-2 py-8 md:px-0">
       <nuxt-link :to="localePath('/stay-up-to-date')" class="mb-7 inline-flex items-center justify-between rounded-full bg-gray-100 bg-opacity-10 px-1 py-1 pr-4 text-sm text-$text-base transition-colors hover:bg-opacity-15" role="alert">
-        <span class="mr-3 rounded-full bg-$primary px-4 py-1.5 text-xs text-white">
+        <span class="mr-3 rounded-full px-4 py-1.5 text-xs dark:(bg-ctp-frappe-maroon text-ctp-frappe-crust)">
           <ContentSlot :use="$slots.updatesTitle" unwrap="p" />
         </span>
         <span class="text-sm font-medium">

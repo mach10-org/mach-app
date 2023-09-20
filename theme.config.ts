@@ -2,6 +2,7 @@ import { ThemeConfig } from '@bg-dev/nuxt-naiveui'
 
 const textColor = '#4c4f69'
 const textColorDark = '#c6d0f5'
+const titleTextColorDark = '#babbf1'
 
 const link = '#be185d'
 const linkHover = '#9d174f'
@@ -107,6 +108,8 @@ export const themeConfig: ThemeConfig = {
     Card: {
       color: baseColorDark,
       borderColor: borderDark,
+      textColor: textColorDark,
+      titleTextColor: titleTextColorDark,
     },
     Menu: {
       itemTextColorHorizontal: textColorDark,
@@ -131,10 +134,13 @@ export const themeConfig: ThemeConfig = {
       dividerColor: borderDark,
       arrowColor: linkDark,
     },
+    Form: {
+      labelTextColor: textColorDark,
+      asteriskColor: '#e78284',
+    },
     Input: {
       placeholderColor: '#737994',
       textColor: textColorDark,
-      // border: '1px solid #414559',
       borderHover: '1px solid #f4b8e4',
       borderFocus: '1px solid #f4b8e4',
     },
@@ -143,6 +149,12 @@ export const themeConfig: ThemeConfig = {
     },
     Switch: {
       railColorActive: '#81c8be',
+    },
+    Checkbox: {
+      textColor: textColorDark,
+    },
+    Radio: {
+      textColor: textColorDark,
     },
   }, // Theme options applied on dark mode
 }
