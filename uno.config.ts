@@ -47,7 +47,7 @@ export default defineConfig({
           [--border-input:${themeConfig.dark?.Card?.borderColor}]
         )
     `],
-    ['super-gradient', 'from-ctp-frappe-mauve to-ctp-frappe-red bg-gradient-to-r'],
+    ['super-gradient', 'from-ctp-frappe-red to-ctp-frappe-mauve bg-gradient-to-r'],
     ['super-text-gradient', 'super-gradient bg-clip-text font-extrabold text-transparent'],
   ],
   theme: {

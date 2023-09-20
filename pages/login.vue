@@ -38,7 +38,7 @@
           type="primary"
           size="large"
           :loading="isLoadingGithub"
-          :theme-overrides="{colorPrimary: '#171515', borderPrimary: '#171515', colorHoverPrimary: '#171515AA', borderHoverPrimary: '#171515AA'}"
+          :theme-overrides="{colorPrimary: '#171515', borderPrimary: '#171515', colorHoverPrimary: '#171515AA', borderHoverPrimary: '#171515AA', textColorPrimary: '#fff', textColorHoverPrimary: '#fff'}"
           @click="signInWithGitHub"
         >
           <template #icon>

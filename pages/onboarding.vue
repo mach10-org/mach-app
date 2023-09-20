@@ -5,8 +5,7 @@
     </div>
     <div class="">
       <div class="flex items-center justify-center pb-2 pt-8">
-        <span class="mr-3 text-2xl sm:text-3xl">👩🏻‍🚀</span>
-        <span class="self-center whitespace-nowrap text-xl font-semibold text-$text-base"> {{ config.public.siteName }} </span>
+        <Brand size="lg" />
       </div>
     </div>
 
@@ -51,7 +50,7 @@
                 <h2 class="super-text-gradient mb-2 text-center text-2xl font-bold md:text-4xl">
                   {{ $t('pages.onboarding.form_2', {firstname: model.firstname}) }}!
                 </h2>
-                <p class="text-8xl text-pink-600">
+                <p class="text-8xl text-$primary">
                   ☺
                 </p>
               </div>
