@@ -156,5 +156,11 @@ export const themeConfig: ThemeConfig = {
     Radio: {
       textColor: textColorDark,
     },
+    Select: {
+      peers: {
+        InternalSelection: { textColor: textColorDark },
+        InternalSelectMenu: { optionTextColor: textColorDark },
+      },
+    },
   }, // Theme options applied on dark mode
 }
