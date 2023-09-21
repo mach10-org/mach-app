@@ -13,22 +13,22 @@
       <nuxt-link
         v-if="prevNext[0]"
         :to="localePath(getPathWithoutLocale(prevNext[0]._path))"
-        class="group mr-auto inline-flex items-center border border-$border-input rounded-lg bg-$background-body px-4 py-2 text-sm font-medium text-$link no-underline transition-colors hover:(border-$primary bg-$primary text-white)"
+        class="group mr-auto inline-flex items-center border border-$border-input rounded-lg bg-$background-body px-4 py-2 text-sm font-medium text-$link no-underline transition-colors hover:(border-$primary bg-$primary text-$background-body)"
       >
         <Icon name="heroicons:arrow-left-solid" class="mr-2 h-5 w-5" />
 
         <div class="ml-2">
-          <span class="text-$text-muted transition-colors group-hover:text-white">{{ $t('pages.course.previousChapter') }}</span> <br>
+          <span class="text-$text-muted transition-colors group-hover:text-$background-body">{{ $t('pages.course.previousChapter') }}</span> <br>
           {{ prevNext[0].title }}
         </div>
       </nuxt-link>
       <nuxt-link
         v-if="prevNext[1]"
         :to="localePath(getPathWithoutLocale(prevNext[1]._path))"
-        class="group ml-auto mt-2 inline-flex items-center border border-$border-input rounded-lg bg-$background-body px-4 py-2 text-sm font-medium text-$link no-underline transition-colors md:mt-0 hover:(border-$primary bg-$primary text-white)"
+        class="group ml-auto mt-2 inline-flex items-center border border-$border-input rounded-lg bg-$background-body px-4 py-2 text-sm font-medium text-$link no-underline transition-colors md:mt-0 hover:(border-$primary bg-$primary text-$background-body)"
       >
         <div class="mr-2">
-          <span class="text-$text-muted transition-colors group-hover:text-white">{{ $t('pages.course.nextChapter') }}</span> <br>
+          <span class="text-$text-muted transition-colors group-hover:text-$background-body">{{ $t('pages.course.nextChapter') }}</span> <br>
           {{ prevNext[1].title }}
         </div>
 
@@ -37,26 +37,33 @@
     </div>
 
     <template #toc>
-      <button
-        type="button"
-        class="fixed bottom-10 right-8 z-90 h-12 w-12 flex items-center justify-center rounded-full bg-$primary text-4xl text-white drop-shadow-lg transition-colors md:(bottom-auto left-8 right-auto top-1/4) hover:bg-$primary-hover"
+      <NButton
+        type="primary"
+        secondary
+        class="fixed bottom-10 right-8 z-90 drop-shadow-lg md:(bottom-auto left-8 right-auto top-1/4)"
+        size="large"
+        strong
+        circle
         aria-controls="drawer-navigation"
         :title="$t('pages.course.showLessons')"
+        style="--n-width: 50px; --n-height: 50px;"
         @click="isTocActive = true"
       >
-        <svg
-          class="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
-        </svg>
-        <span class="sr-only">{{ $t('pages.course.showNavigation') }}</span>
-      </button>
+        <template #icon>
+          <NIcon>
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
+            </svg>
+          </NIcon>
+        </template>
+      </NButton>
       <n-drawer id="drawer-navigation" v-model:show="isTocActive" :width="320" placement="left" display-directive="show">
         <n-drawer-content closable>
           <template #header>

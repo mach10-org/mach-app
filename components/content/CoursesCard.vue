@@ -4,9 +4,9 @@
       :to="href"
       class="group h-full flex flex-col overflow-hidden border border-$border-input rounded bg-$background-base no-underline drop-shadow-lg transition duration-500 hover:drop-shadow-2xl"
     >
-      <nuxt-img class="h-[223px] w-full object-cover" :src="`/img/${preview}`" alt="" sizes="xs:100vw sm:100vw md:100vw lg:360px" />
+      <nuxt-img class="h-[223px] w-full object-cover dark:opacity-70" :src="`/img/${preview}`" alt="" sizes="xs:100vw sm:100vw md:100vw lg:360px" />
       <div class="flex flex-1 flex-col px-4 py-3">
-        <h2 class="mb-1 text-xl font-extrabold text-$link underline underline-dashed transition-colors duration-500 lg:text-2xl group-hover:(text-$link-hover underline-solid)">
+        <h2 class="mb-1 text-xl font-extrabold text-$link underline transition-colors duration-500 lg:text-2xl group-hover:(text-$link-hover no-underline)">
           {{ title }}
         </h2>
         <p class="m-0 flex-1 text-base leading-6 text-$text-base">

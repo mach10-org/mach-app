@@ -1,6 +1,7 @@
 import { defineConfig, presetWind, presetTypography } from 'unocss'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
 import transformerDirectives from '@unocss/transformer-directives'
+import { extendCatppuccin } from 'unocss-catppuccin'
 import { themeConfig } from './theme.config'
 
 export default defineConfig({
@@ -12,14 +13,15 @@ export default defineConfig({
   shortcuts: [
     ['root', `
         selector-[:root]:(
-          [--primary:${themeConfig.shared?.common?.primaryColor}]
-          [--primary-hover:${themeConfig.shared?.common?.primaryColorHover}]
+          [--primary:${themeConfig.light?.common?.primaryColor}]
+          [--primary-hover:${themeConfig.light?.common?.primaryColorHover}]
+          [--secondary:#179299]
           [--text-base:${themeConfig.light?.common?.textColorBase}]
-          [--text-title:#111827]
-          [--text-muted:#89939F]
-          [--background-base:${themeConfig.light?.common?.baseColor}]
+          [--text-title:${themeConfig.light?.Card?.titleTextColor}]
+          [--text-muted:#6c6f85]
+          [--background-base:${themeConfig.light?.common?.baseColor}] 
           [--background-body:${themeConfig.light?.common?.bodyColor}]
-          [--link:${themeConfig.light?.Anchor?.linkTextColorActive}]
+          [--link:${themeConfig.light?.Anchor?.linkTextColorActive}] 
           [--link-hover:${themeConfig.light?.Anchor?.linkTextColorPressed}]
           [--border-input:${themeConfig.light?.Card?.borderColor}]
           [--un-prose-headings:var(--text-title)]
@@ -33,8 +35,12 @@ export default defineConfig({
     `],
     ['rootdark', `
         selector-[html.dark]:(
+          [--primary:${themeConfig.dark?.common?.primaryColor}]
+          [--primary-hover:${themeConfig.dark?.common?.primaryColorHover}]
+          [--secondary:#8caaee]
           [--text-base:${themeConfig.dark?.common?.textColorBase}]
-          [--text-title:#EDF1F5]
+          [--text-title:${themeConfig.dark?.Card?.titleTextColor}]
+          [--text-muted:#a5adce]
           [--background-base:${themeConfig.dark?.common?.baseColor}]
           [--background-body:${themeConfig.dark?.common?.bodyColor}]
           [--link:${themeConfig.dark?.Anchor?.linkTextColorActive}]
@@ -42,6 +48,8 @@ export default defineConfig({
           [--border-input:${themeConfig.dark?.Card?.borderColor}]
         )
     `],
+    ['super-gradient', 'from-ctp-latte-maroon to-ctp-latte-blue dark:(from-ctp-frappe-red to-ctp-frappe-mauve) bg-gradient-to-r'],
+    ['super-text-gradient', 'super-gradient bg-clip-text font-extrabold text-transparent'],
   ],
   theme: {
     fontFamily: {
@@ -94,6 +102,7 @@ export default defineConfig({
         },
       },
     }),
+    extendCatppuccin(),
   ],
   transformers: [
     transformerVariantGroup(),

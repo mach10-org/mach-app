@@ -1,12 +1,11 @@
 <template>
   <div class="h-[100vh] flex flex-col">
-    <div class="h-2 bg-gray-300">
-      <div ref="progressBar" class="h-full from-purple-400 to-pink-600 bg-gradient-to-r" />
+    <div class="h-2 bg-ctp-latte-text dark:bg-ctp-frappe-text">
+      <div ref="progressBar" class="h-full super-gradient" />
     </div>
     <div class="">
       <div class="flex items-center justify-center pb-2 pt-8">
-        <span class="mr-3 text-2xl sm:text-3xl">👩🏻‍🚀</span>
-        <span class="self-center whitespace-nowrap text-xl font-semibold text-$text-base"> {{ config.public.siteName }} </span>
+        <Brand size="lg" />
       </div>
     </div>
 
@@ -35,7 +34,7 @@
                 <n-input ref="firstnameInput" v-model:value="model.firstname" :input-props="{id: 'firstname'}" placeholder="" />
               </n-form-item>
               <n-form-item :show-label="false" :show-feedback="false" class="mt-6 flex justify-center">
-                <n-button type="primary" :disabled="!model.firstname.trim()" icon-placement="right" @click="goNext">
+                <n-button type="primary" secondary :disabled="!model.firstname.trim()" icon-placement="right" @click="goNext">
                   {{ $t('pages.onboarding.next') }}
                   <template #icon>
                     <Icon name="heroicons:arrow-right-solid" />
@@ -48,10 +47,10 @@
           <SplideSlide>
             <SplideSlideWrapper inner-class="max-w-3xl" content-class="text-center">
               <div>
-                <h2 class="mb-2 from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl">
+                <h2 class="mb-2 super-text-gradient text-center text-2xl font-bold md:text-4xl">
                   {{ $t('pages.onboarding.form_2', {firstname: model.firstname}) }}!
                 </h2>
-                <p class="text-8xl text-pink-600">
+                <p class="text-8xl text-$primary">
                   ☺
                 </p>
               </div>
@@ -73,7 +72,7 @@
                 {{ $t('pages.onboarding.form_3_help') }}
               </p>
               <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
-                <n-button type="primary" icon-placement="right" @click="goNext">
+                <n-button type="primary" secondary icon-placement="right" @click="goNext">
                   {{ $t('pages.onboarding.next') }}
                   <template #icon>
                     <Icon name="heroicons:arrow-right-solid" />
@@ -95,7 +94,7 @@
                 </n-radio-group>
               </n-form-item>
               <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
-                <n-button type="primary" icon-placement="right" @click="goNext">
+                <n-button type="primary" secondary icon-placement="right" @click="goNext">
                   {{ $t('pages.onboarding.next') }}
                   <template #icon>
                     <Icon name="heroicons:arrow-right-solid" />
@@ -117,7 +116,7 @@
                 </n-checkbox-group>
               </n-form-item>
               <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
-                <n-button type="primary" icon-placement="right" @click="goNext">
+                <n-button type="primary" secondary icon-placement="right" @click="goNext">
                   {{ $t('pages.onboarding.next') }}
                   <template #icon>
                     <Icon name="heroicons:arrow-right-solid" />
@@ -139,7 +138,7 @@
                 </n-radio-group>
               </n-form-item>
               <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
-                <n-button type="primary" icon-placement="right" @click="goNext">
+                <n-button type="primary" secondary icon-placement="right" @click="goNext">
                   {{ $t('pages.onboarding.next') }}
                   <template #icon>
                     <Icon name="heroicons:arrow-right-solid" />
@@ -151,11 +150,11 @@
 
           <SplideSlide>
             <SplideSlideWrapper inner-class="max-w-3xl">
-              <h2 class="mb-10 from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl">
+              <h2 class="mb-10 super-text-gradient text-center text-2xl font-bold md:text-4xl">
                 {{ $t('pages.onboarding.form_7') }}
               </h2>
               <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
-                <n-button type="primary" icon-placement="right" :loading="isLoading" @click="submit">
+                <n-button type="primary" secondary icon-placement="right" :loading="isLoading" @click="submit">
                   {{ $t('pages.onboarding.next') }}
                   <template #icon>
                     <Icon name="heroicons:arrow-right-solid" />

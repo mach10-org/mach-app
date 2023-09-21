@@ -1,9 +1,9 @@
 <template>
   <NCard class="mx-2 mt-6 md:mx-auto md:mt-10 md:max-w-[600px]">
     <template #header>
-      <i18n-t keypath="pages.contact.title" tag="h1" class="text-text-title text-2xl font-extrabold tracking-tight lg:mb-8 md:text-4xl">
+      <i18n-t keypath="pages.contact.title" tag="h1" class="text-2xl font-extrabold tracking-tight text-$text-title lg:mb-8 md:text-4xl">
         <template #email>
-          <a href="mailto:hello@mach10.jp" class="from-purple-400 to-pink-600 bg-gradient-to-r bg-clip-text text-transparent">
+          <a href="mailto:hello@mach10.jp" class="super-text-gradient">
             hello@mach10.jp
           </a>
         </template>
@@ -49,7 +49,7 @@
       </n-form-item>
 
       <n-form-item :show-label="false" :show-feedback="false">
-        <n-button attr-type="submit" type="primary" class="w-full" :loading="pending">
+        <n-button attr-type="submit" type="primary" secondary class="w-full" :loading="pending">
           {{ $t('pages.contact.submit') }}
         </n-button>
       </n-form-item>

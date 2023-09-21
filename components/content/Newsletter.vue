@@ -12,7 +12,12 @@
           <n-input ref="input" v-model:value="formValue.email" :input-props="{type: 'email', 'aria-label': label}" :placeholder="placeholder" />
         </n-form-item>
         <n-form-item :show-label="false" :show-feedback="false">
-          <n-button attr-type="submit" type="primary" @click="handleSendMail">
+          <n-button
+            attr-type="submit"
+            type="primary"
+            secondary
+            @click="handleSendMail"
+          >
             {{ buttonText }}
           </n-button>
         </n-form-item>

@@ -8,12 +8,13 @@
           class="absolute left-0 top-0 h-full w-full w-full object-cover -z-1"
           densities="x1 x2"
         />
-        <div class="absolute left-0 top-0 h-full w-full bg-black bg-opacity-50" />
+        <div v-else class="bg-ctp-latte-surface0 absolute left-0 top-0 h-full w-full dark:bg-ctp-frappe-lavender" />
+        <div class="absolute left-0 top-0 h-full w-full bg-ctp-latte-crust bg-opacity-75 dark:(bg-ctp-frappe-crust bg-opacity-85)" />
         <div class="absolute left-1/2 top-20 mx-auto w-full max-w-screen-xl px-4 xl:top-1/2 -translate-x-1/2 xl:px-0 xl:-translate-y-1/2">
-          <h1 class="mb-4 max-w-4xl text-2xl font-extrabold leading-none text-white lg:text-4xl sm:text-3xl">
+          <h1 class="inline-block max-w-4xl super-text-gradient pb-4 text-2xl leading-none lg:text-5xl sm:text-3xl">
             {{ title }}
           </h1>
-          <p class="text-lg font-normal text-gray-300">
+          <p class="text-lg font-normal text-$text-muted">
             {{ description }}
           </p>
         </div>

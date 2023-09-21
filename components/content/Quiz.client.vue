@@ -22,6 +22,7 @@
         class=""
         size="large"
         type="primary"
+        secondary
         :disabled="!canSubmit"
         @click="submit"
       >

@@ -1,32 +1,30 @@
 import { ThemeConfig } from '@bg-dev/nuxt-naiveui'
 
-const textColor = '#232E4A'
-const textColorDark = '#e2e5e8'
+const textColor = '#4c4f69'
+const textColorDark = '#c6d0f5'
+const titleTextColor = '#5c5f77'
+const titleTextColorDark = '#babbf1'
 
-const link = '#be185d'
-const linkHover = '#9d174f'
-const linkDark = '#f9a8ca'
-const linkHoverDark = '#f472a8'
+const link = '#1e66f5'
+const linkHover = '#7287fd'
+const linkDark = '#f4b8e4'
+const linkHoverDark = '#ea999c'
 
-const baseColor = '#FCFCFC'
-const bodyColor = '#F9F9F9'
-const baseColorDark = '#242F4C'
-const bodyColorDark = '#232E4A'
+const baseColor = '#eff1f5'
+const bodyColor = '#eff1f5'
+const baseColorDark = '#292c3c'
+const bodyColorDark = '#292c3c'
 
 const border = '#dee5ed'
-const borderDark = '#3a4959'
+const borderDark = '#51576d'
 
 export const themeConfig: ThemeConfig = {
   shared: {
     common: {
       fontFamily: 'Inter,ui-sans-serif,system-ui,-apple-system,sans-serif',
-      primaryColor: '#be185d',
-      primaryColorHover: '#9d174f',
     },
     Button: {
       fontWeight: 600,
-      textColorPrimary: '#fff',
-      textColorHoverPrimary: '#fff',
     },
     Message: {
       fontSize: '16px',
@@ -57,8 +55,18 @@ export const themeConfig: ThemeConfig = {
       textColorBase: textColor,
       baseColor,
       bodyColor,
+      primaryColor: link,
+      primaryColorHover: '#dd7878',
+      borderColor: '#ccd0da',
+      inputColor: 'rgba(0, 0, 0, 0.02)',
+      popoverColor: '#e6e9ef',
+    },
+    Button: {
+      textColorPrimary: '#dce0e8',
+      textColorHoverPrimary: '#dce0e8',
     },
     Anchor: {
+      linkTextColor: textColor,
       linkTextColorActive: link,
       linkTextColorHover: link,
       linkTextColorPressed: linkHover,
@@ -66,19 +74,58 @@ export const themeConfig: ThemeConfig = {
     Card: {
       color: baseColor,
       borderColor: border,
+      textColor,
+      titleTextColor,
+    },
+    Menu: {
+      itemTextColorHorizontal: textColor,
+      itemTextColorActiveHorizontal: link,
+      itemTextColorActiveHoverHorizontal: linkHover,
+      itemTextColorHoverHorizontal: linkHover,
+      itemTextColorActive: link,
+      itemTextColorActiveHover: linkHover,
     },
     Dropdown: {
-      color: baseColor,
       dividerColor: border,
+      optionTextColor: textColor,
+      optionTextColorHover: textColor,
     },
     Drawer: {
-      color: baseColor,
       textColor,
       dividerColor: border,
+      titleTextColor,
     },
     Collapse: {
       dividerColor: border,
       arrowColor: link,
+    },
+    Form: {
+      labelTextColor: textColor,
+      asteriskColor: '#d20f39',
+    },
+    Input: {
+      placeholderColor: '#737994',
+      textColor,
+      borderHover: `1px solid ${link}`,
+      borderFocus: `1px solid ${link}`,
+    },
+    TimePicker: {
+      iconColor: '#737994',
+    },
+    Switch: {
+      railColorActive: link,
+    },
+    Checkbox: {
+      textColor,
+    },
+    Radio: {
+      textColor,
+    },
+    Select: {
+      peers: {
+        InternalSelection: { textColor },
+        InternalSelectMenu: { optionTextColor: textColor },
+      },
     },
   }, // Theme options applied on light mode
   dark: {
@@ -86,8 +133,18 @@ export const themeConfig: ThemeConfig = {
       textColorBase: textColorDark,
       baseColor: baseColorDark,
       bodyColor: bodyColorDark,
+      primaryColor: linkDark,
+      primaryColorHover: '#eebebe',
+      borderColor: '#414559',
+      inputColor: 'rgba(255, 255, 255, 0.02)',
+      popoverColor: '#232634',
+    },
+    Button: {
+      textColorPrimary: '#232634',
+      textColorHoverPrimary: '#232634',
     },
     Anchor: {
+      linkTextColor: textColorDark,
       linkTextColorActive: linkDark,
       linkTextColorHover: linkDark,
       linkTextColorPressed: linkHoverDark,
@@ -95,8 +152,11 @@ export const themeConfig: ThemeConfig = {
     Card: {
       color: baseColorDark,
       borderColor: borderDark,
+      textColor: textColorDark,
+      titleTextColor: titleTextColorDark,
     },
     Menu: {
+      itemTextColorHorizontal: textColorDark,
       itemTextColorActiveHorizontal: linkDark,
       itemTextColorActiveHoverHorizontal: linkHoverDark,
       itemTextColorHoverHorizontal: linkHoverDark,
@@ -104,17 +164,46 @@ export const themeConfig: ThemeConfig = {
       itemTextColorActiveHover: linkHoverDark,
     },
     Dropdown: {
-      color: baseColorDark,
       dividerColor: borderDark,
+      optionTextColor: textColorDark,
+      optionTextColorHover: textColorDark,
     },
     Drawer: {
-      color: baseColorDark,
       textColor: textColorDark,
       dividerColor: borderDark,
+      titleTextColor: titleTextColorDark,
     },
     Collapse: {
       dividerColor: borderDark,
       arrowColor: linkDark,
+    },
+    Form: {
+      labelTextColor: textColorDark,
+      asteriskColor: '#e78284',
+    },
+    Input: {
+      placeholderColor: '#737994',
+      textColor: textColorDark,
+      borderHover: `1px solid ${linkDark}`,
+      borderFocus: `1px solid ${linkDark}`,
+    },
+    TimePicker: {
+      iconColor: '#737994',
+    },
+    Switch: {
+      railColorActive: '#81c8be',
+    },
+    Checkbox: {
+      textColor: textColorDark,
+    },
+    Radio: {
+      textColor: textColorDark,
+    },
+    Select: {
+      peers: {
+        InternalSelection: { textColor: textColorDark },
+        InternalSelectMenu: { optionTextColor: textColorDark },
+      },
     },
   }, // Theme options applied on dark mode
 }

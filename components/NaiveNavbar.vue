@@ -30,6 +30,7 @@
         :inverted="menuInverted"
         mode="horizontal"
         :options="menuOptions"
+        class="font-500"
       />
     </div>
 
