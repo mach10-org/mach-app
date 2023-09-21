@@ -20,10 +20,10 @@
       <div class="sm:center content-center justify-center sm:flex sm:items-center">
         <span class="text-sm text-$text-muted sm:text-center">© {{ $config.public.siteName }} <i18n-t keypath="footer.tagLine">
           <template #love>
-            <Icon name="mdi:heart" class="dark:text-ctp-frappe-red" />
+            <Icon name="mdi:heart" class="text-ctp-latte-red dark:text-ctp-frappe-red" />
           </template>
           <template #matcha>
-            <Icon name="simple-icons:gitea" class="dark:text-ctp-frappe-green" />
+            <Icon name="simple-icons:gitea" class="text-ctp-latte-green dark:text-ctp-frappe-green" />
           </template>
           <template #japan>
             <Icon name="fxemoji:japanflag" />

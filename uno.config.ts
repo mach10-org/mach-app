@@ -15,12 +15,13 @@ export default defineConfig({
         selector-[:root]:(
           [--primary:${themeConfig.light?.common?.primaryColor}]
           [--primary-hover:${themeConfig.light?.common?.primaryColorHover}]
+          [--secondary:#179299]
           [--text-base:${themeConfig.light?.common?.textColorBase}]
-          [--text-title:#111827] 
+          [--text-title:${themeConfig.light?.Card?.titleTextColor}]
           [--text-muted:#6c6f85]
-          [--background-base:${themeConfig.light?.common?.baseColor}]
+          [--background-base:${themeConfig.light?.common?.baseColor}] 
           [--background-body:${themeConfig.light?.common?.bodyColor}]
-          [--link:${themeConfig.light?.Anchor?.linkTextColorActive}]
+          [--link:${themeConfig.light?.Anchor?.linkTextColorActive}] 
           [--link-hover:${themeConfig.light?.Anchor?.linkTextColorPressed}]
           [--border-input:${themeConfig.light?.Card?.borderColor}]
           [--un-prose-headings:var(--text-title)]
@@ -47,7 +48,7 @@ export default defineConfig({
           [--border-input:${themeConfig.dark?.Card?.borderColor}]
         )
     `],
-    ['super-gradient', 'from-ctp-frappe-red to-ctp-frappe-mauve bg-gradient-to-r'],
+    ['super-gradient', 'from-ctp-latte-maroon to-ctp-latte-blue dark:(from-ctp-frappe-red to-ctp-frappe-mauve) bg-gradient-to-r'],
     ['super-text-gradient', 'super-gradient bg-clip-text font-extrabold text-transparent'],
   ],
   theme: {

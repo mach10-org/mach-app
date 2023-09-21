@@ -81,7 +81,7 @@ export default defineNuxtConfig({
   },
 
   naiveui: {
-    colorModePreference: 'system',
+    colorModePreference: 'light',
   },
 
   supabase: {

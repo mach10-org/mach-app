@@ -2,10 +2,11 @@ import { ThemeConfig } from '@bg-dev/nuxt-naiveui'
 
 const textColor = '#4c4f69'
 const textColorDark = '#c6d0f5'
+const titleTextColor = '#5c5f77'
 const titleTextColorDark = '#babbf1'
 
-const link = '#be185d'
-const linkHover = '#9d174f'
+const link = '#1e66f5'
+const linkHover = '#7287fd'
 const linkDark = '#f4b8e4'
 const linkHoverDark = '#ea999c'
 
@@ -54,14 +55,18 @@ export const themeConfig: ThemeConfig = {
       textColorBase: textColor,
       baseColor,
       bodyColor,
-      primaryColor: '#7287fd',
-      primaryColorHover: '#9d174f',
+      primaryColor: link,
+      primaryColorHover: '#dd7878',
+      borderColor: '#ccd0da',
+      inputColor: 'rgba(0, 0, 0, 0.02)',
+      popoverColor: '#dce0e8',
     },
     Button: {
-      textColorPrimary: '#fff',
-      textColorHoverPrimary: '#fff',
+      textColorPrimary: '#dce0e8',
+      textColorHoverPrimary: '#dce0e8',
     },
     Anchor: {
+      linkTextColor: textColor,
       linkTextColorActive: link,
       linkTextColorHover: link,
       linkTextColorPressed: linkHover,
@@ -69,19 +74,58 @@ export const themeConfig: ThemeConfig = {
     Card: {
       color: baseColor,
       borderColor: border,
+      textColor,
+      titleTextColor,
+    },
+    Menu: {
+      itemTextColorHorizontal: textColor,
+      itemTextColorActiveHorizontal: link,
+      itemTextColorActiveHoverHorizontal: linkHover,
+      itemTextColorHoverHorizontal: linkHover,
+      itemTextColorActive: link,
+      itemTextColorActiveHover: linkHover,
     },
     Dropdown: {
-      color: baseColor,
       dividerColor: border,
+      optionTextColor: textColor,
+      optionTextColorHover: textColor,
     },
     Drawer: {
-      color: baseColor,
       textColor,
       dividerColor: border,
+      titleTextColor,
     },
     Collapse: {
       dividerColor: border,
       arrowColor: link,
+    },
+    Form: {
+      labelTextColor: textColor,
+      asteriskColor: '#d20f39',
+    },
+    Input: {
+      placeholderColor: '#737994',
+      textColor,
+      borderHover: `1px solid ${link}`,
+      borderFocus: `1px solid ${link}`,
+    },
+    TimePicker: {
+      iconColor: '#737994',
+    },
+    Switch: {
+      railColorActive: link,
+    },
+    Checkbox: {
+      textColor,
+    },
+    Radio: {
+      textColor,
+    },
+    Select: {
+      peers: {
+        InternalSelection: { textColor },
+        InternalSelectMenu: { optionTextColor: textColor },
+      },
     },
   }, // Theme options applied on light mode
   dark: {
@@ -89,7 +133,7 @@ export const themeConfig: ThemeConfig = {
       textColorBase: textColorDark,
       baseColor: baseColorDark,
       bodyColor: bodyColorDark,
-      primaryColor: '#f4b8e4',
+      primaryColor: linkDark,
       primaryColorHover: '#eebebe',
       borderColor: '#414559',
       inputColor: 'rgba(255, 255, 255, 0.02)',
@@ -120,15 +164,14 @@ export const themeConfig: ThemeConfig = {
       itemTextColorActiveHover: linkHoverDark,
     },
     Dropdown: {
-      color: '#232634',
       dividerColor: borderDark,
       optionTextColor: textColorDark,
       optionTextColorHover: textColorDark,
     },
     Drawer: {
-      color: baseColorDark,
       textColor: textColorDark,
       dividerColor: borderDark,
+      titleTextColor: titleTextColorDark,
     },
     Collapse: {
       dividerColor: borderDark,
@@ -141,8 +184,8 @@ export const themeConfig: ThemeConfig = {
     Input: {
       placeholderColor: '#737994',
       textColor: textColorDark,
-      borderHover: '1px solid #f4b8e4',
-      borderFocus: '1px solid #f4b8e4',
+      borderHover: `1px solid ${linkDark}`,
+      borderFocus: `1px solid ${linkDark}`,
     },
     TimePicker: {
       iconColor: '#737994',
