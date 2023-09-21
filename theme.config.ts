@@ -59,7 +59,7 @@ export const themeConfig: ThemeConfig = {
       primaryColorHover: '#dd7878',
       borderColor: '#ccd0da',
       inputColor: 'rgba(0, 0, 0, 0.02)',
-      popoverColor: '#dce0e8',
+      popoverColor: '#e6e9ef',
     },
     Button: {
       textColorPrimary: '#dce0e8',
