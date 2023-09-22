@@ -6,6 +6,13 @@
       </template>
       <template #end>
         <ClientOnly>
+          <template v-if="isDev">
+            <NuxtLink v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)" class="link">
+              {{
+                locale.name
+              }}
+            </NuxtLink>
+          </template>
           <UserDropdown v-if="user" />
           <ButtonLink v-else :to="localePath('/login/')" size="large">
             {{ $t('header.login') }}
@@ -19,9 +26,17 @@
 
 <script setup lang="ts">
 import { NavbarRoute } from '@bg-dev/nuxt-naiveui'
+import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 const user = useSupabaseUser()
 const i18n = useI18n()
 const localePath = useLocalePath()
+const switchLocalePath = useSwitchLocalePath()
+
+const isDev = process.env.NODE_ENV === 'development'
+
+const availableLocales = computed(() => {
+  return (i18n.locales.value).filter(i => typeof i !== 'string' && i.code !== i18n.locale.value) as LocaleObject[]
+})
 
 const navbarRoutes = computed<NavbarRoute[]>(() => [
   {

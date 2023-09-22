@@ -47,12 +47,12 @@ export default defineNuxtConfig({
   ],
 
   i18n: {
-    strategy: 'no_prefix',
+    strategy: process.env.NODE_ENV === 'development' ? 'prefix_except_default' : 'no_prefix',
     locales: [
       { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },
       { code: 'ja', iso: 'ja-JP', file: 'ja.json', name: '日本語' },
     ],
-    defaultLocale: 'en',
+    defaultLocale: process.env.NODE_ENV === 'development' ? 'en' : 'ja',
     langDir: 'locales',
     detectBrowserLanguage: false,
     trailingSlash: false,
