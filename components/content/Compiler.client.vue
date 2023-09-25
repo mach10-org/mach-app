@@ -186,6 +186,7 @@ onMounted(async () => {
       fontSize: '16px',
       backgroundColor: '#272822',
       padding: '5px',
+      borderRadius: '4px',
     },
     '&.cm-editor .cm-gutters': {
       backgroundColor: '#272822',
