@@ -73,7 +73,7 @@ const props = defineProps<Props>()
 const profile = useProfileStore()
 const supabase = useSupabaseClient<Database>()
 
-const name = computed(() => `${profile.full_name || 'user'}@mach10$ `)
+const name = computed(() => `\u001B[38;5;49m${(profile.full_name || 'user').toLowerCase()}@mach10$\u001B[0m `)
 
 const widget = ref<HTMLDivElement | null>(null)
 const terminal = ref<HTMLDivElement | null>(null)
@@ -131,8 +131,8 @@ const buildText = computed(() => {
     { version: 2, width: 80, height: 14 },
     // [0.248848, 'o', '\u001B[1;31mHello \u001B[32mWorld!\u001B[0m\n'],
     [0, 'o', name.value],
-    ...'go build programe.go\r\n'.split('').map(c => [(time += 0.05), 'o', c]),
-    [time + 1, 'o', name.value],
+    ...'go build programe.go'.split('').map(c => [(time += 0.05), 'o', c]),
+    [time + 1, 'o', `\r\n${name.value}`],
   ]
 })
 
@@ -162,7 +162,7 @@ const writeGoBinary = async (output: string, errorOutput: string) => {
     }
     let time = buildTextEndTime.value
 
-    const computedOutput = (output || errorOutput).replace(/\n/g, '\r\n')
+    const computedOutput = (output || `\u001B[38;5;196m${errorOutput}\u001B[0m`).replace(/\n/g, '\r\n')
 
     player.value = AsciinemaPlayer.create({
       data: [
