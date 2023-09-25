@@ -34,12 +34,13 @@ import { basicSetup } from 'codemirror'
 import { Compartment, EditorState } from '@codemirror/state'
 import { StreamLanguage } from '@codemirror/language'
 import { go } from '@codemirror/legacy-modes/mode/go'
-import { oneDark } from '@codemirror/theme-one-dark'
+import { catppuccin } from 'codemirror-theme-catppuccin'
 import * as AsciinemaPlayer from 'asciinema-player'
 import { promiseTimeout } from '@vueuse/core'
 import { useProfileStore } from '~/stores/profile'
 import { Database } from '~/types/database.types'
 import 'asciinema-player/dist/bundle/asciinema-player.css'
+import '~/assets/css/terminal-theme.css'
 
 interface GoCompilerRunEvent {
   Message: string;
@@ -69,7 +70,7 @@ const props = defineProps<Props>()
 const profile = useProfileStore()
 const supabase = useSupabaseClient<Database>()
 
-const name = computed(() => `\u001B[38;5;49m${(profile.full_name || 'user').toLowerCase()}@mach10$\u001B[0m `)
+const name = computed(() => `\u001B[38;2;166;227;161m${(profile.full_name || 'user').toLowerCase()}@mach10$\u001B[0m `)
 
 const widget = ref<HTMLDivElement | null>(null)
 const terminal = ref<HTMLDivElement | null>(null)
@@ -122,12 +123,16 @@ const run = async (compile: boolean, format: boolean) => {
   isFormatting.value = false
 }
 
-const playerOptions = { theme: 'monokai', idleTimeLimit: 2, autoplay: true, speed: 1, controls: false }
+const playerOptions = { theme: 'catppuccin', idleTimeLimit: 2, autoplay: true, speed: 1, controls: false }
 
 const buildText = computed(() => {
   let time = 0.5
   return [
-    { version: 2, width: 80, height: 14 },
+    {
+      version: 2,
+      width: 80,
+      height: 14,
+    },
     [0, 'o', name.value],
     ...'go build programe.go'.split('').map(c => [(time += 0.05), 'o', c]),
     [time + 1, 'o', `\r\n${name.value}`],
@@ -164,7 +169,7 @@ const writeGoBinary = async (output: string, errorOutput: string) => {
     }
     let time = buildTextEndTime.value
 
-    const computedOutput = (output || `\u001B[38;5;196m${errorOutput}\u001B[0m`).replace(/\n/g, '\r\n')
+    const computedOutput = (output || `\u001B[38;2;243;139;168m${errorOutput}\u001B[0m`).replace(/\n/g, '\r\n')
 
     player.value = AsciinemaPlayer.create({
       data: [
@@ -184,12 +189,8 @@ onMounted(async () => {
   const myTheme = EditorView.baseTheme({
     '&.cm-editor': {
       fontSize: '16px',
-      backgroundColor: '#272822',
       padding: '5px',
       borderRadius: '4px',
-    },
-    '&.cm-editor .cm-gutters': {
-      backgroundColor: '#272822',
     },
   })
 
@@ -197,7 +198,7 @@ onMounted(async () => {
 
   const state = EditorState.create({
     doc: props.code,
-    extensions: [basicSetup, StreamLanguage.define(go), tabSize.of(EditorState.tabSize.of(2)), oneDark, myTheme],
+    extensions: [basicSetup, StreamLanguage.define(go), tabSize.of(EditorState.tabSize.of(2)), catppuccin('mocha'), myTheme],
   })
 
   await until(widget).not.toBeNull()

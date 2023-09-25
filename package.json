@@ -33,12 +33,12 @@
   },
   "dependencies": {
     "@codemirror/legacy-modes": "^6.3.3",
-    "@codemirror/theme-one-dark": "^6.1.2",
     "@pinia/nuxt": "^0.4.11",
     "@splidejs/vue-splide": "^0.6.12",
     "@unocss/reset": "0.55.7",
     "@vueuse/nuxt": "10.4.1",
     "codemirror": "^6.0.1",
+    "codemirror-theme-catppuccin": "^0.3.0",
     "dayjs-nuxt": "^1.1.2",
     "nuxt-font-loader": "2.3.4",
     "nuxt-lodash": "^2.5.0"

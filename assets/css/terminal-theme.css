@@ -1,0 +1,19 @@
+.asciinema-theme-catppuccin .ap-terminal {
+  color: #cdd6f4; /* default text color */
+  background-color: #1e1e2e; /* terminal background color */
+  border-color: #1e1e2e;
+}
+.asciinema-theme-catppuccin .fg-bg {
+  /* inverse for default text color */
+  color: #1e1e2e;
+}
+.asciinema-theme-catppuccin .bg-fg {
+  /* inverse for terminal background color */
+  background-color: #cdd6f4;
+}
+.asciinema-theme-catppuccin .fg-0 {
+  color: #1e1e2e;
+}
+.asciinema-theme-catppuccin .bg-0 {
+  background-color: #1e1e2e;
+}
