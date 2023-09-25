@@ -12,23 +12,19 @@
           <n-button type="info" secondary :loading="isFormatting" @click="() => run(false, true)">
             {{ $t('compiler.format') }}
           </n-button>
-          <n-button type="info" secondary @click="isFullScreen = !isFullScreen">
+          <!-- <n-button type="info" secondary @click="isFullScreen = !isFullScreen">
             <template #icon>
               <Icon v-if="!isFullScreen" name="heroicons:arrows-pointing-out" />
               <Icon v-else name="heroicons:arrows-pointing-in" />
             </template>
-          </n-button>
+          </n-button> -->
         </div>
       </div>
     </template>
-    <div class="flex flex-col">
-      <div class="w-full flex-1">
-        <div ref="widget" class="w-full grow pt-2" />
-      </div>
-      <div v-show="showTerminal" class="cm-footer mt-4 min-h-35 w-full flex-1 shadow-xl">
-        <div ref="terminal" />
-      </div>
-    </div>
+    <div ref="widget" class="w-full grow shadow-xl" />
+    <n-collapse-transition :show="showTerminal" :appear="true">
+      <div ref="terminal" class="mt-4 min-h-[280px] shadow-xl" />
+    </n-collapse-transition>
   </NCard>
 </template>
 
@@ -105,7 +101,10 @@ const run = async (compile: boolean, format: boolean) => {
     const promisesRes = await Promise.all(promises)
     const { data, error } = promisesRes[0]
 
-    if (data) {
+    if (error) {
+      discreteApi.message.error(error.message)
+      console.error(error)
+    } else if (data) {
       if (data.formated.Body) {
         editorView.value.dispatch({ changes: { from: 0, to: editorView.value.state.doc.length, insert: data.formated.Body } })
       }
@@ -126,10 +125,9 @@ const run = async (compile: boolean, format: boolean) => {
 const playerOptions = { theme: 'monokai', idleTimeLimit: 2, autoplay: true, speed: 1, controls: false }
 
 const buildText = computed(() => {
-  let time = 0
+  let time = 0.5
   return [
     { version: 2, width: 80, height: 14 },
-    // [0.248848, 'o', '\u001B[1;31mHello \u001B[32mWorld!\u001B[0m\n'],
     [0, 'o', name.value],
     ...'go build programe.go'.split('').map(c => [(time += 0.05), 'o', c]),
     [time + 1, 'o', `\r\n${name.value}`],
@@ -138,22 +136,26 @@ const buildText = computed(() => {
 
 const buildTextEndTime = computed(() => (buildText.value[buildText.value.length - 1] as number[])[0])
 
-const writeGoRun = async () => {
+const writeGoRun = () => new Promise<void>((resolve) => {
   showTerminal.value = true
 
-  if (terminal.value) {
-    if (player.value) {
-      player.value.dispose()
-    }
-    player.value = AsciinemaPlayer.create({
-      data: buildText.value,
-    }, terminal.value,
-    playerOptions,
-    )
+  nextTick(async () => {
+    if (terminal.value) {
+      if (player.value) {
+        player.value.dispose()
+      }
+      player.value = AsciinemaPlayer.create({
+        data: buildText.value,
+      }, terminal.value,
+      playerOptions,
+      )
 
-    await promiseTimeout(buildTextEndTime.value * 1000)
-  }
-}
+      await promiseTimeout(buildTextEndTime.value * 1000)
+
+      resolve()
+    }
+  })
+})
 
 const writeGoBinary = async (output: string, errorOutput: string) => {
   if (terminal.value) {
@@ -182,6 +184,11 @@ onMounted(async () => {
   const myTheme = EditorView.baseTheme({
     '&.cm-editor': {
       fontSize: '16px',
+      backgroundColor: '#272822',
+      padding: '5px',
+    },
+    '&.cm-editor .cm-gutters': {
+      backgroundColor: '#272822',
     },
   })
 
@@ -201,6 +208,8 @@ onMounted(async () => {
     })
   }
 })
+
+const discreteApi = useDiscreteApi()
 </script>
 
 <style lang="postcss" scoped>
