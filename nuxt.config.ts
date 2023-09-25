@@ -16,6 +16,12 @@ export default defineNuxtConfig({
       trailingSlash: false,
     },
   },
+  routeRules: {
+    '/journey': { ssr: false },
+    '/schedule': { ssr: false },
+    '/profile': { ssr: false },
+    '/onboarding': { ssr: false },
+  },
 
   modules: [
     'nuxt-lodash',
