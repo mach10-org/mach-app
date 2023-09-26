@@ -71,6 +71,40 @@ export interface Database {
           }
         ]
       }
+      feedback: {
+        Row: {
+          comment: string | null
+          created_at: string | null
+          difficulty_rate: number
+          enjoyment_rate: number
+          id: number
+          user_id: string | null
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string | null
+          difficulty_rate: number
+          enjoyment_rate: number
+          id?: number
+          user_id?: string | null
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string | null
+          difficulty_rate?: number
+          enjoyment_rate?: number
+          id?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       last_url: {
         Row: {
           course_title: string

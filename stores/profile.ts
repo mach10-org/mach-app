@@ -416,6 +416,29 @@ export const useProfileStore = defineStore('profile', {
 
       return false
     },
+    async sendFeedback (enjoymentRate: number, difficultyRate: number, comment: string) {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
+
+      try {
+        const { error } = await supabase.from('feedback').insert({
+          user_id: user.value?.id,
+          enjoyment_rate: enjoymentRate,
+          difficulty_rate: difficultyRate,
+          comment,
+        })
+
+        if (error) {
+          throw error
+        }
+
+        return true
+      } catch (error) {
+        discreteApi.message.error('Error while sending the feedback')
+        return false
+      }
+    },
   },
 })
 
