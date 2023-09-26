@@ -78,16 +78,20 @@
 
 <script setup lang="ts">
 import { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import { NButton } from 'naive-ui'
 import { indexFile } from '~/utils/course'
 import { useProfileStore } from '~/stores/profile'
 import { useCourseStore } from '~/stores/course'
+import { useScheduleStore } from '~/stores/schedule'
 
 const route = useRoute()
 const user = useSupabaseUser()
 const profile = useProfileStore()
+const schedule = useScheduleStore()
 const course = useCourseStore()
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const localePath = useLocalePath()
+const dayjs = useDayjs()
 
 const isLoading = computed(() => profile.isLoading)
 const isTocActive = ref(false)
@@ -151,7 +155,40 @@ onMounted(async () => {
   if (user.value && data.value?.title) {
     await until(isLoading).toBe(false)
 
-    profile.saveLastCoursePage(route.fullPath, data.value?.title)
+    profile.saveLastCoursePage(route.fullPath, data.value?.title, dataIndex.value?.title)
+  }
+
+  // If we didn't set a schedule yet, if we didn't ask before and if the user is registered for more than a week
+  if (schedule.weeklyGoal === 0 && !profile.has_been_asked_to_set_schedule && profile.created_at?.clone()?.add(1, 'week').isBefore(dayjs())) {
+    const n = discreteApi.notification.info({
+      title: t('notifications.user.create_schedule'),
+      meta: ' ', // To align buttons to the right
+      action: () =>
+        h(
+          'div',
+          { class: 'flex justify-end gap-3' },
+          [
+            h(NButton, {
+              secondary: true,
+              onClick: () => {
+                n.destroy()
+              },
+            }, { default: () => t('notifications.user.cancel') }),
+            h(NButton, {
+              type: 'primary',
+              secondary: true,
+              onClick: () => {
+                n.destroy()
+                navigateTo(localePath('/schedule'))
+              },
+            }, { default: () => t('notifications.user.ok') }),
+          ],
+        ),
+    })
+
+    profile.setAskedToSetSchedule()
   }
 })
+
+const discreteApi = useDiscreteApi()
 </script>

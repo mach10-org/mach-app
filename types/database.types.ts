@@ -71,8 +71,43 @@ export interface Database {
           }
         ]
       }
+      feedback: {
+        Row: {
+          comment: string | null
+          created_at: string | null
+          difficulty_rate: number
+          enjoyment_rate: number
+          id: number
+          user_id: string | null
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string | null
+          difficulty_rate: number
+          enjoyment_rate: number
+          id?: number
+          user_id?: string | null
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string | null
+          difficulty_rate?: number
+          enjoyment_rate?: number
+          id?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       last_url: {
         Row: {
+          course_title: string
           created_at: string | null
           id: string
           main: boolean
@@ -81,6 +116,7 @@ export interface Database {
           url: string
         }
         Insert: {
+          course_title: string
           created_at?: string | null
           id: string
           main?: boolean
@@ -89,6 +125,7 @@ export interface Database {
           url: string
         }
         Update: {
+          course_title?: string
           created_at?: string | null
           id?: string
           main?: boolean
@@ -157,12 +194,15 @@ export interface Database {
           age: string | null
           avatar_url: string | null
           computer_xp: string | null
+          created_at: string | null
           devices: string[] | null
           dob: string | null
           education: string | null
+          email: string
           full_name: string | null
           gender: string | null
           goal: string[]
+          has_been_asked_to_set_schedule: boolean
           id: string
           timezone: string | null
           updated_at: string | null
@@ -174,12 +214,15 @@ export interface Database {
           age?: string | null
           avatar_url?: string | null
           computer_xp?: string | null
+          created_at?: string | null
           devices?: string[] | null
           dob?: string | null
           education?: string | null
+          email: string
           full_name?: string | null
           gender?: string | null
           goal?: string[]
+          has_been_asked_to_set_schedule?: boolean
           id: string
           timezone?: string | null
           updated_at?: string | null
@@ -191,12 +234,15 @@ export interface Database {
           age?: string | null
           avatar_url?: string | null
           computer_xp?: string | null
+          created_at?: string | null
           devices?: string[] | null
           dob?: string | null
           education?: string | null
+          email?: string
           full_name?: string | null
           gender?: string | null
           goal?: string[]
+          has_been_asked_to_set_schedule?: boolean
           id?: string
           timezone?: string | null
           updated_at?: string | null
@@ -248,7 +294,26 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      last_url_schedule: {
+        Row: {
+          course_title: string | null
+          email: string | null
+          full_name: string | null
+          id: string | null
+          main: boolean | null
+          title: string | null
+          updated_at: string | null
+          url: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "last_url_id_fkey"
+            columns: ["id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Functions: {
       [_ in never]: never

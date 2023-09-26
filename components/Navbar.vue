@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <NaiveNavbar :routes="navbarRoutes" :menu-inverted="false" drawer-closable menu-placement="left">
+    <NaiveNavbar :routes="navbarRoutes" :menu-inverted="false" drawer-closable menu-placement="left" :sticky="false">
       <template #start>
         <Brand size="md" />
       </template>

@@ -111,6 +111,12 @@ export const useCourseStore = defineStore('course', {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()
       const profile = useProfileStore()
+      const discreteApi = useDiscreteApi()
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
 
       try {
         const { data, error } = await supabase.from('learning_lesson').upsert({

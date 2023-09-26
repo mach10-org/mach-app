@@ -1,7 +1,7 @@
 <!-- From https://github.com/becem-gharbi/nuxt-naiveui/blob/main/src/runtime/components/NaiveNavbar.vue -->
 
 <template>
-  <div class="outer" :class="sticky ? 'sticky' : 'static'" :style="{ backgroundColor: naiveTheme.bodyColor}">
+  <div class="outer" :class="sticky ? 'sticky' : 'static'">
     <div class="inner-start" :class="menuPlacement === 'center' ? 'flex-1' : 'unset'">
       <n-button
         v-if="backIcon"
@@ -100,7 +100,6 @@ import {
   useRoute,
   useRouter,
   watchEffect,
-  useThemeVars,
   useNaiveDevice,
   defineAsyncComponent,
 } from '#imports'
@@ -109,7 +108,6 @@ const drawerActive = ref(false)
 const route = useRoute()
 const router = useRouter()
 const activePath = ref()
-const naiveTheme = useThemeVars()
 const { isMobileOrTablet } = useNaiveDevice()
 
 const LazyNDrawerContent = defineAsyncComponent(

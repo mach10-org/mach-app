@@ -10,6 +10,7 @@
     "user": {
       "welcome_back": "Welcome back {name}!",
       "welcome_back_description": "Pick up where you left off!",
+      "create_schedule": "Would you like to create a schedule?",
       "course": "Course",
       "lesson": "Lesson",
       "ok": "Sure",
@@ -60,6 +61,17 @@
     "format": "Format"
   },
   "pages": {
+    "feedback": {
+      "enjoyment_title": "On a scale of 1-5, how are you enjoying this?",
+      "not_for_me": "Not for me 😢",
+      "enjoy_this": "I really enjoy this 😆",
+      "difficulty_title": "How do you rate the current difficulty?",
+      "difficulties": ["Easy", "It’s fine", "Too hard for me", "Not for me"],
+      "comment_title": "Could you tell us more how we could improve?",
+      "go_back_home": "Go back home",
+      "submit": "Submit",
+      "thank_you": "Thank you for your feedback!"
+    },
     "onboarding": {
       "title": "Welcome to Mach10",
       "next": "Next",
@@ -118,11 +130,7 @@
         "Master’s"
       ],
       "gender_label": "Gender",
-      "gender_list": [
-        "Male",
-        "Female",
-        "Other"
-      ],
+      "gender_list": ["Male", "Female", "Other"],
       "comment_label": "Could you tell us more about you and your objectives?",
       "comment_placeholder": "Write your thoughts here...",
       "successfullySaved": "Profile successfully saved"

@@ -215,7 +215,6 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const config = useRuntimeConfig()
 const profile = useProfileStore()
 const i18n = useI18n()
 const localePath = useLocalePath()
