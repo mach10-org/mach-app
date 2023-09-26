@@ -77,13 +77,20 @@ export const useProfileStore = defineStore('profile', {
   actions: {
     async fetch () {
       const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
 
       this.isLoading = true
 
       try {
         const { data: profile, error } = await supabase
           .from('profiles')
-          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course, created_at), answers(id, slug, slug_course, label, is_correct), schedule(day, start, end)').maybeSingle()
+          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course, created_at), answers(id, slug, slug_course, label, is_correct), schedule(day, start, end)').eq('id', user.value.id).maybeSingle()
 
         if (error) {
           throw error
