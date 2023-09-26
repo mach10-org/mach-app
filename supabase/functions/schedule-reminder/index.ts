@@ -45,7 +45,7 @@ serve(async (req) => {
 
     console.info(`Start reminder for day "${day}", hour "${clock}"`)
 
-    const { data: schedules, error: schedulesError } = await supabaseClient.from('schedule').select().eq('day', day).eq('start', clock)
+    const { data: schedules, error: schedulesError } = await supabaseClient.from('schedule').select('*, profiles(email)').eq('day', day).eq('start', clock)
 
     if (schedulesError) { throw schedulesError }
 
@@ -58,20 +58,9 @@ serve(async (req) => {
       })
     }
 
-    const { data: { users }, error: usersError } = await supabaseClient.auth.admin.listUsers({
-      page: 1,
-      perPage: 9999999999999,
-    })
-
-    if (schedulesError) { throw usersError }
-
-    const usersToRemind = users.filter(user => schedules.some(schedule => schedule.user_id === user.id))
-
-    console.info(`${usersToRemind?.length} user(s) found`)
-
     let reminderSent = 0
 
-    for await (const user of usersToRemind) {
+    for await (const user of schedules) {
       const quote = quotes[Math.floor(Math.random() * quotes.length)]
 
       const textContent = `${quote.text}
@@ -107,7 +96,7 @@ Mach10 team<br/>
           },
           body: JSON.stringify({
             sender: senderInfos,
-            to: [{ email: user.email, name: user.email }],
+            to: [{ email: user.profiles?.email, name: user.profiles?.email }],
             subject: `Your learning is about to start in ${minutesBeforeSchedule} minutes and a few words from ${quote.author}`,
             textContent,
             htmlContent,
