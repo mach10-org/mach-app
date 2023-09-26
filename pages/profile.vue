@@ -3,7 +3,7 @@
     <NCard class="mx-2 mt-6 md:mx-auto md:mt-10 md:max-w-[600px]">
       <template #header>
         <h2 class="mb-2 text-center text-2xl md:text-4xl">
-          <span class="super-text-gradient font-bold">{{ user?.email }}</span>
+          <span class="font-bold super-text-gradient">{{ profile.email }}</span>
         </h2>
         <h3 class="mb-6 text-center text-lg font-bold">
           {{ profile.getXp }}
@@ -109,7 +109,6 @@
 import { VueMessageType } from '@nuxtjs/i18n/dist/runtime/composables'
 import { useProfileStore } from '~/stores/profile'
 
-const user = useSupabaseUser()
 const profile = useProfileStore()
 const i18n = useI18n()
 

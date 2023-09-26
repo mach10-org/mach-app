@@ -73,6 +73,7 @@ export interface Database {
       }
       last_url: {
         Row: {
+          course_title: string
           created_at: string | null
           id: string
           main: boolean
@@ -81,6 +82,7 @@ export interface Database {
           url: string
         }
         Insert: {
+          course_title: string
           created_at?: string | null
           id: string
           main?: boolean
@@ -89,6 +91,7 @@ export interface Database {
           url: string
         }
         Update: {
+          course_title?: string
           created_at?: string | null
           id?: string
           main?: boolean
@@ -161,6 +164,7 @@ export interface Database {
           devices: string[] | null
           dob: string | null
           education: string | null
+          email: string
           full_name: string | null
           gender: string | null
           goal: string[]
@@ -180,6 +184,7 @@ export interface Database {
           devices?: string[] | null
           dob?: string | null
           education?: string | null
+          email: string
           full_name?: string | null
           gender?: string | null
           goal?: string[]
@@ -199,6 +204,7 @@ export interface Database {
           devices?: string[] | null
           dob?: string | null
           education?: string | null
+          email?: string
           full_name?: string | null
           gender?: string | null
           goal?: string[]
@@ -254,7 +260,26 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      last_url_schedule: {
+        Row: {
+          course_title: string | null
+          email: string | null
+          full_name: string | null
+          id: string | null
+          main: boolean | null
+          title: string | null
+          updated_at: string | null
+          url: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "last_url_id_fkey"
+            columns: ["id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Functions: {
       [_ in never]: never

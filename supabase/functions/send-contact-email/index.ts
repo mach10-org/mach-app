@@ -1,5 +1,6 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { corsHeaders } from '../_shared/cors.ts'
+import senderInfos from '../_shared/sender-infos.ts'
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -9,12 +10,6 @@ serve(async (req) => {
   try {
     const { subject, email, name, message, topic } = await req.json()
 
-    const mach10 = {
-      email: 'hello@mach10.jp',
-      // email: 'n.hamelin@ncit.nc', // Test width mail sender
-      name: 'Mach10',
-    }
-
     const options = {
       method: 'POST',
       headers: {
@@ -23,8 +18,8 @@ serve(async (req) => {
         'api-key': Deno.env.get('BREVO_API_KEY') || '',
       },
       body: JSON.stringify({
-        sender: { name: mach10.name, email: mach10.email },
-        to: [mach10],
+        sender: senderInfos,
+        to: [senderInfos],
         replyTo: { email, name },
         subject: `[Mach10 contact form] ${subject}`,
         textContent: message,

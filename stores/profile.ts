@@ -42,6 +42,7 @@ export const useProfileStore = defineStore('profile', {
     timezone: '',
     created_at: null,
     has_been_asked_to_set_schedule: false,
+    email: '',
   }),
   getters: {
     isOnBoarded (state) {
@@ -102,6 +103,7 @@ export const useProfileStore = defineStore('profile', {
         this.xp = profile?.xp ?? 0
         this.timezone = profile?.timezone ?? ''
         this.has_been_asked_to_set_schedule = profile?.has_been_asked_to_set_schedule ?? false
+        this.email = profile?.email ?? ''
         if (process.client) {
           const dayjs = useDayjs()
           this.created_at = dayjs.utc(profile?.created_at) ?? null
@@ -150,6 +152,7 @@ export const useProfileStore = defineStore('profile', {
           devices,
           age,
           timezone: dayjs.tz.guess(),
+          email: this.email,
         }).select().single()
 
         if (error) {
@@ -198,6 +201,7 @@ export const useProfileStore = defineStore('profile', {
           gender,
           education,
           about,
+          email: this.email,
         }).select().single()
 
         if (error) {
@@ -221,7 +225,7 @@ export const useProfileStore = defineStore('profile', {
 
       return false
     },
-    async saveLastCoursePage (url: string, title: string, main = false) {
+    async saveLastCoursePage (url: string, title: string, courseTitle: string, main = false) {
       const supabase = useSupabaseClient<Database>()
       const user = useSupabaseUser()
       const discreteApi = useDiscreteApi()
@@ -237,6 +241,7 @@ export const useProfileStore = defineStore('profile', {
           url,
           title,
           main,
+          course_title: courseTitle,
         }).select('url, title, main').single()
 
         if (error) {
@@ -267,6 +272,7 @@ export const useProfileStore = defineStore('profile', {
         const { data, error } = await supabase.from('profiles').upsert({
           id: user.value.id,
           timezone,
+          email: this.email,
         }).select('timezone').single()
 
         if (error) {
@@ -298,6 +304,7 @@ export const useProfileStore = defineStore('profile', {
         const { data, error } = await supabase.from('profiles').upsert({
           id: user.value.id,
           has_been_asked_to_set_schedule: true,
+          email: this.email,
         }).select('has_been_asked_to_set_schedule').single()
 
         if (error) {
@@ -328,6 +335,8 @@ export const useProfileStore = defineStore('profile', {
       this.username = null
       this.xp = 0
       this.lastCoursePage = null
+      this.has_been_asked_to_set_schedule = false
+      this.email = ''
       const dayjs = useDayjs()
       this.timezone = dayjs.tz.guess()
 
@@ -350,6 +359,7 @@ export const useProfileStore = defineStore('profile', {
         const { error } = await supabase.from('profiles').upsert({
           id: user.value.id,
           xp: this.xp + value,
+          email: this.email,
         })
 
         if (error) {
@@ -382,6 +392,7 @@ export const useProfileStore = defineStore('profile', {
         const { error } = await supabase.from('profiles').upsert({
           id: user.value.id,
           xp: this.xp - value,
+          email: this.email,
         })
 
         if (error) {

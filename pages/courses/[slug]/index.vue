@@ -40,7 +40,7 @@ onMounted(async () => {
   if (user.value && data.value?.title) {
     await until(isLoading).toBe(false)
 
-    profile.saveLastCoursePage(route.fullPath, data.value?.title, true)
+    profile.saveLastCoursePage(route.fullPath, data.value?.title, data.value?.title, true)
   }
 })
 </script>

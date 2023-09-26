@@ -5,24 +5,16 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.33.2'
 import dayjs from 'https://esm.sh/dayjs@1.11.9'
-import isoWeek from 'https://esm.sh/dayjs@1.11.9/plugin/isoWeek'
 import utc from 'https://esm.sh/dayjs@1.11.9/plugin/utc'
 import { corsHeaders } from '../_shared/cors.ts'
 import { Database } from '../../../types/database.types.ts'
 import senderInfos from '../_shared/sender-infos.ts'
-import quotes from './quotes.ts'
 
-dayjs.extend(isoWeek)
 dayjs.extend(utc)
 
-const minutesBeforeSchedule = 15
+const weeksMissed = 2
 
 serve(async (req) => {
-  // This is needed if you're planning to invoke your function from a browser.
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
-  }
-
   try {
     const supabaseClient = createClient<Database>(
       Deno.env.get('SUPABASE_URL') ?? '',
@@ -37,58 +29,42 @@ serve(async (req) => {
     )
 
     const { time } = await req.json()
-    let mTime = dayjs.utc(time)
-    mTime = mTime.subtract(minutesBeforeSchedule, 'minute')
 
-    const day = mTime.isoWeekday()
-    const clock = mTime.format('HH:mm:00')
+    // Select people that didn't attend sessions
+    const { data, error } = await supabaseClient.from('last_url_schedule').select('id, url, title, main, full_name, course_title, email').lt('updated_at', dayjs.utc(time).subtract(weeksMissed, 'week').format('YYYY-MM-DD HH:mm:ss'))
 
-    console.info(`Start reminder for day "${day}", hour "${clock}"`)
+    if (error) { throw error }
 
-    const { data: schedules, error: schedulesError } = await supabaseClient.from('schedule').select().eq('day', day).eq('start', clock)
+    let emailSent = 0
 
-    if (schedulesError) { throw schedulesError }
+    for await (const user of data) {
+      const completionDate = dayjs.utc(time).add(4, 'week').format('MMMM DD, YYYY')
 
-    console.info(`${schedules?.length} reminder(s) to send`)
+      const textContent = `Life get busy sometimes and it’s hard to keep up. Visualizing your goal can be a great help. Think of ${completionDate}, you wake up, and you realize what you just accomplished. A new skillset, plenty of new opportunities, the ability to work for yourself or create your dream startup. You did the hardest thing ${user.full_name}, you dared to start. Most people don’t even try. Keep it up, you got this :)
+Remember, struggling means learning.
 
-    if (schedules?.length === 0) {
-      return new Response(JSON.stringify({ message: 'No reminder to send' }), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 200,
-      })
-    }
+Resume course: ${Deno.env.get('URL') || ''}${user.url}
 
-    const { data: { users }, error: usersError } = await supabaseClient.auth.admin.listUsers({
-      page: 1,
-      perPage: 9999999999999,
-    })
-
-    if (schedulesError) { throw usersError }
-
-    const usersToRemind = users.filter(user => schedules.some(schedule => schedule.user_id === user.id))
-
-    console.info(`${usersToRemind?.length} user(s) found`)
-
-    let reminderSent = 0
-
-    for await (const user of usersToRemind) {
-      const quote = quotes[Math.floor(Math.random() * quotes.length)]
-
-      const textContent = `${quote.text}
-- ${quote.author}
-
-See you on Mach10 in ${minutesBeforeSchedule} minutes!
+Feeling down or lack motivation? Tell us more. ${Deno.env.get('URL') || ''}/feedback
 
 Mach10 team
 ${Deno.env.get('URL') || ''}`
 
       const htmlContent = `<html><head></head><body>
-<p><i>${quote.text}</i><br/>
-- ${quote.author}
+<p>
+Life get busy sometimes and it’s hard to keep up. Visualizing your goal can be a great help. Think of ${completionDate}, you wake up, and you realize what you just accomplished. A new skillset, plenty of new opportunities, the ability to work for yourself or create your dream startup. You did the hardest thing ${user.full_name}, you dared to start. Most people don’t even try. Keep it up, you got this :)
 </p>
 
 <p>
-See you on Mach10 in ${minutesBeforeSchedule} minutes!
+Remember, struggling means learning.
+</p>
+
+<p>
+<a href="${Deno.env.get('URL') || ''}${user.url}">Resume course</a>
+</p>
+
+<p>
+Feeling down or lack motivation? <a href="${Deno.env.get('URL') || ''}/feedback">Tell us more.</a>
 </p>
 
 <p>
@@ -108,19 +84,19 @@ Mach10 team<br/>
           body: JSON.stringify({
             sender: senderInfos,
             to: [{ email: user.email, name: user.email }],
-            subject: `Your learning is about to start in ${minutesBeforeSchedule} minutes and a few words from ${quote.author}`,
+            subject: `${user.full_name} your course "${user.course_title}"`,
             textContent,
             htmlContent,
           }),
         })
 
-        reminderSent++
+        emailSent++
       } catch (error) {
         console.error(error)
       }
     }
 
-    console.info(`${reminderSent} reminder(s) sent`)
+    console.info(`${emailSent} email(s) sent`)
 
     return new Response(JSON.stringify({ message: 'ok' }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -137,7 +113,7 @@ Mach10 team<br/>
 })
 
 // To invoke:
-// curl -i --location --request POST 'http://localhost:54321/functions/v1/schedule-reminder' \
+// curl -i --location --request POST 'http://localhost:54321/functions/v1/missed-sessions' \
 //   --header 'Authorization: Bearer SERVICE_TOKEN' \
 //   --header 'Content-Type: application/json' \
 //   --data '{"time":"2023-09-12 03:15:53.091"}'

@@ -155,7 +155,7 @@ onMounted(async () => {
   if (user.value && data.value?.title) {
     await until(isLoading).toBe(false)
 
-    profile.saveLastCoursePage(route.fullPath, data.value?.title)
+    profile.saveLastCoursePage(route.fullPath, data.value?.title, dataIndex.value?.title)
   }
 
   // If we didn't set a schedule yet, if we didn't ask before and if the user is registered for more than a week
