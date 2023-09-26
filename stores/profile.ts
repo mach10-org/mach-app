@@ -1,4 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
+import { Dayjs } from 'dayjs'
 import { useCourseStore } from './course'
 import { useQuizStore } from './quiz'
 import { useScheduleStore } from './schedule'
@@ -11,10 +12,11 @@ interface LastCoursePage {
 }
 
 type rows = Database['public']['Tables']['profiles']['Row']
-interface State extends Omit<rows, 'id' | 'updated_at'> {
+interface State extends Omit<rows, 'id' | 'updated_at' | 'created_at'> {
   isLoading: boolean
   lastCoursePage: LastCoursePage | null
   timezone: string
+  created_at: Dayjs | null
 }
 
 export const machBadges = [
@@ -38,6 +40,8 @@ export const useProfileStore = defineStore('profile', {
     xp: 0,
     lastCoursePage: null,
     timezone: '',
+    created_at: null,
+    has_been_asked_to_set_schedule: false,
   }),
   getters: {
     isOnBoarded (state) {
@@ -97,8 +101,10 @@ export const useProfileStore = defineStore('profile', {
         this.username = profile?.username ?? null
         this.xp = profile?.xp ?? 0
         this.timezone = profile?.timezone ?? ''
+        this.has_been_asked_to_set_schedule = profile?.has_been_asked_to_set_schedule ?? false
         if (process.client) {
           const dayjs = useDayjs()
+          this.created_at = dayjs.utc(profile?.created_at) ?? null
           this.timezone = profile?.timezone ?? dayjs.tz.guess()
         }
 
@@ -274,6 +280,36 @@ export const useProfileStore = defineStore('profile', {
       } catch (error) {
         console.error(error)
         discreteApi.message.error('Error while saving the timezone')
+      }
+
+      return false
+    },
+    async setAskedToSetSchedule () {
+      const supabase = useSupabaseClient<Database>()
+      const user = useSupabaseUser()
+      const discreteApi = useDiscreteApi()
+
+      if (!user.value) {
+        discreteApi.message.error('User not logged in')
+        return false
+      }
+
+      try {
+        const { data, error } = await supabase.from('profiles').upsert({
+          id: user.value.id,
+          has_been_asked_to_set_schedule: true,
+        }).select('has_been_asked_to_set_schedule').single()
+
+        if (error) {
+          throw error
+        }
+
+        this.has_been_asked_to_set_schedule = data.has_been_asked_to_set_schedule ?? false
+
+        return true
+      } catch (error) {
+        console.error(error)
+        discreteApi.message.error('Error while saving the profile')
       }
 
       return false

@@ -157,12 +157,14 @@ export interface Database {
           age: string | null
           avatar_url: string | null
           computer_xp: string | null
+          created_at: string | null
           devices: string[] | null
           dob: string | null
           education: string | null
           full_name: string | null
           gender: string | null
           goal: string[]
+          has_been_asked_to_set_schedule: boolean
           id: string
           timezone: string | null
           updated_at: string | null
@@ -174,12 +176,14 @@ export interface Database {
           age?: string | null
           avatar_url?: string | null
           computer_xp?: string | null
+          created_at?: string | null
           devices?: string[] | null
           dob?: string | null
           education?: string | null
           full_name?: string | null
           gender?: string | null
           goal?: string[]
+          has_been_asked_to_set_schedule?: boolean
           id: string
           timezone?: string | null
           updated_at?: string | null
@@ -191,12 +195,14 @@ export interface Database {
           age?: string | null
           avatar_url?: string | null
           computer_xp?: string | null
+          created_at?: string | null
           devices?: string[] | null
           dob?: string | null
           education?: string | null
           full_name?: string | null
           gender?: string | null
           goal?: string[]
+          has_been_asked_to_set_schedule?: boolean
           id?: string
           timezone?: string | null
           updated_at?: string | null

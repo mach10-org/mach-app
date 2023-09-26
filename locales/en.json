@@ -10,6 +10,7 @@
     "user": {
       "welcome_back": "Welcome back {name}!",
       "welcome_back_description": "Pick up where you left off!",
+      "create_schedule": "Would you like to create a schedule?",
       "course": "Course",
       "lesson": "Lesson",
       "ok": "Sure",
