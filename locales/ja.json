@@ -34,7 +34,7 @@
     "signout": "サインアウト"
   },
   "footer": {
-    "tagLine": "- {愛}とたっぷりの{抹茶}を込めて{日本}で作られました",
+    "tagLine": "- {love}とたっぷりの{matcha}を込めて{japan}で作られました",
     "resources": "リソース",
     "followUs": "私たちをフォローしてください",
     "legal": "法的",
@@ -150,14 +150,14 @@
       "notEnrolledCTA": "今日から始めよう！",
       "summary_left": "週間目標",
       "summary_left_link": "あなたのスケジュールを更新してください",
-      "progress_percentTitle": "あなたが登録したコースの{パーセンテージ}を完了しました。",
+      "progress_percentTitle": "あなたが登録したコースの{percentage}を完了しました。",
       "progress_percentSubtile": "レッスン完了",
       "detail_goToCourse": "コースへ行く",
       "detail_completed": "完了したエクササイズ",
       "detail_lastWeeks": "過去14日間",
       "detail_dateStart": "あなたがそのコースを始めたとき\n",
       "youreBadge": "あなたは{badge}です！",
-      "keepPushing": "{バッジ}スピードを解除するために引き続き押し続けてください！"
+      "keepPushing": "{badge}スピードを解除するために引き続き押し続けてください！"
     },
     "schedule": {
       "title": "あなたのスケジュール",
@@ -223,7 +223,7 @@
   },
   "timeToComplete": {
     "schedule": "スケジュール",
-    "withScheduleFinish": "私の{スケジュール}に従って、{終了日}までにコースを終了します。",
+    "withScheduleFinish": "私の{schedule}に従って、{endDate}までにコースを終了します。",
     "spendHoursFinish": "週に{hours}時間を割くと、{endDate}までにはコースを終了できます。"
   },
   "errors": {
