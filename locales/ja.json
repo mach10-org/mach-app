@@ -1,1 +1,236 @@
-{}
+{
+  "notifications": {
+    "newsletter": {
+      "email_saved": "あなたのメールが保存されました！",
+      "not_valid_email": "メールアドレスが無効です"
+    },
+    "profile": {
+      "profile_saved": "あなたのプロフィールは保存されました"
+    },
+    "user": {
+      "welcome_back": "おかえりなさい、{name}さん！",
+      "welcome_back_description": "あなたが止めたところから再開してください！",
+      "create_schedule": "スケジュールを作成しますか？",
+      "course": "コース",
+      "lesson": "レッスン",
+      "ok": "もちろん",
+      "cancel": "今ではない"
+    }
+  },
+  "menu": {
+    "home": "ホーム",
+    "mission": "ミッション",
+    "roadmap": "ロードマップ",
+    "courses": "コース",
+    "whoFor": "私のためですか？",
+    "whyFree": "無料？\n"
+  },
+  "header": {
+    "login": "ログイン",
+    "openUserMenu": "ユーザーメニューを開く",
+    "journey": "旅行",
+    "schedule": "スケジュール",
+    "profile": "プロフィール",
+    "signout": "サインアウト"
+  },
+  "footer": {
+    "tagLine": "- {愛}とたっぷりの{抹茶}を込めて{日本}で作られました",
+    "resources": "リソース",
+    "followUs": "私たちをフォローしてください",
+    "legal": "法的",
+    "manifesto": "マニフェスト",
+    "codeOfConduct": "行動規範",
+    "getInTouch": "連絡を取る",
+    "instagram": "インスタグラム",
+    "twitter": "ツイッター",
+    "privacyPolicy": "プライバシーポリシー",
+    "termsAndConditions": "利用規約",
+    "licence": "ライセンス",
+    "faq": "よくある質問",
+    "notifyNewsletter": "私たちの最初のコースが準備できたときにお知らせします。最初のコースは2023年に開始予定です。"
+  },
+  "quiz": {
+    "plus_xp": "これにより、あなたは+マッハ {xp}を獲得します",
+    "signup_text1": "追跡するためにサインアップしてください",
+    "signup_text2": "あなたの進歩を経時的に、それは無料です",
+    "correct": "正解！",
+    "incorrect": "不正解！"
+  },
+  "compiler": {
+    "run": "走る",
+    "format": "フォーマット"
+  },
+  "pages": {
+    "feedback": {
+      "enjoyment_title": "1から5のスケールで、これはいかがお楽しみですか？",
+      "not_for_me": "私には無理です😢",
+      "enjoy_this": "本当にこれが好きです😆",
+      "difficulty_title": "現在の難易度をどう評価しますか？\n",
+      "difficulties": {
+        "0": "簡単",
+        "1": "それは大丈夫です",
+        "2": "私には難しすぎます",
+        "3": "私には向いていません"
+      },
+      "comment_title": "私たちはどのように改善できるか、もっと詳しく教えていただけますか？",
+      "go_back_home": "家に帰ってください",
+      "submit": "提出する",
+      "thank_you": "あなたのフィードバックありがとうございます！"
+    },
+    "onboarding": {
+      "title": "マッハ10へようこそ",
+      "next": "次の",
+      "form_1_label": "あなたの名前",
+      "form_1_label_1": "（あなたを何と呼べばよいですか？）",
+      "form_1_placeholder": "名前",
+      "form_2": "はじめまして、{firstname}さん！",
+      "form_3_label": "このウェブサイトでの主な目標は何ですか？",
+      "form_3_list": {
+        "0": "初めての仕事を得る",
+        "1": "キャリアチェンジ",
+        "2": "楽しみや好奇心のために",
+        "3": "私のスキルを向上させる",
+        "4": "別の目標"
+      },
+      "form_3_help": "覚えておいてください、学ぶことはしばしば難 challenging しいですが、人生で最も価値のあることの一部です。一貫性があれば、どこでも望む場所に行けます。",
+      "form_4_label": "あなたのコンピュータースキルをどのように評価しますか？",
+      "form_4_list": {
+        "0": "それを使ったことがない",
+        "1": "私はコンピューターの使い方を知っていますが、技術的な仕事はしたことがありません。",
+        "2": "私はすでにプログラミング経験があります"
+      },
+      "form_5_label": "あなたはどのようなデバイスを所有していますか？",
+      "form_5_list": {
+        "0": "iPad",
+        "1": "他のタブレット",
+        "2": "マック",
+        "3": "Windowsコンピューター",
+        "4": "その他",
+        "5": "これらのどれも"
+      },
+      "form_6_label": "あなたの年齢は何歳ですか？",
+      "form_6_list": {
+        "0": "13 - 18",
+        "1": "19 - 24",
+        "2": "25 - 34",
+        "3": "35 - 44",
+        "4": "45以上",
+        "5": "それは秘密です！"
+      },
+      "form_7": "完璧です！ あなたの旅の一歩一歩をサポートするためにここにいます。始めましょう！",
+      "why_text_1": "私たちは、より最適な体験を提供するために、視聴者の方々をより深く理解し、最も関連性の高い経験をつくり出したいと考えています。私たちのコンテンツを利用している方々を知ることで、最高のコンテンツを作り出す能力が高まります。そのため、何点か質問させていただきたいと思います。",
+      "why_text_2": "これらの回答は任意で、何も答えなくても全く問題ありません、理解しています",
+      "why_btn": "私たちが尋ねる理由",
+      "back": "バック",
+      "skip": "スキップ"
+    },
+    "profile": {
+      "intro": "私たちはあなたのことをもっと知りたいと思っています。ここに申し込む主な目標は何ですか？たとえそれが単なる好奇心であっても、私たちは興味津々です☺。",
+      "intro_2": "これにより、私たちの視聴者を知り、それに応じてコンテンツを調整するのにも役立っています。",
+      "education_label": "教育レベル",
+      "education_list": {
+        "0": "初等教育",
+        "1": "中等教育",
+        "2": "高等教育",
+        "3": "マスターズ"
+      },
+      "gender_label": "ジェンダー",
+      "gender_list": {
+        "0": "男性",
+        "1": "女性",
+        "2": "その他"
+      },
+      "comment_label": "あなたとあなたの目標についてもっと教えていただけますか？",
+      "comment_placeholder": "ここにあなたの考えを書いてください...",
+      "successfullySaved": "プロフィールが正常に保存されました"
+    },
+    "journey": {
+      "title": "あなたの学習",
+      "notEnrolled": "まだ何もコースに登録されていないようですね、今日から始めてみてはどうですか？",
+      "notEnrolledCTA": "今日から始めよう！",
+      "summary_left": "週間目標",
+      "summary_left_link": "あなたのスケジュールを更新してください",
+      "progress_percentTitle": "あなたが登録したコースの{パーセンテージ}を完了しました。",
+      "progress_percentSubtile": "レッスン完了",
+      "detail_goToCourse": "コースへ行く",
+      "detail_completed": "完了したエクササイズ",
+      "detail_lastWeeks": "過去14日間",
+      "detail_dateStart": "あなたがそのコースを始めたとき\n",
+      "youreBadge": "あなたは{badge}です！",
+      "keepPushing": "{バッジ}スピードを解除するために引き続き押し続けてください！"
+    },
+    "schedule": {
+      "title": "あなたのスケジュール",
+      "startTime": "開始時間",
+      "startTimeRequired": "開始時間が必要です",
+      "startTimeAfterEndTime": "開始時間は終了時間より前でなければなりません",
+      "endTime": "終了時間",
+      "endTimeRequired": "終了時間は必須です",
+      "endTimeBeforeStartTime": "終了時間は開始時間の後でなければなりません",
+      "timezone": "タイムゾーン",
+      "successfullySaved": "スケジュールが正常に保存されました"
+    },
+    "login": {
+      "intro": "アカウントを作成するためにサインアップしてください。それは無料で、時間経過とともにあなたの進歩を追跡することができます。",
+      "description": "ログインするか、登録するには、以下のフォームを使用してメールアドレスにマジックリンクを取得してください。",
+      "magicLink_btn": "マジックリンクを送信する",
+      "github_btn": "GitHubでログインする",
+      "or": "または",
+      "inputEmail": "メール",
+      "magic_link_sent": "間もなくあなたの受信トレイにメールが届くはずです！"
+    },
+    "contact": {
+      "title": "以下の{email}に連絡を取るか、下記のフォームをご利用ください。",
+      "form_nameLabel": "フルネーム",
+      "form_nameRequired": "フルネームが必要です",
+      "form_emailLabel": "あなたのメールアドレス",
+      "form_emailSublabel": "（あなたに返信できるように）",
+      "form_emailRequired": "メールが必要です",
+      "form_emailInvalid": "メールが無効です",
+      "form_topicLabel": "トピック",
+      "form_topicRequired": "トピックが必要です",
+      "form_topicPlaceholder": "トピックを選択してください",
+      "form_topicList": {
+        "0": "私には質問があります",
+        "1": "助けを申し出たいです",
+        "2": "私のアカウントに問題があります"
+      },
+      "form_subjectLabel": "件名",
+      "form_subjecPlaceholder": "私たちにどのように助けることができるかお知らせください。",
+      "form_subjectRequired": "件名が必要です",
+      "form_messageLabel": "あなたのメッセージ",
+      "form_messagePlaceholder": "コメントを残してください...",
+      "form_messageRequired": "メッセージが必要です",
+      "submit": "メッセージを送る",
+      "error": "エラーが発生しました！後で再試行してください！",
+      "success": "あなたのメールはチームメンバーに送信されました！"
+    },
+    "course": {
+      "toc": "目次",
+      "showLessons": "すべてのレッスンを表示する",
+      "nextChapter": "次の章：",
+      "previousChapter": "前の章：",
+      "showNavigation": "ナビゲーションを表示する",
+      "completion": "完了",
+      "chapterFinished": "章終了",
+      "markNotFinished": "未完了としてマークする"
+    }
+  },
+  "common": {
+    "save": "保存",
+    "submit": "提出する",
+    "hours": "{hours} 時間"
+  },
+  "timeToComplete": {
+    "schedule": "スケジュール",
+    "withScheduleFinish": "私の{スケジュール}に従って、{終了日}までにコースを終了します。",
+    "spendHoursFinish": "週に{hours}時間を割くと、{endDate}までにはコースを終了できます。"
+  },
+  "errors": {
+    "code": {
+      "429": "セキュリティ上の理由から、これを要求できるのは60秒後からのみです。",
+      "23505": "このメールアドレスはすでに登録されています！追ってご連絡いたします！",
+      "missing_parameter": "メールが不足しています"
+    }
+  }
+}
