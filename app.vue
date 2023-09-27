@@ -1,5 +1,5 @@
 <template>
-  <NaiveConfig :theme-config="themeConfig">
+  <NaiveConfig :theme-config="themeConfig" :locale="naiveLocale" :date-locale="naiveDateLocale">
     <SeoKit />
     <NuxtLayout class="root rootdark">
       <NuxtPage />
@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import { enUS, dateEnUS, jaJP, dateJaJP } from 'naive-ui'
 import { themeConfig } from '~/theme.config'
 import '~/assets/css/style.css'
 import { useProfileStore } from '~/stores/profile'
@@ -17,9 +18,27 @@ import { useCourseStore } from '~/stores/course'
 const user = useSupabaseUser()
 const profile = useProfileStore()
 const course = useCourseStore()
+const dayjs = useDayjs()
 
-const { locales } = useI18n()
+const { locales, locale } = useI18n()
+dayjs.locale(locale.value)
 const index = ref(0)
+
+const naiveLocale = computed(() => {
+  if (locale.value === 'ja') {
+    return jaJP
+  }
+
+  return enUS
+})
+
+const naiveDateLocale = computed(() => {
+  if (locale.value === 'ja') {
+    return dateJaJP
+  }
+
+  return dateEnUS
+})
 
 // Fetch courses
 for (const locale of locales.value) {

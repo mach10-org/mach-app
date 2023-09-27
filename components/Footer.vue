@@ -6,7 +6,7 @@
           <Brand size="lg" />
         </div>
         <div class="mb-16 px-0 md:mb-0 md:px-8">
-          <Newsletter label="Email address" placeholder="Enter your email" button-text="Notify me" input-id="email-newsletter-footer">
+          <Newsletter label="Email address" :placeholder="$t('footer.newsletterPlaceholder')" :button-text="$t('footer.newsletterSubmit')" input-id="email-newsletter-footer">
             <template #description>
               {{ $t('footer.notifyNewsletter') }}
             </template>

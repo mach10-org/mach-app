@@ -19,7 +19,7 @@
           :loading="pending"
           @click="onSubmit(save)"
         >
-          Save
+          {{ $t('common.save') }}
         </n-button>
       </div>
     </ClientOnly>
