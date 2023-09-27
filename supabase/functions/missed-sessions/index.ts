@@ -6,11 +6,17 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.33.2'
 import dayjs from 'https://esm.sh/dayjs@1.11.9'
 import utc from 'https://esm.sh/dayjs@1.11.9/plugin/utc'
+import { I18n } from 'https://esm.sh/i18n-js@4.3.2'
 import { corsHeaders } from '../_shared/cors.ts'
 import { Database } from '../../../types/database.types.ts'
 import senderInfos from '../_shared/sender-infos.ts'
+import enTranslations from '../_locales/en.json' assert { type: 'json' }
+import jaTranslations from '../_locales/ja.json' assert { type: 'json' }
 
 dayjs.extend(utc)
+
+const i18n = new I18n({ en: enTranslations, ja: jaTranslations })
+i18n.locale = Deno.env.get('LOCALE') || 'ja'
 
 const weeksMissed = 2
 
@@ -40,38 +46,7 @@ serve(async (req) => {
     for await (const user of data) {
       const completionDate = dayjs.utc(time).add(4, 'week').format('MMMM DD, YYYY')
 
-      const textContent = `Life get busy sometimes and it’s hard to keep up. Visualizing your goal can be a great help. Think of ${completionDate}, you wake up, and you realize what you just accomplished. A new skillset, plenty of new opportunities, the ability to work for yourself or create your dream startup. You did the hardest thing ${user.full_name}, you dared to start. Most people don’t even try. Keep it up, you got this :)
-Remember, struggling means learning.
-
-Resume course: ${Deno.env.get('URL') || ''}${user.url}
-
-Feeling down or lack motivation? Tell us more. ${Deno.env.get('URL') || ''}/feedback
-
-Mach10 team
-${Deno.env.get('URL') || ''}`
-
-      const htmlContent = `<html><head></head><body>
-<p>
-Life get busy sometimes and it’s hard to keep up. Visualizing your goal can be a great help. Think of ${completionDate}, you wake up, and you realize what you just accomplished. A new skillset, plenty of new opportunities, the ability to work for yourself or create your dream startup. You did the hardest thing ${user.full_name}, you dared to start. Most people don’t even try. Keep it up, you got this :)
-</p>
-
-<p>
-Remember, struggling means learning.
-</p>
-
-<p>
-<a href="${Deno.env.get('URL') || ''}${user.url}">Resume course</a>
-</p>
-
-<p>
-Feeling down or lack motivation? <a href="${Deno.env.get('URL') || ''}/feedback">Tell us more.</a>
-</p>
-
-<p>
-Mach10 team<br/>
-<a href="${Deno.env.get('URL') || ''}">${Deno.env.get('URL') || ''}</a>
-</p>
-</body></html>`
+      const url = Deno.env.get('URL') || ''
 
       try {
         await fetch('https://api.brevo.com/v3/smtp/email', {
@@ -85,8 +60,8 @@ Mach10 team<br/>
             sender: senderInfos,
             to: [{ email: user.email, name: user.email }],
             subject: `${user.full_name} your course "${user.course_title}"`,
-            textContent,
-            htmlContent,
+            textContent: i18n.t('missedSessions.text', { completionDate, name: user.full_name, url, courseUrl: user.url }),
+            htmlContent: i18n.t('missedSessions.html', { completionDate, name: user.full_name, url, courseUrl: user.url }),
           }),
         })
 

@@ -1,0 +1,12 @@
+{
+  "scheduleReminder": {
+    "subject": "Your learning is about to start in %{minutes} minutes and a few words from %{author}",
+    "text": "%{quote}\n- %{author}\n\nSee you on Mach10 in %{minutes} minutes!\n\nMach10 team\n%{url}",
+    "html": "<html><head></head><body>\n<p><i>%{quote}</i><br/>\n- %{author}\n</p>\n<p>\nSee you on Mach10 in %{minutes} minutes!\n</p>\n<p>\nMach10 team<br/>\n<a href=\"%{url}\">%{url}</a>\n</p>\n</body></html>"
+  },
+  "missedSessions": {
+    "subject": "",
+    "text": "Life get busy sometimes and it’s hard to keep up. Visualizing your goal can be a great help. Think of %{completionDate}, you wake up, and you realize what you just accomplished. A new skillset, plenty of new opportunities, the ability to work for yourself or create your dream startup. You did the hardest thing %{name}, you dared to start. Most people don’t even try. Keep it up, you got this :)\nRemember, struggling means learning.\n\nResume course: %{url}%{courseUrl}\n\nFeeling down or lack motivation? Tell us more. %{url}/feedback\n\nMach10 team\n%{url}",
+    "html": "<html><head></head><body>\n<p>\nLife get busy sometimes and it’s hard to keep up. Visualizing your goal can be a great help. Think of %{completionDate}, you wake up, and you realize what you just accomplished. A new skillset, plenty of new opportunities, the ability to work for yourself or create your dream startup. You did the hardest thing %{name}, you dared to start. Most people don’t even try. Keep it up, you got this :)\n</p>\n\n<p>\nRemember, struggling means learning.\n</p>\n\n<p>\n<a href=\"%{url}%{courseUrl}\">Resume course</a>\n</p>\n\n<p>\nFeeling down or lack motivation? <a href=\"%{url}/feedback\">Tell us more.</a>\n</p>\n\n<p>\nMach10 team<br/>\n<a href=\"%{url}\">%{url}</a>\n</p>\n</body></html>"
+  }
+}

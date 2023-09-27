@@ -7,13 +7,19 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.33.2'
 import dayjs from 'https://esm.sh/dayjs@1.11.9'
 import isoWeek from 'https://esm.sh/dayjs@1.11.9/plugin/isoWeek'
 import utc from 'https://esm.sh/dayjs@1.11.9/plugin/utc'
+import { I18n } from 'https://esm.sh/i18n-js@4.3.2'
 import { corsHeaders } from '../_shared/cors.ts'
 import { Database } from '../../../types/database.types.ts'
 import senderInfos from '../_shared/sender-infos.ts'
+import enTranslations from '../_locales/en.json' assert { type: 'json' }
+import jaTranslations from '../_locales/ja.json' assert { type: 'json' }
 import quotes from './quotes.ts'
 
 dayjs.extend(isoWeek)
 dayjs.extend(utc)
+
+const i18n = new I18n({ en: enTranslations, ja: jaTranslations })
+i18n.locale = Deno.env.get('LOCALE') || 'ja'
 
 const minutesBeforeSchedule = 15
 
@@ -63,28 +69,7 @@ serve(async (req) => {
     for await (const user of schedules) {
       const quote = quotes[Math.floor(Math.random() * quotes.length)]
 
-      const textContent = `${quote.text}
-- ${quote.author}
-
-See you on Mach10 in ${minutesBeforeSchedule} minutes!
-
-Mach10 team
-${Deno.env.get('URL') || ''}`
-
-      const htmlContent = `<html><head></head><body>
-<p><i>${quote.text}</i><br/>
-- ${quote.author}
-</p>
-
-<p>
-See you on Mach10 in ${minutesBeforeSchedule} minutes!
-</p>
-
-<p>
-Mach10 team<br/>
-<a href="${Deno.env.get('URL') || ''}">${Deno.env.get('URL') || ''}</a>
-</p>
-</body></html>`
+      const url = Deno.env.get('URL') || ''
 
       try {
         await fetch('https://api.brevo.com/v3/smtp/email', {
@@ -97,9 +82,9 @@ Mach10 team<br/>
           body: JSON.stringify({
             sender: senderInfos,
             to: [{ email: user.profiles?.email, name: user.profiles?.email }],
-            subject: `Your learning is about to start in ${minutesBeforeSchedule} minutes and a few words from ${quote.author}`,
-            textContent,
-            htmlContent,
+            subject: i18n.t('scheduleReminder.subject', { minutes: minutesBeforeSchedule, author: quote.author }),
+            textContent: i18n.t('scheduleReminder.text', { quote: quote.text, minutes: minutesBeforeSchedule, author: quote.author, url }),
+            htmlContent: i18n.t('scheduleReminder.html', { quote: quote.text, minutes: minutesBeforeSchedule, author: quote.author, url }),
           }),
         })
 
