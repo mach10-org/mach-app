@@ -13,13 +13,14 @@ import { Database } from '../../../types/database.types.ts'
 import senderInfos from '../_shared/sender-infos.ts'
 import enTranslations from '../_locales/en.json' assert { type: 'json' }
 import jaTranslations from '../_locales/ja.json' assert { type: 'json' }
-import quotes from './quotes.ts'
 
 dayjs.extend(isoWeek)
 dayjs.extend(utc)
 
 const i18n = new I18n({ en: enTranslations, ja: jaTranslations })
 i18n.locale = Deno.env.get('LOCALE') || 'ja'
+
+const quotes = i18n.t('quotes') as Array<{ text: string, author: string }>
 
 const minutesBeforeSchedule = 15
 

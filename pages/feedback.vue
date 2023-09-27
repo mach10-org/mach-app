@@ -99,7 +99,7 @@
           <span>{{ $t('pages.onboarding.back') }}</span>
         </button>
       </div>
-      <div class="w-30 flex justify-end">
+      <div class="w-40 flex justify-end">
         <NuxtLinkLocale to="/" class="link flex items-center space-x-1">
           {{ $t('pages.feedback.go_back_home') }}
         </NuxtLinkLocale>
