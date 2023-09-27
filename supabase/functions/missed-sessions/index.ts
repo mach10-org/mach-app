@@ -5,6 +5,7 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.33.2'
 import dayjs from 'https://esm.sh/dayjs@1.11.9'
+import 'https://esm.sh/dayjs@1.11.9/locale/ja'
 import utc from 'https://esm.sh/dayjs@1.11.9/plugin/utc'
 import { I18n } from 'https://esm.sh/i18n-js@4.3.2'
 import { corsHeaders } from '../_shared/cors.ts'
@@ -16,7 +17,9 @@ import jaTranslations from '../_locales/ja.json' assert { type: 'json' }
 dayjs.extend(utc)
 
 const i18n = new I18n({ en: enTranslations, ja: jaTranslations })
-i18n.locale = Deno.env.get('LOCALE') || 'ja'
+const locale = Deno.env.get('LOCALE') || 'ja'
+i18n.locale = locale
+dayjs.locale(locale)
 
 const weeksMissed = 2
 
@@ -59,7 +62,7 @@ serve(async (req) => {
           body: JSON.stringify({
             sender: senderInfos,
             to: [{ email: user.email, name: user.email }],
-            subject: `${user.full_name} your course "${user.course_title}"`,
+            subject: i18n.t('missedSessions.subject', { name: user.full_name, url, courseTitle: user.course_title }),
             textContent: i18n.t('missedSessions.text', { completionDate, name: user.full_name, url, courseUrl: user.url }),
             htmlContent: i18n.t('missedSessions.html', { completionDate, name: user.full_name, url, courseUrl: user.url }),
           }),
