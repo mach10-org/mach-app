@@ -1,0 +1,34 @@
+name: Translate JSON files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Translate front strings
+        uses: voloshinskii/localize-ai@v1.0.2
+        with: 
+          model: gpt-4
+          openai-token: ${{ secrets.OPENAI_API_KEY }}
+          locales-path: ./locales
+          main-locale: en
+      - name: Translate email strings
+        uses: voloshinskii/localize-ai@v1.0.2
+        with: 
+          model: gpt-4
+          openai-token: ${{ secrets.OPENAI_API_KEY }}
+          locales-path: ./supabase/functions/_locales
+          main-locale: en
+
+      - name: commit and push all changed files
+        env:
+          CI_COMMIT_MESSAGE: Localize new strings
+          CI_COMMIT_AUTHOR: CI
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "username@users.noreply.github.com"
+          git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
