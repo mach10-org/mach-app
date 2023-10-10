@@ -47,7 +47,7 @@
           <SplideSlide>
             <SplideSlideWrapper inner-class="max-w-3xl" content-class="text-center">
               <div>
-                <h2 class="mb-2 super-text-gradient text-center text-2xl font-bold md:text-4xl">
+                <h2 class="mb-2 text-center text-2xl font-bold super-text-gradient md:text-4xl">
                   {{ $t('pages.onboarding.form_2', {firstname: model.firstname}) }}!
                 </h2>
                 <p class="text-8xl text-$primary">
@@ -150,7 +150,7 @@
 
           <SplideSlide>
             <SplideSlideWrapper inner-class="max-w-3xl">
-              <h2 class="mb-10 super-text-gradient text-center text-2xl font-bold md:text-4xl">
+              <h2 class="mb-10 text-center text-2xl font-bold super-text-gradient md:text-4xl">
                 {{ $t('pages.onboarding.form_7') }}
               </h2>
               <n-form-item :show-label="false" :show-feedback="false" class="flex justify-center">
@@ -296,7 +296,7 @@ const onSplideMove = async (splide: Core, index: number) => {
 const submit = async () => {
   isLoading.value = true
   if (await profile.saveOnboarding(model.value.firstname, model.value.goals, model.value.computerXp, model.value.devices, model.value.age)) {
-    navigateTo(localePath('/courses'))
+    await navigateTo(localePath('/courses'), { external: true }) // Need to add external otherwise: Error: Avoided redundant navigation to current location: "/onboarding/" ???
   }
   isLoading.value = false
 }
@@ -306,7 +306,7 @@ const isLoadingProfile = computed(() => profile.isLoading)
 onMounted(async () => {
   await until(isLoadingProfile).toBe(false)
   if (profile.isOnBoarded) {
-    navigateTo(localePath('/courses'))
+    await navigateTo(localePath('/courses'), { external: true }) // Need to add external otherwise: Error: Avoided redundant navigation to current location: "/onboarding/" ???
     return
   }
 
