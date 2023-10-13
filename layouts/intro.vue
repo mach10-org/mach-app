@@ -11,12 +11,14 @@
         <div v-else class="bg-ctp-latte-surface0 absolute left-0 top-0 h-full w-full dark:bg-ctp-frappe-lavender" />
         <div class="absolute left-0 top-0 h-full w-full bg-ctp-latte-crust bg-opacity-75 dark:(bg-ctp-frappe-crust bg-opacity-85)" />
         <div class="absolute left-1/2 top-20 mx-auto w-full max-w-screen-xl px-4 xl:top-1/2 -translate-x-1/2 xl:px-0 xl:-translate-y-1/2">
-          <h1 class="inline-block max-w-4xl super-text-gradient pb-4 text-2xl leading-none lg:text-5xl sm:text-3xl">
+          <slot name="header-top" />
+          <h1 class="inline-block max-w-4xl pb-4 text-2xl leading-none super-text-gradient lg:text-5xl sm:text-3xl">
             {{ title }}
           </h1>
           <p class="text-lg font-normal text-$text-muted">
             {{ description }}
           </p>
+          <slot name="header-bottom" />
         </div>
       </header>
       <div class="relative z-20 mx-4 mb-8 max-w-screen-xl flex justify-between rounded bg-$background-base p-6 xl:mx-auto -mt-36 xl:p-9 xl:-mt-32">

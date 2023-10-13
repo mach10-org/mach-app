@@ -1,12 +1,12 @@
 ---
-title: Find motivation
+title: Trouver la motivation
 description: Rien n'est plus rare et puissant qu'une personne determinée.
 preview: find-motivation.jpg
 date: 2023-10-12 15:34:15
+showToc: false
 tags:
-  - motivation
+  - Motivation
 ---
-
 
 Rien n'est plus rare et puissant qu'une personne determinée.
 

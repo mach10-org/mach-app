@@ -6,7 +6,7 @@
     >
       <nuxt-img class="h-[223px] w-full object-cover dark:opacity-70" :src="`/img/${preview}`" alt="" sizes="xs:100vw sm:100vw md:100vw lg:360px" />
       <div class="flex flex-1 flex-col px-4 py-3">
-        <div v-if="tags" class="mb-3">
+        <div v-if="tags" class="mb-3 space-x-2">
           <n-tag v-for="tag in tags" :key="tag" :bordered="false" round type="info">
             {{ tag }}
           </n-tag>
