@@ -47,6 +47,10 @@ const menus = computed<Array<{
   title: i18n.t('footer.resources'),
   menu: [
     {
+      label: i18n.t('footer.blog'),
+      path: '/blog/',
+    },
+    {
       label: i18n.t('footer.manifesto'),
       path: '/manifesto/',
     },
