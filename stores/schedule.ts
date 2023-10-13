@@ -50,7 +50,7 @@ export const useScheduleStore = defineStore('schedule', {
           ...l,
           // @ts-ignore
           user_id: user.value.id,
-        }))).select('day, start, end')
+        }))).select('day_start, start, day_end, end')
 
         if (error) {
           throw error

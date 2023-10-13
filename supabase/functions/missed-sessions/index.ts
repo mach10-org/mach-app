@@ -40,7 +40,7 @@ serve(async (req) => {
     const { time } = await req.json()
 
     // Select people that didn't attend sessions
-    const { data, error } = await supabaseClient.from('last_url_schedule').select('id, url, title, main, full_name, course_title, email').lt('updated_at', dayjs.utc(time).subtract(weeksMissed, 'week').format('YYYY-MM-DD HH:mm:ss'))
+    const { data, error } = await supabaseClient.from('last_url_with_schedule').select('id, url, title, main, full_name, course_title, email').lt('updated_at', dayjs.utc(time).subtract(weeksMissed, 'week').format('YYYY-MM-DD HH:mm:ss'))
 
     if (error) { throw error }
 

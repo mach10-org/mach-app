@@ -90,7 +90,7 @@ export const useProfileStore = defineStore('profile', {
       try {
         const { data: profile, error } = await supabase
           .from('profiles')
-          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course, created_at), answers(id, slug, slug_course, label, is_correct), schedule(day, start, end)').eq('id', user.value.id).maybeSingle()
+          .select('*, last_url(url, title, main), learning_lesson(slug, slug_course, created_at), answers(id, slug, slug_course, label, is_correct), schedule(day_start, start, day_end, end)').eq('id', user.value.id).maybeSingle()
 
         if (error) {
           throw error
