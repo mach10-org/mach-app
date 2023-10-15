@@ -66,7 +66,7 @@ const getItems = () => {
   }))
 
   schedule.list.forEach((item) => {
-    const start = dayjs.utc(item.start, 'HH:mm:ss').isoWeekday(item.day).tz(profile.timezone)
+    const start = dayjs.utc(item.start, 'HH:mm:ss').isoWeekday(item.day_start).tz(profile.timezone)
     const period = {
       start: start.format('HH:mm'),
       end: dayjs.utc(item.end, 'HH:mm:ss').tz(profile.timezone).format('HH:mm'),
@@ -91,8 +91,9 @@ const discreteApi = useDiscreteApi()
 
 const save = async () => {
   const list: Array<{
-    day: number
+    day_start: number
     start: string
+    day_end: number
     end: string
   }> = []
 
@@ -106,8 +107,9 @@ const save = async () => {
         const end = dayjs(time.end, 'HH:mm').second(0).day(item.day).tz(profile.timezone, true).utc()
 
         list.push({
-          day: start.isoWeekday(),
+          day_start: start.isoWeekday(),
           start: start.format('HH:mm:ss'),
+          day_end: end.isoWeekday(),
           end: end.format('HH:mm:ss'),
         })
       })

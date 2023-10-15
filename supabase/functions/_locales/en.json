@@ -9,6 +9,11 @@
     "text": "Life get busy sometimes and it’s hard to keep up. Visualizing your goal can be a great help. Think of %{completionDate}, you wake up, and you realize what you just accomplished. A new skillset, plenty of new opportunities, the ability to work for yourself or create your dream startup. You did the hardest thing %{name}, you dared to start. Most people don’t even try. Keep it up, you got this :)\nRemember, struggling means learning.\n\nResume course: %{url}%{courseUrl}\n\nFeeling down or lack motivation? Tell us more. %{url}/feedback\n\nMach10 team\n%{url}",
     "html": "<html><head></head><body>\n<p>\nLife get busy sometimes and it’s hard to keep up. Visualizing your goal can be a great help. Think of %{completionDate}, you wake up, and you realize what you just accomplished. A new skillset, plenty of new opportunities, the ability to work for yourself or create your dream startup. You did the hardest thing %{name}, you dared to start. Most people don’t even try. Keep it up, you got this :)\n</p>\n\n<p>\nRemember, struggling means learning.\n</p>\n\n<p>\n<a href=\"%{url}%{courseUrl}\">Resume course</a>\n</p>\n\n<p>\nFeeling down or lack motivation? <a href=\"%{url}/feedback\">Tell us more.</a>\n</p>\n\n<p>\nMach10 team<br/>\n<a href=\"%{url}\">%{url}</a>\n</p>\n</body></html>"
   },
+  "missedSession": {
+    "subject": "We missed you %{name}",
+    "text": "Life can get busy sometimes and it’s normal :)\nRemember: To keep a habit is easier than create a new one! Need help to stay on track? Tell a friend about Mach10, it’s often easier to progress with a buddy than alone.\n\n%{quote}\n- %{author}\n\nWe’re looking forward to see you back on Mach10!\n\nMach10 team\n%{url}",
+    "html": "<html><head></head><body>\n<p>\nLife can get busy sometimes and it’s normal :)\n</p>\n<p>\nRemember: To keep a habit is easier than create a new one! Need help to stay on track? Tell a friend about Mach10, it’s often easier to progress with a buddy than alone.\n</p>\n\n<p><i>%{quote}</i><br/>\n- %{author}\n</p>\n\n<p>\nWe’re looking forward to see you back on Mach10!\n</p>\n\n<p>\nMach10 team<br/>\n<a href=\"%{url}\">%{url}</a>\n</p>\n</body></html>"
+  },
   "quotes": [
     {
       "text": "Education is the most powerful weapon which you can use to change the world.",

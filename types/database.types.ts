@@ -261,7 +261,8 @@ export interface Database {
       schedule: {
         Row: {
           created_at: string | null
-          day: number
+          day_end: number
+          day_start: number
           end: string
           id: number
           start: string
@@ -269,7 +270,8 @@ export interface Database {
         }
         Insert: {
           created_at?: string | null
-          day: number
+          day_end: number
+          day_start: number
           end: string
           id?: number
           start: string
@@ -277,7 +279,8 @@ export interface Database {
         }
         Update: {
           created_at?: string | null
-          day?: number
+          day_end?: number
+          day_start?: number
           end?: string
           id?: number
           start?: string
@@ -294,7 +297,31 @@ export interface Database {
       }
     }
     Views: {
-      last_url_schedule: {
+      last_url_per_schedule: {
+        Row: {
+          course_title: string | null
+          day_end: number | null
+          day_start: number | null
+          email: string | null
+          end: string | null
+          full_name: string | null
+          id: string | null
+          main: boolean | null
+          start: string | null
+          title: string | null
+          updated_at: string | null
+          url: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "last_url_id_fkey"
+            columns: ["id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      last_url_with_schedule: {
         Row: {
           course_title: string | null
           email: string | null

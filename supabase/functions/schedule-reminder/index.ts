@@ -45,14 +45,14 @@ serve(async (req) => {
 
     const { time } = await req.json()
     let mTime = dayjs.utc(time)
-    mTime = mTime.subtract(minutesBeforeSchedule, 'minute')
+    mTime = mTime.add(minutesBeforeSchedule, 'minute')
 
     const day = mTime.isoWeekday()
     const clock = mTime.format('HH:mm:00')
 
     console.info(`Start reminder for day "${day}", hour "${clock}"`)
 
-    const { data: schedules, error: schedulesError } = await supabaseClient.from('schedule').select('*, profiles(email)').eq('day', day).eq('start', clock)
+    const { data: schedules, error: schedulesError } = await supabaseClient.from('schedule').select('*, profiles(email)').eq('day_start', day).eq('start', clock)
 
     if (schedulesError) { throw schedulesError }
 
